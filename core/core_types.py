@@ -28,17 +28,30 @@ def hamming(a, b, res: Resolution = Resolution.EXACT) -> int:
     n = res.value
     return int(np.count_nonzero(a[:n] != b[:n]))
 
-# --- Ведана узла: RS6 (НЕ путать с Curator.phase и энергией — З-0015) ---
+# --- Ресурсное состояние узла: RS6 (НЕ путать с Curator.phase и энергией
+#     Тела — З-0015). Статистика достатка/динамики подтверждений узла. ---
 class RS6(Enum):
     LARGE_GROWING = auto(); LARGE_SHRINKING = auto()
     SUFFICIENT_GROWING = auto(); SUFFICIENT_STABLE = auto()
     SCARCE_GROWING = auto(); SCARCE_SHRINKING = auto()
 
-# --- Нидана-трасса (SPEC §1.7) ------------------------------------------
-class Nidana(Enum):
-    AVIDYA = auto(); SANSKARA = auto(); VIJNANA = auto(); NAMARUPA = auto()
-    AYATANA = auto(); SPARSHA = auto(); VEDANA = auto(); TANHA = auto()
-    UPADANA = auto(); BHAVA = auto(); JATI = auto(); JARA_MARANA = auto()
+# --- Стадии элементарного цикла внимания (SPEC §1.7) ---------------------
+# Имена — инженерные (правило З-0029). Соответствие 12 ниданам — контрольный
+# слой: core/attention_trace.py::NIDANA_CORRESPONDENCE (испытание философией,
+# не источник имён). Порядок членов enum = порядок стадий цикла.
+class AttentionStage(Enum):
+    UNCERTAINTY = auto()       # зарегистрирована ненулевая неопределённость
+    PROBE_IMPULSE = auto()     # зонд/предложение сформированы до контакта
+    SIGNAL_IN = auto()         # сырой сигнал получен от драйвера
+    DISTINCTION = auto()       # различию присвоен идентификатор
+    CONTEXT_READY = auto()     # активный контекст загружен к сопоставлению
+    CONTACT = auto()           # сопоставление сигнала с ожиданиями
+    EVALUATION = auto()        # исход оценён; ресурсное состояние обновлено
+    DRIVE = auto()             # реакция влечения (гедоника/инициатива)
+    RETENTION = auto()         # конкурент удерживает позицию (витальность)
+    SUPERPOSITION = auto()     # конкуренция не схлопнулась
+    CONTEXT_FIXATION = auto()  # узел вошёл в актуальный контекст
+    CONTEXT_DECAY = auto()     # узел покинул актуальный контекст
 
 @dataclass
 class BetaCounter:
@@ -65,4 +78,5 @@ class MeaningToken:
     competitors: set = field(default_factory=set)   # |...| <= W_BUDGET
     resource_state: RS6 = RS6.SCARCE_GROWING
     salience: float = 0.0
-    karma_density: float = 0.0
+    confirmation_density: float = 0.0  # плотность осаждённого подтверждённого
+                                       # вклада (контрольный слой: карма)

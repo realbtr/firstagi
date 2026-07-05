@@ -35,7 +35,7 @@ from .teacher import TeacherDriver, TeachingLog, RewardOrder
 from .hedonic import HedonicAdapter
 from .initiative import InitiativeEngine, Proposal
 from .vitality import VitalityEngine, WakeUpRestorer
-from .core_types import Nidana
+from .core_types import AttentionStage
 
 
 # ══════════════════════════════════════════════════════════════════════
@@ -687,17 +687,17 @@ class LearningSystem:
         capacity_budget=None,   # Optional[CapacityBudget]
         query_log=None,         # Optional[ContextQueryLog] — лог удивлений для SleepDriver
         provisional_base=None,  # Optional[ProvisionalBase]
-        nidana_tracer=None,     # Optional[NidanaTracer] — трасса C.12 (И1-Т4)
+        attention_tracer=None,     # Optional[AttentionTracer] — трасса C.12 (И1-Т4)
     ) -> None:
         from .generalization import GeneralizationBase
         from .algorithm import AttractorEngine
         from .provisional import ProvisionalBase
-        from .nidana import NidanaTracer
+        from .attention_trace import AttentionTracer
 
         self._capacity_budget = capacity_budget
         self._query_log = query_log
-        self.nidana = nidana_tracer if nidana_tracer is not None \
-            else NidanaTracer(enabled=False)
+        self.attention_trace = attention_tracer if attention_tracer is not None \
+            else AttentionTracer(enabled=False)
         evict_cb = capacity_budget.enforce if capacity_budget is not None else None
         self.base = GeneralizationBase(evict_callback=evict_cb)
         self._base_tolerance = feature_tolerance
@@ -742,7 +742,7 @@ class LearningSystem:
         """
         from .algorithm import StepResult
 
-        _tracing = self.nidana.enabled
+        _tracing = self.attention_trace.enabled
 
         # 0. Инициатива: предложения ДО токена
         proposals = self.initiative.propose(
@@ -750,7 +750,7 @@ class LearningSystem:
         )
         if _tracing and proposals:
             # Санскара: формирующий импульс подействовал до контакта
-            self.nidana.emit(Nidana.SANSKARA, tick=self.engine.step_count,
+            self.attention_trace.emit(AttentionStage.PROBE_IMPULSE, tick=self.engine.step_count,
                              n_proposals=len(proposals))
 
         # 1. Модуляция параметров движка ресурсом
@@ -762,10 +762,10 @@ class LearningSystem:
             _tick0 = self.engine.step_count
             _active_before = set(self.engine.context.active_gen_ids())
             # Виджняна: сырой сигнал получен; Намарупа: различие оформлено
-            self.nidana.emit(Nidana.VIJNANA, node=_fid, tick=_tick0)
-            self.nidana.emit(Nidana.NAMARUPA, node=_fid, tick=_tick0)
+            self.attention_trace.emit(AttentionStage.SIGNAL_IN, node=_fid, tick=_tick0)
+            self.attention_trace.emit(AttentionStage.DISTINCTION, node=_fid, tick=_tick0)
             # Аятана: активный контекст готов к сопоставлению
-            self.nidana.emit(Nidana.AYATANA, tick=_tick0,
+            self.attention_trace.emit(AttentionStage.CONTEXT_READY, tick=_tick0,
                              n_active=len(_active_before))
 
         # 2. Шаг Ядра
@@ -774,20 +774,20 @@ class LearningSystem:
         if _tracing:
             _tick = self.engine.step_count
             # Спарша: контакт токена с ожиданиями состоялся
-            self.nidana.emit(Nidana.SPARSHA, node=_fid, tick=_tick,
+            self.attention_trace.emit(AttentionStage.CONTACT, node=_fid, tick=_tick,
                              outcome=result.outcome.name)
             # Авидья: зарегистрирована ненулевая неопределённость
             if result.outcome in (StepOutcome.REFUTED, StepOutcome.EXPLORING):
-                self.nidana.emit(Nidana.AVIDYA, node=_fid, tick=_tick,
+                self.attention_trace.emit(AttentionStage.UNCERTAINTY, node=_fid, tick=_tick,
                                  outcome=result.outcome.name)
             # Джати/Джара-марана: фиксация и распад актуального контекста
             # (C.12: события контекста, не жизни Gen в базе)
             _active_after = set(self.engine.context.active_gen_ids())
             for _gid in _active_after - _active_before:
-                self.nidana.emit(Nidana.JATI, node=_gid, tick=_tick,
+                self.attention_trace.emit(AttentionStage.CONTEXT_FIXATION, node=_gid, tick=_tick,
                                  kind="context_fixation")
             for _gid in _active_before - _active_after:
-                self.nidana.emit(Nidana.JARA_MARANA, node=_gid, tick=_tick,
+                self.attention_trace.emit(AttentionStage.CONTEXT_DECAY, node=_gid, tick=_tick,
                                  kind="context_decay")
 
         # 2а. Лог удивлений для SleepDriver: запись REFUTED с контекстом
@@ -826,7 +826,7 @@ class LearningSystem:
             _level = round(self.resource.state.level, 4)
             _touched = self.engine.context.active_gen_ids() or [""]
             for _gid in _touched:
-                self.nidana.emit(Nidana.VEDANA, node=_gid, tick=_tick,
+                self.attention_trace.emit(AttentionStage.EVALUATION, node=_gid, tick=_tick,
                                  outcome=result.outcome.name, level=_level)
 
         # 6. Внутренний учитель — мгновенный триггер
@@ -841,7 +841,7 @@ class LearningSystem:
                 self.resource.add_reward(reward)
                 if _tracing:
                     # Танха: гедоническая реакция на завершение
-                    self.nidana.emit(Nidana.TANHA, node=gid,
+                    self.attention_trace.emit(AttentionStage.DRIVE, node=gid,
                                      tick=self.engine.step_count, kind="hedonic")
 
         # 6в. Инициатива: оценить совпадение, выдать бонус
@@ -850,7 +850,7 @@ class LearningSystem:
             self.resource.add_reward(initiative_bonus)
             if _tracing:
                 # Танха: ставка инициативы сыграла
-                self.nidana.emit(Nidana.TANHA, tick=self.engine.step_count,
+                self.attention_trace.emit(AttentionStage.DRIVE, tick=self.engine.step_count,
                                  kind="initiative")
 
         # 6г. Витальность: зафиксировать активации подтверждённых Gen
@@ -860,7 +860,7 @@ class LearningSystem:
                 self.vitality.record_activation(gid, _vstep)
                 if _tracing:
                     # Упадана: конкурент удерживает позицию (C.12)
-                    self.nidana.emit(Nidana.UPADANA, node=gid, tick=_vstep)
+                    self.attention_trace.emit(AttentionStage.RETENTION, node=gid, tick=_vstep)
             if self._capacity_budget is not None:
                 self._capacity_budget.set_step(_vstep)
 
@@ -875,7 +875,7 @@ class LearningSystem:
         if self.disambiguator.detect_bifurcation(self.engine.context, self.base):
             if _tracing:
                 # Бхава: суперпозиция конкурентов ещё не схлопнулась
-                self.nidana.emit(Nidana.BHAVA, tick=self.engine.step_count,
+                self.attention_trace.emit(AttentionStage.SUPERPOSITION, tick=self.engine.step_count,
                                  n_active=len(self.engine.context.active_gen_ids()))
             if len(self.engine.context.active_gen_ids()) > self.disambiguator.max_competing:
                 _before_dis = (set(self.engine.context.active_gen_ids())
@@ -889,7 +889,7 @@ class LearningSystem:
                     # Разрешение конкуренции: проигравшие покидают контекст
                     _after_dis = set(self.engine.context.active_gen_ids())
                     for _gid in _before_dis - _after_dis:
-                        self.nidana.emit(Nidana.JARA_MARANA, node=_gid,
+                        self.attention_trace.emit(AttentionStage.CONTEXT_DECAY, node=_gid,
                                          tick=self.engine.step_count,
                                          kind="disambiguation")
 
@@ -972,11 +972,11 @@ class LearningSystem:
         Сбросить контекст, обобщитель и запись траектории
         (вызывать на границах предложений/сессий).
         """
-        if self.nidana.enabled:
+        if self.attention_trace.enabled:
             # Джара-марана: распад всего актуального контекста на границе
             _tick = self.engine.step_count
             for _gid in self.engine.context.active_gen_ids():
-                self.nidana.emit(Nidana.JARA_MARANA, node=_gid, tick=_tick,
+                self.attention_trace.emit(AttentionStage.CONTEXT_DECAY, node=_gid, tick=_tick,
                                  kind="context_reset")
         self.engine.context.reset()
         self.generalizer.reset_chain()
