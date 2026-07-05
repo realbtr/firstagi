@@ -1,0 +1,33 @@
+# ── Секреты (О-7): никогда в git ────────────────────────────────
+.secrets/*
+!.secrets/keys.env.example
+*.env
+!*.env.example
+teachers.local.toml
+API_key.txt
+credentials.txt
+**/tg_bot_cred/
+
+# ── Входные копии других агентов (источники, не часть репозитория) ──
+read it*/
+z.ai.studio.FirstAGI/
+
+# ── Артефакты данных: базы гетерархии бэкапятся снапшотами, не git ──
+*.db
+*.log
+*.pid
+
+# ── Python ──
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+
+# ── ОС/редакторы ──
+Thumbs.db
+.DS_Store
+~$*
+
+# Снапшоты-архивы могут содержать чужие .env — в git не ходят (О-7)
+docs/archive/*.tar
+docs/archive/*.zip

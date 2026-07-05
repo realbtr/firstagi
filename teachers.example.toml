@@ -1,0 +1,32 @@
+# Реестр LLM-учителей — ШАБЛОН (коммитится). Секретов здесь НЕТ:
+# key_env — это ИМЯ переменной окружения, сам ключ живёт в .secrets/keys.env.
+#
+# Личный реестр исследователя: скопируйте этот файл в teachers.local.toml
+# (в git не попадает) и опишите своих учителей. Один исследователь может
+# держать сколько угодно учителей и подключать их к своим копиям почемучек.
+
+[[teacher]]
+name     = "claude-teacher"
+provider = "claude"
+model    = "claude-haiku-4-5-20251001"
+key_env  = "ANTHROPIC_API_KEY"
+
+[[teacher]]
+name     = "deepseek-teacher"
+provider = "deepseek"
+model    = "deepseek-chat"
+key_env  = "DEEPSEEK_API_KEY"
+
+[[teacher]]
+name     = "qwen-teacher"
+provider = "qwen"
+model    = "qwen-turbo"
+key_env  = "QWEN_API_KEY"
+
+# Свой или self-hosted endpoint (OpenAI-совместимый), например z.ai или vLLM:
+# [[teacher]]
+# name     = "my-local-teacher"
+# provider = "openai_compatible"
+# model    = "qwen2.5-7b-instruct"
+# base_url = "http://localhost:8000/v1"
+# key_env  = "MY_LOCAL_KEY"

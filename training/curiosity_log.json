@@ -1,0 +1,140 @@
+{
+  "events": [
+    {
+      "event": "phase_start",
+      "phase": 2,
+      "elapsed_s": 0.0,
+      "kind": "train",
+      "domains": [
+        "serial_встреча",
+        "serial_угощение",
+        "serial_помощь",
+        "winnie_friends",
+        "winnie_honey",
+        "winnie_rabbit"
+      ]
+    },
+    {
+      "event": "domain_switch",
+      "phase": 2,
+      "elapsed_s": 1.9,
+      "domain": "winnie_honey",
+      "transitions": 1001,
+      "base_size": 381,
+      "match_rate": 0.831
+    },
+    {
+      "event": "domain_switch",
+      "phase": 2,
+      "elapsed_s": 4.0,
+      "domain": "winnie_friends",
+      "transitions": 2002,
+      "base_size": 783,
+      "match_rate": 0.688
+    },
+    {
+      "event": "checkpoint",
+      "phase": 2,
+      "elapsed_s": 7.1,
+      "gen_count": 1180
+    },
+    {
+      "event": "phase_start",
+      "phase": 2,
+      "elapsed_s": 7.1,
+      "kind": "sleep",
+      "domains": [
+        "serial_встреча",
+        "serial_угощение",
+        "serial_помощь",
+        "winnie_friends",
+        "winnie_honey",
+        "winnie_rabbit"
+      ]
+    },
+    {
+      "event": "domain_switch",
+      "phase": 2,
+      "elapsed_s": 10.6,
+      "domain": "winnie_honey",
+      "transitions": 1001,
+      "base_size": 1485,
+      "match_rate": 0.787
+    },
+    {
+      "event": "domain_switch",
+      "phase": 2,
+      "elapsed_s": 14.1,
+      "domain": "winnie_friends",
+      "transitions": 2002,
+      "base_size": 1785,
+      "match_rate": 0.695
+    },
+    {
+      "event": "checkpoint",
+      "phase": 2,
+      "elapsed_s": 18.8,
+      "gen_count": 2018
+    },
+    {
+      "event": "curiosity_questions",
+      "phase": 2,
+      "elapsed_s": 18.9,
+      "pattern_questions": [
+        "Кто ещё зайца заяц?",
+        "Кто ещё зайца маша?",
+        "Что ещё лиса зайца?",
+        "Кто ещё поблагодарил дал?",
+        "Кто ещё поблагодарил зайца?",
+        "Что ещё ослик поблагодарил?",
+        "Кто ещё принёс зайца?",
+        "Кто ещё принёс поблагодарила?"
+      ],
+      "cluster_questions": [],
+      "gap_questions": [],
+      "semantic_bridges": [
+        {
+          "word": "зайца",
+          "degree": 45
+        },
+        {
+          "word": "поблагодарил",
+          "degree": 35
+        },
+        {
+          "word": "принёс",
+          "degree": 35
+        },
+        {
+          "word": "совы",
+          "degree": 35
+        },
+        {
+          "word": "этом",
+          "degree": 35
+        },
+        {
+          "word": "ягоды",
+          "degree": 33
+        },
+        {
+          "word": "в",
+          "degree": 32
+        },
+        {
+          "word": "удивился",
+          "degree": 31
+        },
+        {
+          "word": "лесу",
+          "degree": 30
+        },
+        {
+          "word": "всё",
+          "degree": 30
+        }
+      ]
+    }
+  ],
+  "total_events": 9
+}
