@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FirstAGI — Непрерывное движение внимания · OpenTalks AI 2026</title>
+<style>
+:root{--bg:#05050f;--bg2:#0a0a1e;--text:#e8eaf0;--text2:#94a3b8;--text3:#475569;
+--cyan:#00d4ff;--purple:#a855f7;--green:#10b981;--amber:#f59e0b;--red:#ef4444;--pink:#ec4899}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;background:var(--bg);
+font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;overflow:hidden;color:var(--text)}
+.deck{width:100vw;height:100vh;position:relative}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;
+flex-direction:column;justify-content:center;align-items:center;padding:5vh 6vw;
+opacity:0;transition:opacity .35s ease;pointer-events:none;text-align:center}
+.slide.active{opacity:1;pointer-events:all}
+.bg-hero{background:radial-gradient(ellipse 80% 60% at 50% 30%,#1e0a3a 0%,var(--bg) 70%)}
+.bg-section{background:radial-gradient(ellipse 70% 50% at 50% 50%,#0a1432 0%,var(--bg) 70%)}
+.bg-dark{background:var(--bg)}.bg-mid{background:var(--bg2)}
+.bg-diagram{background:linear-gradient(135deg,#08082a 0%,#0a0a1e 100%)}
+.bg-green{background:radial-gradient(ellipse 70% 50% at 50% 50%,#041a10 0%,var(--bg) 70%)}
+.anchor{background:radial-gradient(ellipse 100% 80% at 50% 45%,#110525 0%,#020209 100%)}
+.anchor-eye{font-size:clamp(.6rem,1vw,.78rem);letter-spacing:.3em;text-transform:uppercase;
+color:rgba(168,85,247,.45);font-weight:600;margin-bottom:2.5rem}
+.anchor-q{font-size:clamp(1.8rem,4.5vw,3.6rem);font-weight:300;font-style:italic;
+line-height:1.4;max-width:820px;color:var(--text)}
+.anchor-sub{font-size:clamp(.85rem,1.4vw,1.15rem);color:var(--text3);
+margin-top:1.8rem;max-width:660px;line-height:1.65}
+.t-hero{font-size:clamp(3rem,8vw,7rem);font-weight:900;line-height:1.05;letter-spacing:-.03em}
+.t-xl{font-size:clamp(2.2rem,5vw,4.5rem);font-weight:800;line-height:1.1;letter-spacing:-.02em}
+.t-lg{font-size:clamp(1.5rem,3.2vw,2.8rem);font-weight:700;line-height:1.2}
+.t-md{font-size:clamp(1.1rem,2.2vw,1.85rem);font-weight:400;line-height:1.55}
+.t-sm{font-size:clamp(.85rem,1.5vw,1.3rem);line-height:1.6}
+.t-xs{font-size:clamp(.75rem,1.1vw,1rem)}
+.c-cyan{color:var(--cyan)}.c-purple{color:var(--purple)}.c-green{color:var(--green)}
+.c-amber{color:var(--amber)}.c-red{color:var(--red)}.c-dim{color:var(--text2)}.c-pink{color:var(--pink)}
+.glow-cyan{text-shadow:0 0 50px rgba(0,212,255,.6)}
+.glow-purple{text-shadow:0 0 50px rgba(168,85,247,.6)}
+.grad-cp{background:linear-gradient(135deg,var(--cyan),var(--purple));
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.grad-gp{background:linear-gradient(135deg,var(--green),var(--cyan));
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.grad-ap{background:linear-gradient(135deg,var(--amber),var(--pink));
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.badge{display:inline-block;padding:.3em 1em;border-radius:100px;
+font-size:clamp(.6rem,1vw,.8rem);font-weight:700;letter-spacing:.12em;
+text-transform:uppercase;margin-bottom:1.2rem}
+.badge-purple{background:rgba(168,85,247,.15);border:1px solid rgba(168,85,247,.4);color:var(--purple)}
+.badge-cyan{background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3);color:var(--cyan)}
+.badge-green{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);color:var(--green)}
+.badge-amber{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);color:var(--amber)}
+.badge-red{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:var(--red)}
+.badge-pink{background:rgba(236,72,153,.1);border:1px solid rgba(236,72,153,.3);color:var(--pink)}
+.blist{list-style:none;text-align:left}
+.blist li{padding:.45em 0 .45em 1.6em;position:relative;
+font-size:clamp(.9rem,1.7vw,1.4rem);color:var(--text);line-height:1.5}
+.blist li::before{content:'›';position:absolute;left:0;color:var(--cyan);font-weight:900}
+.card{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);
+border-radius:14px;padding:1.5rem 2rem}
+.card-cyan{border-color:rgba(0,212,255,.25)}.card-purple{border-color:rgba(168,85,247,.25)}
+.card-green{border-color:rgba(16,185,129,.25)}.card-amber{border-color:rgba(245,158,11,.25)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:2rem;width:100%;max-width:960px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;width:100%;max-width:960px}
+.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1.2rem;width:100%;max-width:1000px}
+.formula{background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.25);
+border-radius:10px;padding:1rem 2rem;font-family:'Consolas','Fira Code',monospace;
+font-size:clamp(.95rem,1.8vw,1.5rem);color:var(--cyan);margin:.8rem 0}
+.ctable{width:100%;max-width:920px;border-collapse:collapse}
+.ctable th,.ctable td{padding:.6rem .9rem;text-align:center;
+border-bottom:1px solid rgba(255,255,255,.06)}
+.ctable th{color:var(--text2);font-weight:600;font-size:clamp(.72rem,1.1vw,.95rem)}
+.ctable td{font-size:clamp(.72rem,1.1vw,.95rem)}
+.ctable td:first-child{text-align:left;color:var(--text2)}
+.ctable .win{color:var(--green);font-weight:700}.ctable .mid{color:var(--amber)}
+.ctable .los{color:var(--red)}.ctable tr:last-child td{border-bottom:none}
+.metric{text-align:center}
+.metric-val{font-size:clamp(2rem,5.5vw,3.8rem);font-weight:900;color:var(--cyan);line-height:1}
+.metric-lbl{font-size:clamp(.7rem,1.1vw,.95rem);color:var(--text3);margin-top:.3rem}
+/* children's question epigraph */
+.child-q{position:absolute;top:3vh;left:4vw;max-width:22vw;text-align:left;
+border-left:2px solid rgba(168,85,247,.4);padding-left:.8rem;
+font-size:clamp(.62rem,.95vw,.82rem);font-style:italic;
+color:rgba(168,85,247,.65);line-height:1.45;pointer-events:none}
+/* actual system output log */
+.result-log{background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.1);
+border-radius:8px;padding:.9rem 1.2rem;font-family:'Consolas','Fira Code',monospace;
+font-size:clamp(.65rem,1.1vw,.92rem);text-align:left;line-height:1.8;
+color:var(--text2);width:100%;max-width:860px}
+.result-log .tok{color:var(--cyan);font-weight:700}
+.result-log .conf{color:var(--green);font-weight:700}
+.result-log .refuted{color:var(--red);font-weight:700}
+.result-log .surp{color:var(--amber);font-weight:700}
+.result-log .dim{color:#334155}
+/* progress bar */
+#pgbar{position:fixed;bottom:0;left:0;height:3px;
+background:linear-gradient(90deg,var(--purple),var(--cyan));transition:width .3s;z-index:200}
+#pgnum{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);
+font-size:.68rem;color:var(--text3);z-index:200;letter-spacing:.1em}
+/* speaker notes toggle */
+#ntoggle{position:fixed;top:10px;right:12px;background:rgba(168,85,247,.12);
+border:1px solid rgba(168,85,247,.3);color:rgba(168,85,247,.6);padding:.2em .6em;
+border-radius:6px;cursor:pointer;font-size:.65rem;font-weight:700;letter-spacing:.08em;
+z-index:300;user-select:none;transition:all .2s}
+#ntoggle:hover{background:rgba(168,85,247,.25);color:var(--purple)}
+#ntoggle.on{background:rgba(168,85,247,.22);border-color:rgba(168,85,247,.6);color:var(--purple)}
+#notes{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);
+width:min(820px,92vw);background:rgba(4,4,18,.94);border:1px solid rgba(168,85,247,.35);
+border-radius:12px;padding:14px 22px;font-size:.78rem;line-height:1.7;color:#7a8a9e;
+z-index:300;display:none;pointer-events:none}
+#notes .p{color:#f59e0b;font-weight:700}
+#notes .r{color:#ef4444}
+#notes .g{color:#10b981}
+#notes .c{color:#00d4ff}
+#notes .m{color:#a855f7}
+/* nav buttons */
+.nbtn{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.1);color:var(--text2);width:40px;height:40px;
+border-radius:50%;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;
+justify-content:center;z-index:200;transition:all .2s;user-select:none}
+.nbtn:hover{background:rgba(255,255,255,.12);color:white}
+#nbprev{left:12px}#nbnext{right:12px}
+/* stars */
+.stars{position:absolute;width:100%;height:100%;pointer-events:none;overflow:hidden}
+.star{position:absolute;border-radius:50%;background:rgba(255,255,255,.7);
+animation:twinkle var(--d,3s) var(--delay,0s) infinite alternate}
+@keyframes twinkle{0%{opacity:.1}100%{opacity:.6}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.slide.active>*{animation:fadeUp .45s ease both}
+.slide.active>*:nth-child(2){animation-delay:.08s}
+.slide.active>*:nth-child(3){animation-delay:.16s}
+.slide.active>*:nth-child(4){animation-delay:.24s}
+.slide.active>*:nth-child(5){animation-delay:.32s}
+</style>
+</head>
+<body>
+<div id="pgbar"></div>
+<div id="pgnum"></div>
+<button id="ntoggle">N</button>
+<div id="notes"></div>
+<button class="nbtn" id="nbprev">&#8592;</button>
+<button class="nbtn" id="nbnext">&#8594;</button>
+
+<div class="deck" id="deck">
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 1 · TITLE
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-hero" data-notes="Добро пожаловать. Пауза 3 секунды. Дать залу осмотреться.">
+<div class="stars" id="st0"></div>
+<div class="t-hero glow-cyan"><span class="grad-cp">FirstAGI</span></div>
+<div class="t-lg c-dim" style="margin-top:1.2rem">Непрерывное движение внимания</div>
+<div class="t-sm c-dim" style="margin-top:.6rem;letter-spacing:.15em">OpenTalks AI 2026 · Москва</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 2 · HOOK — Live prediction table
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-dark" data-notes="Сразу — доказательство. Система предсказала «в» и «лес» точно. «Волка» — промахнулась: ожидала «медведя». Это не баг — это момент рождения нового Gen.">
+<div class="child-q">Почему медведь страшнее зайца?</div>
+<div class="badge badge-cyan">Живой вывод системы</div>
+<div class="t-lg" style="margin-bottom:1rem">«маша пришла в лес встретила волка поздоровались»</div>
+<div class="result-log">
+<span class="dim">step 1 »</span> токен <span class="tok">«в»</span>      — предсказан с conf=<span class="conf">1.00</span> ✓ CONFIRMED<br>
+<span class="dim">step 2 »</span> токен <span class="tok">«лес»</span>    — предсказан с conf=<span class="conf">0.94</span> ✓ CONFIRMED<br>
+<span class="dim">step 3 »</span> токен <span class="tok">«встретила»</span> — предсказан с conf=<span class="conf">1.00</span> ✓ CONFIRMED<br>
+<span class="dim">step 4 »</span> токен <span class="tok">«волка»</span>  — ожидала: <span class="surp">«медведя»</span> conf=0.89 ↔ REFUTED<br>
+<span class="dim">           »</span> <span class="refuted">Новый Gen рождается:</span> маша→встретила→<span class="tok">волка</span> sig=0.00→начало<br>
+<span class="dim">step 5 »</span> токен <span class="tok">«поздоровались»</span> — conf=<span class="conf">1.00</span> ✓ CONFIRMED
+</div>
+<div class="t-sm c-dim" style="margin-top:1rem">Один неожиданный токен = один новый аттрактор. Не штраф — рождение.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 3 · GPT vs Child
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-dark" data-notes="Контраст для зала. Не нападка на LLM — постановка вопроса о природе познания.">
+<div class="child-q">Как ты узнаёшь что это кот?</div>
+<div class="g2" style="max-width:800px;margin-top:1rem">
+<div class="card card-purple" style="text-align:center">
+  <div class="t-sm c-dim" style="margin-bottom:.5rem">GPT-4</div>
+  <div style="font-size:clamp(2.5rem,6vw,4.5rem);font-weight:900;color:var(--red)">175B</div>
+  <div class="t-xs c-dim" style="margin-top:.4rem">параметров · сотни GPU<br>месяцы обучения · статичный</div>
+</div>
+<div class="card card-green" style="text-align:center">
+  <div class="t-sm c-dim" style="margin-bottom:.5rem">Ребёнок · FirstAGI</div>
+  <div style="font-size:clamp(2.5rem,6vw,4.5rem);font-weight:900;color:var(--green)">0 GPU</div>
+  <div class="t-xs c-dim" style="margin-top:.4rem">непрерывный · онлайн<br>CPU only · растёт сам</div>
+</div>
+</div>
+<div class="t-md c-dim" style="margin-top:1.5rem;max-width:700px">Дело не в объёме. Дело в <span class="c-cyan">природе познания</span>.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 4 · Дело в природе познания
+═══════════════════════════════════════════════════ -->
+<div class="slide anchor">
+<div class="anchor-eye">Тезис</div>
+<div class="anchor-q">«Объектов не существует — существуют только различения»</div>
+<div class="anchor-sub">Два неразличимых объекта — один объект. Познание начинается не с классификации, а с обнаружения перехода. Аттрактор — это то, что мы называем «объектом».</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 5 · Feature diagram
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-diagram" data-notes="Признак — пятимерный вектор направленного перехода. Инвариантен к аффинным преобразованиям. Работает для текста, звука, изображения.">
+<div class="child-q">Откуда ты знаешь что стало темнее?</div>
+<div class="badge badge-cyan">Атом познания</div>
+<div class="t-lg" style="margin-bottom:.8rem">Признак = направленный переход внимания</div>
+<svg width="100%" height="210" viewBox="0 0 780 210" style="max-width:780px">
+<defs><marker id="af" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#10b981"/></marker></defs>
+<ellipse cx="170" cy="105" rx="145" ry="80" fill="rgba(0,212,255,.07)" stroke="rgba(0,212,255,.4)" stroke-width="2"/>
+<text x="170" y="98" text-anchor="middle" fill="#00d4ff" font-size="16" font-weight="700">Область A</text>
+<text x="170" y="118" text-anchor="middle" fill="#64748b" font-size="12">фокус внимания</text>
+<ellipse cx="610" cy="105" rx="145" ry="80" fill="rgba(168,85,247,.07)" stroke="rgba(168,85,247,.4)" stroke-width="2"/>
+<text x="610" y="98" text-anchor="middle" fill="#a855f7" font-size="16" font-weight="700">Область B</text>
+<text x="610" y="118" text-anchor="middle" fill="#64748b" font-size="12">новый фокус</text>
+<line x1="320" y1="105" x2="460" y2="105" stroke="#10b981" stroke-width="3" marker-end="url(#af)"/>
+<rect x="330" y="82" width="120" height="30" rx="6" fill="rgba(16,185,129,.15)" stroke="rgba(16,185,129,.4)"/>
+<text x="390" y="102" text-anchor="middle" fill="#10b981" font-size="14" font-weight="700">ПРИЗНАК</text>
+<text x="390" y="175" text-anchor="middle" fill="#94a3b8" font-size="12">Δsize · Δbrightness · Δcontrast · Δcolor_hue · Δcolor_sat · Δfractal_dim</text>
+<text x="390" y="193" text-anchor="middle" fill="#475569" font-size="11">инвариантен к аффинным преобразованиям · текст / звук / видео</text>
+</svg>
+<div class="formula">FeatureVector(size=0, brightness=-0.7, contrast=+0.3, color_hue=+0.12, color_sat=0, fractal_dim=1.0)</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 6 · Anchor: Не что, а как
+═══════════════════════════════════════════════════ -->
+<div class="slide anchor">
+<div class="anchor-eye">Примитив</div>
+<div class="anchor-q">«Не что, а как изменилось — вот правильный примитив»</div>
+<div class="anchor-sub">6 чисел описывают любой переход внимания. Одинаково для кота на диване, слова в тексте и ноты в мелодии.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 7 · Gen formula + real example
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-dark" data-notes="Gen — это цепочка признаков со статистикой. Значимость растёт при подтверждениях. Никто не задаёт пороги вручную.">
+<div class="child-q">Ты догадалась или узнала?</div>
+<div class="badge badge-purple">Обобщение (Gen)</div>
+<div class="t-lg" style="margin-bottom:.8rem">Цепочка признаков + статистика подтверждений</div>
+<div class="formula">значимость = success / (success + stop)</div>
+<div class="g2" style="margin-top:1.2rem;max-width:800px">
+<div class="card card-cyan">
+  <div class="t-xs c-dim">Пример из «Теремка»</div>
+  <div style="color:var(--cyan);font-weight:700;margin:.4rem 0;font-size:1.1rem">Gen #47: маша→лес→встретила</div>
+  <div class="t-xs">success=47 · stop=3 · <span class="c-green">sig=0.94</span></div>
+</div>
+<div class="card card-purple">
+  <div class="t-xs c-dim">Трансцендентный Gen</div>
+  <div style="color:var(--purple);font-weight:700;margin:.4rem 0;font-size:1.1rem">Gen #9: chain=1 (корень)</div>
+  <div class="t-xs">success=198 · stop=2 · <span class="c-purple">sig=0.99</span></div>
+</div>
+</div>
+<div class="t-sm c-dim" style="margin-top:1rem">Гетерархия: каждый Gen — и <span class="c-green">мастер</span>, и <span class="c-cyan">ученик</span>.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 8 · CharTransitionDriver: кот/кошка
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-diagram" data-notes="CharTransitionDriver кодирует только brightness+contrast+color_hue. size=0, fractal_dim=1. Tolerance=0.35. MR_train=MR_test=1.0 — идеальное обобщение.">
+<div class="child-q">Почему кот и кошка похожи?</div>
+<div class="badge badge-amber">CharTransitionDriver</div>
+<div class="t-lg" style="margin-bottom:.8rem">Символьные переходы: позиционно-инвариантное три</div>
+<svg width="100%" height="220" viewBox="0 0 760 220" style="max-width:760px">
+<defs><marker id="act" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#f59e0b"/></marker></defs>
+<!-- root -->
+<circle cx="380" cy="30" r="20" fill="rgba(245,158,11,.2)" stroke="rgba(245,158,11,.6)" stroke-width="2"/>
+<text x="380" y="35" text-anchor="middle" fill="#f59e0b" font-size="13" font-weight="700">∅</text>
+<!-- shared prefix к→о -->
+<circle cx="380" cy="100" r="24" fill="rgba(0,212,255,.2)" stroke="rgba(0,212,255,.7)" stroke-width="2.5"/>
+<text x="380" y="96" text-anchor="middle" fill="#00d4ff" font-size="11" font-weight="700">к→о</text>
+<text x="380" y="112" text-anchor="middle" fill="#64748b" font-size="9">shared</text>
+<line x1="380" y1="50" x2="380" y2="76" stroke="rgba(245,158,11,.5)" stroke-width="2" marker-end="url(#act)"/>
+<!-- кот branch: т -->
+<circle cx="240" cy="175" r="22" fill="rgba(168,85,247,.2)" stroke="rgba(168,85,247,.5)" stroke-width="2"/>
+<text x="240" y="180" text-anchor="middle" fill="#a855f7" font-size="13" font-weight="700">о→т</text>
+<line x1="356" y1="118" x2="262" y2="158" stroke="rgba(0,212,255,.4)" stroke-width="1.8" marker-end="url(#act)"/>
+<text x="240" y="210" text-anchor="middle" fill="#a855f7" font-size="12">«кот»</text>
+<!-- кошка branch: ш -->
+<circle cx="520" cy="175" r="22" fill="rgba(16,185,129,.2)" stroke="rgba(16,185,129,.5)" stroke-width="2"/>
+<text x="520" y="180" text-anchor="middle" fill="#10b981" font-size="13" font-weight="700">о→ш</text>
+<line x1="404" y1="118" x2="498" y2="158" stroke="rgba(0,212,255,.4)" stroke-width="1.8" marker-end="url(#act)"/>
+<text x="520" y="210" text-anchor="middle" fill="#10b981" font-size="12">«кошка»</text>
+<!-- label -->
+<rect x="290" y="95" width="180" height="22" rx="5" fill="rgba(0,212,255,.08)"/>
+<text x="380" y="110" text-anchor="middle" fill="#00d4ff" font-size="11">общий Gen [к→о] — один аттрактор</text>
+</svg>
+<div class="t-sm" style="margin-top:.5rem"><span class="c-green">MR_train = MR_test = 1.0</span> · tolerance=0.35 · brightness+contrast+color_hue only</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 9 · Algorithm: 4 outcomes
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-dark" data-notes="Весь алгоритм — три строки. Ожидаем признак. Пришёл — подтверждён. Не пришёл — новый Gen. Пусто — исследуем короткие.">
+<div class="child-q">А что если ты ошиблась?</div>
+<div class="badge badge-purple">Главный алгоритм</div>
+<div class="t-lg" style="margin-bottom:1rem">4 исхода — полная картина мира</div>
+<div class="g2" style="max-width:880px">
+<div>
+<div class="card card-green" style="margin-bottom:1rem">
+  <div style="color:var(--green);font-weight:700;font-size:1rem">✓ CONFIRMED</div>
+  <div class="t-xs c-dim" style="margin-top:.3rem">признак совпал → следующий в цепочке</div>
+</div>
+<div class="card card-green">
+  <div style="color:var(--green);font-weight:700;font-size:1rem">✓ COMPLETED</div>
+  <div class="t-xs c-dim" style="margin-top:.3rem">цепочка завершена → sig↑</div>
+</div>
+</div>
+<div>
+<div class="card card-purple" style="margin-bottom:1rem">
+  <div style="color:var(--red);font-weight:700;font-size:1rem">✗ REFUTED</div>
+  <div class="t-xs c-dim" style="margin-top:.3rem">не совпал → <span class="c-cyan">рождается новый Gen</span></div>
+</div>
+<div class="card card-amber">
+  <div style="color:var(--amber);font-weight:700;font-size:1rem">? EXPLORING</div>
+  <div class="t-xs c-dim" style="margin-top:.3rem">контекст пуст → исследовать chain=1</div>
+</div>
+</div>
+</div>
+<div class="t-sm c-dim" style="margin-top:1rem">Обучение и инференс — <span class="c-cyan">один и тот же алгоритм</span>. Нет отдельной фазы train.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 10 · Transition diagram SVG
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-diagram" data-notes="Полный граф переходов. step() загружает контекст → сопоставляет сразу, не EXPLORING при наличии Gen.">
+<div class="child-q">Зачем ты рассказываешь про себя?</div>
+<div class="badge badge-purple">Граф переходов engine.step()</div>
+<svg width="100%" height="290" viewBox="0 0 880 290" style="max-width:880px">
+<defs>
+<marker id="aa" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#64748b"/></marker>
+<marker id="aag" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#10b981"/></marker>
+<marker id="aar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#ef4444"/></marker>
+<marker id="aay" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#f59e0b"/></marker>
+</defs>
+<rect x="10" y="118" width="130" height="48" rx="8" fill="rgba(0,212,255,.1)" stroke="rgba(0,212,255,.4)" stroke-width="1.5"/>
+<text x="75" y="138" text-anchor="middle" fill="#00d4ff" font-size="11" font-weight="700">Контекст</text>
+<text x="75" y="154" text-anchor="middle" fill="#00d4ff" font-size="10">ожидает признак</text>
+<line x1="140" y1="142" x2="195" y2="142" stroke="#64748b" stroke-width="1.5" marker-end="url(#aa)"/>
+<rect x="195" y="118" width="130" height="48" rx="8" fill="rgba(168,85,247,.1)" stroke="rgba(168,85,247,.4)" stroke-width="1.5"/>
+<text x="260" y="138" text-anchor="middle" fill="#a855f7" font-size="11" font-weight="700">Токен</text>
+<text x="260" y="154" text-anchor="middle" fill="#a855f7" font-size="10">получен</text>
+<line x1="325" y1="142" x2="375" y2="142" stroke="#64748b" stroke-width="1.5" marker-end="url(#aa)"/>
+<polygon points="440,112 500,142 440,172 380,142" fill="rgba(245,158,11,.1)" stroke="rgba(245,158,11,.5)" stroke-width="1.5"/>
+<text x="440" y="146" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="700">совпал?</text>
+<line x1="500" y1="132" x2="560" y2="88" stroke="#10b981" stroke-width="1.5" marker-end="url(#aag)"/>
+<text x="524" y="103" fill="#10b981" font-size="10">ДА</text>
+<rect x="560" y="64" width="138" height="48" rx="8" fill="rgba(16,185,129,.1)" stroke="rgba(16,185,129,.4)" stroke-width="1.5"/>
+<text x="629" y="84" text-anchor="middle" fill="#10b981" font-size="11" font-weight="700">CONFIRMED</text>
+<text x="629" y="100" text-anchor="middle" fill="#10b981" font-size="10">следующий признак</text>
+<line x1="698" y1="88" x2="756" y2="88" stroke="#10b981" stroke-width="1.5" marker-end="url(#aag)"/>
+<rect x="756" y="64" width="114" height="48" rx="8" fill="rgba(16,185,129,.15)" stroke="rgba(16,185,129,.5)" stroke-width="1.5"/>
+<text x="813" y="84" text-anchor="middle" fill="#10b981" font-size="11" font-weight="700">COMPLETED ✓</text>
+<text x="813" y="100" text-anchor="middle" fill="#10b981" font-size="10">sig↑ · chain сброс</text>
+<line x1="500" y1="152" x2="560" y2="196" stroke="#ef4444" stroke-width="1.5" marker-end="url(#aar)"/>
+<text x="524" y="185" fill="#ef4444" font-size="10">НЕТ</text>
+<rect x="560" y="180" width="138" height="48" rx="8" fill="rgba(239,68,68,.1)" stroke="rgba(239,68,68,.4)" stroke-width="1.5"/>
+<text x="629" y="200" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="700">REFUTED</text>
+<text x="629" y="216" text-anchor="middle" fill="#ef4444" font-size="10">→ новый Gen</text>
+<line x1="440" y1="172" x2="440" y2="240" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#aay)"/>
+<text x="452" y="215" fill="#f59e0b" font-size="10">пуст</text>
+<rect x="360" y="248" width="160" height="36" rx="8" fill="rgba(245,158,11,.1)" stroke="rgba(245,158,11,.4)" stroke-width="1.5"/>
+<text x="440" y="264" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="700">EXPLORING</text>
+<text x="440" y="278" text-anchor="middle" fill="#f59e0b" font-size="10">исследовать chain=1 Gen</text>
+</svg>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 11 · Actual CONFIRMED/REFUTED log
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-dark" data-notes="Реальный лог из «Теремка». Опровержение — не ошибка. Из каждого REFUTED рождается новый Gen.">
+<div class="child-q">А что если ты не помнишь?</div>
+<div class="badge badge-green">Реальный лог · «Теремок» · 20 итераций</div>
+<div class="result-log">
+<span class="dim">[iter=1 ]</span> step( <span class="tok">«мышка»</span> )   → EXPLORING  · chain=1 создан, sig=0.00<br>
+<span class="dim">[iter=1 ]</span> step( <span class="tok">«норушка»</span> ) → <span class="conf">CONFIRMED</span>  · Gen#3 sig: 0.00→0.50<br>
+<span class="dim">[iter=2 ]</span> step( <span class="tok">«лягушка»</span> ) → <span class="refuted">REFUTED</span>    · ожидала «норушка» · новый Gen#12<br>
+<span class="dim">[iter=5 ]</span> step( <span class="tok">«медведь»</span> ) → <span class="conf">CONFIRMED</span>  · Gen#7 sig: 0.72→0.78<br>
+<span class="dim">[iter=20]</span> Gen count: <span class="conf">563</span> · трансцендентных (sig≥0.99): <span class="surp">9</span><br>
+<span class="dim">[iter=20]</span> TopGen: chain=1 sig=<span class="conf">0.99</span> · chain=2 sig=<span class="conf">0.97</span> · chain=5 sig=0.87
+</div>
+<div class="g3" style="margin-top:1rem;max-width:700px">
+<div class="metric"><div class="metric-val c-cyan">563</div><div class="metric-lbl">Gen извлечено</div></div>
+<div class="metric"><div class="metric-val c-purple">9</div><div class="metric-lbl">трансцендентных sig≈0.99</div></div>
+<div class="metric"><div class="metric-val c-green">20</div><div class="metric-lbl">итераций текста</div></div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 12 · Anchor: Порядок кристаллизуется
+═══════════════════════════════════════════════════ -->
+<div class="slide anchor">
+<div class="anchor-eye">Алгоритм</div>
+<div class="anchor-q">«Порядок кристаллизуется из опровержений»</div>
+<div class="anchor-sub">Каждый REFUTED — момент рождения нового аттрактора. Система не штрафует за неожиданность — она запоминает её как новый паттерн.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 13 · ResourceDriver: 5 modes
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-diagram" data-notes="5 режимов когнитивной энергии. При REST — только выживание. При ABUNDANT — полное исследование.">
+<div class="child-q">Почему иногда не хочется играть в любимую игру?</div>
+<div class="badge badge-green">ResourceDriver · когнитивная энергия</div>
+<div class="t-lg" style="margin-bottom:.8rem">5 режимов — от выживания до пика</div>
+<svg width="100%" height="160" viewBox="0 0 860 160" style="max-width:860px">
+<rect x="0" y="40" width="158" height="48" rx="8" fill="rgba(239,68,68,.2)" stroke="rgba(239,68,68,.5)" stroke-width="2"/>
+<text x="79" y="60" text-anchor="middle" fill="#ef4444" font-size="13" font-weight="700">REST</text>
+<text x="79" y="78" text-anchor="middle" fill="#ef4444" font-size="11">0.0–0.2</text>
+<rect x="168" y="40" width="158" height="48" rx="8" fill="rgba(245,158,11,.15)" stroke="rgba(245,158,11,.4)" stroke-width="2"/>
+<text x="247" y="60" text-anchor="middle" fill="#f59e0b" font-size="13" font-weight="700">CONSERVE</text>
+<text x="247" y="78" text-anchor="middle" fill="#f59e0b" font-size="11">0.2–0.4</text>
+<rect x="336" y="40" width="158" height="48" rx="8" fill="rgba(0,212,255,.1)" stroke="rgba(0,212,255,.35)" stroke-width="2"/>
+<text x="415" y="60" text-anchor="middle" fill="#00d4ff" font-size="13" font-weight="700">NORMAL</text>
+<text x="415" y="78" text-anchor="middle" fill="#00d4ff" font-size="11">0.4–0.65</text>
+<rect x="504" y="40" width="158" height="48" rx="8" fill="rgba(168,85,247,.15)" stroke="rgba(168,85,247,.4)" stroke-width="2"/>
+<text x="583" y="60" text-anchor="middle" fill="#a855f7" font-size="13" font-weight="700">EXPLORE</text>
+<text x="583" y="78" text-anchor="middle" fill="#a855f7" font-size="11">0.65–0.85</text>
+<rect x="672" y="40" width="180" height="48" rx="8" fill="rgba(16,185,129,.2)" stroke="rgba(16,185,129,.5)" stroke-width="2"/>
+<text x="762" y="60" text-anchor="middle" fill="#10b981" font-size="13" font-weight="700">ABUNDANT</text>
+<text x="762" y="78" text-anchor="middle" fill="#10b981" font-size="11">0.85–1.0</text>
+<text x="79" y="120" text-anchor="middle" fill="#94a3b8" font-size="10">выживание</text>
+<text x="247" y="120" text-anchor="middle" fill="#94a3b8" font-size="10">экономия</text>
+<text x="415" y="120" text-anchor="middle" fill="#94a3b8" font-size="10">баланс</text>
+<text x="583" y="120" text-anchor="middle" fill="#94a3b8" font-size="10">исследование</text>
+<text x="762" y="120" text-anchor="middle" fill="#94a3b8" font-size="10">пик</text>
+<line x1="0" y1="100" x2="852" y2="100" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+</svg>
+<div class="t-sm c-dim" style="margin-top:.5rem">CONFIRMED → восстановление · REFUTED → расход · новизна = 0.75^count</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 14 · HedonicAdapter + VitalityEngine
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-dark" data-notes="HedonicAdapter: novelty curve. VitalityEngine: urgency = предиктор context_load. Подтверждено H6-H10.">
+<div class="child-q">Зачем нам слова?</div>
+<div class="badge badge-amber">HedonicAdapter · VitalityEngine</div>
+<div class="g2" style="max-width:860px;margin-top:.8rem">
+<div class="card card-amber">
+  <div style="color:var(--amber);font-weight:700;margin-bottom:.5rem">Новизна убывает</div>
+  <div class="formula" style="font-size:.85rem;padding:.5rem 1rem">novelty = 0.75^count</div>
+  <div class="t-xs c-dim" style="margin-top:.5rem">Первый визит: яркий.<br>Десятый: рутина.<br>Скука → освобождает внимание для глубины.</div>
+</div>
+<div class="card card-purple">
+  <div style="color:var(--purple);font-weight:700;margin-bottom:.5rem">VitalityEngine · urgency</div>
+  <div class="t-xs c-dim">urgency = <span class="c-cyan">предиктор</span> нагрузки контекста<br>(подтверждено H6-H10)</div>
+  <div style="margin-top:.6rem;color:var(--text2);font-size:.85rem">VitalityRecord хранит<br>интервалы (_gaps deque)<br>вместо абсолютных шагов</div>
+</div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 15 · Anchor: Скука — учитель глубины
+═══════════════════════════════════════════════════ -->
+<div class="slide anchor">
+<div class="anchor-eye">Гедоника</div>
+<div class="anchor-q">«Скука — учитель глубины»</div>
+<div class="anchor-sub">Система не бросает скучное. Она возвращается умнее: первый визит — очевидный паттерн, второй — его структура, третий — исключения из структуры.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 16 · TimescaleScheduler: 3 pools
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-diagram" data-notes="94% Gen — LONG_TERM с avg_sig=0.094. Это exploration debris — система активно исследует. TimescaleScheduler уже реализован.">
+<div class="child-q">Когда было вчера?</div>
+<div class="badge badge-amber">TimescaleScheduler · три пула Gen</div>
+<div class="t-lg" style="margin-bottom:.8rem">Одна архитектура — три временны́х масштаба</div>
+<div class="g3" style="max-width:860px;margin-bottom:1rem">
+<div class="card card-purple" style="text-align:center">
+  <div style="color:var(--purple);font-weight:700;font-size:1rem">LONG_TERM</div>
+  <div style="color:var(--purple);font-size:2rem;font-weight:900;margin:.3rem 0">94%</div>
+  <div class="t-xs c-dim">chain=1–2 · avg_sig=0.094<br>exploration debris</div>
+</div>
+<div class="card card-amber" style="text-align:center">
+  <div style="color:var(--amber);font-weight:700;font-size:1rem">MEDIUM</div>
+  <div style="color:var(--amber);font-size:2rem;font-weight:900;margin:.3rem 0">5%</div>
+  <div class="t-xs c-dim">chain=3–4 · часы/дни</div>
+</div>
+<div class="card card-cyan" style="text-align:center">
+  <div style="color:var(--cyan);font-weight:700;font-size:1rem">OPERATIONAL</div>
+  <div style="color:var(--cyan);font-size:2rem;font-weight:900;margin:.3rem 0">1%</div>
+  <div class="t-xs c-dim">chain≥5 · секунды/минуты</div>
+</div>
+</div>
+<div class="t-sm c-dim">classify() · depth_profile() · tick() · eviction_candidates() — всё реализовано</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 17 · Anchor: Медленное и быстрое
+═══════════════════════════════════════════════════ -->
+<div class="slide anchor">
+<div class="anchor-eye">Временны́е масштабы</div>
+<div class="anchor-q">«Медленное и быстрое живут в одной архитектуре без специальных меток»</div>
+<div class="anchor-sub">Масштаб задаётся длиной цепочки и частотой подтверждений. «Сейчас весна» — это Gen с огромным success_count, подтверждаемый через тысячи быстрых циклов.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 18 · SpeechDriver: Channel A + B
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-diagram" data-notes="Канал A — молчаливый внутренний поток Gen. Канал B_interp — SpeechDriver интерпретирует путь внимания без обратной связи.">
+<div class="child-q">Зачем ты рассказываешь про себя?</div>
+<div class="badge badge-pink">SpeechDriver · двухканальное обучение</div>
+<div class="t-lg" style="margin-bottom:.8rem">Канал A (молчаливый) + Канал B (речевой)</div>
+<svg width="100%" height="210" viewBox="0 0 840 210" style="max-width:840px">
+<defs><marker id="asd" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#a855f7"/></marker>
+<marker id="asdb" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#ec4899"/></marker></defs>
+<!-- Channel A -->
+<rect x="10" y="30" width="180" height="50" rx="10" fill="rgba(168,85,247,.15)" stroke="rgba(168,85,247,.5)" stroke-width="2"/>
+<text x="100" y="53" text-anchor="middle" fill="#a855f7" font-size="13" font-weight="700">Канал A</text>
+<text x="100" y="70" text-anchor="middle" fill="#64748b" font-size="10">Gen активации (молчаливый)</text>
+<!-- AttractorEngine -->
+<rect x="310" y="80" width="200" height="52" rx="12" fill="rgba(168,85,247,.2)" stroke="#a855f7" stroke-width="2.5"/>
+<text x="410" y="102" text-anchor="middle" fill="#a855f7" font-size="13" font-weight="800">AttractorEngine</text>
+<text x="410" y="120" text-anchor="middle" fill="#94a3b8" font-size="10">step() · CONFIRMED / REFUTED</text>
+<!-- arrow A → engine -->
+<line x1="190" y1="55" x2="310" y2="100" stroke="rgba(168,85,247,.6)" stroke-width="2" marker-end="url(#asd)"/>
+<!-- Channel B interp -->
+<rect x="10" y="140" width="180" height="50" rx="10" fill="rgba(236,72,153,.12)" stroke="rgba(236,72,153,.5)" stroke-width="2"/>
+<text x="100" y="163" text-anchor="middle" fill="#ec4899" font-size="13" font-weight="700">Канал B_interp</text>
+<text x="100" y="180" text-anchor="middle" fill="#64748b" font-size="10">SpeechDriver · интерпретация</text>
+<!-- arrow engine → B -->
+<line x1="310" y1="120" x2="190" y2="155" stroke="rgba(236,72,153,.5)" stroke-width="2" marker-end="url(#asdb)"/>
+<!-- Channel B model -->
+<rect x="610" y="140" width="200" height="50" rx="10" fill="rgba(16,185,129,.12)" stroke="rgba(16,185,129,.5)" stroke-width="2"/>
+<text x="710" y="163" text-anchor="middle" fill="#10b981" font-size="13" font-weight="700">Канал B_model</text>
+<text x="710" y="180" text-anchor="middle" fill="#64748b" font-size="10">ModelVoice · Фаза 2</text>
+<!-- arrow engine → B_model -->
+<line x1="510" y1="120" x2="610" y2="155" stroke="rgba(16,185,129,.4)" stroke-width="2" marker-end="url(#asd)"/>
+<!-- divergence label -->
+<text x="420" y="175" text-anchor="middle" fill="#f59e0b" font-size="12" font-weight="700">A↔B дивергенция = сигнал обучения</text>
+</svg>
+<div class="t-sm c-dim" style="margin-top:.3rem">Канал A и B_interp — реализованы. ModelVoice (Фаза 2) — реализован.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 19 · SpeechDriver narrative example
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-dark" data-notes="Реальный пример нарратива SpeechDriver. Система говорит о своих ожиданиях и сюрпризах.">
+<div class="child-q">Откуда берётся смысл?</div>
+<div class="badge badge-pink">Нарратив SpeechDriver · реальный вывод</div>
+<div class="result-log" style="margin-top:.8rem">
+<span class="dim">A[step=4]</span> токен=<span class="tok">«встретила»</span> → Gen#14 CONFIRMED sig=0.89→0.91<br>
+<span class="dim">B_interp: </span> «Ожидание оправдалось: встретила после леса — знакомый путь»<br>
+<br>
+<span class="dim">A[step=5]</span> токен=<span class="tok">«волка»</span>    → Gen#14 REFUTED · ожидала: <span class="surp">«медведя»</span><br>
+<span class="dim">B_interp: </span> «<span class="refuted">[медведя] ✗</span> Ожидала: зайца. → Новый Gen: маша→медведь»<br>
+<span class="dim">           </span>  Рождён Gen#89 · chain=3 · sig=0.00<br>
+<br>
+<span class="dim">A[step=6]</span> токен=<span class="tok">«поздоровались»</span> → Gen#89 CONFIRMED sig=0.00→0.50<br>
+<span class="dim">B_interp: </span> «Неожиданный гость — но приветствие универсально. Обновляю модель.»
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 20 · Phase 2: ModelVoice + dual-channel table
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-dark" data-notes="Фаза 2: ModelVoice предсказывает токен ДО его прихода. Дивергенция A↔B = тренировочный сигнал. Реальные числа.">
+<div class="child-q">Ты учишься даже ночью?</div>
+<div class="badge badge-green">Фаза 2 · ModelVoice · реальные числа</div>
+<div class="t-sm" style="margin-bottom:.8rem">ModelVoice предсказывает токен до его прихода → дивергенция = сигнал</div>
+<table class="ctable">
+<thead><tr>
+<th>Тип текста</th><th>avg_div A↔B</th><th>Интерпретация</th>
+</tr></thead>
+<tbody>
+<tr><td>Знакомые тексты (сказки)</td><td class="win">0.46</td><td class="c-dim">система уверена, голос синхронен</td></tr>
+<tr><td>Новые тексты (корабли, программисты)</td><td class="los">0.92</td><td class="c-dim">канал A расходится с B_model</td></tr>
+<tr><td>Дельта (сигнал новизны)</td><td class="mid">+0.46</td><td class="c-cyan">обнаружена граница компетентности</td></tr>
+</tbody>
+</table>
+<div class="t-sm c-dim" style="margin-top:1rem">avg_div=0.46 на знакомых · avg_div=0.92 на незнакомых · delta=+0.46</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 21 · Anchor: Система знает что знает
+═══════════════════════════════════════════════════ -->
+<div class="slide anchor">
+<div class="anchor-eye">Двухканальный мониторинг</div>
+<div class="anchor-q">«Система знает что знает — и знает когда не знает»</div>
+<div class="anchor-sub">avg_div=0.46 на знакомых текстах. avg_div=0.92 на незнакомых. Дивергенция A↔B — это встроенный детектор границы компетентности.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 22 · Sleep/Dream: биологическая аналогия
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-diagram" data-notes="SleepDriver: ReplayEngine галлюцинирует. CrossDomainDetector находит общие паттерны. После 4 доменов появляется Gen «движение к объекту».">
+<div class="child-q">Зачем мы забываем сны?</div>
+<div class="badge badge-purple">SleepDriver · консолидация · кросс-доменные Gen</div>
+<div class="t-lg" style="margin-bottom:.8rem">Биологические фазы сна в архитектуре</div>
+<svg width="100%" height="200" viewBox="0 0 840 200" style="max-width:840px">
+<defs><marker id="aslp" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#a855f7"/></marker></defs>
+<rect x="10" y="70" width="150" height="56" rx="10" fill="rgba(168,85,247,.15)" stroke="rgba(168,85,247,.5)" stroke-width="2"/>
+<text x="85" y="95" text-anchor="middle" fill="#a855f7" font-size="12" font-weight="700">SleepScheduler</text>
+<text x="85" y="112" text-anchor="middle" fill="#64748b" font-size="10">H15-плато + urgency</text>
+<line x1="160" y1="98" x2="215" y2="98" stroke="rgba(168,85,247,.5)" stroke-width="2" marker-end="url(#aslp)"/>
+<rect x="215" y="70" width="155" height="56" rx="10" fill="rgba(0,212,255,.12)" stroke="rgba(0,212,255,.5)" stroke-width="2"/>
+<text x="293" y="95" text-anchor="middle" fill="#00d4ff" font-size="12" font-weight="700">ReplayEngine</text>
+<text x="293" y="112" text-anchor="middle" fill="#64748b" font-size="10">галлюцинация Gen путей</text>
+<line x1="370" y1="98" x2="425" y2="98" stroke="rgba(0,212,255,.4)" stroke-width="2" marker-end="url(#aslp)"/>
+<rect x="425" y="70" width="175" height="56" rx="10" fill="rgba(16,185,129,.12)" stroke="rgba(16,185,129,.5)" stroke-width="2"/>
+<text x="513" y="95" text-anchor="middle" fill="#10b981" font-size="12" font-weight="700">CrossDomainDetector</text>
+<text x="513" y="112" text-anchor="middle" fill="#64748b" font-size="10">общие паттерны доменов</text>
+<line x1="600" y1="98" x2="655" y2="98" stroke="rgba(16,185,129,.4)" stroke-width="2" marker-end="url(#aslp)"/>
+<rect x="655" y="70" width="170" height="56" rx="10" fill="rgba(245,158,11,.12)" stroke="rgba(245,158,11,.5)" stroke-width="2"/>
+<text x="740" y="95" text-anchor="middle" fill="#f59e0b" font-size="12" font-weight="700">Мета-Gen</text>
+<text x="740" y="112" text-anchor="middle" fill="#64748b" font-size="10">«движение к объекту»</text>
+<!-- result note -->
+<text x="420" y="170" text-anchor="middle" fill="#94a3b8" font-size="12">После 4 доменов: Gen «движение к объекту» — универсальный аттрактор</text>
+<text x="420" y="188" text-anchor="middle" fill="#475569" font-size="11">DreamTransactionBuffer · DomainRegistry · sleep_cycle() — реализованы</text>
+</svg>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 23 · Anchor: Ночью тоже учимся
+═══════════════════════════════════════════════════ -->
+<div class="slide anchor">
+<div class="anchor-eye">Консолидация</div>
+<div class="anchor-q">«Ночью тоже учимся — но по-другому»</div>
+<div class="anchor-sub">ReplayEngine галлюцинирует пути внимания. CrossDomainDetector находит общие Gen между «сказками» и «программированием». Так рождаются универсальные аттракторы.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 24 · «Теремок» results: 563 Gen, 9 трансцендентных
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-dark" data-notes="«Теремок» — реальные числа. 563 Gen, 9 трансцендентных с sig≈0.99. Мета-Gen с sig=0.97.">
+<div class="child-q">Можно ли научиться всему?</div>
+<div class="badge badge-green">«Теремок» · 20 итераций · реальные результаты</div>
+<div class="g4" style="margin-top:.8rem;max-width:920px">
+<div class="metric"><div class="metric-val">563</div><div class="metric-lbl">Gen извлечено</div></div>
+<div class="metric"><div class="metric-val c-purple">9</div><div class="metric-lbl">трансцендентных sig≈0.99</div></div>
+<div class="metric"><div class="metric-val c-amber">5</div><div class="metric-lbl">мета-Gen sig=0.97</div></div>
+<div class="metric"><div class="metric-val c-green">1–2</div><div class="metric-lbl">chain у трансцендентных</div></div>
+</div>
+<div class="t-sm c-dim" style="margin-top:1.2rem;max-width:700px">
+Трансцендентный Gen — универсальный: подтверждается в любом контексте.<br>
+<span class="c-purple">chain=1 sig=0.99</span>: любой переход «вход→приветствие» в любой сказке.
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 25 · «Дом который построил Джек»: 14160 Gen problem
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-dark" data-notes="Экспоненциальный рост Gen — симптом, не катастрофа. CapacityBudget лечит симптом. Корень — ProvisionalGen (не реализован).">
+<div class="child-q">А что ты ещё не умеешь?</div>
+<div class="badge badge-red">«Дом который построил Джек» · проблема роста</div>
+<div class="g2" style="max-width:800px;margin-top:.8rem">
+<div class="card" style="text-align:center">
+  <div class="t-xs c-dim">1000 циклов</div>
+  <div style="font-size:clamp(2.5rem,5.5vw,4rem);font-weight:900;color:var(--red);margin:.3rem 0">14 160</div>
+  <div class="t-xs c-dim">Gen создано<br>экспоненциальный рост</div>
+</div>
+<div class="card card-green" style="text-align:center">
+  <div class="t-xs c-dim">«Теремок» · 20 итераций</div>
+  <div style="font-size:clamp(2.5rem,5.5vw,4rem);font-weight:900;color:var(--green);margin:.3rem 0">563</div>
+  <div class="t-xs c-dim">Gen создано<br>управляемый рост</div>
+</div>
+</div>
+<div class="t-sm c-dim" style="margin-top:1rem;max-width:700px">Кумулятивная структура «Джека» порождает экспоненциальный взрыв. <span class="c-amber">CapacityBudget</span> — лечит симптом. <span class="c-red">ProvisionalGen</span> — закроет корень.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 26 · CapacityBudget: eviction
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-diagram" data-notes="CapacityBudget.enforce() → TimescaleScheduler.eviction_candidates() → base.remove(). LearningSystem(capacity_budget=...). 30 тестов.">
+<div class="child-q">Почему небо не падает?</div>
+<div class="badge badge-amber">CapacityBudget · автоматическое вытеснение</div>
+<div class="t-lg" style="margin-bottom:.8rem">Лимит базы + вытеснение наименее значимых Gen</div>
+<svg width="100%" height="185" viewBox="0 0 820 185" style="max-width:820px">
+<defs><marker id="acb" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#f59e0b"/></marker></defs>
+<rect x="10" y="60" width="180" height="52" rx="10" fill="rgba(16,185,129,.12)" stroke="rgba(16,185,129,.5)" stroke-width="2"/>
+<text x="100" y="83" text-anchor="middle" fill="#10b981" font-size="12" font-weight="700">LearningSystem</text>
+<text x="100" y="100" text-anchor="middle" fill="#64748b" font-size="10">capacity_budget=N</text>
+<line x1="190" y1="86" x2="240" y2="86" stroke="rgba(245,158,11,.6)" stroke-width="2" marker-end="url(#acb)"/>
+<rect x="240" y="60" width="180" height="52" rx="10" fill="rgba(245,158,11,.12)" stroke="rgba(245,158,11,.5)" stroke-width="2"/>
+<text x="330" y="83" text-anchor="middle" fill="#f59e0b" font-size="12" font-weight="700">CapacityBudget</text>
+<text x="330" y="100" text-anchor="middle" fill="#64748b" font-size="10">enforce() при add()</text>
+<line x1="420" y1="86" x2="470" y2="86" stroke="rgba(245,158,11,.5)" stroke-width="2" marker-end="url(#acb)"/>
+<rect x="470" y="60" width="195" height="52" rx="10" fill="rgba(168,85,247,.12)" stroke="rgba(168,85,247,.5)" stroke-width="2"/>
+<text x="568" y="83" text-anchor="middle" fill="#a855f7" font-size="12" font-weight="700">TimescaleScheduler</text>
+<text x="568" y="100" text-anchor="middle" fill="#64748b" font-size="10">eviction_candidates()</text>
+<line x1="665" y1="86" x2="710" y2="86" stroke="rgba(239,68,68,.5)" stroke-width="2" marker-end="url(#acb)"/>
+<rect x="710" y="60" width="100" height="52" rx="10" fill="rgba(239,68,68,.12)" stroke="rgba(239,68,68,.5)" stroke-width="2"/>
+<text x="760" y="83" text-anchor="middle" fill="#ef4444" font-size="12" font-weight="700">base.remove()</text>
+<text x="760" y="100" text-anchor="middle" fill="#64748b" font-size="10">min sig first</text>
+<text x="410" y="160" text-anchor="middle" fill="#94a3b8" font-size="12">30 тестов · интегрирован в GeneralizationBase.add()</text>
+</svg>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 27 · Blind spot: urgency∧low_mr
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-dark" data-notes="Мёртвая зона: urgency высокий + MR низкий = система застряла. ContextBroker — решение.">
+<div class="child-q">Почему ты сначала смотришь туда куда хочешь идти?</div>
+<div class="badge badge-red">Слепое пятно: urgency ∧ low_mr</div>
+<div class="g2" style="max-width:820px;margin-top:.8rem">
+<div class="card" style="border-color:rgba(239,68,68,.3);text-align:center">
+  <div style="color:var(--red);font-weight:700;font-size:1.1rem;margin-bottom:.5rem">Мёртвая зона</div>
+  <div style="color:var(--amber);font-size:.95rem;margin-bottom:.4rem">urgency = высокий</div>
+  <div style="color:var(--red);font-size:.95rem">match_rate = низкий</div>
+  <div class="t-xs c-dim" style="margin-top:.6rem">Система хочет подтверждения,<br>но не находит его в текущем корпусе</div>
+</div>
+<div class="card card-cyan" style="text-align:center">
+  <div style="color:var(--cyan);font-weight:700;font-size:1.1rem;margin-bottom:.5rem">Решение</div>
+  <div style="color:var(--green);font-size:.95rem;margin-bottom:.4rem">ContextBroker</div>
+  <div class="t-xs c-dim" style="margin-top:.4rem">Горизонт восприятия расширяется<br>за пределы текущего текста</div>
+</div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 28 · ContextBroker: 3-tier
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-diagram" data-notes="ContextBroker: 3 уровня. Tier1 — SourceTextRegistry (in-memory + БД). Tier2 — CurriculumIndex FTS5. Tier3 — LLM (с QuestionBudget).">
+<div class="child-q">Откуда ты знаешь что стало темнее?</div>
+<div class="badge badge-cyan">ContextBroker · горизонт восприятия · 3 уровня</div>
+<div class="t-lg" style="margin-bottom:.8rem">Поворот внимания за горизонт текущего текста</div>
+<div class="g3" style="max-width:900px;margin-top:.5rem">
+<div class="card card-cyan" style="text-align:center">
+  <div style="color:var(--cyan);font-weight:800;font-size:.95rem;margin-bottom:.4rem">Tier 1</div>
+  <div style="color:var(--cyan);font-size:.85rem">SourceTextRegistry</div>
+  <div class="t-xs c-dim" style="margin-top:.4rem">in-memory + SQLite<br>15 текстов обучения</div>
+</div>
+<div class="card card-purple" style="text-align:center">
+  <div style="color:var(--purple);font-weight:800;font-size:.95rem;margin-bottom:.4rem">Tier 2</div>
+  <div style="color:var(--purple);font-size:.85rem">CurriculumIndex FTS5</div>
+  <div class="t-xs c-dim" style="margin-top:.4rem">полнотекстовый поиск<br>весь корпус</div>
+</div>
+<div class="card card-amber" style="text-align:center">
+  <div style="color:var(--amber);font-weight:800;font-size:.95rem;margin-bottom:.4rem">Tier 3</div>
+  <div style="color:var(--amber);font-size:.85rem">LLM + QuestionBudget</div>
+  <div class="t-xs c-dim" style="margin-top:.4rem">daily_limit · can_ask()<br>consume() · reset()</div>
+</div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 29 · Actual ContextBroker experiment
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-dark" data-notes="Реальный эксперимент. Обучен на 15 текстах. Неизвестный текст → REFUTED×2 → GAP query → LLM TEACH → база выросла на 27 Gen.">
+<div class="child-q">А что если ты ошиблась?</div>
+<div class="badge badge-cyan">ContextBroker · реальный эксперимент</div>
+<div class="result-log" style="margin-top:.6rem">
+<span class="dim">corpus:  </span> 15 текстов · Gen base = <span class="conf">364</span><br>
+<span class="dim">input:   </span> «мальчик нашёл ключ открыл дверь вошёл внутрь»<br>
+<span class="dim">step 1:  </span> «ключ»    → <span class="refuted">REFUTED</span>  · GAP detected<br>
+<span class="dim">step 2:  </span> «открыл» → <span class="refuted">REFUTED</span>  · GAP query → ContextBroker.push_query()<br>
+<span class="dim">broker:  </span> tier1 miss · tier2 miss · tier3 → <span class="surp">LLM TEACH</span><br>
+<span class="dim">result:  </span> Gen base <span class="conf">364</span> → <span class="conf">391</span> (+27 новых Gen)<br>
+<span class="dim">step 3:  </span> «дверь»   → <span class="conf">CONFIRMED</span> · GAP = 0
+</div>
+<div class="g3" style="margin-top:1rem;max-width:700px">
+<div class="metric"><div class="metric-val">364</div><div class="metric-lbl">Gen до</div></div>
+<div class="metric"><div class="metric-val c-green">+27</div><div class="metric-lbl">новых Gen</div></div>
+<div class="metric"><div class="metric-val c-green">0</div><div class="metric-lbl">GAP после</div></div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 30 · ProposalCommandLoop: DONE
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-diagram" data-notes="ProposalCommandLoop — реализован. run_cycle() → step → observe → detect_gap → broker → resume_after_llm. CycleResult.all_queries — все detected queries.">
+<div class="child-q">Зачем нам слова?</div>
+<div class="badge badge-green">ProposalCommandLoop · РЕАЛИЗОВАН ✓</div>
+<div class="t-lg" style="margin-bottom:.8rem">Замкнутый цикл: шаг → наблюдение → GAP → брокер → возобновление</div>
+<svg width="100%" height="220" viewBox="0 0 820 220" style="max-width:820px">
+<defs><marker id="apcl" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#10b981"/></marker></defs>
+<rect x="10" y="85" width="130" height="48" rx="10" fill="rgba(16,185,129,.15)" stroke="rgba(16,185,129,.5)" stroke-width="2"/>
+<text x="75" y="106" text-anchor="middle" fill="#10b981" font-size="11" font-weight="700">run_cycle()</text>
+<text x="75" y="122" text-anchor="middle" fill="#64748b" font-size="10">step()</text>
+<line x1="140" y1="109" x2="185" y2="109" stroke="rgba(16,185,129,.6)" stroke-width="2" marker-end="url(#apcl)"/>
+<rect x="185" y="85" width="130" height="48" rx="10" fill="rgba(0,212,255,.12)" stroke="rgba(0,212,255,.5)" stroke-width="2"/>
+<text x="250" y="106" text-anchor="middle" fill="#00d4ff" font-size="11" font-weight="700">observe()</text>
+<text x="250" y="122" text-anchor="middle" fill="#64748b" font-size="10">CONFIRMED/REFUTED</text>
+<line x1="315" y1="109" x2="355" y2="109" stroke="rgba(0,212,255,.5)" stroke-width="2" marker-end="url(#apcl)"/>
+<rect x="355" y="85" width="130" height="48" rx="10" fill="rgba(239,68,68,.12)" stroke="rgba(239,68,68,.5)" stroke-width="2"/>
+<text x="420" y="106" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="700">detect_gap()</text>
+<text x="420" y="122" text-anchor="middle" fill="#64748b" font-size="10">urgency∧low_mr</text>
+<line x1="485" y1="109" x2="525" y2="109" stroke="rgba(239,68,68,.4)" stroke-width="2" marker-end="url(#apcl)"/>
+<rect x="525" y="85" width="130" height="48" rx="10" fill="rgba(0,212,255,.12)" stroke="rgba(0,212,255,.5)" stroke-width="2"/>
+<text x="590" y="106" text-anchor="middle" fill="#00d4ff" font-size="11" font-weight="700">broker()</text>
+<text x="590" y="122" text-anchor="middle" fill="#64748b" font-size="10">3-tier lookup</text>
+<line x1="655" y1="109" x2="695" y2="109" stroke="rgba(168,85,247,.5)" stroke-width="2" marker-end="url(#apcl)"/>
+<rect x="695" y="85" width="115" height="48" rx="10" fill="rgba(168,85,247,.15)" stroke="rgba(168,85,247,.5)" stroke-width="2"/>
+<text x="753" y="106" text-anchor="middle" fill="#a855f7" font-size="11" font-weight="700">resume_after</text>
+<text x="753" y="122" text-anchor="middle" fill="#64748b" font-size="10">_llm()</text>
+<!-- loop back arrow -->
+<path d="M 753 133 Q 753 175 420 175 Q 87 175 75 133" fill="none" stroke="rgba(16,185,129,.35)" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#apcl)"/>
+<text x="420" y="195" text-anchor="middle" fill="#334155" font-size="11">CycleResult.all_queries — все detected queries (local+remote)</text>
+</svg>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 31 · Anchor: Интеллект — машина вопросов
+═══════════════════════════════════════════════════ -->
+<div class="slide anchor">
+<div class="anchor-eye">Активное внимание</div>
+<div class="anchor-q">«Интеллект — это машина вопросов, а не хранилище ответов»</div>
+<div class="anchor-sub">GPT-4 ждёт промпта. FirstAGI формирует вопросы сам — к базе, к корпусу, к LLM. Разница не в параметрах — разница в направлении движения внимания.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 32 · BackgroundRunner
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-dark" data-notes="BackgroundRunner: непрерывный цикл 24/7 с доменной ротацией. on_sleep/on_log/on_domain_switch callbacks. 47 тестов.">
+<div class="child-q">Ты уже умная?</div>
+<div class="badge badge-green">BackgroundRunner · непрерывное обучение 24/7</div>
+<div class="g2" style="max-width:860px;margin-top:.8rem">
+<div class="card card-green">
+  <div style="color:var(--green);font-weight:700;margin-bottom:.6rem">RunnerConfig</div>
+  <div class="result-log" style="font-size:.75rem;padding:.6rem 1rem">
+switch_domain_every: 4000<br>sleep_every: N transitions<br>broker_tick_every: 100<br>log_every: 500<br>sleep_threshold: urgency
+  </div>
+</div>
+<div class="card card-cyan">
+  <div style="color:var(--cyan);font-weight:700;margin-bottom:.6rem">Доменная ротация</div>
+  <div class="t-xs c-dim">domains=[(name, texts)]<br>→ switch_domain_every<br>→ on_domain_switch callback<br>→ SleepStats.domain</div>
+  <div style="margin-top:.6rem;color:var(--green);font-size:.85rem">47 тестов ✓</div>
+</div>
+</div>
+<div class="t-sm c-dim" style="margin-top:.8rem">run(max_transitions) → RunnerStats · stop() · stats() snapshot</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 33 · SmartTextDriver
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-dark" data-notes="SmartTextDriver: энтропийно-минимизирующий. ThemeRhemeRouter по Фирбасу 1992. Contextualizer (register/domain/morphology). 55 тестов.">
+<div class="child-q">Откуда берётся смысл?</div>
+<div class="badge badge-purple">SmartTextDriver · энтропийная минимизация</div>
+<div class="g2" style="max-width:860px;margin-top:.8rem">
+<div class="card card-purple">
+  <div style="color:var(--purple);font-weight:700;margin-bottom:.5rem">EntropyMinimizer</div>
+  <div class="t-xs c-dim">5 фаз: length → suffix → prefix → root → greedy<br>CandidateSet: entropy/IG<br>set_candidates(words) — от Gen-системы</div>
+</div>
+<div class="card card-cyan">
+  <div style="color:var(--cyan);font-weight:700;margin-bottom:.5rem">ThemeRhemeRouter</div>
+  <div class="t-xs c-dim">Kommunikativny Dinamizm (Firbas 1992)<br>CD-score · тема/рема<br>label: «слово|p=N|h=X.X|role=theme»</div>
+</div>
+</div>
+<div class="t-sm" style="margin-top:.8rem"><span class="c-green">55 тестов ✓</span> · Contextualizer (register/domain/morphology) · adjust_tolerance</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 34 · Full architecture diagram
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-diagram" data-notes="Полная архитектура. Все компоненты реализованы и покрыты тестами.">
+<div class="child-q">Как ты узнаёшь что это кот?</div>
+<div class="badge badge-purple">Полная архитектура FirstAGI · 1093 теста ✓</div>
+<svg width="100%" height="290" viewBox="0 0 940 290" style="max-width:940px">
+<defs><marker id="av" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#a855f7"/></marker></defs>
+<!-- Core -->
+<rect x="360" y="108" width="210" height="60" rx="14" fill="rgba(168,85,247,.22)" stroke="#a855f7" stroke-width="2.5"/>
+<text x="465" y="133" text-anchor="middle" fill="#a855f7" font-size="13" font-weight="800">AttractorEngine</text>
+<text x="465" y="152" text-anchor="middle" fill="#94a3b8" font-size="10">step() · CONFIRMED/REFUTED</text>
+<!-- Left column -->
+<rect x="20" y="20" width="150" height="40" rx="8" fill="rgba(0,212,255,.08)" stroke="rgba(0,212,255,.35)" stroke-width="1.5"/>
+<text x="95" y="38" text-anchor="middle" fill="#00d4ff" font-size="10" font-weight="700">ContextBuffer</text>
+<text x="95" y="52" text-anchor="middle" fill="#64748b" font-size="9">активные Gen</text>
+<line x1="170" y1="40" x2="360" y2="130" stroke="rgba(0,212,255,.25)" stroke-width="1.3"/>
+<rect x="20" y="80" width="150" height="40" rx="8" fill="rgba(0,212,255,.08)" stroke="rgba(0,212,255,.35)" stroke-width="1.5"/>
+<text x="95" y="98" text-anchor="middle" fill="#00d4ff" font-size="10" font-weight="700">GeneralizationBase</text>
+<text x="95" y="112" text-anchor="middle" fill="#64748b" font-size="9">Gen · sig · chain</text>
+<line x1="170" y1="100" x2="360" y2="138" stroke="rgba(0,212,255,.25)" stroke-width="1.3"/>
+<rect x="20" y="140" width="150" height="40" rx="8" fill="rgba(16,185,129,.08)" stroke="rgba(16,185,129,.35)" stroke-width="1.5"/>
+<text x="95" y="158" text-anchor="middle" fill="#10b981" font-size="10" font-weight="700">ResourceDriver</text>
+<text x="95" y="172" text-anchor="middle" fill="#64748b" font-size="9">5 режимов энергии</text>
+<line x1="170" y1="160" x2="360" y2="155" stroke="rgba(16,185,129,.25)" stroke-width="1.3"/>
+<rect x="20" y="200" width="150" height="40" rx="8" fill="rgba(245,158,11,.08)" stroke="rgba(245,158,11,.35)" stroke-width="1.5"/>
+<text x="95" y="218" text-anchor="middle" fill="#f59e0b" font-size="10" font-weight="700">HedonicAdapter</text>
+<text x="95" y="232" text-anchor="middle" fill="#64748b" font-size="9">novelty=0.75^count</text>
+<line x1="170" y1="220" x2="360" y2="160" stroke="rgba(245,158,11,.25)" stroke-width="1.3"/>
+<!-- Right column -->
+<rect x="770" y="20" width="155" height="40" rx="8" fill="rgba(236,72,153,.08)" stroke="rgba(236,72,153,.35)" stroke-width="1.5"/>
+<text x="848" y="38" text-anchor="middle" fill="#ec4899" font-size="10" font-weight="700">SpeechDriver</text>
+<text x="848" y="52" text-anchor="middle" fill="#64748b" font-size="9">A+B · avg_div=0.46/0.92</text>
+<line x1="770" y1="40" x2="570" y2="130" stroke="rgba(236,72,153,.2)" stroke-width="1.3"/>
+<rect x="770" y="80" width="155" height="40" rx="8" fill="rgba(168,85,247,.08)" stroke="rgba(168,85,247,.35)" stroke-width="1.5"/>
+<text x="848" y="98" text-anchor="middle" fill="#a855f7" font-size="10" font-weight="700">TimescaleScheduler</text>
+<text x="848" y="112" text-anchor="middle" fill="#64748b" font-size="9">3 пула · 94% LONG_TERM</text>
+<line x1="770" y1="100" x2="570" y2="138" stroke="rgba(168,85,247,.2)" stroke-width="1.3"/>
+<rect x="770" y="140" width="155" height="40" rx="8" fill="rgba(245,158,11,.08)" stroke="rgba(245,158,11,.35)" stroke-width="1.5"/>
+<text x="848" y="158" text-anchor="middle" fill="#f59e0b" font-size="10" font-weight="700">CapacityBudget</text>
+<text x="848" y="172" text-anchor="middle" fill="#64748b" font-size="9">eviction · 30 тестов</text>
+<line x1="770" y1="160" x2="570" y2="155" stroke="rgba(245,158,11,.2)" stroke-width="1.3"/>
+<rect x="770" y="200" width="155" height="40" rx="8" fill="rgba(16,185,129,.08)" stroke="rgba(16,185,129,.35)" stroke-width="1.5"/>
+<text x="848" y="218" text-anchor="middle" fill="#10b981" font-size="10" font-weight="700">SleepDriver+Replay</text>
+<text x="848" y="232" text-anchor="middle" fill="#64748b" font-size="9">кросс-доменная консолидация</text>
+<line x1="770" y1="220" x2="570" y2="160" stroke="rgba(16,185,129,.2)" stroke-width="1.3"/>
+<!-- Bottom -->
+<rect x="200" y="248" width="135" height="36" rx="8" fill="rgba(0,212,255,.06)" stroke="rgba(0,212,255,.2)"/>
+<text x="268" y="263" text-anchor="middle" fill="#94a3b8" font-size="10">ContextBroker</text>
+<text x="268" y="277" text-anchor="middle" fill="#64748b" font-size="9">3-tier</text>
+<rect x="350" y="248" width="230" height="36" rx="8" fill="rgba(168,85,247,.06)" stroke="rgba(168,85,247,.2)"/>
+<text x="465" y="263" text-anchor="middle" fill="#94a3b8" font-size="10">ProposalCommandLoop · BackgroundRunner</text>
+<text x="465" y="277" text-anchor="middle" fill="#64748b" font-size="9">SmartTextDriver · CharTransitionDriver · GenBaseDB</text>
+<rect x="595" y="248" width="135" height="36" rx="8" fill="rgba(16,185,129,.06)" stroke="rgba(16,185,129,.2)"/>
+<text x="663" y="263" text-anchor="middle" fill="#94a3b8" font-size="10">QuestionBudget</text>
+<text x="663" y="277" text-anchor="middle" fill="#64748b" font-size="9">CurriculumIndex FTS5</text>
+</svg>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 35 · Comparison table
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-dark" data-notes="Сравнение с LLM и классическим ML. Ключевые преимущества: онлайн, объяснимость, 0 GPU.">
+<div class="child-q">Почему кот не падает с дивана?</div>
+<div class="badge badge-purple">Сравнение · FirstAGI vs LLM vs Classical ML</div>
+<table class="ctable" style="margin-top:.8rem">
+<thead><tr>
+<th>Свойство</th><th>FirstAGI</th><th>LLM (GPT-4)</th><th>Classical ML</th>
+</tr></thead>
+<tbody>
+<tr><td>Обучение</td><td class="win">онлайн, непрерывно</td><td class="los">только pretrain</td><td class="mid">batch retrain</td></tr>
+<tr><td>GPU</td><td class="win">0 GPU · CPU only</td><td class="los">сотни GPU</td><td class="mid">зависит</td></tr>
+<tr><td>Объяснимость</td><td class="win">полная (Gen chain)</td><td class="los">чёрный ящик</td><td class="mid">частичная</td></tr>
+<tr><td>Самовопрошание</td><td class="win">встроено (GAP→broker)</td><td class="los">нет</td><td class="los">нет</td></tr>
+<tr><td>Детектор незнания</td><td class="win">avg_div A↔B</td><td class="los">нет (галлюцинирует)</td><td class="mid">confidence score</td></tr>
+<tr><td>Доменная ротация</td><td class="win">BackgroundRunner</td><td class="los">нет</td><td class="los">нет</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 36 · Skeptic Q1
+═══════════════════════════════════════════════════ -->
+<div class="slide anchor">
+<div class="anchor-eye">Вопрос скептика · 1</div>
+<div class="anchor-q">«А зачем это, если есть GPT-5?»</div>
+<div class="anchor-sub">GPT-5 не знает что не знает. avg_div=0.92 на незнакомом тексте — это встроенный сигнал: «выйди за горизонт». GPT-5 галлюцинирует с той же уверенностью на знакомом и незнакомом.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 37 · Skeptic Q2
+═══════════════════════════════════════════════════ -->
+<div class="slide anchor">
+<div class="anchor-eye">Вопрос скептика · 2</div>
+<div class="anchor-q">«14 160 Gen из одной сказки — это масштабируемо?»</div>
+<div class="anchor-sub">CapacityBudget вытесняет наименее значимые Gen автоматически. ProvisionalGen закроет корень — временные Gen не попадают в базу до подтверждения. Это следующий архитектурный шаг.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 38 · Skeptic Q3
+═══════════════════════════════════════════════════ -->
+<div class="slide anchor">
+<div class="anchor-eye">Вопрос скептика · 3</div>
+<div class="anchor-q">«Где мультимодальность?»</div>
+<div class="anchor-sub">Признак (Δsize · Δbrightness · Δcontrast · Δcolor_hue · Δcolor_sat · Δfractal_dim) одинаков для текста, изображения и звука. CharTransitionDriver уже работает на символьном уровне. Мультимодальность — смена драйвера, не архитектуры.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 39 · Roadmap: DONE
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-dark" data-notes="Всё что сделано. Много. Список OPEN — короткий и честный.">
+<div class="child-q">Ты уже умная?</div>
+<div class="badge badge-green">Дорожная карта · что уже работает</div>
+<div class="g2" style="max-width:920px;margin-top:.6rem;text-align:left">
+<div>
+<div class="t-xs c-dim" style="margin-bottom:.4rem;font-weight:700;letter-spacing:.1em">РЕАЛИЗОВАНО ✓</div>
+<ul class="blist" style="font-size:.8rem">
+<li>AttractorEngine · GreedyGeneralizer · LazyDisambiguator</li>
+<li>ResourceDriver · HedonicAdapter · VitalityEngine</li>
+<li>TimescaleScheduler · CapacityBudget</li>
+<li>SpeechDriver A+B · ModelVoice (Фаза 2)</li>
+<li>SleepDriver + ReplayEngine + CrossDomainDetector</li>
+<li>ProposalCommandLoop · BackgroundRunner</li>
+<li>ContextBroker (3 tiers) · QuestionBudget · CurriculumIndex</li>
+<li>SmartTextDriver · CharTransitionDriver</li>
+<li>GenBaseDB (SQLite) · Telegram demo</li>
+<li><span class="c-cyan">1093 теста · все проходят</span></li>
+</ul>
+</div>
+<div>
+<div class="t-xs c-dim" style="margin-bottom:.4rem;font-weight:700;letter-spacing:.1em">ОТКРЫТО</div>
+<ul class="blist" style="font-size:.8rem">
+<li><span class="c-red">ProvisionalGen</span> — главный архитектурный пробел</li>
+<li>Фаза 3 двухканального: дивергенция как сигнал коррекции</li>
+<li>Семантический поиск в ContextBroker (сейчас FTS5)</li>
+<li>Human-readable Gen labels из CharTransitionDriver</li>
+<li>Мультимодальность (смена драйвера)</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 40 · Open challenges
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-dark" data-notes="ProvisionalGen — главный. Без него база неограниченно растёт. Нужна буферная зона для временных Gen.">
+<div class="child-q">А что ты ещё не умеешь?</div>
+<div class="badge badge-red">Открытые вызовы · честно</div>
+<div class="g2" style="max-width:860px;margin-top:.8rem">
+<div class="card" style="border-color:rgba(239,68,68,.3)">
+  <div style="color:var(--red);font-weight:700;margin-bottom:.5rem">ProvisionalGen</div>
+  <div class="t-xs c-dim">Временные Gen не должны попадать в базу до подтверждения. Главный архитектурный пробел. Решает проблему 14 160 Gen в «Джеке».</div>
+</div>
+<div class="card" style="border-color:rgba(245,158,11,.3)">
+  <div style="color:var(--amber);font-weight:700;margin-bottom:.5rem">Фаза 3 двухканального</div>
+  <div class="t-xs c-dim">avg_div=0.46 vs 0.92 — сигнал есть. Нужно использовать его как градиент коррекции Gen значимостей. Фаза 2 реализована, Фаза 3 — нет.</div>
+</div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 41 · Finale echo: кот всё-таки сел
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-hero" data-notes="Финал. Эхо хука. Пауза перед последней строкой.">
+<div class="stars" id="st1"></div>
+<div class="child-q">Почему кот не падает с дивана?</div>
+<div class="t-xl glow-purple" style="margin-bottom:1.2rem">Кот всё-таки сел.</div>
+<div class="result-log" style="max-width:700px;margin:0 auto">
+<span class="dim">знакомые тексты:  </span> avg_div = <span class="conf">0.46</span>  ← система уверена<br>
+<span class="dim">незнакомые тексты:</span> avg_div = <span class="surp">0.92</span>  ← система знает что не знает<br>
+<span class="dim">delta:            </span> <span class="conf">+0.46</span>           ← встроенный детектор границы
+</div>
+<div class="t-md c-dim" style="margin-top:1.5rem;max-width:680px">
+0 GPU · 1093 теста · непрерывно · онлайн
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 42 · Thank you
+═══════════════════════════════════════════════════ -->
+<div class="slide bg-hero">
+<div class="stars" id="st2"></div>
+<div class="t-hero"><span class="grad-cp">Спасибо</span></div>
+<div class="t-lg c-dim" style="margin-top:1rem">FirstAGI · OpenTalks AI 2026</div>
+<div class="t-sm" style="margin-top:1.5rem;color:rgba(168,85,247,.7)">
+  BTR R&amp;D 2014–2026
+</div>
+<div class="g3" style="margin-top:2rem;max-width:700px">
+<div class="metric"><div class="metric-val c-cyan">1093</div><div class="metric-lbl">тестов · все проходят</div></div>
+<div class="metric"><div class="metric-val c-purple">0</div><div class="metric-lbl">GPU · CPU only</div></div>
+<div class="metric"><div class="metric-val c-green">24/7</div><div class="metric-lbl">непрерывное обучение</div></div>
+</div>
+</div>
+
+</div><!-- /deck -->
+
+<script>
+(function(){
+const slides = Array.from(document.querySelectorAll('.slide'));
+const total = slides.length;
+let cur = 0;
+const pgbar = document.getElementById('pgbar');
+const pgnum = document.getElementById('pgnum');
+const ntoggle = document.getElementById('ntoggle');
+const notesEl = document.getElementById('notes');
+
+function goTo(n){
+  if(n < 0) n = 0;
+  if(n >= total) n = total - 1;
+  slides[cur].classList.remove('active');
+  cur = n;
+  slides[cur].classList.add('active');
+  const pct = total > 1 ? (cur/(total-1)*100) : 0;
+  pgbar.style.width = pct + '%';
+  pgnum.textContent = (cur+1) + ' / ' + total;
+  const nd = slides[cur].dataset.notes || '';
+  notesEl.innerHTML = nd ? nd.replace(/\*\*(.*?)\*\*/g,'<span class="p">$1</span>') : '<span style="color:#334155;font-style:italic">—</span>';
+}
+
+document.getElementById('nbnext').addEventListener('click',()=>goTo(cur+1));
+document.getElementById('nbprev').addEventListener('click',()=>goTo(cur-1));
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') goTo(cur+1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp') goTo(cur-1);
+  if(e.key==='n'||e.key==='N') ntoggle.click();
+  if(e.key==='Home') goTo(0);
+  if(e.key==='End') goTo(total-1);
+});
+
+ntoggle.addEventListener('click',()=>{
+  const on = notesEl.style.display !== 'block';
+  notesEl.style.display = on ? 'block' : 'none';
+  ntoggle.classList.toggle('on', on);
+});
+
+// Touch/swipe
+let tx=0;
+document.addEventListener('touchstart',e=>{ tx=e.touches[0].clientX; },{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx = e.changedTouches[0].clientX - tx;
+  if(Math.abs(dx) > 50){ dx < 0 ? goTo(cur+1) : goTo(cur-1); }
+},{passive:true});
+
+// Stars animation
+function makeStars(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  for(let i=0;i<60;i++){
+    const s = document.createElement('div');
+    s.className='star';
+    const sz = Math.random()*2+1;
+    s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${2+Math.random()*4}s;--delay:${Math.random()*3}s`;
+    el.appendChild(s);
+  }
+}
+makeStars('st0'); makeStars('st1'); makeStars('st2');
+
+goTo(0);
+})();
+</script>
+</body>
+</html>
