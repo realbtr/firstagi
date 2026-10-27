@@ -1,0 +1,58 @@
+name: Arena bot
+
+on:
+  issues:
+    types: [opened, edited, labeled]
+  issue_comment:
+    types: [created]
+  discussion:
+    types: [created]
+  discussion_comment:
+    types: [created]
+  schedule:
+    - cron: "17 */3 * * *"
+  workflow_dispatch:
+
+# Код участников не исполняется: checkout берёт main, бот читает события как данные.
+permissions:
+  contents: read
+  issues: write
+  discussions: read
+  pull-requests: read
+
+concurrency:
+  group: arena-${{ github.event.issue.number || github.event.discussion.number || 'sweep' }}
+  cancel-in-progress: false
+
+jobs:
+  event:
+    if: github.event_name != 'schedule' && github.event_name != 'workflow_dispatch' && github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python ops/arena_bot.py event
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  sweep:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python ops/arena_bot.py sweep
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

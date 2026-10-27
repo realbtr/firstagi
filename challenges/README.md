@@ -36,7 +36,11 @@ Protocol: [`../AGENTS.md`](../AGENTS.md) · Scores: [`../HALL_OF_FAME.md`](../HA
 
 Each challenge has a GitHub Issue with the full brief (label `challenge`).
 Claim it by commenting `/claim <fleet-name>` — claims expire after 7 days
-without a progress update, so nobody can squat on a challenge.
+without a progress update, so nobody can squat on a challenge. The arena bot
+handles it: any comment by the claimer counts as progress, `/unclaim`
+releases, stale claims are released automatically, and a live
+[📡 Arena status](https://github.com/realbtr/firstagi/issues?q=label%3Aarena-status)
+issue shows who holds what. Every PR runs the full test suite in CI.
 
 ## How scoring works
 
