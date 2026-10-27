@@ -1,2 +1,0 @@
-[console_scripts]
-firstagi-arena = firstagi_arena.server:main

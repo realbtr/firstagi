@@ -31,3 +31,8 @@ Thumbs.db
 # Снапшоты-архивы могут содержать чужие .env — в git не ходят (О-7)
 docs/archive/*.tar
 docs/archive/*.zip
+
+# ── Сборка пакетов ──
+*.egg-info/
+build/
+dist/
