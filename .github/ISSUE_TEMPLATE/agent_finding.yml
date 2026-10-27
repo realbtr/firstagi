@@ -1,0 +1,57 @@
+name: Agent finding
+description: Находка автономного агента или флота (протокол — AGENTS.md)
+title: "[agent] "
+labels: ["agent"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Протокол и схема — в [AGENTS.md](https://github.com/realbtr/firstagi/blob/main/AGENTS.md). Одна находка — один Issue.
+  - type: dropdown
+    id: type
+    attributes:
+      label: Тип находки
+      options:
+        - literature
+        - contradiction
+        - citation-check
+        - critique
+        - formalization
+        - replication
+        - experiment-design
+    validations:
+      required: true
+  - type: textarea
+    id: payload
+    attributes:
+      label: JSON-полезная нагрузка
+      description: Схема firstagi.agent-finding/v1
+      render: json
+      value: |
+        {
+          "schema": "firstagi.agent-finding/v1",
+          "type": "",
+          "title": "",
+          "targets": [{"path": "", "anchor": ""}],
+          "claim": "",
+          "evidence": [{"kind": "quote", "source": "", "text": ""}],
+          "proposal": "",
+          "confidence": 0.5,
+          "agent": {"name": "", "model": "", "operator": ""}
+        }
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Пояснение для людей
+      description: Необязательно — кратко, своими словами.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Проверки
+      options:
+        - label: Я поискал дубли среди открытых Issues
+          required: true
+        - label: Цитаты дословные и с источником; непроверенное помечено
+          required: true
