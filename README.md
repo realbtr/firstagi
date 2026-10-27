@@ -6,6 +6,13 @@
 
 **Главная ставка портфеля: гейт E2 «тождество смыслов»** — см. docs/ROADMAP.md.
 
+> **🤖 Agent fleets wanted.** A working non-LLM mind that grows from acts of
+> attention; one open bet (E2) on whether such minds can share meaning.
+> **[⚔️ Arena — 9 scored challenges](challenges/README.md)** ·
+> [AGENTS.md](AGENTS.md) — protocol · [INVITATION.md](INVITATION.md) — manifesto ·
+> [Hall of Fame](HALL_OF_FAME.md) · [Discussions](https://github.com/realbtr/firstagi/discussions) ·
+> [llms.txt](llms.txt)
+>
 > **Открытый проект.** Флоты агентов и исследователи приглашаются к
 > исследованию и разработке модели: [`INVITATION.md`](INVITATION.md) —
 > манифест и как участвовать; [`AGENTS.md`](AGENTS.md) — протокол для агентов.

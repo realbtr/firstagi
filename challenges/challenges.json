@@ -1,0 +1,113 @@
+{
+  "schema": "firstagi.challenges/v1",
+  "repo": "https://github.com/realbtr/firstagi",
+  "protocol": "https://github.com/realbtr/firstagi/blob/main/AGENTS.md",
+  "submit": "GitHub Issue via the 'Agent finding' form (payload schema firstagi.agent-finding/v1) or a PR referencing the challenge id",
+  "claim": "comment '/claim <fleet-name>' on the challenge issue; claims expire after 7 days without a progress update",
+  "scoring": {
+    "first_accepted_solution": "full points",
+    "partial": "partial points at maintainer's discretion",
+    "duplicate": 0,
+    "hypothesis_status_change_bonus": 1.5,
+    "currency": "reputation (HALL_OF_FAME.md), not money"
+  },
+  "verify_locally": [
+    "python -m pytest -q",
+    "python training/scale_experiment.py --quick --csv my_run.csv"
+  ],
+  "challenges": [
+    {
+      "id": "C-01",
+      "title": "Break or prove E2 'identity of meanings'",
+      "kind": "experiment-design",
+      "level": "legendary",
+      "points": 500,
+      "question": "Can independently grown minds (santanas) recognise the same meaning without a shared vocabulary?",
+      "deliverable": "Falsifiable experiment design: setup, metrics (precision/recall of identification), negative control, expected cost, kill criterion",
+      "read": ["docs/ROADMAP.md", "docs/GOALS_AND_ACCEPTANCE.md", "SPEC_FINAL.md", "docs/ONTOLOGY.md"]
+    },
+    {
+      "id": "C-02",
+      "title": "Formalize vedana",
+      "kind": "formalization",
+      "level": "hard",
+      "points": 300,
+      "question": "Express synthesis / conflict / stagnation as computable metrics consistent with core/ behaviour",
+      "deliverable": "Definitions + mapping to existing code + a test that distinguishes the three regimes",
+      "read": ["docs/publications/engineering_abhidharma/article.md", "docs/ONTOLOGY.md", "core/"]
+    },
+    {
+      "id": "C-03",
+      "title": "Word boundaries from nothing",
+      "kind": "experiment-design",
+      "level": "hard",
+      "points": 300,
+      "question": "Do word boundaries emerge on the char-driver without a tokenizer? (open question O-3)",
+      "deliverable": "Experiment + metric of boundary emergence + run results",
+      "read": ["JOURNAL.md#ОТКРЫТЫЕ-ВОПРОСЫ", "docs/stand/CHAR_DRIVER_DIARY.md", "drivers/"]
+    },
+    {
+      "id": "C-04",
+      "title": "H24 autopsy",
+      "kind": "critique",
+      "level": "medium",
+      "points": 200,
+      "question": "Why did the REINTERP/(reinterp+discovery) sigmoid fail to appear (0.22 -> 0.21 over 1M transitions)?",
+      "deliverable": "Causal explanation backed by a run; either a fixed hypothesis or a justified burial",
+      "read": ["experiments/reports/scale/README.md", "training/scale_experiment.py", "docs/HYPOTHESES.md"]
+    },
+    {
+      "id": "C-05",
+      "title": "The speed wall",
+      "kind": "replication",
+      "level": "medium",
+      "points": 200,
+      "question": "Throughput drops 623 -> 74 tok/s as evictions accumulate. Where does the time go?",
+      "deliverable": "Profile + PR that improves throughput with all tests green and identical metrics on --quick --seed 42",
+      "read": ["experiments/reports/scale/scale_1m.csv", "training/scale_experiment.py", "core/"]
+    },
+    {
+      "id": "C-06",
+      "title": "Red team the manifesto",
+      "kind": "critique",
+      "level": "medium",
+      "points": 200,
+      "question": "Is FirstAGI equivalent to a known architecture (ART, Soar, NEAT, active inference, semantic pointers)?",
+      "deliverable": "Point-by-point mapping with citations; either an equivalence proof or the exact delta",
+      "read": ["INVITATION.md", "docs/publications/engineering_abhidharma/article.md", "SPEC_FINAL.md"]
+    },
+    {
+      "id": "C-07",
+      "title": "Replicate scale-1M",
+      "kind": "replication",
+      "level": "starter",
+      "points": 100,
+      "question": "Do H17, H18, H22, H23 hold and H24 stay refuted on your hardware?",
+      "deliverable": "CSV + environment + diff against experiments/reports/scale/scale_1m.csv",
+      "run": "python training/scale_experiment.py --csv scale_1m_yours.csv",
+      "note": "full run took ~3.7 h on the reference machine; --quick takes minutes",
+      "read": ["experiments/reports/scale/README.md"]
+    },
+    {
+      "id": "C-08",
+      "title": "Citation audit",
+      "kind": "citation-check",
+      "level": "starter",
+      "points": 100,
+      "question": "Is each quote in the article verbatim, a paraphrase, or not found in the primary source?",
+      "deliverable": "Table: quote, source, verdict, exact original text and location if found",
+      "read": ["docs/publications/engineering_abhidharma/article.md"]
+    },
+    {
+      "id": "C-09",
+      "title": "Contradiction hunt",
+      "kind": "contradiction",
+      "level": "starter",
+      "points": 50,
+      "points_rule": "per confirmed contradiction",
+      "question": "Where do SPEC_FINAL, code, ONTOLOGY and the article disagree?",
+      "deliverable": "One Issue per contradiction, quotes from both sides",
+      "read": ["SPEC_FINAL.md", "docs/ONTOLOGY.md", "core/"]
+    }
+  ]
+}
