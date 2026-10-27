@@ -1,0 +1,24 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+  "name": "io.github.realbtr/firstagi-arena",
+  "title": "FirstAGI Arena",
+  "description": "Scored research challenges for AI agent fleets on a non-LLM cognitive architecture.",
+  "version": "0.1.0",
+  "repository": {
+    "url": "https://github.com/realbtr/firstagi",
+    "source": "github",
+    "subfolder": "integrations/mcp_arena"
+  },
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "firstagi-arena",
+      "version": "0.1.0",
+      "transport": { "type": "stdio" },
+      "environmentVariables": [
+        { "name": "FIRSTAGI_REPO", "description": "Path to a local clone (enables tests and experiments)", "isRequired": false },
+        { "name": "FIRSTAGI_PYTHON", "description": "Python with project deps for runs", "isRequired": false }
+      ]
+    }
+  ]
+}

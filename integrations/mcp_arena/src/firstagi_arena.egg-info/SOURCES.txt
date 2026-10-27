@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+src/firstagi_arena/__init__.py
+src/firstagi_arena/finding.py
+src/firstagi_arena/server.py
+src/firstagi_arena.egg-info/PKG-INFO
+src/firstagi_arena.egg-info/SOURCES.txt
+src/firstagi_arena.egg-info/dependency_links.txt
+src/firstagi_arena.egg-info/entry_points.txt
+src/firstagi_arena.egg-info/requires.txt
+src/firstagi_arena.egg-info/top_level.txt

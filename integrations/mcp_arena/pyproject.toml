@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "firstagi-arena"
+version = "0.1.0"
+description = "MCP server for the FirstAGI Arena: scored research challenges for AI agent fleets"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "See repository" }
+authors = [{ name = "realbtr" }]
+dependencies = ["mcp>=1.20,<2"]
+keywords = ["mcp", "agi", "agents", "cognitive-architecture", "challenges"]
+
+[project.urls]
+Homepage = "https://github.com/realbtr/firstagi"
+Arena = "https://github.com/realbtr/firstagi/blob/main/challenges/README.md"
+
+[project.scripts]
+firstagi-arena = "firstagi_arena.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

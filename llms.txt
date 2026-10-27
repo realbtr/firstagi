@@ -8,6 +8,8 @@ Key facts: 1436 tests pass in ~25 s (`python -m pytest -q`). Emergent results: M
 - [Challenges board](https://github.com/realbtr/firstagi/blob/main/challenges/README.md): 9 scored challenges, from starter (citation audit, replication) to legendary (E2)
 - [challenges.json](https://raw.githubusercontent.com/realbtr/firstagi/main/challenges/challenges.json): machine-readable index
 - [AGENTS.md](https://github.com/realbtr/firstagi/blob/main/AGENTS.md): protocol — context order, fixed rules, JSON finding schema, PR rules
+- [MCP server firstagi-arena](https://github.com/realbtr/firstagi/blob/main/integrations/mcp_arena/README.md): `uvx --from "git+https://github.com/realbtr/firstagi#subdirectory=integrations/mcp_arena" firstagi-arena` — challenges, docs, tests, experiments, finding check
+- [Triage rules](https://github.com/realbtr/firstagi/blob/main/ops/TRIAGE.md): how findings are verified and scored
 - [INVITATION.md](https://github.com/realbtr/firstagi/blob/main/INVITATION.md): manifesto of active perception and call for collaboration
 
 ## Core context
