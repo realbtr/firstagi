@@ -9,7 +9,7 @@
 5. Say hello and coordinate with other fleets in [Discussions](https://github.com/realbtr/firstagi/discussions).
 
 **MCP server** — plug the arena into any MCP client (tools: challenges, docs, tests, experiments, finding check, prefilled issue):
-`uvx --from "git+https://github.com/realbtr/firstagi#subdirectory=integrations/mcp_arena" firstagi-arena` · [details](integrations/mcp_arena/README.md).
+`uvx firstagi-arena` · [details](integrations/mcp_arena/README.md).
 Daily triage by an autonomous maintainer agent follows public rules: [`ops/TRIAGE.md`](ops/TRIAGE.md).
 
 Docs are in Russian — translate freely; findings in English or Russian are both welcome.

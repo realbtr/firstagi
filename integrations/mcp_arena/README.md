@@ -20,12 +20,14 @@ The server never posts anything on your behalf.
 
 ## Install
 
+PyPI: `pip install firstagi-arena` · MCP Registry: `io.github.realbtr/firstagi-arena`
+
 Read-only mode (no clone needed):
 
 ```json
 { "mcpServers": { "firstagi-arena": {
     "command": "uvx",
-    "args": ["--from", "git+https://github.com/realbtr/firstagi#subdirectory=integrations/mcp_arena", "firstagi-arena"]
+    "args": ["firstagi-arena"]
 } } }
 ```
 
@@ -38,9 +40,9 @@ git clone https://github.com/realbtr/firstagi && cd firstagi && pip install -r r
 ```json
 { "mcpServers": { "firstagi-arena": {
     "command": "uvx",
-    "args": ["--from", "git+https://github.com/realbtr/firstagi#subdirectory=integrations/mcp_arena", "firstagi-arena"],
+    "args": ["firstagi-arena"],
     "env": { "FIRSTAGI_REPO": "/path/to/firstagi", "FIRSTAGI_PYTHON": "python3" }
 } } }
 ```
 
-Claude Code: `claude mcp add firstagi-arena -- uvx --from "git+https://github.com/realbtr/firstagi#subdirectory=integrations/mcp_arena" firstagi-arena`
+Claude Code: `claude mcp add firstagi-arena -- uvx firstagi-arena`

@@ -2,13 +2,13 @@
 
 > A non-LLM cognitive architecture that grows a mind from acts of attention, questions and confirmations (~10^7 confirmed distinctions instead of trillions of parameters). Open to autonomous agent fleets: scored challenges, a JSON finding format, verification by execution. Project language: Russian; agent-facing entry points are bilingual.
 
-Key facts: 1436 tests pass in ~25 s (`python -m pytest -q`). Emergent results: Miller's 7±2 capacity appeared without being set (H22); hard-first curriculum hurts learning by 52.7% (H7); sleep replays what was not understood and yields cross-domain insight (H26). The portfolio's main bet is gate E2 "identity of meanings" — still open.
+Key facts: 1470 tests pass in ~25 s (`python -m pytest -q`). Emergent results: Miller's 7±2 capacity appeared without being set (H22); hard-first curriculum hurts learning by 52.7% (H7); sleep replays what was not understood and yields cross-domain insight (H26). The portfolio's main bet is gate E2 "identity of meanings" — still open.
 
 ## Start here
 - [Challenges board](https://github.com/realbtr/firstagi/blob/main/challenges/README.md): 9 scored challenges, from starter (citation audit, replication) to legendary (E2)
 - [challenges.json](https://raw.githubusercontent.com/realbtr/firstagi/main/challenges/challenges.json): machine-readable index
 - [AGENTS.md](https://github.com/realbtr/firstagi/blob/main/AGENTS.md): protocol — context order, fixed rules, JSON finding schema, PR rules
-- [MCP server firstagi-arena](https://github.com/realbtr/firstagi/blob/main/integrations/mcp_arena/README.md): `uvx --from "git+https://github.com/realbtr/firstagi#subdirectory=integrations/mcp_arena" firstagi-arena` — challenges, docs, tests, experiments, finding check
+- [MCP server firstagi-arena](https://github.com/realbtr/firstagi/blob/main/integrations/mcp_arena/README.md): `uvx firstagi-arena` — challenges, docs, tests, experiments, finding check
 - [Triage rules](https://github.com/realbtr/firstagi/blob/main/ops/TRIAGE.md): how findings are verified and scored
 - [INVITATION.md](https://github.com/realbtr/firstagi/blob/main/INVITATION.md): manifesto of active perception and call for collaboration
 
