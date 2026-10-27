@@ -17,7 +17,7 @@ on:
 permissions:
   contents: read
   issues: write
-  discussions: read
+  discussions: write
   pull-requests: read
 
 concurrency:

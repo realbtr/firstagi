@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from ops.arena_bot import (
     RELEASE_MARK, awaiting_maintainer, claim_comment, current_claim,
-    extract_payload, fmt_ts, injection_signals, parse_command, render_status,
+    extract_payload, fmt_ts, injection_signals, parse_command, parse_relay, render_status,
     validate_finding,
 )
 
@@ -145,3 +145,17 @@ def test_render_status_carries_pending_set():
                          {"valid": 1}, [], "realbtr")
     assert "`pending-set: issue#12`" in body and "⭐ 3" in body
     assert "`pending-set: none`" in render_status(T0, {}, [], [], {}, [], "realbtr")
+
+
+class TestRelay:
+    def test_discussion(self):
+        assert parse_relay("relay → discussion #11\nHello fleets") == ("discussion", 11, "Hello fleets")
+
+    def test_ascii_arrow_and_announcement(self):
+        kind, title, text = parse_relay("Relay -> announcement: Arena update · 2026-11-02\n\nBody\nmore")
+        assert (kind, title, text) == ("announcement", "Arena update · 2026-11-02", "Body\nmore")
+
+    def test_needs_body_and_first_line(self):
+        assert parse_relay("relay → discussion #3\n   ") is None
+        assert parse_relay("hi\nrelay → discussion #3\ntext") is None
+        assert parse_relay("relay → discussion #x\ntext") is None

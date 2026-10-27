@@ -180,6 +180,22 @@ def injection_signals(text: str) -> list[str]:
     return found
 
 
+RELAY_RE = re.compile(r"^\s*relay\s*(?:→|->)\s*(?:discussion\s*#(?P<num>\d+)|announcement:\s*(?P<title>.+?))\s*$",
+                      re.IGNORECASE)
+
+
+def parse_relay(body: str) -> tuple[str, str | int, str] | None:
+    """Первая строка `relay → discussion #N` / `relay → announcement: Заголовок`, дальше — текст.
+    Облачный triage-агент не может писать в Discussions; бот пересылает за него."""
+    first, _, rest = (body or "").partition("\n")
+    m = RELAY_RE.match(first)
+    if not m or not rest.strip():
+        return None
+    if m["num"]:
+        return "discussion", int(m["num"]), rest.strip()
+    return "announcement", m["title"].strip()[:200], rest.strip()
+
+
 def awaiting_maintainer(thread: dict, maintainer: str, bot_logins: set[str],
                         at: datetime, hours: int = RESPONSE_HOURS) -> bool:
     """Последнее слово не за владельцем/ботом и молчание дольше `hours`."""
@@ -279,6 +295,9 @@ class GitHub:
         return out
 
     def graphql(self, query: str, **variables) -> dict:
+        if self.dry and query.lstrip().startswith("mutation"):
+            print(f"[dry-run] graphql mutation {json.dumps(variables, ensure_ascii=False)[:200]}")
+            return {}
         return self._req("POST", f"{API}/graphql", {"query": query, "variables": variables})
 
     def comment(self, number: int, body: str) -> None:
@@ -385,7 +404,45 @@ def flag_if_suspicious(gh: GitHub, number: int, text: str, labels: set[str]) -> 
         print(f"flagged #{number}: {reasons}")
 
 
-def run_event(gh: GitHub, maintainer: str, bots: set[str]) -> None:
+RELAY_ID_Q = """query($owner:String!,$name:String!,$num:Int!){repository(owner:$owner,name:$name){
+  id discussion(number:$num){id url} discussionCategories(first:20){nodes{id slug}}}}"""
+RELAY_ADD_COMMENT = """mutation($id:ID!,$body:String!){
+  addDiscussionComment(input:{discussionId:$id,body:$body}){comment{url}}}"""
+RELAY_CREATE = """mutation($r:ID!,$c:ID!,$t:String!,$b:String!){
+  createDiscussion(input:{repositoryId:$r,categoryId:$c,title:$t,body:$b}){discussion{url}}}"""
+
+
+def handle_relay(gh: GitHub, issue: dict, comment: dict, relayers: set[str]) -> None:
+    """Пересылка из Issue «Arena status» в Discussions — только от доверенных авторов."""
+    if STATUS_LABEL not in label_names(issue) or comment["user"]["login"] not in relayers:
+        return
+    relay = parse_relay(comment.get("body", ""))
+    if not relay:
+        return
+    kind, target, text = relay
+    owner, name = gh.repo.split("/")
+    data = (gh.graphql(RELAY_ID_Q, owner=owner, name=name,
+                       num=target if kind == "discussion" else 0).get("data") or {}).get("repository") or {}
+    if kind == "discussion":
+        disc = data.get("discussion")
+        if not disc:
+            gh.comment(issue["number"], f"⚠️ relay failed: discussion #{target} not found.")
+            return
+        res = gh.graphql(RELAY_ADD_COMMENT, id=disc["id"], body=text)
+        url = (((res.get("data") or {}).get("addDiscussionComment") or {}).get("comment") or {}).get("url")
+    else:
+        cat = next((c["id"] for c in data.get("discussionCategories", {}).get("nodes", [])
+                    if c["slug"] == "announcements"), None)
+        if not cat:
+            gh.comment(issue["number"], "⚠️ relay failed: no Announcements category.")
+            return
+        res = gh.graphql(RELAY_CREATE, r=data["id"], c=cat, t=target, b=text)
+        url = (((res.get("data") or {}).get("createDiscussion") or {}).get("discussion") or {}).get("url")
+    gh.comment(issue["number"], f"✅ relayed to {url}" if url
+               else f"⚠️ relay failed: {json.dumps(res.get('errors'))[:300]}")
+
+
+def run_event(gh: GitHub, maintainer: str, bots: set[str], relayers: set[str] | None = None) -> None:
     name = os.environ.get("GITHUB_EVENT_NAME", "")
     with open(os.environ["GITHUB_EVENT_PATH"], encoding="utf-8") as f:
         ev = json.load(f)
@@ -407,6 +464,7 @@ def run_event(gh: GitHub, maintainer: str, bots: set[str]) -> None:
         if issue.get("pull_request"):
             return
         handle_claim_command(gh, issue, comment, bots, maintainer)
+        handle_relay(gh, issue, comment, relayers or {maintainer})
         flag_if_suspicious(gh, issue["number"], comment.get("body", ""), label_names(issue))
     elif name in ("discussion", "discussion_comment"):
         node = ev.get("comment") or ev.get("discussion") or {}
@@ -522,8 +580,12 @@ def main() -> None:
         sys.exit("GITHUB_TOKEN is required")
     maintainer = os.environ.get("ARENA_MAINTAINER", repo.split("/")[0])
     bots = {"github-actions[bot]", *filter(None, os.environ.get("ARENA_BOT_LOGINS", "").split(","))}
+    relayers = {maintainer, *filter(None, os.environ.get("ARENA_RELAYERS", "").split(","))}
     gh = GitHub(token, repo, dry_run=args.dry_run)
-    (run_event if args.mode == "event" else run_sweep)(gh, maintainer, bots)
+    if args.mode == "event":
+        run_event(gh, maintainer, bots, relayers)
+    else:
+        run_sweep(gh, maintainer, bots)
 
 
 if __name__ == "__main__":
