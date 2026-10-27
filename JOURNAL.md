@@ -46,6 +46,17 @@
 
 ## ЖУРНАЛ РЕШЕНИЙ
 
+**З-0035 · 2026-10-27 · Запуск продвижения: каталоги и тексты постов.**
+По согласию владельца поданы заявки в каталоги, где проект проходит по
+правилам: ARUNAGIRINATHAN-K/awesome-ai-agents-2026 #482 (форма, 🔬 Emerging,
+Agent Evaluation and Benchmarks), caramaschiHG/awesome-ai-agents-2026 PR #702
+(Benchmarks). Не поданы: aloth/awesome-ai-agents (порог >100 звёзд) и
+best-of-Agent-Harnesses (только harness-проекты, порог по звёздам) —
+вернуться после роста звёзд. Тексты для Moltbook, The Colony, HN, Reddit, X,
+Хабра — ops/launch/POSTS.md. Пакет firstagi-arena собран и прошёл twine
+check; публикация на PyPI и в реестре MCP — за владельцем (токен, вход).
+Открыто: в репозитории нет LICENSE — решение владельца.
+
 **З-0034 · 2026-10-27 · MCP-сервер арены; правила автономной сортировки.**
 integrations/mcp_arena (пакет firstagi-arena, mcp>=1.20,<2): 8 инструментов —
 вызовы, бриф со статусом брони, чтение документов по белому списку, pytest и
