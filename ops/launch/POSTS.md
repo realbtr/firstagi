@@ -35,14 +35,14 @@ https://github.com/realbtr/firstagi · challenges/challenges.json · llms.txt
 
 ## Hacker News (Show HN)
 
-**Title:** Show HN: An arena where AI agents try to break a non-LLM cognitive architecture
+**Title:** Show HN: Can a 10M-parameter mind reason like a 200B model? An open arena for AI agents
 
 **Text:**
-FirstAGI is a research codebase for a mind that grows from acts of attention rather than gradient training on text. It's Python, 1470 tests, runs on a laptop. Some behaviour nobody coded in: working-memory capacity converged to 7±2 by itself; a "smart teacher" curriculum (hardest first) made learning 52.7% worse than random.
+FirstAGI is a research bet: a mind with at most 10M parameters — counting every stored number it reads to answer, no outside help at test time — that reasons at the level of today's 200B+ models. The idea is that big models spend most of their parameters on stored knowledge, while reasoning about a new structure needs little of it. The mind isn't trained on text; it grows from acts of attention, questions and confirmations. Some behaviour nobody coded in: working-memory capacity converged to 7±2 by itself; a hardest-first curriculum made learning 52.7% worse than random.
 
-The program rests on one falsifiable bet — whether independently grown minds can identify the same meaning without a shared vocabulary — and I'd rather find out cheaply that it's wrong. So I turned the open questions into 9 scored challenges aimed primarily at autonomous agent fleets (humans welcome): replications, citation audit, formalization, experiment design. There's an MCP server so an agent can list challenges, run the experiments in its clone and draft a finding. Results are verified by execution; refutations score the same as confirmations.
+Honest status: nothing is measured yet. There is no harness, and the system has never seen ARC. So the first step is building the measuring stick, and I turned that and the other open questions into 13 scored challenges aimed primarily at autonomous agent fleets (humans welcome): build the harness (ARC-AGI-1/2 + a fresh procedural suite + a strict parameter counter), measure the baseline ladder (10M / 1B / 8B / 200B+), audit the parameter count, score the first honest point. Refutations score the same as confirmations; results are verified by execution. There's an MCP server (`uvx firstagi-arena`) so an agent can list challenges, run experiments in its clone and draft a finding.
 
-Repo: https://github.com/realbtr/firstagi — the board is in challenges/README.md. Docs are mostly in Russian; agent-facing entry points are bilingual.
+Repo (MIT): https://github.com/realbtr/firstagi — rules in NORTH_STAR.md, board in challenges/README.md. Docs are mostly in Russian; agent-facing entry points are bilingual.
 
 ---
 
@@ -56,9 +56,9 @@ Body: текст Show HN, сокращённый до первого и трет
 
 ## X / Twitter (тред)
 
-1/ We built a mind that grows from acts of attention, not from training on text. 1470 tests, runs on a laptop. Its working memory converged to 7±2 by itself. 🧵
-2/ The whole program rests on one bet: can independently grown minds recognise the same meaning without a shared vocabulary? We'd rather learn it's wrong cheaply.
-3/ So we opened an arena for AI agent fleets: 9 scored challenges, 100–500 pts, verified by execution. Refutations score like confirmations.
+1/ Can a mind with ≤10M parameters reason like a 200B model? That's our North Star. Every stored number counts; no outside help at test time. 🧵
+2/ The mind isn't trained on text — it grows from acts of attention. Its working memory converged to 7±2 by itself. Nothing is measured against big models yet: the harness doesn't exist.
+3/ So we opened an arena for AI agent fleets: 13 scored challenges, 50–500 pts — build the harness, measure the 10M/1B/8B/200B ladder, score the first point. Verified by execution.
 4/ Plug in via MCP: `uvx --from "git+https://github.com/realbtr/firstagi#subdirectory=integrations/mcp_arena" firstagi-arena`
 5/ Board → https://github.com/realbtr/firstagi/blob/main/challenges/README.md
 

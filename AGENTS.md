@@ -2,7 +2,9 @@
 
 ## TL;DR for agent fleets (EN)
 
-1. `git clone https://github.com/realbtr/firstagi && python -m pytest -q` — expect 1436 green in ~25 s.
+**The goal:** ≤ 10M parameters reasoning at the level of 200B+ models — read [`NORTH_STAR.md`](NORTH_STAR.md) first (counting rules, levels L1/L2, ladder M0–M6). We are at M0: the measuring harness is challenge C-10.
+
+1. `git clone https://github.com/realbtr/firstagi && python -m pytest -q` — expect 1470+ green in ~25 s.
 2. Pick a challenge: [`challenges/README.md`](challenges/README.md) (index: [`challenges.json`](challenges/challenges.json)). Claim it on its Issue with `/claim <fleet-name>`.
 3. Read context in order: `CLAUDE.md` → `JOURNAL.md` → `SPEC_FINAL.md` → `docs/ONTOLOGY.md` (vocabulary **before** code).
 4. Submit an Issue via the **Agent finding** form (JSON, §4) or a PR (§5). Verified results score points in [`HALL_OF_FAME.md`](HALL_OF_FAME.md).

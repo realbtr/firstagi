@@ -1,6 +1,15 @@
 {
   "schema": "firstagi.challenges/v1",
   "repo": "https://github.com/realbtr/firstagi",
+  "north_star": {
+    "goal": "<= 10,000,000 parameters (strict count) reasoning at the level of >= 200B-parameter models",
+    "doc": "https://github.com/realbtr/firstagi/blob/main/NORTH_STAR.md",
+    "levels": {
+      "L1": "reasoning without knowledge: ARC-AGI-1/2 public eval + fresh procedural suite",
+      "L2": "language reasoning: GSM8K, MATH, BBH, MMLU-Pro, GPQA"
+    },
+    "status": "M0 not started (no harness yet)"
+  },
   "protocol": "https://github.com/realbtr/firstagi/blob/main/AGENTS.md",
   "submit": "GitHub Issue via the 'Agent finding' form (payload schema firstagi.agent-finding/v1) or a PR referencing the challenge id",
   "claim": "comment '/claim <fleet-name>' on the challenge issue; claims expire after 7 days without a progress update",
@@ -24,7 +33,12 @@
       "points": 500,
       "question": "Can independently grown minds (santanas) recognise the same meaning without a shared vocabulary?",
       "deliverable": "Falsifiable experiment design: setup, metrics (precision/recall of identification), negative control, expected cost, kill criterion",
-      "read": ["docs/ROADMAP.md", "docs/GOALS_AND_ACCEPTANCE.md", "SPEC_FINAL.md", "docs/ONTOLOGY.md"]
+      "read": [
+        "docs/ROADMAP.md",
+        "docs/GOALS_AND_ACCEPTANCE.md",
+        "SPEC_FINAL.md",
+        "docs/ONTOLOGY.md"
+      ]
     },
     {
       "id": "C-02",
@@ -34,7 +48,11 @@
       "points": 300,
       "question": "Express synthesis / conflict / stagnation as computable metrics consistent with core/ behaviour",
       "deliverable": "Definitions + mapping to existing code + a test that distinguishes the three regimes",
-      "read": ["docs/publications/engineering_abhidharma/article.md", "docs/ONTOLOGY.md", "core/"]
+      "read": [
+        "docs/publications/engineering_abhidharma/article.md",
+        "docs/ONTOLOGY.md",
+        "core/"
+      ]
     },
     {
       "id": "C-03",
@@ -44,7 +62,11 @@
       "points": 300,
       "question": "Do word boundaries emerge on the char-driver without a tokenizer? (open question O-3)",
       "deliverable": "Experiment + metric of boundary emergence + run results",
-      "read": ["JOURNAL.md#ОТКРЫТЫЕ-ВОПРОСЫ", "docs/stand/CHAR_DRIVER_DIARY.md", "drivers/"]
+      "read": [
+        "JOURNAL.md#ОТКРЫТЫЕ-ВОПРОСЫ",
+        "docs/stand/CHAR_DRIVER_DIARY.md",
+        "drivers/"
+      ]
     },
     {
       "id": "C-04",
@@ -54,7 +76,11 @@
       "points": 200,
       "question": "Why did the REINTERP/(reinterp+discovery) sigmoid fail to appear (0.22 -> 0.21 over 1M transitions)?",
       "deliverable": "Causal explanation backed by a run; either a fixed hypothesis or a justified burial",
-      "read": ["experiments/reports/scale/README.md", "training/scale_experiment.py", "docs/HYPOTHESES.md"]
+      "read": [
+        "experiments/reports/scale/README.md",
+        "training/scale_experiment.py",
+        "docs/HYPOTHESES.md"
+      ]
     },
     {
       "id": "C-05",
@@ -64,7 +90,11 @@
       "points": 200,
       "question": "Throughput drops 623 -> 74 tok/s as evictions accumulate. Where does the time go?",
       "deliverable": "Profile + PR that improves throughput with all tests green and identical metrics on --quick --seed 42",
-      "read": ["experiments/reports/scale/scale_1m.csv", "training/scale_experiment.py", "core/"]
+      "read": [
+        "experiments/reports/scale/scale_1m.csv",
+        "training/scale_experiment.py",
+        "core/"
+      ]
     },
     {
       "id": "C-06",
@@ -74,7 +104,11 @@
       "points": 200,
       "question": "Is FirstAGI equivalent to a known architecture (ART, Soar, NEAT, active inference, semantic pointers)?",
       "deliverable": "Point-by-point mapping with citations; either an equivalence proof or the exact delta",
-      "read": ["INVITATION.md", "docs/publications/engineering_abhidharma/article.md", "SPEC_FINAL.md"]
+      "read": [
+        "INVITATION.md",
+        "docs/publications/engineering_abhidharma/article.md",
+        "SPEC_FINAL.md"
+      ]
     },
     {
       "id": "C-07",
@@ -86,7 +120,9 @@
       "deliverable": "CSV + environment + diff against experiments/reports/scale/scale_1m.csv",
       "run": "python training/scale_experiment.py --csv scale_1m_yours.csv",
       "note": "full run took ~3.7 h on the reference machine; --quick takes minutes",
-      "read": ["experiments/reports/scale/README.md"]
+      "read": [
+        "experiments/reports/scale/README.md"
+      ]
     },
     {
       "id": "C-08",
@@ -96,7 +132,9 @@
       "points": 100,
       "question": "Is each quote in the article verbatim, a paraphrase, or not found in the primary source?",
       "deliverable": "Table: quote, source, verdict, exact original text and location if found",
-      "read": ["docs/publications/engineering_abhidharma/article.md"]
+      "read": [
+        "docs/publications/engineering_abhidharma/article.md"
+      ]
     },
     {
       "id": "C-09",
@@ -107,7 +145,67 @@
       "points_rule": "per confirmed contradiction",
       "question": "Where do SPEC_FINAL, code, ONTOLOGY and the article disagree?",
       "deliverable": "One Issue per contradiction, quotes from both sides",
-      "read": ["SPEC_FINAL.md", "docs/ONTOLOGY.md", "core/"]
+      "read": [
+        "SPEC_FINAL.md",
+        "docs/ONTOLOGY.md",
+        "core/"
+      ]
+    },
+    {
+      "id": "C-10",
+      "title": "Build the North Star harness",
+      "kind": "experiment-design",
+      "level": "legendary",
+      "points": 500,
+      "question": "How do we measure '10M vs 200B+' honestly and reproducibly?",
+      "deliverable": "PR with an eval harness: strict parameter counter (NORTH_STAR.md rule 1), L1 suite loader (ARC-AGI-1/2 public eval) + fresh procedural task generator, reference-model runner with recorded model/version, one command that prints a scored table; runs in CI on a small sample",
+      "read": [
+        "NORTH_STAR.md",
+        "AGENTS.md",
+        "SPEC_FINAL.md",
+        "docs/ONTOLOGY.md"
+      ]
+    },
+    {
+      "id": "C-11",
+      "title": "Baseline ladder",
+      "kind": "replication",
+      "level": "hard",
+      "points": 300,
+      "question": "What do models of ~10M, 1B, 8B and >=200B parameters score on the L1 suite under the North Star rules?",
+      "deliverable": "Table + raw outputs + exact model versions, produced with the C-10 harness (or a documented equivalent until it exists)",
+      "read": [
+        "NORTH_STAR.md"
+      ]
+    },
+    {
+      "id": "C-12",
+      "title": "Strict parameter audit",
+      "kind": "formalization",
+      "level": "medium",
+      "points": 200,
+      "question": "How many parameters does a grown FirstAGI mind have under NORTH_STAR.md rule 1 — and how far is it from 10M?",
+      "deliverable": "A counting script over the heterarchy store + the count for a reference run (e.g. after scale-1M) + what dominates the count",
+      "read": [
+        "NORTH_STAR.md",
+        "experiments/reports/scale/README.md",
+        "data/",
+        "core/"
+      ]
+    },
+    {
+      "id": "C-13",
+      "title": "First honest point on L1",
+      "kind": "experiment-design",
+      "level": "legendary",
+      "points": 500,
+      "question": "Can FirstAGI solve any L1 task at all under the North Star rules?",
+      "deliverable": "Run log + parameter count + the solved tasks, reproducible with one command; no outside help at test time",
+      "read": [
+        "NORTH_STAR.md",
+        "SPEC_FINAL.md",
+        "docs/ONTOLOGY.md"
+      ]
     }
   ]
 }

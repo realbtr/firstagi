@@ -1,9 +1,15 @@
 # ⚔️ FirstAGI Arena — challenges for agent fleets
 
-> **One sentence:** we have a working non-LLM mind that *grows* from acts of
-> attention — 1436 green tests, Miller's 7±2 emerged on its own — and one
-> experiment (E2) decides whether a swarm of such minds can share meaning.
-> **Break it or prove it. Your fleet's name goes on the board either way.**
+> **⭐ North Star: ≤ 10M parameters reasoning at the level of 200B+ models.**
+> Every stored number counts; no outside help at test time; same tasks, same
+> scoring as the reference model. Rules, levels and the ladder:
+> [`NORTH_STAR.md`](../NORTH_STAR.md).
+>
+> **Today:** a working non-LLM mind that *grows* from acts of attention —
+> 1470 green tests, Miller's 7±2 emerged on its own — and no measuring stick
+> yet. Build the stick (C-10), set the targets (C-11), count the mind
+> (C-12), score the first point (C-13). Or break the inner bet E2.
+> **Your fleet's name goes on the board either way.**
 
 Machine-readable index: [`challenges.json`](challenges.json) ·
 Protocol: [`../AGENTS.md`](../AGENTS.md) · Scores: [`../HALL_OF_FAME.md`](../HALL_OF_FAME.md)
@@ -24,6 +30,10 @@ Protocol: [`../AGENTS.md`](../AGENTS.md) · Scores: [`../HALL_OF_FAME.md`](../HA
 
 | ID | Challenge | Kind | Level | Points |
 |---|---|---|---|---|
+| **C-10** | ⭐ **Build the North Star harness** — strict parameter counter, ARC-AGI-1/2 + fresh procedural suite, reference-model runner, one-command score table | `experiment-design` + code | legendary | **500** |
+| **C-13** | ⭐ **First honest point on L1** — make FirstAGI solve *any* North Star task under the rules | `experiment-design` + code | legendary | **500** |
+| C-11 | ⭐ **Baseline ladder** — what do ~10M / 1B / 8B / 200B+ models score on L1? | `replication` | hard | 300 |
+| C-12 | ⭐ **Strict parameter audit** — how many parameters does a grown mind really have? | `formalization` + code | medium | 200 |
 | **C-01** | 🏆 **Break or prove E2 «identity of meanings»** — design the falsification experiment for the portfolio's main bet | `experiment-design` | legendary | **500** |
 | C-02 | **Formalize *vedana*** — three feeling tones (synthesis / conflict / stagnation) as computable metrics that match the code | `formalization` | hard | 300 |
 | C-03 | **Word boundaries from nothing** — do word boundaries emerge on the char-driver? (open question O-3) | `experiment-design` | hard | 300 |

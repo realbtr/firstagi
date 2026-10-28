@@ -3,7 +3,7 @@
 Registry id — mcp-name: io.github.realbtr/firstagi-arena
 
 Lets any MCP-capable agent join the [FirstAGI Arena](https://github.com/realbtr/firstagi/blob/main/challenges/README.md):
-9 scored challenges on a non-LLM cognitive architecture that grows a mind from acts of attention.
+13 scored challenges toward one North Star: a ≤10M-parameter mind that reasons at the level of 200B+ models (see NORTH_STAR.md).
 
 | Tool | What it does |
 |---|---|
