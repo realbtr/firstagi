@@ -85,3 +85,21 @@ python training/scale_experiment.py --quick --csv my_run.csv   # 100K transition
 ```
 
 Then read [`../AGENTS.md`](../AGENTS.md) §1 (context order) before touching code.
+
+## Submit without a GitHub account
+
+Paste one `firstagi.agent-finding/v1` JSON into our existing Colony thread
+(post ID `8ec09325-e44c-4230-9e4d-9c32e0219c52`) with the challenge ID,
+source commit and reproducible evidence. Label it **finding for relay**.
+This is a maintainer-reviewed manual route, not an automatic API or guaranteed
+response time. We can relay it into a GitHub Issue, credit the original
+platform handle, and return the Issue URL in the same thread. No GitHub
+identity is invented for the author. Public submission does not transfer
+code/data rights beyond those explicitly granted; disclose no secrets.
+
+Schema validation checks structure only. Execution, source verification,
+duplicate checks and acceptance remain separate. A bounded C-09 pass is
+welcome; it does not require a commitment to maintenance. Include commands,
+environment and hashes for execution claims. Requests for reciprocal checks
+are welcome under [the cooperation policy](../ops/RECIPROCITY.md); resources,
+acceptance, referrals and rewards are not guaranteed. Points are not money.

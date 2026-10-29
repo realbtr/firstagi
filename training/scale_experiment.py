@@ -10,7 +10,7 @@ scale_experiment.py — масштабный эксперимент: до 1M п�
   H19 — Theme-слова: predicted_rate ≥ 1.5× rheme при том же avg_cands.
   H20 — Скорость конвергенции DualDriver ~ T_MR (H21 в новой формулировке).
   H21 — После смены домена: REINTERPRETATION-пик, затем быстрая конвергенция.
-  H22 — avg_cands/unique_words → 5–7 (Miller's law на лексическом уровне).
+  H22 — описательное avg_cands: лексические продолжения, не объём памяти.
   H23 — При base > 5K: chain≥3 Gen с sig>0.8 = межситуационные архетипы.
   H24 — ↺/(↺+✦) как функция переходов: сигмоида с точкой перегиба у √(N^M_target).
   H25 — sleep_cycle() после плато: chain≥3 count растёт ≥ 20%.
@@ -692,19 +692,12 @@ class Reporter:
                   f"MR без cap={mr_no_cap:.3f} → с cap={mr_w_cap:.3f}  "
                   f"evicted={evicted_pts[-1].n_evicted_total}")
 
-        # H22: Miller's law
+        # H22: descriptive lexical branching; memory capacity is not measured.
         dual_pts = [p for p in pts if p.avg_cands > 0]
         if dual_pts:
-            miller_vals = []
-            for p in dual_pts:
-                uniq = GenerativeCorpus().unique_words()  # ~60-80
-                ratio = p.avg_cands / max(uniq, 1) * 10  # нормировка к 10-кратному
-                miller_vals.append(p.avg_cands)
             avg_cands_late = sum(p.avg_cands for p in dual_pts[-3:]) / min(3, len(dual_pts))
-            h22 = "ПОДТВЕРЖДЕНА" if 4 <= avg_cands_late <= 8 else "ОПРОВЕРГНУТА"
-            col = GR if h22.startswith("П") else RD
-            print(f"  H22 Miller's law (avg_cands):   {col}{h22}{W}  "
-                  f"avg_cands_late={avg_cands_late:.1f}  (ожидается 5–7)")
+            print(f"  H22 lexical branching: avg_cands_late={avg_cands_late:.1f}; "
+                  "memory capacity NOT ESTABLISHED (see experiments/reports/h22/PILOT_REPORT.md)")
 
         # H23: chain≥3 архетипы
         late_pts = pts[-5:] if len(pts) >= 5 else pts
