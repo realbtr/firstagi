@@ -1,0 +1,24 @@
+{
+  "schema": "firstagi.h22-protocol/v1",
+  "version": "1.0.0",
+  "status": "pilot preregistration; confirmatory series not run",
+  "credit": "Counterfactual proposed by Solomon on The Colony; implementation by FirstAGI project",
+  "question": "Is the pre-probe lexical candidate count robust to storage budget, feature tolerance and configured disambiguator limit?",
+  "baseline": {"capacity": 0, "feature_tolerance": 0.15, "max_competing": 8},
+  "conditions": [
+    {"id": "baseline", "capacity": 0, "feature_tolerance": 0.15, "max_competing": 8},
+    {"id": "capacity256", "capacity": 256, "feature_tolerance": 0.15, "max_competing": 8},
+    {"id": "capacity1024", "capacity": 1024, "feature_tolerance": 0.15, "max_competing": 8},
+    {"id": "tolerance0075", "capacity": 0, "feature_tolerance": 0.075, "max_competing": 8},
+    {"id": "tolerance030", "capacity": 0, "feature_tolerance": 0.3, "max_competing": 8},
+    {"id": "competing2", "capacity": 0, "feature_tolerance": 0.15, "max_competing": 2},
+    {"id": "competing32", "capacity": 0, "feature_tolerance": 0.15, "max_competing": 32}
+  ],
+  "pilot": {"transitions": 8000, "checkpoints": [2000, 4000, 6000, 8000], "seeds": [41, 42], "repeat": {"condition": "baseline", "seed": 42}},
+  "confirmatory": {"transitions": 50000, "checkpoints": [10000, 20000, 30000, 40000, 50000], "seeds": [101, 202, 303, 404, 505], "enabled": false},
+  "corpus": {"training_domain": "лес", "training_batch_texts": 30, "training_generator": "training.scale_experiment.GenerativeCorpus", "evaluation_texts_per_domain": 30, "evaluation_seeds": {"familiar": 70001, "novel": 70002}, "novel_domain": "море", "reject_training_evaluation_text_overlap": true},
+  "evaluation": {"mode": "frozen index, no process_token calls", "tokenizer": "DualDriverLoop._tokenize", "candidate_source": "build_next_word_index(system)", "zero_candidate_steps": "included as zero; do not filter", "primary": "sum(candidate counts)/all cue-target transitions in fixed familiar probes", "secondary": ["candidate count on novel probes", "target_in_candidates rate (coverage, not forced-choice accuracy)", "mean probe count", "empirical training bigram outdegree", "base size", "evictions", "steps above configured storage capacity"], "late_window": "last two checkpoints; mean within a run, seeds are independent units"},
+  "controls": {"synthetic_outdegrees": [1, 7, 16], "frozen_index_digest_unchanged": true, "training_stream_identical_across_conditions_per_seed": true, "repeated_baseline_nontiming_metrics_identical": true, "hash_seed": "0", "budget_activation": "from first insertion; no 3125-node activation wall; original protected-node eviction policy retained"},
+  "decision_rules": {"pilot": "Only instrumentation, budget activation and reproducibility checks; no final verdict for H22", "descriptive_7plusminus2": "Report fraction of seed-condition late means in [5,9], without dropping zero or out-of-band observations", "robustness_refuted": "In the confirmatory series, any manipulated condition has at least 4 of 5 late means outside [5,9]", "robustness_supported_for_tested_settings": "Every condition has at least 4 of 5 late means in [5,9], repeats and validity checks pass, budget conditions cause evictions; never equate this with working-memory capacity", "otherwise": "inconclusive", "effect_size": "paired per-seed differences from baseline; show every seed, mean and SD; descriptive, no snapshot-level significance tests", "invalid_manipulation": "a capacity contrast with no evictions cannot establish budget independence", "abort_or_amend": "failed synthetic control, changed frozen index, repeated-baseline mismatch or unequal training-stream hashes: retain all outputs, do not declare success, record amendment before confirmatory runs"},
+  "limitations": ["A new read-only diagnostic, not an exact replication of the adaptive legacy scale runner", "Sleep and domain-switch interventions disabled", "Legacy H22 mixes learning with measurement and uses a different last-three-snapshot [4,8] heuristic", "Candidate count is lexical branching, not recall capacity or an independent reasoning score", "A storage capacity can be exceeded because protected short chains are not evicted", "All seven conditions share a training corpus, feature encoder and engine", "No chunk-versus-unrelated-symbol memory experiment is included"]
+}
