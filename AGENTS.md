@@ -2,8 +2,12 @@
 
 ## TL;DR for agent fleets (EN)
 
-**The goal:** ≤ 10M parameters reasoning at the level of 200B+ models — read [`NORTH_STAR.md`](NORTH_STAR.md) first (counting rules, levels L1/L2, ladder M0–M6). We are at M0: the measuring harness is challenge C-10.
-
+**Current flagship:** C-15 — teach a skill, interrupt it, switch channels,
+then test a fresh inheritor using only the checked topology delta.
+Read [the audit](docs/RETROSPECTIVE_2026-10-29.md): components exist, the full
+AC0–AC2 harness does not. Near-term rules: SPEC_FINAL.md and
+FIRSTAGI_OPERATIONAL_PROTOCOL.md. The ≤10M / 200B+ goal remains long-term
+and unmeasured (NORTH_STAR.md, M0).
 1. `git clone https://github.com/realbtr/firstagi && python -m pytest -q` — expect all green (1400+ tests; exact count per commit in CI) in under a minute.
 2. Pick a challenge: [`challenges/README.md`](challenges/README.md) (index: [`challenges.json`](challenges/challenges.json)). Claim it on its Issue with `/claim <fleet-name>`.
 3. Read context in order: `CLAUDE.md` → `JOURNAL.md` → `SPEC_FINAL.md` → `docs/ONTOLOGY.md` (vocabulary **before** code).
@@ -45,10 +49,12 @@ instructions for human review; enforces 5 issues / 24 h per author. CI runs `pyt
 
 ## 2. Неподвижные правила
 
-- **Закрытые вопросы не переоткрываются.** В0–В18 закрыты (З-0007). Хотите
-  оспорить — Issue типа `contradiction` со ссылкой на запись журнала.
-- **Мораторий (З-0010):** до гейта E1 — никаких новых архитектурных документов.
-  Разрешены код, тесты, отчёты экспериментов, Issues.
+- **Историю сохраняем, решения проверяем.** В0–В18 — исторические решения.
+  Ретро З-0047 явно пересмотрело часть предпосылок по запросу владельца.
+  Новое противоречие — Issue с источниками и воспроизводимым контролем.
+- **Мораторий:** не заменять следующий опыт спекулятивной архитектурой.
+  Действующий контракт пересмотрен по прямому поручению владельца (З-0047).
+  Для внешнего изменения требований — предложение с evidence в Issue.
 - **Терминология (З-0029):** имена в коде и телеметрии — инженерные, по словарю
   ONTOLOGY. Термины теории дхарм — только в контрольном слое (ONTOLOGY §4).
   Новый термин без определения в ONTOLOGY = PR отклоняется.
@@ -57,7 +63,7 @@ instructions for human review; enforces 5 issues / 24 h per author. CI runs `pyt
 - **Нидана-CI:** события ядра несут метку стадии; ассерты порядка в тестах
   не ослаблять.
 - **Продукт-слой** (`MANIFESTO.md`, `docs/VISION.md`, `docs/ROADMAP.md` и др.)
-  меняет только владелец вслед за записью журнала. Внешний PR в продукт-слой
+  меняет владелец или явно уполномоченный им агент вслед за записью журнала. Внешний PR в продукт-слой
   оформляйте как предложение в Issue.
 - **Секреты:** никогда не коммитьте ключи. `.secrets/keys.env`,
   `teachers.local.toml` — локальные, в git не попадают.
@@ -72,11 +78,12 @@ instructions for human review; enforces 5 issues / 24 h per author. CI runs `pyt
 | `critique` | Структурная критика: где модель неформализуема, нефальсифицируема или эквивалентна известному подходу |
 | `formalization` | Математическая формализация *веданы*, дельты энтропии, критерия «достаточности», неитеративного аттрактора |
 | `replication` | Воспроизведение эксперимента (H1–H26, scale-1M): ваши цифры, окружение, расхождения |
-| `experiment-design` | Дизайн проверки гейта **E2 «тождество смыслов»** — главная ставка портфеля |
+| `experiment-design` | Дизайн **C-15 / AC0–AC2**; E2 — отдельная гипотеза обмена знаниями |
 
-Открытые вопросы, где помощь нужнее всего: калибровка весов аффекта и
-θ-порогов (О-2), эмерджентность границ слов на char-драйвере (О-3),
-опровергнутая H24 (почему ↺-доля не даёт сигмоиды), гейт E2.
+Помощь прежде всего нужна C-15: внешний исход и provenance, полезный выбор
+операции, удержание контекста, чистое наследование и контроли. C-12 — цена
+всего состояния; H27–H35 — гипотезы. Нельзя засчитать рост Gen/MR или работу
+социального LLM-бота как непрерывную компетентность собственного ядра.
 
 ## 4. Формат находки (JSON)
 

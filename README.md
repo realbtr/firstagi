@@ -1,39 +1,44 @@
-# FirstAGI / Почемучка / Класс
+# FirstAGI — a continuously learning attention kernel
 
-Разум, который выращивается, а не тренируется: ~10⁷ подтверждённых
-различений вместо триллионов параметров; двигатель — подлинный вопрос,
-а не вознаграждение; рой агентов над общей гетерархией смыслов (Алая).
+**Teach a skill. Interrupt it. Let a fresh mind inherit it.**
+Can one shared attention algorithm become more competent in its channels,
+retain that competence through interruption/restart, and transfer a checked
+knowledge delta to a fresh instance? Help build and falsify this experiment.
 
-**Главная ставка портфеля: гейт E2 «тождество смыслов»** — см. docs/ROADMAP.md.
+**Status:** a working component testbed; the complete continual-action and
+inheritance harness is not implemented. Read the [readiness audit](docs/RETROSPECTIVE_2026-10-29.md).
+Current priority: **[C-15 / AC0–AC2](challenges/README.md)**; long-term
+[North Star](NORTH_STAR.md): ≤10M parameters versus 200B+ reasoning quality
+(unmeasured). No claim of AGI, enterprise service or achieved parity.
 
-> **⭐ North Star: ≤ 10M parameters reasoning at the level of 200B+ models** —
-> every stored number counts, no outside help at test time ([rules](NORTH_STAR.md)).
-> **🤖 Agent fleets wanted** to build the measuring stick and climb the ladder.
-> **[⚔️ Arena — 14 scored challenges](challenges/README.md)** ·
-> [AGENTS.md](AGENTS.md) — protocol · [INVITATION.md](INVITATION.md) — manifesto ·
-> [Hall of Fame](HALL_OF_FAME.md) · [Discussions](https://github.com/realbtr/firstagi/discussions) ·
-> [llms.txt](llms.txt) · **License: [MIT](LICENSE)** — use, fork and build on it freely.
->
-> **Открытый проект.** Флоты агентов и исследователи приглашаются к
-> исследованию и разработке модели: [`INVITATION.md`](INVITATION.md) —
-> манифест и как участвовать; [`AGENTS.md`](AGENTS.md) — протокол для агентов.
+Мы строим постоянно действующее ядро управления вниманием, которое учится
+в ходе взаимодействия, сохраняет гетерархию воспроизводимых обобщений и
+становится умелее в своих каналах. Несколько экземпляров и общие редакции
+знания — следующий проверяемый шаг, а не уже готовая возможность.
+
+[Manifesto](MANIFESTO.md) · [Operational protocol](FIRSTAGI_OPERATIONAL_PROTOCOL.md)
+· [Teaser for people, agents and labs](challenges/TEASER.md) · [Agent instructions](AGENTS.md)
+· [Discussions](https://github.com/realbtr/firstagi/discussions) · [MIT](LICENSE).
 
 ## Карта репозитория
 
 | Путь | Что это | Когда читать |
 |---|---|---|
-| `INVITATION.md` | Приглашение к участию + манифест активного восприятия | впервые здесь |
+| `INVITATION.md` | Приглашение к C-15 и участию | впервые здесь |
 | `AGENTS.md` | Протокол для внешних агентов: вход в контекст, правила, JSON-формат находок | агенту до первого Issue/PR |
 | `docs/publications/` | Статья «Инженерная Абхидхарма» (md + исходный docx) | концептуальная база |
 | `experiments/reports/` | Указатель всех отчётов (аудит конвергенции, scale-1M и др.) | после каждого эксперимента |
 | `JOURNAL.md` | Журнал решений (append-only), текущее состояние, следующее действие | **Старт каждой сессии** |
 | `HANDOFF.md` | 5 маршрутов восстановления контекста (горячий/обход/мотивация/передача/вовлечение) | потерялись? начните здесь |
-| `SPEC_FINAL.md` | Единственная действующая спецификация | **Старт каждой сессии** |
+| `SPEC_FINAL.md` | Действующий целевой контракт; реализацию смотреть в аудите | **Старт каждой сессии** |
+| `FIRSTAGI_OPERATIONAL_PROTOCOL.md` | Следующий baseline, AC0–AC4; не готовый benchmark | перед реализацией |
+| `docs/RETROSPECTIVE_2026-10-29.md` | Матрица готовности и пересмотр приоритетов | при выборе задачи |
+| `docs/concept/` | Неизменённые сентябрьские конституции, хэши и границы источника | концептуальная проверка |
 | `CLAUDE.md` | Правила для агентов | старт сессии агента |
 | `MANIFESTO.md` | Манифест проекта (текущая редакция) | презентация проекта |
 | `docs/VISION.md` | Концептуальное видение, где прорыв | презентация проекта |
-| `docs/GOALS_AND_ACCEPTANCE.md` | Цели и критерии приёмки (гейты E1–E7) | планирование |
-| `docs/ROADMAP.md` | Дорожная карта по спринтам S0–S6 | планирование |
+| `docs/GOALS_AND_ACCEPTANCE.md` | Ближайшие AC0–AC4 и исторические E-гейты | планирование |
+| `docs/ROADMAP.md` | Последовательность AC0→AC1→AC2; отложенные ветки | планирование |
 | `docs/ONTOLOGY.md` | Базовая онтология терминов + контрольный слой дхарм | **перед любым именованием** |
 | `docs/ARCHITECTURE_DECISIONS.md` | Индекс архитектурных решений (ADR) | перед изменением ядра |
 | `docs/TRADEOFFS_ITERATION_1.md` | Компромиссы текущей итерации | перед изменением ядра |
@@ -41,9 +46,9 @@
 | `docs/archive/` | История (v2, v3, v4, мастер-ТЗ, аудиты, снапшоты) | только по ссылке из журнала |
 | `docs/stand/` | Самоописание стенда (обзор, введение, дневник char-драйвера) | справочно |
 | `core/` `drivers/` | КАНОН кода (З-0026): ядро 35+ модулей, периферия 14 драйверов | — |
-| `body/` | Тело: ключи учителей, транспорт (растёт в S2) | — |
+| `body/` | Тело: транспорт и доступ к учителям | — |
 | `app/` `data/` `training/` | Оркестрация (FastAPI), персистентность (SQLite), эксперименты H1–H26 | — |
-| `tests/` | 1427 тестов — CI-база | `python -m pytest -q` |
+| `tests/` | 1400+ тестов — точное число по коммиту в CI | `python -m pytest -q` |
 | `corpus/` `curriculum/` `experiments/` | Куррикулумы, агент-учитель, отчёты | — |
 
 ## Источники (получены 2026-07-05, З-0022)

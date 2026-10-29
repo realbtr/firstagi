@@ -1,0 +1,18 @@
+{
+  "imported": "2026-10-29",
+  "decision": "З-0047",
+  "sources": [
+    {
+      "original_name": "FIRSTAGI_CONSTITUTION.md",
+      "file": "FIRSTAGI_CONSTITUTION.md",
+      "sha256": "5a95be1d6be53faa9a4f79f86829931364867bb5f768353ee3c8beb562d0ead4",
+      "role": "unchanged conceptual source; implementation and active revisions are specified elsewhere"
+    },
+    {
+      "original_name": "FIRSTAGI_CONSTITUTION_v0.4_compact.md",
+      "file": "FIRSTAGI_CONSTITUTION_v0.4_compact.md",
+      "sha256": "7f952d08e50bfc93edc0e5047b64e2dc16b8fbc2e4879a386226e9ed0411913a",
+      "role": "unchanged conceptual source; implementation and active revisions are specified elsewhere"
+    }
+  ]
+}

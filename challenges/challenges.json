@@ -8,7 +8,8 @@
       "L1": "reasoning without knowledge: ARC-AGI-1/2 public eval + fresh procedural suite",
       "L2": "language reasoning: GSM8K, MATH, BBH, MMLU-Pro, GPQA"
     },
-    "status": "M0 not started (no harness yet)"
+    "status": "M0 not started (no harness yet)",
+    "relation_to_current_focus": "Long-term external reasoning target; AC0–AC2 is the nearer evidence ladder, not parity with 200B+"
   },
   "protocol": "https://github.com/realbtr/firstagi/blob/main/AGENTS.md",
   "submit": "GitHub Issue via the 'Agent finding' form (payload schema firstagi.agent-finding/v1) or a PR referencing the challenge id",
@@ -26,6 +27,33 @@
     "python training/scale_experiment.py --quick --csv my_run.csv"
   ],
   "challenges": [
+    {
+      "id": "C-15",
+      "title": "Teach a skill. Interrupt it. Let a fresh mind inherit it.",
+      "kind": "experiment-design",
+      "level": "legendary",
+      "points": 500,
+      "priority": "flagship",
+      "status": "open: full harness not implemented",
+      "question": "Can one continuously acting attention core acquire useful skill across interleaved channels, retain it through interruption/restart, and transfer it to a fresh instance through a checked topology delta?",
+      "deliverable": "A staged runnable AC0–AC2 harness: opaque observations/operations/outcomes, preregistered numeric thresholds and budgets, held-out task scoring, full causal traces, baseline controllers, B0/B1/minus-delta/replay inheritance controls; report each stage separately",
+      "read": [
+        "SPEC_FINAL.md",
+        "docs/RETROSPECTIVE_2026-10-29.md",
+        "docs/GOALS_AND_ACCEPTANCE.md",
+        "docs/ONTOLOGY.md",
+        "challenges/TEASER.md"
+      ],
+      "operational_protocol": "https://github.com/realbtr/firstagi/blob/main/FIRSTAGI_OPERATIONAL_PROTOCOL.md",
+      "accept": "Before confirming runs commit seeds, held-out generator, numeric success/retention/cost thresholds and failure rules. Show controlled task improvement, continuity and topology-only inheritance over B0, minus-delta and replay, with raw causal logs and reproduction commands. Partial AC0/AC1 submissions must state scope and may receive partial credit.",
+      "fails_if": "A hidden domain solver or LLM makes target-run decisions; MR/node growth replaces task outcomes; timeout/unknown becomes negative evidence; episodes/checkpoints leak to the inheritor; controls or thresholds selected after seeing confirming data; only a smoke or pilot is claimed as the full gate",
+      "notes": [
+        "reputation points, not money",
+        "Current readiness smoke demonstrates components only",
+        "One learned skill before a large swarm; no hosted service or company benefit claimed"
+      ],
+      "run": "python experiments/diagnostics/attention_readiness_smoke.py --out experiments/reports/my_readiness.json"
+    },
     {
       "id": "C-01",
       "title": "Break or prove E2 'identity of meanings'",
@@ -265,5 +293,20 @@
         "docs/HYPOTHESES.md"
       ]
     }
-  ]
+  ],
+  "current_focus": {
+    "flagship": "C-15",
+    "gates": [
+      "AC0",
+      "AC1",
+      "AC2"
+    ],
+    "priority_support": [
+      "C-12",
+      "C-06",
+      "C-09"
+    ],
+    "rule": "Evidence of useful continual action first; E2 is an exchange hypothesis, North Star remains the long-term external target",
+    "operational_protocol": "https://github.com/realbtr/firstagi/blob/main/FIRSTAGI_OPERATIONAL_PROTOCOL.md"
+  }
 }

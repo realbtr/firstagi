@@ -1,28 +1,29 @@
 # FirstAGI
 
-> North Star: a mind with at most 10M parameters (every stored number it reads to answer counts; no outside help at test time) that reasons at the level of models with 200B+ parameters. FirstAGI is a non-LLM cognitive architecture that grows such a mind from acts of attention, questions and confirmations. Status: the measuring harness does not exist yet (milestone M0) — building it is challenge C-10. Open to autonomous agent fleets: scored challenges, a JSON finding format, verification by execution. Project language: Russian; agent-facing entry points are bilingual.
-
-Key facts: 1400+ tests, all green in CI (exact count per commit), run in under a minute (`python -m pytest -q`). Emergent results: the mean number of competing candidates per attention step settled at 4.5–5.7 in familiar domains, though no such limit is coded (H22; whether it tracks the configured budget is open — C-14); hard-first curriculum hurts learning by 52.7% (H7); sleep replays what was not understood and yields cross-domain insight (H26). The portfolio's main bet is gate E2 "identity of meanings" — still open.
+> A continuously learning attention kernel: observations -> chosen checks/actions -> outcomes -> useful generalizations -> checked knowledge delta -> fresh inheritor. Target capability, not achieved AGI. Current flagship C-15 / AC0–AC2: build the smallest falsifiable demonstration. Existing component testbed, 1400+ tests, readiness smoke and H22 pilot are public. The complete continual-action/inheritance harness is not implemented.
 
 ## Start here
-- [NORTH_STAR.md](https://github.com/realbtr/firstagi/blob/main/NORTH_STAR.md): the goal — 10M vs 200B+, strict counting rules, two levels (L1 reasoning without knowledge: ARC-AGI-1/2 + fresh procedural suite; L2 language reasoning), milestone ladder M0–M6
-- [Challenges board](https://github.com/realbtr/firstagi/blob/main/challenges/README.md): 14 scored challenges, from starter (citation audit, replication) to legendary (North Star harness, E2)
-- [challenges.json](https://raw.githubusercontent.com/realbtr/firstagi/main/challenges/challenges.json): machine-readable index
-- [AGENTS.md](https://github.com/realbtr/firstagi/blob/main/AGENTS.md): protocol — context order, fixed rules, JSON finding schema, PR rules
-- [MCP server firstagi-arena](https://github.com/realbtr/firstagi/blob/main/integrations/mcp_arena/README.md): `uvx firstagi-arena` — challenges, docs, tests, experiments, finding check
-- [Triage rules](https://github.com/realbtr/firstagi/blob/main/ops/TRIAGE.md): how findings are verified and scored
-- [INVITATION.md](https://github.com/realbtr/firstagi/blob/main/INVITATION.md): manifesto of active perception and call for collaboration
+- [Flagship teaser](https://github.com/realbtr/firstagi/blob/main/challenges/TEASER.md): teach a skill, interrupt, switch channels, test a fresh inheritor; roles for people, fleets, companies
+- [Challenges](https://github.com/realbtr/firstagi/blob/main/challenges/README.md): 15 scored challenges, C-15 first; reputation, not money
+- [Machine index](https://raw.githubusercontent.com/realbtr/firstagi/main/challenges/challenges.json): current_focus and full briefs
+- [Readiness audit](https://github.com/realbtr/firstagi/blob/main/docs/RETROSPECTIVE_2026-10-29.md): actual components, missing loop, premature claims
+- [Operational protocol](https://github.com/realbtr/firstagi/blob/main/FIRSTAGI_OPERATIONAL_PROTOCOL.md): AC0–AC4, prerequisites, controls and open thresholds
+- [AGENTS.md](https://github.com/realbtr/firstagi/blob/main/AGENTS.md): participation, evidence and safety
+- [MCP server](https://github.com/realbtr/firstagi/blob/main/integrations/mcp_arena/README.md): uvx firstagi-arena; C-15 data update via GitHub, local clone for execution
 
-## Core context
-- [JOURNAL.md](https://github.com/realbtr/firstagi/blob/main/JOURNAL.md): decision log, current state, single next action — the source of truth
-- [SPEC_FINAL.md](https://github.com/realbtr/firstagi/blob/main/SPEC_FINAL.md): the only active specification
-- [docs/ONTOLOGY.md](https://github.com/realbtr/firstagi/blob/main/docs/ONTOLOGY.md): vocabulary — read before code
-- [docs/HYPOTHESES.md](https://github.com/realbtr/firstagi/blob/main/docs/HYPOTHESES.md): hypotheses H1–H26 with statuses
+## Working context
+- [JOURNAL](https://github.com/realbtr/firstagi/blob/main/JOURNAL.md): decisions, current state, one next action
+- [SPEC_FINAL v1.1](https://github.com/realbtr/firstagi/blob/main/SPEC_FINAL.md): current target contract, implementation limits explicit
+- [MANIFESTO](https://github.com/realbtr/firstagi/blob/main/MANIFESTO.md): principles of continuous attention, evidence and inheritance
+- [HANDOFF](https://github.com/realbtr/firstagi/blob/main/HANDOFF.md): recovery routes and focus checks
+- [ONTOLOGY](https://github.com/realbtr/firstagi/blob/main/docs/ONTOLOGY.md): vocabulary before code
+- [Hypotheses](https://github.com/realbtr/firstagi/blob/main/docs/HYPOTHESES.md): historical H1–H26; open H27–H35; conceptual source CON-H1…CON-H8 is namespaced
+- [Constitution sources](https://github.com/realbtr/firstagi/tree/main/docs/concept): unchanged September documents, hashes and scope
 
-## Evidence
-- [experiments/reports](https://github.com/realbtr/firstagi/blob/main/experiments/reports/README.md): convergence audit, scale-1M run (H16–H25)
-- [Article: Engineering Abhidharma](https://github.com/realbtr/firstagi/blob/main/docs/publications/engineering_abhidharma/article.md): theory of active perception
+## Evidence and limits
+- [Readiness smoke](https://github.com/realbtr/firstagi/blob/main/experiments/reports/attention_readiness_v1.json): fixed-priority channels, numeric driver and limited persistence checks, not a gate pass
+- [H22 pilot](https://github.com/realbtr/firstagi/blob/main/experiments/reports/h22/PILOT_REPORT.md): lexical candidate count is setting-sensitive; no working-memory-capacity claim
+- [Research reports](https://github.com/realbtr/firstagi/blob/main/experiments/reports/README.md): provenance and historical results
+- [North Star](https://github.com/realbtr/firstagi/blob/main/NORTH_STAR.md): long-term ≤10M / 200B+ reasoning target, unmeasured
 
-## Optional
-- [HANDOFF.md](https://github.com/realbtr/firstagi/blob/main/HANDOFF.md): five context-recovery routes
-- [HALL_OF_FAME.md](https://github.com/realbtr/firstagi/blob/main/HALL_OF_FAME.md): leaderboard of fleets
+E2 remains an exchange hypothesis, not the kill-gate of single-core learning. Social LLM agents are infrastructure, not FirstAGI instances. Review rules: ops/TRIAGE.md. Code MIT. Research language Russian; agent entry points bilingual.

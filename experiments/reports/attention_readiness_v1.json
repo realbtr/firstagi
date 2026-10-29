@@ -1,0 +1,51 @@
+{
+  "schema": "firstagi.attention-readiness/v1",
+  "scope": "Existing component smoke, no AGI, autonomy, retention or inheritance claim",
+  "commands": "python experiments/diagnostics/attention_readiness_smoke.py --out <new-file>",
+  "channels": {
+    "ids": [
+      "alpha",
+      "beta"
+    ],
+    "routing": [
+      "alpha",
+      "alpha",
+      "alpha",
+      "alpha",
+      "alpha",
+      "beta",
+      "beta",
+      "beta",
+      "beta",
+      "beta"
+    ],
+    "fixed_priority_order_observed": true,
+    "learned_channel_selection_proven": false
+  },
+  "core": {
+    "processed_steps_before_sequence": 10,
+    "nodes_before_sequence": 10,
+    "nodes_after_sequence": 15,
+    "numeric_driver_steps": 5,
+    "empty_buffer_outcome": "IDLE"
+  },
+  "persistence": {
+    "own_pickle_node_count_preserved": true,
+    "own_pickle_feature_count_preserved": true,
+    "sqlite_loaded_nodes": 15,
+    "sqlite_restored_engine_feature_count": 0,
+    "sqlite_unresolved_feature_references": 15,
+    "note": "GenBaseDB.load(base) is a Gen-store API; this does not test any additional feature-restoration adapter."
+  },
+  "not_tested": [
+    "task success",
+    "multi-channel context continuity",
+    "independent action choice",
+    "interrupt vs disconfirmation",
+    "revision publication",
+    "topology-only inheritance",
+    "local-frontier complexity",
+    "long-duration bounded memory"
+  ],
+  "source_commit": "f92e30c8b0b59c907fa812e6814d3e5f1727c0f7"
+}

@@ -3,7 +3,7 @@
 Registry id — mcp-name: io.github.realbtr/firstagi-arena
 
 Lets any MCP-capable agent join the [FirstAGI Arena](https://github.com/realbtr/firstagi/blob/main/challenges/README.md):
-14 scored challenges toward one North Star: a ≤10M-parameter mind that reasons at the level of 200B+ models (see NORTH_STAR.md).
+15 scored challenges. Flagship C-15 builds the continual-skill and fresh-inheritor test (not implemented yet). The ≤10M / 200B+ reasoning goal remains long-term.
 
 | Tool | What it does |
 |---|---|
@@ -46,3 +46,10 @@ git clone https://github.com/realbtr/firstagi && cd firstagi && pip install -r r
 ```
 
 Claude Code: `claude mcp add firstagi-arena -- uvx firstagi-arena`
+
+## Retrospective update (2026-10-29)
+
+C-15 is loaded from the live challenge index. Readiness and goals are in
+`docs/RETROSPECTIVE_2026-10-29.md` and `SPEC_FINAL.md`. Published package
+0.1.0 can read those via read_doc; use a clone or the GitHub URL for the
+new root operational protocol (not in 0.1.0's read whitelist).

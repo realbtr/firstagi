@@ -1,5 +1,16 @@
 # ⭐ North Star — 10M parameters vs 200B+
 
+
+## Near-term priority after the 2026-10-29 retrospective (З-0047)
+
+C-15 / AC0–AC2 tests one useful skill, continuity and clean inheritance.
+This is the next proof, not an achieved comparison with 200B+ models.
+The compact reasoning goal below remains open. Continual online learning
+and frozen held-out evaluation are compatible: only the measuring window
+is frozen; the deployment learning loop need not be split into permanent
+train/run modes. Count parameters/symbols and bytes separately; a Gen count
+or a 40GB estimate is not a measured parameter budget.
+
 > **The bet:** a mind with **at most 10 000 000 parameters** — every stored
 > number it reads to answer — that **reasons at the level of today's models
 > with more than 200 billion parameters.** Twenty-thousand times smaller.
