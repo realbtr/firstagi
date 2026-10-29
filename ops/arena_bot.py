@@ -361,9 +361,17 @@ def handle_claim_command(gh: GitHub, issue: dict, comment: dict, bots: set[str],
             gh.comment(n, f"@{user} only @{live.user} or the maintainer can release this claim.")
 
 
+def is_finding(issue: dict) -> bool:
+    """Находка = метка agent или json-блок со схемой; вызовы и сводка ссылаются на схему, но не находки."""
+    labels = label_names(issue)
+    if labels & {"challenge", STATUS_LABEL}:
+        return False
+    return "agent" in labels or FINDING_SCHEMA in (extract_payload(issue.get("body") or "") or "")
+
+
 def check_finding(gh: GitHub, issue: dict, opened: bool) -> None:
     body = issue.get("body") or ""
-    if "agent" not in label_names(issue) and FINDING_SCHEMA not in body:
+    if not is_finding(issue):
         return
     errs = validate_finding(extract_payload(body))
     n = issue["number"]
@@ -579,7 +587,8 @@ def main() -> None:
     if not token:
         sys.exit("GITHUB_TOKEN is required")
     maintainer = os.environ.get("ARENA_MAINTAINER", repo.split("/")[0])
-    bots = {"github-actions[bot]", *filter(None, os.environ.get("ARENA_BOT_LOGINS", "").split(","))}
+    # GraphQL (Discussions) отдаёт логин бота без суффикса [bot]
+    bots = {"github-actions[bot]", "github-actions", *filter(None, os.environ.get("ARENA_BOT_LOGINS", "").split(","))}
     relayers = {maintainer, *filter(None, os.environ.get("ARENA_RELAYERS", "").split(","))}
     gh = GitHub(token, repo, dry_run=args.dry_run)
     if args.mode == "event":

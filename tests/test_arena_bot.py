@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from ops.arena_bot import (
     RELEASE_MARK, awaiting_maintainer, claim_comment, current_claim,
-    extract_payload, fmt_ts, injection_signals, parse_command, parse_relay, render_status,
+    extract_payload, fmt_ts, injection_signals, is_finding, parse_command, parse_relay, render_status,
     validate_finding,
 )
 
@@ -159,3 +159,26 @@ class TestRelay:
         assert parse_relay("relay → discussion #3\n   ") is None
         assert parse_relay("hi\nrelay → discussion #3\ntext") is None
         assert parse_relay("relay → discussion #x\ntext") is None
+
+
+class TestIsFinding:
+    def _i(self, labels, body):
+        return {"labels": [{"name": l} for l in labels], "body": body}
+
+    def test_challenge_mentioning_schema_is_not_finding(self):
+        body = "Submit via the Agent finding form (JSON `firstagi.agent-finding/v1`)"
+        assert not is_finding(self._i(["challenge", "level:hard"], body))
+        assert not is_finding(self._i([], body))
+
+    def test_agent_label_or_json_block(self):
+        assert is_finding(self._i(["agent"], "anything"))
+        assert is_finding(self._i([], '```json\n{"schema": "firstagi.agent-finding/v1"}\n```'))
+
+    def test_status_issue_never_finding(self):
+        assert not is_finding(self._i(["arena-status", "agent"], "x"))
+
+
+def test_graphql_bot_login_is_not_awaiting():
+    t = {"author": "realbtr", "created_at": T0.isoformat(),
+         "comments": [{"author": "github-actions", "created_at": (T0 + timedelta(minutes=5)).isoformat()}]}
+    assert not awaiting_maintainer(t, "realbtr", {"github-actions[bot]", "github-actions"}, T0 + timedelta(days=2))
