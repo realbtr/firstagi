@@ -1,0 +1,3 @@
+# Preserve exact bytes of hashed experiment artifacts on all platforms.
+experiments/reports/h22/** -text
+experiments/protocols/h22_v1.json -text

@@ -1,0 +1,197 @@
+{
+  "condition": {
+    "id": "capacity256",
+    "capacity": 256,
+    "feature_tolerance": 0.15,
+    "max_competing": 8
+  },
+  "seed": 41,
+  "phase": "pilot",
+  "training_sha256": "bae5d3165ad740a46d1bb4686c8818dba640918c77d392549978019dd1e78991",
+  "probe_sha256": "46569768cb04c508a9386552ecfeae023418bc4d09da68c8b42c65fa1470e9b1",
+  "protocol_sha256": "960b9ee3af0597c179630e9c210996f4afc643bab9c69dc1f1b8a90d233136c8",
+  "late_avg_candidates": 1.076271186440678,
+  "late_target_coverage": 0.061016949152542375,
+  "final_evicted": 3155,
+  "final_base_size": 525,
+  "elapsed_s": 7.970583699992858,
+  "checkpoints": [
+    {
+      "training_steps": 2000,
+      "base_size": 393,
+      "evicted": 370,
+      "over_budget_steps": 1348,
+      "index_sha256": "35eb4c0b149651852ddf6f505e2cdcba25019a1a5ce0ba26b37ce1e04bc2d145",
+      "frozen_state_unchanged": true,
+      "metrics": {
+        "familiar": {
+          "n": 295,
+          "candidate_sum": 118,
+          "avg_candidates": 0.4,
+          "target_coverage": 0.02711864406779661,
+          "nonempty_rate": 0.19322033898305085,
+          "avg_probes": 0.010169491525423728,
+          "histogram": {
+            "0": 238,
+            "1": 18,
+            "2": 27,
+            "3": 2,
+            "4": 10
+          }
+        },
+        "novel": {
+          "n": 312,
+          "candidate_sum": 59,
+          "avg_candidates": 0.1891025641025641,
+          "target_coverage": 0.003205128205128205,
+          "nonempty_rate": 0.09935897435897435,
+          "avg_probes": 0.0,
+          "histogram": {
+            "0": 281,
+            "1": 16,
+            "2": 7,
+            "3": 3,
+            "4": 5
+          }
+        }
+      },
+      "empirical_bigram_avg": 20.257627118644066,
+      "elapsed_s": 1.0740675000706688
+    },
+    {
+      "training_steps": 4000,
+      "base_size": 471,
+      "evicted": 1150,
+      "over_budget_steps": 3348,
+      "index_sha256": "04b3cc4d37975db41f00acec040c65a0fb015c8307859a70cd8a3cf7eb90ed7b",
+      "frozen_state_unchanged": true,
+      "metrics": {
+        "familiar": {
+          "n": 295,
+          "candidate_sum": 215,
+          "avg_candidates": 0.7288135593220338,
+          "target_coverage": 0.0576271186440678,
+          "nonempty_rate": 0.24067796610169492,
+          "avg_probes": 0.04406779661016949,
+          "histogram": {
+            "0": 224,
+            "1": 25,
+            "2": 7,
+            "3": 8,
+            "4": 3,
+            "5": 28
+          }
+        },
+        "novel": {
+          "n": 312,
+          "candidate_sum": 114,
+          "avg_candidates": 0.36538461538461536,
+          "target_coverage": 0.003205128205128205,
+          "nonempty_rate": 0.16346153846153846,
+          "avg_probes": 0.009615384615384616,
+          "histogram": {
+            "0": 261,
+            "1": 31,
+            "2": 3,
+            "3": 4,
+            "5": 13
+          }
+        }
+      },
+      "empirical_bigram_avg": 24.471186440677965,
+      "elapsed_s": 2.9413063999963924
+    },
+    {
+      "training_steps": 6000,
+      "base_size": 498,
+      "evicted": 2157,
+      "over_budget_steps": 5348,
+      "index_sha256": "ef15a33406b0cd95d7393002785cde4bcf2bc65a752482b8d4549bd83a758db5",
+      "frozen_state_unchanged": true,
+      "metrics": {
+        "familiar": {
+          "n": 295,
+          "candidate_sum": 298,
+          "avg_candidates": 1.0101694915254238,
+          "target_coverage": 0.061016949152542375,
+          "nonempty_rate": 0.24067796610169492,
+          "avg_probes": 0.07457627118644068,
+          "histogram": {
+            "0": 224,
+            "1": 15,
+            "2": 8,
+            "3": 2,
+            "4": 11,
+            "5": 21,
+            "8": 14
+          }
+        },
+        "novel": {
+          "n": 312,
+          "candidate_sum": 143,
+          "avg_candidates": 0.4583333333333333,
+          "target_coverage": 0.003205128205128205,
+          "nonempty_rate": 0.16346153846153846,
+          "avg_probes": 0.01282051282051282,
+          "histogram": {
+            "0": 261,
+            "1": 17,
+            "2": 12,
+            "3": 2,
+            "4": 4,
+            "5": 16
+          }
+        }
+      },
+      "empirical_bigram_avg": 26.054237288135592,
+      "elapsed_s": 4.870721100014634
+    },
+    {
+      "training_steps": 8000,
+      "base_size": 525,
+      "evicted": 3155,
+      "over_budget_steps": 7348,
+      "index_sha256": "02eb4a34e02c105c03c680ceaeeaefb65541b4f5b0736ae4c9c57de4c1cedfde",
+      "frozen_state_unchanged": true,
+      "metrics": {
+        "familiar": {
+          "n": 295,
+          "candidate_sum": 337,
+          "avg_candidates": 1.1423728813559322,
+          "target_coverage": 0.061016949152542375,
+          "nonempty_rate": 0.24067796610169492,
+          "avg_probes": 0.08813559322033898,
+          "histogram": {
+            "0": 224,
+            "1": 15,
+            "3": 8,
+            "4": 5,
+            "5": 15,
+            "6": 7,
+            "7": 7,
+            "8": 14
+          }
+        },
+        "novel": {
+          "n": 312,
+          "candidate_sum": 176,
+          "avg_candidates": 0.5641025641025641,
+          "target_coverage": 0.003205128205128205,
+          "nonempty_rate": 0.16346153846153846,
+          "avg_probes": 0.022435897435897436,
+          "histogram": {
+            "0": 261,
+            "1": 17,
+            "3": 12,
+            "5": 12,
+            "6": 7,
+            "7": 3
+          }
+        }
+      },
+      "empirical_bigram_avg": 27.11186440677966,
+      "elapsed_s": 7.964560199994594
+    }
+  ],
+  "nontiming_sha256": "c23f5067e5561ea0c23d396193fb2a30f3353a9095ed857035af705668bfecb8"
+}

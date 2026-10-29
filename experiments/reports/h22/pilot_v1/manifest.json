@@ -1,0 +1,303 @@
+{
+  "phase": "pilot",
+  "git_commit": "74606f7e85293e1a21697d652e4d31d3f12bd043",
+  "working_tree_status": "",
+  "protocol_sha256": "960b9ee3af0597c179630e9c210996f4afc643bab9c69dc1f1b8a90d233136c8",
+  "protocol": {
+    "schema": "firstagi.h22-protocol/v1",
+    "version": "1.0.0",
+    "status": "pilot preregistration; confirmatory series not run",
+    "credit": "Counterfactual proposed by Solomon on The Colony; implementation by FirstAGI project",
+    "question": "Is the pre-probe lexical candidate count robust to storage budget, feature tolerance and configured disambiguator limit?",
+    "baseline": {
+      "capacity": 0,
+      "feature_tolerance": 0.15,
+      "max_competing": 8
+    },
+    "conditions": [
+      {
+        "id": "baseline",
+        "capacity": 0,
+        "feature_tolerance": 0.15,
+        "max_competing": 8
+      },
+      {
+        "id": "capacity256",
+        "capacity": 256,
+        "feature_tolerance": 0.15,
+        "max_competing": 8
+      },
+      {
+        "id": "capacity1024",
+        "capacity": 1024,
+        "feature_tolerance": 0.15,
+        "max_competing": 8
+      },
+      {
+        "id": "tolerance0075",
+        "capacity": 0,
+        "feature_tolerance": 0.075,
+        "max_competing": 8
+      },
+      {
+        "id": "tolerance030",
+        "capacity": 0,
+        "feature_tolerance": 0.3,
+        "max_competing": 8
+      },
+      {
+        "id": "competing2",
+        "capacity": 0,
+        "feature_tolerance": 0.15,
+        "max_competing": 2
+      },
+      {
+        "id": "competing32",
+        "capacity": 0,
+        "feature_tolerance": 0.15,
+        "max_competing": 32
+      }
+    ],
+    "pilot": {
+      "transitions": 8000,
+      "checkpoints": [
+        2000,
+        4000,
+        6000,
+        8000
+      ],
+      "seeds": [
+        41,
+        42
+      ],
+      "repeat": {
+        "condition": "baseline",
+        "seed": 42
+      }
+    },
+    "confirmatory": {
+      "transitions": 50000,
+      "checkpoints": [
+        10000,
+        20000,
+        30000,
+        40000,
+        50000
+      ],
+      "seeds": [
+        101,
+        202,
+        303,
+        404,
+        505
+      ],
+      "enabled": false
+    },
+    "corpus": {
+      "training_domain": "лес",
+      "training_batch_texts": 30,
+      "training_generator": "training.scale_experiment.GenerativeCorpus",
+      "evaluation_texts_per_domain": 30,
+      "evaluation_seeds": {
+        "familiar": 70001,
+        "novel": 70002
+      },
+      "novel_domain": "море",
+      "reject_training_evaluation_text_overlap": true
+    },
+    "evaluation": {
+      "mode": "frozen index, no process_token calls",
+      "tokenizer": "DualDriverLoop._tokenize",
+      "candidate_source": "build_next_word_index(system)",
+      "zero_candidate_steps": "included as zero; do not filter",
+      "primary": "sum(candidate counts)/all cue-target transitions in fixed familiar probes",
+      "secondary": [
+        "candidate count on novel probes",
+        "target_in_candidates rate (coverage, not forced-choice accuracy)",
+        "mean probe count",
+        "empirical training bigram outdegree",
+        "base size",
+        "evictions",
+        "steps above configured storage capacity"
+      ],
+      "late_window": "last two checkpoints; mean within a run, seeds are independent units"
+    },
+    "controls": {
+      "synthetic_outdegrees": [
+        1,
+        7,
+        16
+      ],
+      "frozen_index_digest_unchanged": true,
+      "training_stream_identical_across_conditions_per_seed": true,
+      "repeated_baseline_nontiming_metrics_identical": true,
+      "hash_seed": "0",
+      "budget_activation": "from first insertion; no 3125-node activation wall; original protected-node eviction policy retained"
+    },
+    "decision_rules": {
+      "pilot": "Only instrumentation, budget activation and reproducibility checks; no final verdict for H22",
+      "descriptive_7plusminus2": "Report fraction of seed-condition late means in [5,9], without dropping zero or out-of-band observations",
+      "robustness_refuted": "In the confirmatory series, any manipulated condition has at least 4 of 5 late means outside [5,9]",
+      "robustness_supported_for_tested_settings": "Every condition has at least 4 of 5 late means in [5,9], repeats and validity checks pass, budget conditions cause evictions; never equate this with working-memory capacity",
+      "otherwise": "inconclusive",
+      "effect_size": "paired per-seed differences from baseline; show every seed, mean and SD; descriptive, no snapshot-level significance tests",
+      "invalid_manipulation": "a capacity contrast with no evictions cannot establish budget independence",
+      "abort_or_amend": "failed synthetic control, changed frozen index, repeated-baseline mismatch or unequal training-stream hashes: retain all outputs, do not declare success, record amendment before confirmatory runs"
+    },
+    "limitations": [
+      "A new read-only diagnostic, not an exact replication of the adaptive legacy scale runner",
+      "Sleep and domain-switch interventions disabled",
+      "Legacy H22 mixes learning with measurement and uses a different last-three-snapshot [4,8] heuristic",
+      "Candidate count is lexical branching, not recall capacity or an independent reasoning score",
+      "A storage capacity can be exceeded because protected short chains are not evicted",
+      "All seven conditions share a training corpus, feature encoder and engine",
+      "No chunk-versus-unrelated-symbol memory experiment is included"
+    ]
+  },
+  "source_sha256": {
+    "core/__init__.py": "63e10c7236d2f065a397e9d4f0ad96cfef4f67185dd050e9069aca3382b52abc",
+    "core/active_query_bridge.py": "cd38ebe33919e9af41e445034199523352c413e1d860caf770cf476cd2421417",
+    "core/algorithm.py": "ec96bc2cdfa3c258f5059b1658d57fa802e92636e6ff8f92d8c59f53f1bfbe51",
+    "core/app.py": "6062c6246f13c27ce42a7863f9d681848e382c4b35af636d35d4bc722123d23c",
+    "core/attention_loop.py": "2c912532e5e9b575998e5794a540fd789656fd6ed672dcfa5623fab501a8645a",
+    "core/attention_trace.py": "c84407554a59a9522e1885c502c1f755ab490d76145e18e6c4cc7fa7f596ef0b",
+    "core/attractor.py": "25ab261381bfb2560fc481633d0b3545e900be6813d5e7bff3524cc943035044",
+    "core/budget.py": "f525d9bce909d40a578cc8630d5ac26f80c55f9c8a410b01a56f78a7dc08bab4",
+    "core/capacity.py": "69d451ab1969982ff5345975545b783bf17e643594536fef71d889e892872f9e",
+    "core/context.py": "1bac985f32fc7907600814259b9824c73dfd0d82a0dac9f1ac65aa5d78ef37e2",
+    "core/core_types.py": "29bb3c0ffade71d3a44146e24891cd85715ba4c050412e9eabee6c1299a563b3",
+    "core/curiosity.py": "3617beb6342fe6c22acb5a07b412c24608b4b4a2fc345012e614fa2584a113e4",
+    "core/domain_detector.py": "fc3c9926b9eab1ceebacf4d05217c07b9e80dc063cfdc3ddaf90a26dcefced10",
+    "core/dream.py": "80f1a8629ececf83af7d9534c85eacfb0abec9bb027912ea3c7c37a2fd826c30",
+    "core/driver_control.py": "d8c8a2dae9a29a944abfb37cbd837cbd932863bb1a261b65af3a54193a9568b8",
+    "core/dual_driver.py": "7ec14218ba7995f1f666434d0e3c3525085fd596b81e77ddd8e43270b1c873c1",
+    "core/exploration.py": "535d115412f82499d5431eae0e9495439fb9c0566665e1a02544568d5614b294",
+    "core/feature.py": "f3cb380ab40663434a5a48cd661ae625f118f3487dbadb9c71a608f2affcca6c",
+    "core/fractal.py": "923a8e6581d639ad09c0e89bc9b35c08a94db878ca7f544b23ba7be2b6264578",
+    "core/generalization.py": "ba5bf830cc99a4ec2804a1a6cdfc9bb5c07a06155d3dcdd0958fd67db309ccef",
+    "core/hedonic.py": "84c948c44141e865732f1586ebde57ead48e0362edfd0a43abf6ede09dd87b9c",
+    "core/heterarchy.py": "14816481dc6565e2be0d6f1c6a1fc60676c7b701100979db06effe4987e2310a",
+    "core/inference_peephole.py": "520703c98cc8f08a1a6562d9c35f7e56bb982120ad158088b8e322fb1cffa1b2",
+    "core/initiative.py": "d4a0672511a5f6dfbe763d2a70b7034f18a2446215b76fdd96e4f0cc4c88759d",
+    "core/inspector.py": "2d6fc50b47d6494f95a40626aef6f4202a46a7401e77add1cdb5372d17076a7c",
+    "core/learning.py": "154c27586b6efd3ea457821c29c8ed84bd7dbf8c5be80d99015813685c9b3097",
+    "core/llm_broker.py": "aad9cb2f08245ac1cdbb463d2c2731f46a096e4b86041afef4c4531d4ba1b32d",
+    "core/llm_node.py": "9736029643d6b524d80f1a0ae057a0200deec0a19210fd751b71d4f476d42bc8",
+    "core/llm_providers.py": "7e3f41dca150ddf9a69776ab50a0f493a815046147f16cf1e77354dce1f375c9",
+    "core/narrative.py": "fbe0c5e63d723b7870636986a68fdae5ee07a3364dfea38d12c07e9bd2d87e17",
+    "core/peripheral.py": "0a3dfdbe5029f8716e6769276ac04c8b51a4050b229fe0d44d4cd06d2dcf51ec",
+    "core/proposal_loop.py": "2e8d8228aca04530b05bed13c510ed798cf41b37bf976cd0e41f5062e924f5f7",
+    "core/provisional.py": "209b629e4625cc529e45116eb23c5b5b94e909ae0e271b9c2a9c2d0de0687f50",
+    "core/query_builder.py": "5607a925ee1540ad6733580e1c8593469960e7f909a8927add52b14216b0d577",
+    "core/question_trace.py": "601edc4fc8fbc941a5c8a66c353cdac6b6e0f05971d3b8e240fb762636ec0938",
+    "core/resource.py": "3e6790eb3483f08f1e18bb67e45c58135419975ca7ca3c004e733dfd38e7687a",
+    "core/scheduler.py": "2f7736113b6be28eb1e472dbac1de21341260e188b3e2f38fdf7c25aaf93bcba",
+    "core/session.py": "6430a5eab776ca3ede467e313de77b03411e3d085edbd07025f0408d703606c3",
+    "core/teacher.py": "5ac2bacfbf2e129b4645bc390b89ce229d5a38f889b5226a982fb70148b6abef",
+    "core/timescale.py": "d52289331e747b25224b26bc11fc7a97e5e37fc9f19af5e9254dbc71792089fb",
+    "core/vitality.py": "190cbea66f9782e014edb04b53fb40e3aaada8922bd98743498ff394783ae6de",
+    "drivers/__init__.py": "3b7c4980937816f1ccc325f7697e1c6f90772aeed7f79cf40afdd4f6e3382e1a",
+    "drivers/annotation_driver.py": "ef5dd6e2275d7b50070cbb3d7fe56d1db0cf541da2e7857a65f7b4d479a22f78",
+    "drivers/base.py": "a0b13975c331817d49b538fd14e9ba54bc96f3d1df8334cc797b3ae081de0f70",
+    "drivers/char_gen_decoder.py": "9c69415ff8b92632e330314fc0448ee35ffcd3ef1fd6918c13245ae9ddfdc75a",
+    "drivers/char_transition_driver.py": "b44164befa7fe54ebffd46efa1c09afbe2a0f935571dcdf6bc8f2c53a906314a",
+    "drivers/context_broker.py": "92a5edc73d2783c5e933753b4ae07892530d1b7bbe0593a007f0b57e58493e09",
+    "drivers/emotion_driver.py": "7ca4ae7b41bfcba534d2065268a24ad8810db1927a0104f71a9bacf3b636d285",
+    "drivers/memory_driver.py": "12bd9edb7120538be54c5b1b1e01f965fe165b22c9657b914bdd119961500941",
+    "drivers/model_voice.py": "a3e78966f6d00c4df08cf86b3e697962591673fb2bd175a510a327dd56a2f3c6",
+    "drivers/narrator_driver.py": "93666925e9acbb9ab69ac2e688c491b95581ce7be785044371c5fee5d40c1be8",
+    "drivers/sequence_driver.py": "7398e84aa35bdd1814552574759bc74570945897cb9f12dec1efebc4dcbd05fa",
+    "drivers/smart_text_driver.py": "0e719d5871ad6aaf5fd222db76a56ab9b081e7c054a043026edbf886d00b1be5",
+    "drivers/speech_driver.py": "a0c7ac9a3087e2844de07ba15c510804611eb4835795fcdfcbc0f4cb2932f3ea",
+    "drivers/text_driver.py": "dd8722258c53ad2f7711d8400b62f423d36b2c57b284bd58b1f67876a47d12eb",
+    "training/__init__.py": "733594698b0d26e086c59becbd99f5d381ad71c40d6e5b5ef683d302b992794c",
+    "training/active_attention_demo.py": "a7191d5d31411e05199e963b030cf017d51fd9b60722e1628557a06e68dc59c4",
+    "training/active_run.py": "0357c8696489aee07510b31ce056116bf4f283aba2949dac77642d463c70c5e8",
+    "training/active_server_demo.py": "086a1b221939492aa1234152a91cc59314c4527fa3f2dd7ba16b3d46a42b0fc1",
+    "training/adaptive_counter.py": "10f5aae0f530b42466cb84d05eccfd524f0e132a04092c1b03b58bc6ce22111a",
+    "training/analyze_current_db.py": "3eba3d9923421e069545827e871c7e959eb0c646d167c7a03d63ee6e445f4280",
+    "training/annotation_test.py": "b5fbd6fee2466765f4a3e367027a184d9b8c081e43afb930d09a892d8cef7941",
+    "training/blind_spot_experiment.py": "5cf0b1d522f071015278802dc8a87385e203afe1d425870ea16d6c3f23727e47",
+    "training/bridge_llm_demo.py": "9f114fdae88c2914b17b3a1bfcd2cc8a0111954c043ab00f93fae5e25a730c2a",
+    "training/char_calibration.py": "7c090524c67805178167069af2ecc1cb9922dca88371c5366fb79e3ec1363b45",
+    "training/context_query_demo.py": "8b64ff43b059fa0f0b77cb52d700c5b1c2c0702114544ba4b2651a0699a07232",
+    "training/corpus.py": "edd8d3d35ce687e789d0121e5a21231a9826fc5044c00162e5c4bf34df6bbdfa",
+    "training/curiosity_jack_demo.py": "8b2d5ea137fd7dfbb1f4d7555cb62f2644fe6dccb9780f1920818e3dbd9d6b5f",
+    "training/curiosity_run.py": "611ac2a8520f6ceedccaf9e592b6f2ad33a7b77fe6b22abd79fcf2f8c62e1e2e",
+    "training/curiosity_showcase.py": "efc1fbdfb8e90e7fe7688c2cc54ca7a517c11b5196202816e0579cbbfa978629",
+    "training/dual_channel_demo.py": "729328f5b21957342a8be9f5349ef8832544e3453de77b82e8e45542f57109a1",
+    "training/dual_driver_demo.py": "a3d1b3e87a49294dec9bcae018348db9e703d17c6c8556e8208923bc69581903",
+    "training/emotion_cycle_demo.py": "eba4e0481e588dc628c6f5714c802b48630134962fbec9e05205bb3d4dff05e8",
+    "training/emotion_demo.py": "de343b5a481cd169821796a8a5322a1f67853e914a846ba1736cd994df7350e4",
+    "training/emotion_repeat_demo.py": "6ae84b2cbc99138ce9124511b69194ec2a665bbc71322e8045a783dcb92f44de",
+    "training/fork_demo.py": "2e432a694c20e3ff9dcd70315b4c3d2032bbeffce8413959b6b6e7add0f569c1",
+    "training/h11_h15_experiments.py": "5dabb0ce7ea54fcaddf4b5012352c6cbeac2150f2e4a5ffbab91e4e95bbe641a",
+    "training/h22_counterfactual.py": "58e7ea68a62154ce4e957fdd5b666f416ca6b51531bea33cc9f51b1d67d77a6a",
+    "training/h25_sleep_experiment.py": "78ff39c65f0ad1029210a62dc8870e5249e053161ecd7ff77f01ff656433f3d0",
+    "training/h26_sleep_driver_experiment.py": "c48b60a8a936e3f735e5fbaeb159881418468eacc0fa52d656952438aaf70c35",
+    "training/h6_h10_experiments.py": "208aaf83ef6d95675aae4a3670e36497fb9ccfff8d5f1a9b8de0bd08327b8850",
+    "training/integrated_cycle_demo.py": "6d16f7a160e791dcc90b2d29388f21ce80da5adb1fa7a870cd192efa0a54665c",
+    "training/integration_experiment.py": "bbd679c4383258ac3a2b2c0142f1ced122283bed466cbea86cf29861289384bb",
+    "training/intuition_demo.py": "93c2c27d9ede44b3c798b3348aa99bab88816e877b7cdb026a9426464f075635",
+    "training/intuition_test_new.py": "00c3e4ef05ec72994301caf8bb9269509fd5a589ea07a39759ed9d51ec86eb0a",
+    "training/jack_run.py": "7cc91d1afce65702fce3d3a5db207b64d3d7f6cf87b1ae2c28e2c781750172c3",
+    "training/live_connect.py": "172eeb5460b4e4245658b543528427c056d13ae3c071f7f07918604aaf578b78",
+    "training/live_session.py": "07c8a4375227a328d0eb94095dd9c79554e1b1f57eccf648d00f7409fc33d686",
+    "training/llm_cycle_demo.py": "d252b80b71065ff4bb12e7bc98d4bf2e1557be978f51649e7ad9bbafc79106f2",
+    "training/llm_loop.py": "25969e39675ca90df5982a128ec1ff4e87284d36b93a45ae05a95e6d3e5eb2a7",
+    "training/llm_run.py": "e3395bec6a413d26245dcbdc6f5fb7ae9aa4003a78358fb7ff739a3291a69a3a",
+    "training/loop.py": "d23acb96d77deab4e9ff4059eadc3b0088466d5ebc80b023676382164042169e",
+    "training/mirror_neuron_demo.py": "aadcd27035afb2125c01f10a65c252b7b6dabbdd0733f2a9f84976b593428db5",
+    "training/moomin_corpus.py": "6210d92d441effffc986361f796a061f380a48e2e93b889a13d6ef6fe4ef684f",
+    "training/moomin_inspect.py": "c2756906bcd360828b44bbfe5c5d2019af893d6d75f19c4bd494dcfd3d01eee0",
+    "training/moomin_run.py": "e06f10e994ca06c181694d60daa2f41c3805379d9960bb55ee314c73d4f80e25",
+    "training/narrator_demo.py": "2c2c8c311a57ba1f22378ef5226b67329720f5443a88d781d904c1750ca176bb",
+    "training/peephole_demo.py": "9b71bf9a079d600340619c0f5c793440e2814a2c3600eddb9b81213d8a211574",
+    "training/proposal_loop_demo.py": "e6b6b3e57cd99a16adc25801d4d48321b3815f40a152d61d8f131f31909e29db",
+    "training/rich_corpus.py": "4a1d50e8706a69f146638c46d466c8a4d72b36420ec4f0331adbc276e97964a7",
+    "training/run.py": "08fe8086548a745896e09251d006fba964c567784d49d693e9f9b8277cace541",
+    "training/runner_demo.py": "09fef805842a5558674391734149a550838ee1096565d1693ab60e6dd6cf03c7",
+    "training/saturation_long_run.py": "5a757bcb654d667c8bdee1a84a2ce97b4cac3643a11ef09870d3912bf6852a6c",
+    "training/scale_experiment.py": "4bcad4b349463cfc8d57d6e51f359d369d84214732c25aecd0030a305acc8c9b",
+    "training/serial_corpus.py": "d98e7805609a45b818b7d8ab5f2d9018ef31ac6eef219a345982880aedd0b0d2",
+    "training/serial_curiosity_demo.py": "036e02f5c3863d8eba33a4352915a2bcab134d69613bfdaa4fdc381b2a44ad56",
+    "training/show_curiosity.py": "7debc27325ec400c6426c3a75483c3595da989c3f9162419559962a09b0211e1",
+    "training/smart_driver_demo.py": "0e6326a058f6a96c39a8b07c1876b7673940a217ea6585a1fd440e370c3975cf",
+    "training/song_run.py": "48aa2553c872ecf6cd32379d350fa59263da6c81a079b7cf410ad1607d90aa8c",
+    "training/story_experiment.py": "2ec33730f53fb1bf7d8d04adffe78845bbcabbc28907024e3a528e3c9864b9e0",
+    "training/teacher.py": "6173ec9b8104646539b4b5bdd899249dda516170aa7de64642090e1a2f0ddb77",
+    "training/vitality_experiments.py": "a09a19b885eee77db835fa5dfbe7bb8bf572306da363e609428041e3ba05261b",
+    "training/winnie_corpus.py": "d4cdb6620ecd741892d7918159bfc37a0333562f2544e49ac5a40c0c86021982",
+    "training/winnie_run.py": "d6a78ae7ee52a91053526acdbb6f1e072c5bb59828a0944d3de62ff0f1425272"
+  },
+  "python": "3.12.2 (tags/v3.12.2:6abddd9, Feb  6 2024, 21:26:36) [MSC v.1937 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 142 Stepping 12, GenuineIntel",
+  "packages": {
+    "numpy": "2.1.2",
+    "pytest": "9.0.2",
+    "fastapi": "0.133.1"
+  },
+  "pythonhashseed": "0",
+  "command": [
+    "training/h22_counterfactual.py",
+    "--phase",
+    "pilot",
+    "--out",
+    "experiments/reports/h22/pilot_v1"
+  ],
+  "synthetic_controls": [
+    {
+      "outdegree": 1,
+      "measured": 1.0
+    },
+    {
+      "outdegree": 7,
+      "measured": 7.0
+    },
+    {
+      "outdegree": 16,
+      "measured": 16.0
+    }
+  ]
+}
