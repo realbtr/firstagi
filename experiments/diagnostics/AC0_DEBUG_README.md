@@ -64,3 +64,11 @@ This fixture is a **debug scaffold**, not preregistration, skill acquisition,
 passed AC0, or evidence for <=10M/200B+ reasoning parity. Its role is to make
 the next missing mechanism executable and falsifiable. See the
 [operational contract](../../FIRSTAGI_OPERATIONAL_PROTOCOL.md).
+
+## Before wiring proposals to actions
+
+The [operation readiness audit](../reports/ac0_debug/PROPOSAL_READINESS.md)
+finds exact operation-feature aliases on seed42 and a before-token versus
+after-observation proposal phase mismatch. Run
+`python experiments/diagnostics/ac0_proposal_readiness.py --out <new-file.json>`.
+This audit selects no actions and does not modify the core or driver vocabulary.
