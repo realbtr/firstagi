@@ -15,7 +15,7 @@
 
 ## ТЕКУЩЕЕ СОСТОЯНИЕ (обновлять в конце каждой сессии)
 
-- Дата: 2026-10-29 (обновление 15, З-0047/З-0048).
+- Дата: 2026-10-29 (обновление 16, плановый запуск З-0050).
 - Цель: непрерывное ядро внимания учится умелым действиям в каналах,
   накапливает гетерархию и проверяемое знание, которое может наследоваться.
 - Состояние: рабочий стенд компонентов; AC0–AC4 НЕ ПРОЙДЕНЫ.
@@ -32,16 +32,19 @@
   всего 15 вызовов. Бот/LLM-triage — инфраструктура, не доказательство ядра.
 - CI: 1400+ тестов; точный результат по коммиту. Отдельная readiness выборка:
   259 passed. Нидана-трасса проверяет стадии, не весь будущий causal path.
+- Первый AC0 event debug scaffold предложен в PR #22 (dfef2cf), CI зелёный,
+  не слит: два канала, внешний action/outcome, observer existing core,
+  10 новых тестов, шесть raw debug traces. Это НЕ gate pass и НЕ learned policy.
 - Открытые блокеры: внешний event/outcome контракт, непрерывный scheduler,
   контекст/полное восстановление, независимость доказательств, версии/дельты,
   локальные индексы/ресурсы. Детали — ретро, протокол и HYPOTHESES.
 
 ## СЛЕДУЮЩЕЕ ДЕЙСТВИЕ (всегда ровно одно)
 
-→ Реализовать событийный baseline AC0: два контролируемых канала,
-доступные операции и внешний исход отдельно от поддержки Gen, полный
-causal log одного полезного обобщения; до confirming runs зафиксировать
-численные task/budget thresholds и контроли по FIRSTAGI_OPERATIONAL_PROTOCOL.md.
+→ В ветке PR #22 подключить existing proposals к выбору доступной операции
+без доступа к скрытой таблице ответов и проследить предсказание одного Gen →
+внешний исход → поддержку → повторное использование. PR не сливать самому;
+до confirming runs закрепить пороги и held-out/frozen controls.
 
 ---
 
@@ -63,6 +66,42 @@ ABIOME Scout — f60a9b7e-6683-4d7a-86c2-357dc34f05b9.
 GitHub Issues/PR/Discussions новых внешних сообщений после ретро нет,
 C-15 не занят. На Moltbook добавлены сообщения с количественными заявлениями
 без доступных артефактов; это не независимо проверенные результаты FirstAGI.
+
+**З-0050 · 2026-10-29 · Плановый цикл firstagi-2: AC0 event debug baseline.**
+Запуск 21:11Z, проверка/публикация завершена около 21:20Z. Remote main
+совпадал с 620b88b, checkout был чистым. Проверены новые GitHub Issues/PR/
+Discussions, CI/Arena bot и собственные Colony/Moltbook-треды; новых внешних
+обращений после предыдущего обхода нет. Ничего повторно не отвечали и
+новых приглашений не посылали; ожидаем конкретный артефакт ABIOME Scout.
+У C-15 отсутствовала метка challenge — добавлена для обработки броней ботом.
+
+Создана ветка agent/ac0-event-baseline-20261029, source-only commit 462f6b3,
+данные/отчёт dfef2cf. PR: https://github.com/realbtr/firstagi/pull/22 (open,
+не слит, прикреплён к чату; GitHub CI tests SUCCESS). Код ядра не менялся.
+В experiments/diagnostics/ac0_event_baseline.py контролируемая непрозрачная
+двухканальная среда отделяет операцию/фактический исход от core StepOutcome.
+Unknown не превращается в negative; pending cue сохраняется. Validator
+отклоняет нарушенные causal chains и fabricated success; observer отклоняет
+повторную доставку до второго обновления. Это in-memory, не durable exactly-once.
+Existing TextDriver/LearningSystem наблюдает завершённые переходы, не выбирает
+действия; fixture prediction_support не является поддержкой названного Gen.
+
+Два seed (41/42) × fixed/random/privileged oracle, по 48 попыток. Каждый run:
+36 наблюдённых исходов, 12 unknown, 72 токена observer. Successes: fixed13/24,
+random16/17, oracle36/36 (знаменатель 36 для каждого seed). Все шесть traces
+и SHA-256 receipts проверены, 10 новых тестов. Полный набор: 1496 passed,
+3 skipped, 59 прежних datetime.utcnow warnings; GitHub CI тоже зелёный.
+Raw данные и ограничения — experiments/reports/ac0_debug/README.md в PR.
+Seed42 dirty flag отражает тогда untracked seed41 data; source не менялся.
+Фиксированное расписание, контроллеры-scaffold, нет learned Gen support,
+held-out competence, actual index-work counters, persistence/inheritance;
+AC0–AC4 по-прежнему не пройдены. Никакой новой оценки 10M/200B+.
+
+Один progress опубликован в существующем Discussion21:
+https://github.com/realbtr/firstagi/discussions/21#discussioncomment-19278777.
+Никаких новых announcements или повторных соцпостов. Рабочая ветка main
+восстановлена; исследовательский код остаётся в PR до ревью. Событийный
+debug контракт теперь исполним, ближайший разрыв — выбор операции из ядра.
 
 **З-0049 · 2026-10-29 · Новые отклики Colony и исправление H22.**
 Solomon обнаружил оставшиеся старые вердикты H22 в scale README и скрипте
