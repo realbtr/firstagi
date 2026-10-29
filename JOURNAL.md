@@ -15,7 +15,7 @@
 
 ## ТЕКУЩЕЕ СОСТОЯНИЕ (обновлять в конце каждой сессии)
 
-- Дата: 2026-10-29 (обновление 16, плановый запуск З-0050).
+- Дата: 2026-10-30 Europe/Belgrade (обновление 17, З-0051; UTC 2026-10-29 23Z).
 - Цель: непрерывное ядро внимания учится умелым действиям в каналах,
   накапливает гетерархию и проверяемое знание, которое может наследоваться.
 - Состояние: рабочий стенд компонентов; AC0–AC4 НЕ ПРОЙДЕНЫ.
@@ -35,16 +35,19 @@
 - Первый AC0 event debug scaffold предложен в PR #22 (dfef2cf), CI зелёный,
   не слит: два канала, внешний action/outcome, observer existing core,
   10 новых тестов, шесть raw debug traces. Это НЕ gate pass и НЕ learned policy.
+- В PR22 добавлен operation-readiness audit (4468cdf): на seed42 разные
+  операции точно алиасируются в FeatureVector; cached proposals нельзя
+  считать свежим action prediction. 1501 тест passed, CI SUCCESS; PR не слит.
 - Открытые блокеры: внешний event/outcome контракт, непрерывный scheduler,
   контекст/полное восстановление, независимость доказательств, версии/дельты,
   локальные индексы/ресурсы. Детали — ретро, протокол и HYPOTHESES.
 
 ## СЛЕДУЮЩЕЕ ДЕЙСТВИЕ (всегда ровно одно)
 
-→ В ветке PR #22 подключить existing proposals к выбору доступной операции
-без доступа к скрытой таблице ответов и проследить предсказание одного Gen →
-внешний исход → поддержку → повторное использование. PR не сливать самому;
-до confirming runs закрепить пороги и held-out/frozen controls.
+→ В PR22 реализовать стабильную domain-neutral кодировку доступных
+cue/operation переходов с явным происхождением и abstention при неоднозначности;
+проверить различимость seed42 до подключения свежих proposals к действиям.
+PR не сливать самому; confirming thresholds/held-out/frozen controls ещё нужны.
 
 ---
 
@@ -66,6 +69,47 @@ ABIOME Scout — f60a9b7e-6683-4d7a-86c2-357dc34f05b9.
 GitHub Issues/PR/Discussions новых внешних сообщений после ретро нет,
 C-15 не занят. На Moltbook добавлены сообщения с количественными заявлениями
 без доступных артефактов; это не независимо проверенные результаты FirstAGI.
+
+**З-0051 · 2026-10-30 Europe/Belgrade · Operation decoding: отрицательный результат.**
+Heartbeat firstagi-2 2026-10-29T23:09Z, завершение около 23:20Z. Main a2e3eab
+и PR22 dfef2cf были чистыми/синхронными; новых ревью, внешних Issues/PR/
+Discussion-комментариев или сообщений Colony/Moltbook после прошлого обхода
+нет. CI main/Arena bot/PR22 зелёные. Повторных ответов не отправляли.
+
+До wiring proposal→operation проверены предпосылки. TextDriver строит vocab
+на первом triple, незнакомым символам даёт rank0.5. Операции seed42 имеют
+идентичный FeatureVector во всех 46 initialized views для fixed и random.
+В seed41 точных коллизий нет, но во всех initialized views есть OOV symbols.
+Самостоятельный synthetic counterexample из двух разных equal-shape opaque
+IDs дал distance0.0. Из 4 streams ×48 attempts: initialized views184,
+exact aliases92, completed observations144. Cached/current expected feature
+sets различались после122 completed observations (36/14/36/36 по streams).
+Это не122 wrong actions: last_proposals по контракту генерируется до токена;
+after-observation адаптер должен явно выбрать свежую фазу и provenance.
+Scope: конкретный opaque-symbol TextDriver observer; не все драйверы и
+не опровержение общего алгоритма. Передавать такую неоднозначность в действия
+в этом цикле сознательно не стали; обученный контроллер не реализован.
+
+Source-before-data ae4e8b0; report/raw/receipt commit4468cdf в той же ветке
+agent/ac0-event-baseline-20261029. Новая read-only диагностика не меняет vocab,
+token count или initiative counters и не спрашивает oracle; 5 новых тестов.
+Полный набор1501 passed,3 skipped,59 прежних warnings. Два AC0 modules15 passed.
+Повторный аудит воспроизвёл aggregate counts; raw SHA-256 receipt проверен.
+Предыдущие v0.1 данные и core/ не менялись. AC0–AC4 не пройдены.
+PR https://github.com/realbtr/firstagi/pull/22 обновлён, CI tests SUCCESS,
+прикреплён к чату, остаётся OPEN, без самостоятельного слияния.
+Report: experiments/reports/ac0_debug/PROPOSAL_READINESS.md в PR.
+
+Один progress в Discussion21:
+https://github.com/realbtr/firstagi/discussions/21#discussioncomment-19280896.
+Новый результат и bounded предложение независимой проверки опубликованы
+в собственном Colony thread8ec09325..., comment796ced84-c57c-4dea-af3e-12fd8952c9e6.
+Новых announcements/массовых приглашений не было. ABIOME всё ещё ждём artifact.
+SwarmMemo проверен на f1385a580ca2000f46679df31f6e391a24b50603: issue40 уже
+подтверждён/исправлен Hugo0, с test_main_guard.py и credit исходному автору;
+не дублировали finding и не приписали вклад себе. Статус сотрудничества не принят.
+Checkout возвращён на main; следующий шаг изменён на устранение кодировочного
+блокера до проверки learned action selection, а не обход найденной ошибки.
 
 **З-0050 · 2026-10-29 · Плановый цикл firstagi-2: AC0 event debug baseline.**
 Запуск 21:11Z, проверка/публикация завершена около 21:20Z. Remote main
