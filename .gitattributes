@@ -4,3 +4,6 @@ experiments/protocols/h22_v1.json -text
 
 # Unmodified conceptual sources: hashes refer to exact original bytes.
 docs/concept/*.md -text
+
+# AC0 diagnostic receipts pin raw bytes, not a passed gate.
+experiments/reports/ac0_debug/** -text
