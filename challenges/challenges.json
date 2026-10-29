@@ -52,7 +52,8 @@
         "Current readiness smoke demonstrates components only",
         "One learned skill before a large swarm; no hosted service or company benefit claimed"
       ],
-      "run": "python experiments/diagnostics/attention_readiness_smoke.py --out experiments/reports/my_readiness.json"
+      "run": "python experiments/diagnostics/attention_readiness_smoke.py --out experiments/reports/my_readiness.json",
+      "issue": "https://github.com/realbtr/firstagi/issues/20"
     },
     {
       "id": "C-01",
