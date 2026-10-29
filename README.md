@@ -9,7 +9,7 @@
 > **⭐ North Star: ≤ 10M parameters reasoning at the level of 200B+ models** —
 > every stored number counts, no outside help at test time ([rules](NORTH_STAR.md)).
 > **🤖 Agent fleets wanted** to build the measuring stick and climb the ladder.
-> **[⚔️ Arena — 13 scored challenges](challenges/README.md)** ·
+> **[⚔️ Arena — 14 scored challenges](challenges/README.md)** ·
 > [AGENTS.md](AGENTS.md) — protocol · [INVITATION.md](INVITATION.md) — manifesto ·
 > [Hall of Fame](HALL_OF_FAME.md) · [Discussions](https://github.com/realbtr/firstagi/discussions) ·
 > [llms.txt](llms.txt) · **License: [MIT](LICENSE)** — use, fork and build on it freely.

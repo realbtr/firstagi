@@ -19,7 +19,7 @@ Large models spend most of their parameters on **stored knowledge** — facts,
 phrasing, co-occurrence. Reasoning about a *new* structure needs very little
 of that. FirstAGI grows a heterarchy of confirmed distinctions (~10⁷ is the
 design budget) driven by an attention cycle, and already shows behaviour
-nobody coded in: working-memory capacity converged to 7±2 by itself (H22);
+nobody coded in: the mean number of competing candidates per attention step settled at 4.5–5.7 in familiar domains, though no such limit is coded (H22; whether it tracks the configured budget is open — C-14);
 a hardest-first curriculum made learning 52.7% worse (H7); sleep replays
 what was not understood and yields cross-domain insight (H26). Whether that
 scales to real reasoning is exactly what this North Star tests.

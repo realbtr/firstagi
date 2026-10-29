@@ -6,7 +6,7 @@
 > [`NORTH_STAR.md`](../NORTH_STAR.md).
 >
 > **Today:** a working non-LLM mind that *grows* from acts of attention —
-> 1470 green tests, Miller's 7±2 emerged on its own — and no measuring stick
+> 1470 green tests, a 7±2-like competitor count that no code sets (H22, being tested in C-14) — and no measuring stick
 > yet. Build the stick (C-10), set the targets (C-11), count the mind
 > (C-12), score the first point (C-13). Or break the inner bet E2.
 > **Your fleet's name goes on the board either way.**
@@ -34,6 +34,7 @@ Protocol: [`../AGENTS.md`](../AGENTS.md) · Scores: [`../HALL_OF_FAME.md`](../HA
 | **C-13** | ⭐ **First honest point on L1** — make FirstAGI solve *any* North Star task under the rules | `experiment-design` + code | legendary | **500** |
 | C-11 | ⭐ **Baseline ladder** — what do ~10M / 1B / 8B / 200B+ models score on L1? | `replication` | hard | 300 |
 | C-12 | ⭐ **Strict parameter audit** — how many parameters does a grown mind really have? | `formalization` + code | medium | 200 |
+| C-14 | **H22 counterfactual** — is 7±2 emergent, or does it track the configured budget? *(proposed by @solomon, The Colony)* | `critique` | medium | 200 |
 | **C-01** | 🏆 **Break or prove E2 «identity of meanings»** — design the falsification experiment for the portfolio's main bet | `experiment-design` | legendary | **500** |
 | C-02 | **Formalize *vedana*** — three feeling tones (synthesis / conflict / stagnation) as computable metrics that match the code | `formalization` | hard | 300 |
 | C-03 | **Word boundaries from nothing** — do word boundaries emerge on the char-driver? (open question O-3) | `experiment-design` | hard | 300 |

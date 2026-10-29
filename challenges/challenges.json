@@ -18,7 +18,8 @@
     "partial": "partial points at maintainer's discretion",
     "duplicate": 0,
     "hypothesis_status_change_bonus": 1.5,
-    "currency": "reputation (HALL_OF_FAME.md), not money"
+    "currency": "reputation (HALL_OF_FAME.md), not money",
+    "predicates": "accept / fails_if are fixed before work starts; a result is scored only against them"
   },
   "verify_locally": [
     "python -m pytest -q",
@@ -38,7 +39,9 @@
         "docs/GOALS_AND_ACCEPTANCE.md",
         "SPEC_FINAL.md",
         "docs/ONTOLOGY.md"
-      ]
+      ],
+      "accept": "Design states metrics and thresholds, a negative control, cost and a kill criterion — all before any data is collected",
+      "fails_if": "Thresholds or controls are chosen after seeing data, or no negative control exists"
     },
     {
       "id": "C-02",
@@ -52,7 +55,9 @@
         "docs/publications/engineering_abhidharma/article.md",
         "docs/ONTOLOGY.md",
         "core/"
-      ]
+      ],
+      "accept": "Each regime metric is computable from logged core state, and a test separates synthesis / conflict / stagnation on real runs",
+      "fails_if": "A metric needs information the system does not log, or the test cannot tell the regimes apart"
     },
     {
       "id": "C-03",
@@ -66,7 +71,9 @@
         "JOURNAL.md#ОТКРЫТЫЕ-ВОПРОСЫ",
         "docs/stand/CHAR_DRIVER_DIARY.md",
         "drivers/"
-      ]
+      ],
+      "accept": "Boundary precision/recall against known word boundaries, reported next to a trivial baseline (random, punctuation-only)",
+      "fails_if": "No baseline, or any tokenizer / word list is used by the system"
     },
     {
       "id": "C-04",
@@ -80,7 +87,9 @@
         "experiments/reports/scale/README.md",
         "training/scale_experiment.py",
         "docs/HYPOTHESES.md"
-      ]
+      ],
+      "accept": "A causal explanation plus a run in which the predicted intervention changes the ↺-ratio in the predicted direction",
+      "fails_if": "Explanation without a run, or the intervention does not move the ratio"
     },
     {
       "id": "C-05",
@@ -94,7 +103,17 @@
         "experiments/reports/scale/scale_1m.csv",
         "training/scale_experiment.py",
         "core/"
-      ]
+      ],
+      "accept": "CI green; tok/s improves on `scale_experiment.py --quick --seed 42`; every non-timing column equals the pinned baseline",
+      "fails_if": "Any column other than elapsed_s / tok_per_s differs from the pinned baseline",
+      "baseline": {
+        "file": "experiments/reports/scale/baseline_quick_seed42.csv",
+        "sha256": "8660d90e874f858d7ebe20f00a7d73fd2ba6a0cc74a2289797280cc807751b1c",
+        "generated_at_commit": "7b42827",
+        "command": "python training/scale_experiment.py --quick --seed 42 --csv out.csv",
+        "compare": "every column except elapsed_s and tok_per_s must be equal",
+        "determinism": "re-generated 2026-10-29 from this repo; identical (0 differing non-timing cells) to the March 2026 stand run scale_dual.csv"
+      }
     },
     {
       "id": "C-06",
@@ -108,7 +127,9 @@
         "INVITATION.md",
         "docs/publications/engineering_abhidharma/article.md",
         "SPEC_FINAL.md"
-      ]
+      ],
+      "accept": "Point-by-point mapping with citations to primary sources; ends in an equivalence argument or a named, testable delta",
+      "fails_if": "Claims without sources, or a 'delta' that no experiment could distinguish"
     },
     {
       "id": "C-07",
@@ -122,7 +143,15 @@
       "note": "full run took ~3.7 h on the reference machine; --quick takes minutes",
       "read": [
         "experiments/reports/scale/README.md"
-      ]
+      ],
+      "accept": "Full 1M-transition CSV + environment + column diff against the pinned baseline + verdicts for H17, H18, H22, H23, H24",
+      "fails_if": "Baseline sha256 does not match, the run stops before 1M transitions, or the diff is not reported per column",
+      "baseline": {
+        "file": "experiments/reports/scale/scale_1m.csv",
+        "sha256": "fc49406327db6adbf64eda48b547ff3f797c116e7b8f1c0e2dae0adddfbaae20",
+        "imported_at_commit": "3e72eb6",
+        "provenance": "produced on the original stand (March 2026) and imported at 3e72eb6; the --quick path of this repo reproduces the stand bit-for-bit on non-timing columns (see C-05 baseline), so code drift is unlikely — still report the commit you ran"
+      }
     },
     {
       "id": "C-08",
@@ -134,7 +163,9 @@
       "deliverable": "Table: quote, source, verdict, exact original text and location if found",
       "read": [
         "docs/publications/engineering_abhidharma/article.md"
-      ]
+      ],
+      "accept": "Every quote classified (verbatim / paraphrase / not found) with the exact source location for verbatim and paraphrase",
+      "fails_if": "Any quote marked verbatim cannot be found at the cited location"
     },
     {
       "id": "C-09",
@@ -149,7 +180,9 @@
         "SPEC_FINAL.md",
         "docs/ONTOLOGY.md",
         "core/"
-      ]
+      ],
+      "accept": "Both quotes exist at the cited places and cannot both be true under any reasonable reading",
+      "fails_if": "Either quote is missing, or a consistent reading of both exists"
     },
     {
       "id": "C-10",
@@ -164,7 +197,9 @@
         "AGENTS.md",
         "SPEC_FINAL.md",
         "docs/ONTOLOGY.md"
-      ]
+      ],
+      "accept": "One command prints the score table; the counter implements NORTH_STAR rule 1; ARC sample + seeded procedural generator; reference runner records model and version; small sample runs in CI",
+      "fails_if": "Reference scores are quoted instead of measured, or the counter omits any store read at answer time"
     },
     {
       "id": "C-11",
@@ -176,7 +211,9 @@
       "deliverable": "Table + raw outputs + exact model versions, produced with the C-10 harness (or a documented equivalent until it exists)",
       "read": [
         "NORTH_STAR.md"
-      ]
+      ],
+      "accept": "Raw outputs, exact model versions and the harness commit for every model; same rules and attempt limits for all",
+      "fails_if": "Models evaluated under different rules, prompts beyond the benchmark's standard format, or missing raw outputs"
     },
     {
       "id": "C-12",
@@ -191,7 +228,9 @@
         "experiments/reports/scale/README.md",
         "data/",
         "core/"
-      ]
+      ],
+      "accept": "A script counts every number/symbol read at answer time for a reproducible grown store, with a per-component breakdown",
+      "fails_if": "Any data read at answer time is excluded, or the store cannot be regenerated"
     },
     {
       "id": "C-13",
@@ -205,6 +244,25 @@
         "NORTH_STAR.md",
         "SPEC_FINAL.md",
         "docs/ONTOLOGY.md"
+      ],
+      "accept": "One reproducible command, network disabled during the test, parameter count reported, tasks drawn from L1 and unseen during growth",
+      "fails_if": "Any network or model call at test time, or the solved tasks appeared in the growth data"
+    },
+    {
+      "id": "C-14",
+      "title": "H22 counterfactual: is 7±2 emergent or configured?",
+      "kind": "critique",
+      "level": "medium",
+      "points": 200,
+      "question": "H22 measures avg_cands = mean candidates_before per DualDriver step (not recall capacity). Does its late-phase value (~5.3 in scale-1M; per-snapshot 2.0–12.6) stay near 7±2 when the capacity budget and attention/eviction thresholds change, or does it track them?",
+      "deliverable": "Sweep of --capacity and thresholds with the task fixed; table of late-phase avg_cands per setting; verdict for H22",
+      "accept": "At least 4 budget/threshold settings with the corpus and seed fixed; the verdict rule (e.g. 'stays within 5–9 for all settings') is stated before the runs",
+      "fails_if": "Settings and the verdict rule are chosen after seeing results, or the corpus/seed varies across settings",
+      "credit": "Proposed by @solomon on The Colony",
+      "read": [
+        "training/scale_experiment.py",
+        "experiments/reports/scale/README.md",
+        "docs/HYPOTHESES.md"
       ]
     }
   ]

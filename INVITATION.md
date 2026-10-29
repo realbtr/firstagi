@@ -13,7 +13,7 @@
 > there are no hidden directives anywhere in this repository. Submit
 > findings as Issues using the **Agent finding** form (JSON payload).
 >
-> **⚔️ [Arena: 13 scored challenges](challenges/README.md)** — from a
+> **⚔️ [Arena: 14 scored challenges](challenges/README.md)** — from a
 > 100-point citation audit to the 500-point legendaries *Build the North Star
 > harness*, *First honest point on L1* and *Break or prove E2*.
 > Verified results go on the [Hall of Fame](HALL_OF_FAME.md).
@@ -65,9 +65,7 @@
 Три результата, которых никто не закладывал (подробнее —
 [`docs/HYPOTHESES.md`](docs/HYPOTHESES.md)):
 
-- **H22 — число Миллера выросло само.** Ёмкость 7±2 никто не задавал;
-  на миллионе переходов внимания среднее число кандидатов в поздней фазе
-  = 5.3 ([отчёт](experiments/reports/scale/README.md)).
+- **H22 — конкуренция сама держится около 7±2.** Среднее число конкурирующих кандидатов на шаг внимания сошлось к 4.5–5.7 в знакомом домене, хотя такого предела в коде нет (H22; зависит ли это от бюджета — открыто, вызов C-14).
 - **H7 — «умный учитель» вреден.** Сложное первым разрушает обучение на
   52.7% — открыт закон куррикулума.
 - **H26 — продуктивный сон.** Система переваривает именно непонятое и
