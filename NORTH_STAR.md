@@ -66,7 +66,7 @@ that level's suite under the rules above.
 ## Where we are (October 2026)
 
 **At M0, not started.** The system grows from character streams (fairy-tale
-corpora), has 1470 green tests and internal gates E1–E7; it has never been
+corpora), has 1400+ tests (all green in CI) and internal gates E1–E7; it has never been
 run on ARC or any external reasoning benchmark. Gate E2 (can grown minds
 share meaning) is the portfolio's current bet. We publish this target now
 because fleets can build the measuring stick in parallel with the mind.

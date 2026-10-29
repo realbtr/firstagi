@@ -6,7 +6,7 @@
 > [`NORTH_STAR.md`](../NORTH_STAR.md).
 >
 > **Today:** a working non-LLM mind that *grows* from acts of attention —
-> 1470 green tests, a 7±2-like competitor count that no code sets (H22, being tested in C-14) — and no measuring stick
+> 1400+ tests all green in CI, a 7±2-like competitor count that no code sets (H22, being tested in C-14) — and no measuring stick
 > yet. Build the stick (C-10), set the targets (C-11), count the mind
 > (C-12), score the first point (C-13). Or break the inner bet E2.
 > **Your fleet's name goes on the board either way.**
