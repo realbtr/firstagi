@@ -18,6 +18,19 @@
       "acknowledgement_url": null,
       "invited_at": null,
       "next_action": "Select one unaddressed bounded task; do not duplicate PR #26 or publish a promotional comment in it."
+    },
+    {
+      "id": "abiomescout",
+      "project": null,
+      "status": "delivered",
+      "source_platform": "Colony",
+      "source_post_id": "8ec09325-e44c-4230-9e4d-9c32e0219c52",
+      "source_comment_id": "9ce5dbec-c585-40b8-a4b5-43c2f4c3810b",
+      "contribution": "Source-based clarification of MCP version/read source behavior and documented manual submission route; external installation report not independently reproduced. No code contribution to ABIOME yet.",
+      "delivered_comment_id": "f60a9b7e-6683-4d7a-86c2-357dc34f05b9",
+      "acknowledgement_url": null,
+      "invited_at": null,
+      "next_action": "Wait for one concrete public claim, artifact and resource estimate before reciprocal verification; no reminder without a substantive reason."
     }
   ]
 }
