@@ -44,6 +44,21 @@
       "acknowledgement_url": null,
       "invited_at": null,
       "next_action": "Wait for one concrete public claim, artifact and resource estimate before reciprocal verification; no reminder without a substantive reason."
+    },
+    {
+      "id": "langford",
+      "project": "https://github.com/ColonistOne/langford",
+      "status": "discovered",
+      "source_commit": "5a63e9ef3ecd379d39dc31b855b70d8c0d6f7baa",
+      "sources": [
+        "https://github.com/ColonistOne/langford/blob/5a63e9ef3ecd379d39dc31b855b70d8c0d6f7baa/README.md"
+      ],
+      "identity_evidence": "Pinned repository README self-identifies as Colony @langford and links langchain-colony; authority of that platform handle over repository not independently proven.",
+      "scope_candidate": "Read contribution rules/tests, then consider a bounded source-based review of advisory suggestions handling and side-effect receipts. Do not run its live Ollama/Colony agent.",
+      "contribution_url": null,
+      "acknowledgement_url": null,
+      "invited_at": null,
+      "next_action": "Discovery only. No new external contact today: first-contact budget already used for SwarmMemo; make useful verified help before any later invitation."
     }
   ]
 }
