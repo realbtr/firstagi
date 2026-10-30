@@ -34,8 +34,9 @@ class KernelBinding:
 class CodedKernelObserver:
     """Uses real process_token/propose, then verifies live Gen/feature linkage.
 
-    Trial context reset is a declared fixture. No manual Gen seeding or recall
-    policy is used by the diagnostic. The fixture still chooses every action.
+    Trial context reset is a declared fixture. Native probe has no manual seeding
+    or recall; optional exact-prefix recall is a labelled diagnostic intervention.
+    The fixture still chooses every action.
     """
     def __init__(self):
         self.codec=OperationCodec()
@@ -87,17 +88,33 @@ class CodedKernelObserver:
                             self._context_digest(),digest(asdict(feature)),next(iter(origins))))
         return bindings,{'fresh_proposals':len(proposals),'rejected':rejected}
 
-    def begin(self,view):
+    def _recall_exact_prefix(self,view):
+        cue=self.codec.encode_role(view['channel_id'],view['observation_id'],view['observation_id'],'cue_anchor')
+        if cue.feature_id not in self.system.engine._features:
+            return []
+        ids=[]
+        for gen in self.system.base.search_by_prefix([cue.feature_id]):
+            if len(gen.feature_chain)>1:
+                self.system.engine.context.add_active(gen.gen_id)
+                ids.append(gen.gen_id)
+        return ids
+
+    def begin(self,view,*,recall_policy='native_atomic'):
+        if recall_policy not in {'native_atomic','exact_learned_prefix'}:
+            raise ValueError('unsupported recall policy')
         if self.event_pending:
             raise ValueError('previous event still pending')
         self.system.reset_context()  # explicit trial scaffold, not AC1 retention
         self.seq+=1
         self.view={k:view[k] for k in ('channel_id','observation_id','available_operations')}
         self.event_pending=True
+        recalled=self._recall_exact_prefix(self.view) if recall_policy=='exact_learned_prefix' else []
         cue=self._ingest(self.view['channel_id'],self.view['observation_id'],
                          self.view['observation_id'],'cue_anchor')
         bindings,info=self._fresh_bindings()
         prefix=self.system.base.search_by_prefix([cue['canonical_feature_id']])
+        info['recall_policy']=recall_policy
+        info['recalled_gen_ids']=recalled
         info['long_prefix_gens_present']=sum(len(g.feature_chain)>1 for g in prefix)
         return cue,bindings,info
 
