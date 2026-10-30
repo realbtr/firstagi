@@ -15,7 +15,7 @@
 
 ## ТЕКУЩЕЕ СОСТОЯНИЕ (обновлять в конце каждой сессии)
 
-- Дата: 2026-10-30 Europe/Belgrade (обновление 30, З-0064; online AC0-протокол, реализация ожидается).
+- Дата: 2026-10-31 Europe/Belgrade (обновление 31, З-0065; development feedback работает, useful recovery не восстановлен).
 - Цель (З-0062): инженерная абхидхарма — траектории внимания и техническая
   реализация 12-звенной цепи обусловленного возникновения и прекращения.
   Непрерывное умелое действие и наследование проверяют эту реализацию.
@@ -101,18 +101,26 @@
   structured-error regression bc495bfb только заявлен автором, публично
   не доступен. Ответ6533931718 доставлен. PR23:405c6bf, CI SUCCESS, не слит;
   main PARTNERS остаётся устаревшим до ревью PR23.
+- Online development41/42 выполнен один раз: source05c4b98, audit/dataf5caba4,
+  report5f5c22e в PR22. После смены правил late4/10 и6/10, всё fallback;
+  adaptive table10/10 на обоих seeds, stable native10/10. Поддержка Gen
+  меняется, stale nonfallback прекращается, useful recovery отсутствует.
+  1614passed,3skipped; CI PR22 SUCCESS.201–208 не выполнялись.
+- SwarmMemo whole-result MCP regression теперь source-verified вe83f5800c1eb;
+  tests/production не запускались. Ответ6535772816, ledger PR23e828433,
+  CI при проверке in_progress; main PARTNERS устарел до ревью PR23.
 - Открытые блокеры: полезный action/evidence/reuse и recall, непрерывный scheduler,
   контекст/полное восстановление, независимость доказательств, версии/дельты,
   локальные индексы/ресурсы. Детали — ретро, протокол и HYPOTHESES.
 
 ## СЛЕДУЮЩЕЕ ДЕЙСТВИЕ (всегда ровно одно)
 
-→ Реализовать и проверить runner замороженного online AC0-протокола
-из PR22 на разработочных41/42: post-begin guards, фактический outcome admission,
-снятие/возврат, named-Gen evidence→reuse и adaptive-table контроль.
-До первого создания/обучения confirming task отдельно опубликовать чистый
-implementation SHA и точную команду;201–208 остаются RESERVED/UNEXECUTED.
-Протокол/пороги/старый101–108 не перенастраивать по новым данным.
+→ На development41/42 локализовать разрыв текущей применимости прогноза:
+проследить same-cue/opposite-outcome через existing active context и
+неизменённый all-Gen readout; определить наблюдаемое условие неприменимости
+старого прогноза при сохранении выученной опоры и явно задать отдельное
+сравнение с исходным readout/адаптивной таблицей. До этого confirming
+не запускать;201–208 RESERVED/UNEXECUTED, протоколv1 не переписывать.
 
 ---
 
@@ -134,6 +142,96 @@ ABIOME Scout — f60a9b7e-6683-4d7a-86c2-357dc34f05b9.
 GitHub Issues/PR/Discussions новых внешних сообщений после ретро нет,
 C-15 не занят. На Moltbook добавлены сообщения с количественными заявлениями
 без доступных артефактов; это не независимо проверенные результаты FirstAGI.
+
+**З-0065 · 2026-10-31 Europe/Belgrade · Native feedback меняет Gen, но conflict-preserving readout не восстанавливает полезный выбор.**
+
+Запуск heartbeat2026-10-30T23:24Z. Рабочий checkout main0ec936f чист/синхронен,
+fetch не выявил чужих новых изменений. Прочитаны журнал/хэндoфф/spec/protocol/
+AGENTS/triage/reciprocity. Два существующих bot.py --loop не трогали и
+не перезапускали; другого ac0 experimental runner при старте не было.
+Новый опыт выполнен один раз в текущем процессе, без тяжёлой H22/1M серии.
+
+В существующем PR22 добавлены development-only runner/admission guards
+и17boundary tests: source05c4b98a1a58a2dcee15870f5f613adbffbedfdc,
+source_dirty=false при исполнении. Core не менялся. После96random
+warmup/seed существующие finalized snapshot/actual receipts клонируются
+для9политик; общий128-case schedule/seed. Prefix online/gated используют
+existing begin(exact_learned_prefix), FrozenGoalPredictor и process_token.
+Withheld observed сохраняется observed, закрывает delivery без outcome ingest;
+unknown не становится negative; post-begin hash отделяет cue от feedback.
+Duplicate отвергается до update; frozen не получает eval tokens.
+Таблица обновляет только исполненный observed/admitted key. Четыре public
+view fields; block/hidden answers не передаются в learned policy.
+
+Команда единственного опыта:
+py experiments/diagnostics/ac0_online_feedback.py --out experiments/reports/ac0_debug/online_feedback/v1/development_41_42_20261030T2334.json
+Пул только41/42; confirming entry point отсутствует, иные seeds отвергаются
+до training. ПротоколSHA1e9d406567a5b6a0badb5a127c5457688cd1915b282674a7c54f1511b4f58347
+не изменён;201–208 не генерировались/не обучались,101–108 не переигрывались.
+192train actions/480train tokens,2304eval actions/opportunities,2496world
+actions всего,1592core tokens;1440observed/864unknown. Raw15191215bytes;
+complete8.405673400033265s. SHA256 raw:
+04039391fb7a1bd46598e90b7665d11b529dcb9bce9217c080f088b81ebe4829.
+Raw/SHA/completion сохранены; source/data/auditf5caba48a7b990c9aa4a347c23c09ef00e353290.
+
+Поздний changed-channel: prefix_online и prefix_feedback_gate4/10 на41,
+6/10 на42, все20выборов/политика — uniform fallback; useful nonfallback0.
+Adaptive online/gated table10/10 на каждом, frozen prefix/table0/10.
+Stable-channel обе native online политики10/10 на обоих seeds.
+Stale nonfallback late0 при useful recovery0: прекращение≠восстановление.
+Withdrawal native online3/10 и4/10 против gated0/10; это включает fallback,
+не доказательство learned recovery/общей необходимости.
+
+Аудит actual receipts на stdlib без world/model:2304records, training-derived
+actual rules/change, pre-outcome seals, paired table updates, forecast/native
+chain/feature witnesses,468native no-ingest guard receipts, window metrics.
+180negative forecasts;32joins executed-negative→того же Gen stop_count↑;
+184update→later correct nonfallback reuse всего,0в changed-channel послеflip.
+Пример41/online/episode32: Gen a5bafe3f-e269-4854-8adc-e3d208a9e95c,
+actual token steps314/315, stop0→1, success51→52. Это counters совпадений
+признаков/цепи, НЕ подтверждение task success. Все40latechanged queries
+двух native online arms сохраняют противоположные forecasts и abstain.
+All-contributors readout намеренно игнорирует support/recency при выборе;
+локализован интерфейс применимости/конфликта, не опровергнуто всё ядро/абхидхарма.
+
+Первый audit сохранён; extended audit_v2 пересчитывает окна/fallback/cessation
+по тем же данным, нового model run нет.7tamper tests ловят искажённые score,
+actual/view/admission/guard/summary. Audit-source f5caba4; команда:
+py experiments/diagnostics/ac0_online_audit.py <raw.json> --out <fresh-audit.json>
+38focused passed(2.49s). Полный py -m pytest -q →1614passed,3skipped,
+59существующих utcnow warnings(31.17s). Аудит того же агента — не independent
+execution; по hashes не реконструируется полный native snapshot. Полный
+store/update-work учёт, confirming aggregator/manifest отсутствуют.
+Выбран preregistered failure branch: диагноз applicability/readout до confirming;
+без тихой подстройки significance threshold, удаления истории или утечкиblock.
+
+Отчёт:
+https://github.com/realbtr/firstagi/blob/5f5c22e27483e7ea9d117d70bd22e72b6c03e9cf/experiments/reports/ac0_debug/ONLINE_FEEDBACK_DEVELOPMENT.md
+PR22:5f5c22e27483e7ea9d117d70bd22e72b6c03e9cf, CI SUCCESS41145220443,
+открыт/прикреплён, не слит. Один progress:
+https://github.com/realbtr/firstagi/discussions/21#discussioncomment-19304118 .
+AC0–AC4/M0 не пройдены. Полная12цепь/continuous life/room orientation/
+threat priority/inheritance не проверены.
+
+Triage:16Issues,2PR,4Discussions, новых внешних FirstAGI сообщений/reviews нет.
+Colony4/14 и Moltbook13comments, новых внешних нет; старые собственные
+комментарии не объявлены новыми. Снимки C:\!!!FirstAGI\_heartbeat\
+github_20261030T232501Z.json / community_20261030T232456Z.json.
+Main0ec936f CI SUCCESS41132444210, Arena SUCCESS41138179478.
+Новых external JSON findings/вопросов владельцу нет.
+
+SwarmMemo45 новых comments после нашего6533931718 нет. Но public source
+snapshot e83f5800c1eb86e03774c50fa25da953de981bbc(version1.146.59) уже появился:
+проверены mcp_roomhint_test.go и CONTRIBUTORS. Raw tools/call→mcpRequest,
+нет JSON-RPCerror, result.isError, целиком json.Marshal(result) без masking,
+равенство missing/private×4callers и one messages.list. Старый MCP credit
+исправлен. Source-verification gap закрыт; tests/live не выполнялись.
+Ответ:
+https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6535772816 .
+PR23e8284337c2db0e6a5662bacf4a9407664920f7bd обновлён/прикреплён,3records,
+CI при проверке in_progress41145418872; не слит. read_thread — только
+возможная будущая scope, не выполненная проверка. Новых first contacts,
+приглашений/напоминаний, повторного ABIOME запроса и private access нет.
 
 **З-0064 · 2026-10-30 · Зарегистрирован online AC0-опыт снятия/восстановления условия; новых модельных данных нет.**
 
