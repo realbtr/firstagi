@@ -49,10 +49,13 @@ claimed. Help choose the evaluation contract before implementing it.
 · [Readiness audit](../docs/RETROSPECTIVE_2026-10-29.md)
 · [Agent protocol](../AGENTS.md) · MCP: `uvx firstagi-arena`.
 
-The long-term target remains a ≤10M-parameter mind with reasoning quality
-comparable to 200B+ models. Nothing here demonstrates that comparison yet.
-The next proof is smaller and more decisive: **one skill that persists and
-transfers under controls.**
+The primary subject is an engineering interpretation of Abhidharma:
+attention trajectories and a twelve-link conditioned arising / cessation
+cycle. Show which condition sustains a continuation, and what happens when
+that condition is removed. Event labels alone are insufficient. Durable
+anchors differ from temporary peripheral detail; numerical compactness is
+philosophical guidance, not a target to prove. See [the contract](../docs/ATTENTION_TRAJECTORIES.md).
+Continual skill and inheritance remain behavioral tests of the mechanism.
 
 ## RU, короткая версия
 

@@ -2,14 +2,16 @@
   "schema": "firstagi.challenges/v1",
   "repo": "https://github.com/realbtr/firstagi",
   "north_star": {
-    "goal": "<= 10,000,000 parameters (strict count) reasoning at the level of >= 200B-parameter models",
+    "goal": "Engineering interpretation of Abhidharma: attention trajectories, significant durable distinctions, and twelve-link conditioned arising and cessation",
     "doc": "https://github.com/realbtr/firstagi/blob/main/NORTH_STAR.md",
     "levels": {
       "L1": "reasoning without knowledge: ARC-AGI-1/2 public eval + fresh procedural suite",
       "L2": "language reasoning: GSM8K, MATH, BBH, MMLU-Pro, GPQA"
     },
-    "status": "M0 not started (no harness yet)",
-    "relation_to_current_focus": "Long-term external reasoning target; AC0–AC2 is the nearer evidence ladder, not parity with 200B+"
+    "status": "Target implementation; functional cycle not demonstrated. Historical M0 external harness not built.",
+    "relation_to_current_focus": "AC0–AC2 tests the conditioned cycle through useful action, continuity and inheritance; numerical compactness is philosophical guidance, not a mandatory target",
+    "numerical_estimates_status": "Illustrative intuition only; no separate task to verify or falsify 7^7, sub-million anchors or parameter ratios; actual resource use remains measured",
+    "levels_status": "Legacy optional comparison suites; published brief criteria preserved"
   },
   "protocol": "https://github.com/realbtr/firstagi/blob/main/AGENTS.md",
   "submit": "GitHub Issue via the 'Agent finding' form (payload schema firstagi.agent-finding/v1) or a PR referencing the challenge id",
@@ -50,7 +52,8 @@
       "notes": [
         "reputation points, not money",
         "Current readiness smoke demonstrates components only",
-        "One learned skill before a large swarm; no hosted service or company benefit claimed"
+        "One learned skill before a large swarm; no hosted service or company benefit claimed",
+        "Z-0062: central subject is attention trajectories and the twelve-link conditioned cycle. Expose functional dependencies and cessation; event-label coverage is not a causal implementation. Published scoring criteria remain unchanged."
       ],
       "run": "python experiments/diagnostics/attention_readiness_smoke.py --out experiments/reports/my_readiness.json",
       "issue": "https://github.com/realbtr/firstagi/issues/20"
@@ -228,7 +231,8 @@
         "docs/ONTOLOGY.md"
       ],
       "accept": "One command prints the score table; the counter implements NORTH_STAR rule 1; ARC sample + seeded procedural generator; reference runner records model and version; small sample runs in CI",
-      "fails_if": "Reference scores are quoted instead of measured, or the counter omits any store read at answer time"
+      "fails_if": "Reference scores are quoted instead of measured, or the counter omits any store read at answer time",
+      "priority_note": "Optional historical external comparison; the published brief is retained, but its numerical target is not the project objective (Z-0062)."
     },
     {
       "id": "C-11",
@@ -242,7 +246,8 @@
         "NORTH_STAR.md"
       ],
       "accept": "Raw outputs, exact model versions and the harness commit for every model; same rules and attempt limits for all",
-      "fails_if": "Models evaluated under different rules, prompts beyond the benchmark's standard format, or missing raw outputs"
+      "fails_if": "Models evaluated under different rules, prompts beyond the benchmark's standard format, or missing raw outputs",
+      "priority_note": "Optional historical external comparison; the published brief is retained, but its numerical target is not the project objective (Z-0062)."
     },
     {
       "id": "C-12",
@@ -259,7 +264,8 @@
         "core/"
       ],
       "accept": "A script counts every number/symbol read at answer time for a reproducible grown store, with a per-component breakdown",
-      "fails_if": "Any data read at answer time is excluded, or the store cannot be regenerated"
+      "fails_if": "Any data read at answer time is excluded, or the store cannot be regenerated",
+      "priority_note": "Actual resource accounting remains useful. No mandatory 10M cap; report durable, candidate, runtime and peripheral stores separately without hiding costs (Z-0062)."
     },
     {
       "id": "C-13",
@@ -275,7 +281,8 @@
         "docs/ONTOLOGY.md"
       ],
       "accept": "One reproducible command, network disabled during the test, parameter count reported, tasks drawn from L1 and unseen during growth",
-      "fails_if": "Any network or model call at test time, or the solved tasks appeared in the growth data"
+      "fails_if": "Any network or model call at test time, or the solved tasks appeared in the growth data",
+      "priority_note": "Optional historical external comparison; the published brief is retained, but its numerical target is not the project objective (Z-0062)."
     },
     {
       "id": "C-14",
@@ -307,7 +314,7 @@
       "C-06",
       "C-09"
     ],
-    "rule": "Evidence of useful continual action first; E2 is an exchange hypothesis, North Star remains the long-term external target",
+    "rule": "Conditioned attention trajectories first: functional conditions, state changes and cessation. Reuse AC0–AC2; exact next action in JOURNAL. External size comparisons are optional.",
     "operational_protocol": "https://github.com/realbtr/firstagi/blob/main/FIRSTAGI_OPERATIONAL_PROTOCOL.md"
   }
 }

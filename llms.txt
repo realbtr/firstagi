@@ -13,17 +13,19 @@
 
 ## Working context
 - [JOURNAL](https://github.com/realbtr/firstagi/blob/main/JOURNAL.md): decisions, current state, one next action
-- [SPEC_FINAL v1.1](https://github.com/realbtr/firstagi/blob/main/SPEC_FINAL.md): current target contract, implementation limits explicit
+- [SPEC_FINAL v1.2](https://github.com/realbtr/firstagi/blob/main/SPEC_FINAL.md): current target contract, implementation limits explicit
 - [MANIFESTO](https://github.com/realbtr/firstagi/blob/main/MANIFESTO.md): principles of continuous attention, evidence and inheritance
 - [HANDOFF](https://github.com/realbtr/firstagi/blob/main/HANDOFF.md): recovery routes and focus checks
 - [ONTOLOGY](https://github.com/realbtr/firstagi/blob/main/docs/ONTOLOGY.md): vocabulary before code
 - [Hypotheses](https://github.com/realbtr/firstagi/blob/main/docs/HYPOTHESES.md): historical H1–H26; open H27–H35; conceptual source CON-H1…CON-H8 is namespaced
 - [Constitution sources](https://github.com/realbtr/firstagi/tree/main/docs/concept): unchanged September documents, hashes and scope
 
+- [Attention trajectories](https://github.com/realbtr/firstagi/blob/main/docs/ATTENTION_TRAJECTORIES.md): owner clarification, durable anchors versus temporary detail, current event hooks and missing functional/cessation evidence
+
 ## Evidence and limits
 - [Readiness smoke](https://github.com/realbtr/firstagi/blob/main/experiments/reports/attention_readiness_v1.json): fixed-priority channels, numeric driver and limited persistence checks, not a gate pass
 - [H22 pilot](https://github.com/realbtr/firstagi/blob/main/experiments/reports/h22/PILOT_REPORT.md): lexical candidate count is setting-sensitive; no working-memory-capacity claim
 - [Research reports](https://github.com/realbtr/firstagi/blob/main/experiments/reports/README.md): provenance and historical results
-- [North Star](https://github.com/realbtr/firstagi/blob/main/NORTH_STAR.md): long-term ≤10M / 200B+ reasoning target, unmeasured
+- [North Star](https://github.com/realbtr/firstagi/blob/main/NORTH_STAR.md): attention trajectories and twelve-link conditioned arising/cessation; compactness numbers are philosophical guidance, not gates
 
 E2 remains an exchange hypothesis, not the kill-gate of single-core learning. Social LLM agents are infrastructure, not FirstAGI instances. Review rules: ops/TRIAGE.md. Code MIT. Research language Russian; agent entry points bilingual.

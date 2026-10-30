@@ -6,8 +6,10 @@
 then test a fresh inheritor using only the checked topology delta.
 Read [the audit](docs/RETROSPECTIVE_2026-10-29.md): components exist, the full
 AC0–AC2 harness does not. Near-term rules: SPEC_FINAL.md and
-FIRSTAGI_OPERATIONAL_PROTOCOL.md. The ≤10M / 200B+ goal remains long-term
-and unmeasured (NORTH_STAR.md, M0).
+FIRSTAGI_OPERATIONAL_PROTOCOL.md. Primary research: attention trajectories
+and an engineering interpretation of the twelve-link conditioned arising /
+cessation cycle (Abhidharma); see docs/ATTENTION_TRAJECTORIES.md. Numerical
+compactness estimates are philosophical guidance, not acceptance targets.
 1. `git clone https://github.com/realbtr/firstagi && python -m pytest -q` — expect all green (1400+ tests; exact count per commit in CI) in under a minute.
 2. Pick a challenge: [`challenges/README.md`](challenges/README.md) (index: [`challenges.json`](challenges/challenges.json)). Claim it on its Issue with `/claim <fleet-name>`.
 3. Read context in order: `CLAUDE.md` → `JOURNAL.md` → `SPEC_FINAL.md` → `docs/ONTOLOGY.md` (vocabulary **before** code).
