@@ -119,6 +119,18 @@ def test_existing_companion_receipt_is_never_overwritten(tmp_path):
     assert not path.exists() and receipt.read_text()=='prior artifact receipt'
 
 
+def test_cli_rejects_existing_companion_before_any_experiment(tmp_path,monkeypatch):
+    import sys
+    from experiments.diagnostics import ac0_goal_evaluator as evaluator
+    path=tmp_path/'not-fresh.json'
+    path.with_suffix('.json.completion.json').write_text('existing completion')
+    def forbidden(*args,**kwargs):raise AssertionError('must reject BEFORE evaluating seeds')
+    monkeypatch.setattr(evaluator,'run_suite',forbidden)
+    monkeypatch.setattr(sys,'argv',['evaluator','--mode','confirming','--out',str(path)])
+    with pytest.raises(SystemExit) as error:evaluator.main()
+    assert error.value.code==2 and not path.exists()
+
+
 def synthetic_runs():
     """Fabricated calculator fixture, NOT an empirical confirming pool."""
     runs=[]

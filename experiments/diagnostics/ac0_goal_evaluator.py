@@ -218,11 +218,17 @@ def run_suite(mode='development',*,limits=None,clock=time.perf_counter):
     return result,budget
 
 
-def write_artifact(path,result,budget):
+def ensure_fresh_output(path):
     receipt=path.with_suffix(path.suffix+'.completion.json')
     sha_path=path.with_suffix(path.suffix+'.sha256')
     if any(p.exists() for p in (path,receipt,sha_path)):
         raise FileExistsError('fresh output path and companion receipts required')
+
+
+def write_artifact(path,result,budget):
+    ensure_fresh_output(path)
+    receipt=path.with_suffix(path.suffix+'.completion.json')
+    sha_path=path.with_suffix(path.suffix+'.sha256')
     path.parent.mkdir(parents=True,exist_ok=True)
     raw=(json.dumps(result,indent=2)+'\n').encode()
     with path.open('xb') as f:f.write(raw)
@@ -241,7 +247,8 @@ def main():
     parser.add_argument('--mode',choices=('development','confirming'),default='development')
     parser.add_argument('--implementation-commit')
     args=parser.parse_args()
-    if args.out.exists():parser.error('fresh output path required')
+    try:ensure_fresh_output(args.out)
+    except FileExistsError as error:parser.error(str(error))
     commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     dirty=bool(subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).strip())
     if args.mode=='confirming' and (dirty or args.implementation_commit!=commit):
