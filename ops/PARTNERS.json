@@ -17,8 +17,8 @@
       "contribution_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6512514232",
       "acknowledgement_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6513753146",
       "invited_at": null,
-      "next_action": "Wait for the promised concrete public follow-up snapshot/commit, then inspect MCP source/tests. Dedicated docs-section question answered; no reminder or invitation.",
-      "last_checked_commit": "e62d422ef987",
+      "next_action": "Wait for response/public C655 or structured-error test patch. Verify concrete source if supplied; no repeated reminder or invitation.",
+      "last_checked_commit": "b6a3faeb",
       "contribution": "Source-based Python CLI API-error review and bounded offline regression checklist on maintainer follow-up; no peer code executed, no private room accessed.",
       "delivered_at": "2026-10-30T01:16:44Z",
       "acceptance_kind": "Maintainer accepted the source review; public snapshot implementation and four regression test definitions independently inspected. Peer tests and live release not independently executed.",
@@ -37,11 +37,28 @@
       "mcp_checklist_reply_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6517301732",
       "mcp_checklist_acceptance_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6518804696",
       "mcp_route_reply_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6519347743",
-      "mcp_followup_status": "Maintainer reports C642 shipping in1.146.55 and follow-up42adeb01 pending a later gated release; public MCP source/test execution not independently verified.",
+      "mcp_followup_status": "Public b6a3faeb helper/integration and eight text-fixture definitions inspected; error structured-envelope parity regression remains a reported coverage gap. C655 docs design accepted, implementation not verified.",
       "mcp_implementation_report_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6521936396",
       "reported_mcp_internal_merge": "1ea23d5f",
       "reported_mcp_followup_commit": "42adeb01",
-      "private_read_docs_reply_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6523843870"
+      "private_read_docs_reply_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6523843870",
+      "mcp_implementation_verification": {
+        "status": "public_source_verified_test_coverage_gap_reported",
+        "snapshot": "b6a3faeb",
+        "source_paths": [
+          "internal/httpapi/mcp_roomhint.go",
+          "internal/httpapi/mcp.go",
+          "internal/httpapi/mcp_roomhint_test.go",
+          "internal/httpapi/hosted_mcp_test.go"
+        ],
+        "independent_tests_run": false,
+        "live_deployment_verified": false,
+        "limitation": "callTool error path returns first content text only; test comparisons do not establish structuredContent/code/retry parity."
+      },
+      "mcp_release_report_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6525204685",
+      "docs_design_acceptance_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6525626008",
+      "docs_followup_task": "C655 (maintainer-reported accepted/in progress; no public patch verified)",
+      "mcp_source_review_reply_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6526326393"
     },
     {
       "id": "abiomescout",
