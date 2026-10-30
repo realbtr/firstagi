@@ -182,6 +182,20 @@ Native propose группирует по feature иоставляет best Gen: 
 проверить ВСЕ active Gen contributors для proposed feature, чтобы ranking
 не скрыл противоречащие outcome forecasts. Confidence не разрешает конфликт.
 
+### Paired goal evaluator (PR22, З-0058)
+
+RunBudget — счётчики train actions/core tokens, evaluation opportunities/actions
+иwall-clock; превышение останавливаетrun сpartial data, не заменой seeds.
+ReceiptObserver/CreationReceipts — tracing adapter стандартного warmup:
+регистрирует фактические токены ипервое появление Gen после token/context reset,
+связывая feature chain сранее наблюдёнными token steps. Это не независимое
+свидетельство качества Gen. Tracing sink удаляется изobserver доfreeze.
+aggregate — calculator заранее заданных paired thresholds, не AGI-gate.
+Completion receipt — отдельный итог после raw write, чтобы execution complete
+не означал прохождение wall budget при сохранении. Raw pending-write status
+пригоден дляclaims только вместе сcomplete receipt ивалидными hashes.
+Неисполненный forecast имеет unknown/not_executed, анеobservednegative.
+
 ## 5. Правила словаря
 
 1. Новый термин → сначала определение здесь (через запись З-NNNN), потом код.
