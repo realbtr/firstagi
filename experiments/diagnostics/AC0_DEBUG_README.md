@@ -90,3 +90,5 @@ Candidate coverage is measured separately from action quality; no actions execut
 Named-Gen outcome replay: [report](../reports/ac0_debug/OUTCOME_EVIDENCE.md), external receipts separate prediction agreement from task success; in-sample debug, no AC0 pass.
 
 Next goal-choice design: [registered protocol v1](../reports/ac0_debug/GOAL_CHOICE_PROTOCOL_v1.md). No confirming results or frozen runner yet; goal selection is an explicit scaffold, not an AC0 pass.
+
+Frozen-query development check: [128 immutable queries, conflict-preserving selector](../reports/ac0_debug/FROZEN_QUERY.md). Confirming evaluator still absent; no confirming seeds or task-quality score.
