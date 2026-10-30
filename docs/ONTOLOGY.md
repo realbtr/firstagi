@@ -169,6 +169,19 @@ task, transfer или independent replication. Opportunity — заранее н
 проба, входящая в denominator даже при abstention; unknown отдельно от negative.
 Это определения будущего протокола, не реализованный native policy/AC0 pass.
 
+### Frozen query implementation (PR22, З-0057)
+
+FrozenGoalPredictor — read-only adapter зарегистрированного goal-selector
+scaffold; query принимает только четыре public fields, не world/teacher.
+CountedBase — временный proxy чтений: учитывает весь scan и каждый get,
+включая повторные обращения native initiative/context. BoundaryError —
+прекращение run при мутации frozen state/превышении бюджета, не abstention.
+episode_schedule — заранее построенные парные one-action opportunities;
+opportunity_metrics сохраняет observed denominator при abstention.
+Native propose группирует по feature иоставляет best Gen: predictor обязан
+проверить ВСЕ active Gen contributors для proposed feature, чтобы ranking
+не скрыл противоречащие outcome forecasts. Confidence не разрешает конфликт.
+
 ## 5. Правила словаря
 
 1. Новый термин → сначала определение здесь (через запись З-NNNN), потом код.
