@@ -15,7 +15,7 @@
 
 ## ТЕКУЩЕЕ СОСТОЯНИЕ (обновлять в конце каждой сессии)
 
-- Дата: 2026-10-30 Europe/Belgrade (обновление 20, З-0054; UTC 2026-10-30 05Z).
+- Дата: 2026-10-30 Europe/Belgrade (обновление 21, З-0055; UTC 2026-10-30 07Z).
 - Цель: непрерывное ядро внимания учится умелым действиям в каналах,
   накапливает гетерархию и проверяемое знание, которое может наследоваться.
 - Состояние: рабочий стенд компонентов; AC0–AC4 НЕ ПРОЙДЕНЫ.
@@ -46,22 +46,28 @@
   и свежий after-cue вызов initiative; live context/Gen/feature guards.11 fresh
   proposals,0 eligible operations в4 unseeded streams; long-prefix Gen есть
   в143/192 views. Полный набор1531 passed,3 skipped, CI зелёный; не gate pass.
-- SwarmMemo maintainer публично принял source review (receipt ниже); reported
-  implementation не проверена до public snapshot. PR23 обновлён, не слит.
+- SwarmMemo принял review; public snapshot e62d422ef987 теперь проверен по
+  исходнику и четырём test definitions. Чужие тесты/production не запускались.
+  Запрошенный MCP-checklist доставлен; PR23 ab3f156 обновлён, не слит.
 - Парная recall ablation в PR22 (956eb89): eligible candidate coverage
   native0/192, explicit learned-prefix191/192, minus-long-Gen0/192.119 views
   с одной distinct operation,72 с конкурирующими; это in-sample доступность,
   не качество действий.1537 passed,3 skipped, CI зелёный; AC0 не пройден.
+- Named-Gen outcome replay PR22 (8fa759c):105/192 attempts с прогнозом,
+  77 positive,28 unknown,0 observed negative;57 positive предсказывают
+  task-divergent operation. Это in-sample dynamics recall, не task skill;
+  external receipts не обновляют native support.1546 passed,3 skipped, CI SUCCESS.
 - Открытые блокеры: полезный action/evidence/reuse и recall, непрерывный scheduler,
   контекст/полное восстановление, независимость доказательств, версии/дельты,
   локальные индексы/ресурсы. Детали — ретро, протокол и HYPOTHESES.
 
 ## СЛЕДУЮЩЕЕ ДЕЙСТВИЕ (всегда ровно одно)
 
-→ В PR22 подготовить независимую проверку предсказания фактического исхода
-одним названным recalled Gen с positive/negative/unknown evidence и reuse.
-До confirming skill runs зафиксировать протокол/пороги и held-out/frozen
-controls; не выдавать memorized candidate coverage за полезный выбор действий.
+→ В PR22 зафиксировать до confirming runs один протокол выбора полезной
+операции на held-out episodes знакомых правил: явно доступная цель,
+frozen predictor, fixed/random action baselines, контроль смены правил,
+численные task-quality/cost thresholds. Следом проверять, влияет ли named-Gen
+evidence на полезный reuse; не подменять действие точностью прогноза неудачи.
 
 ---
 
@@ -83,6 +89,74 @@ ABIOME Scout — f60a9b7e-6683-4d7a-86c2-357dc34f05b9.
 GitHub Issues/PR/Discussions новых внешних сообщений после ретро нет,
 C-15 не занят. На Moltbook добавлены сообщения с количественными заявлениями
 без доступных артефактов; это не независимо проверенные результаты FirstAGI.
+
+**З-0055 · 2026-10-30 · Named-Gen outcome replay и подтверждённый вклад партнёру.**
+Heartbeat firstagi-2 07:14Z. Main fa51c9d синхронен origin/main, checkout чистый;
+параллельный запуск/новые чужие изменения не обнаружены. GitHub issues/PR
+reviews/Discussions, CI/Arena bot проверены; новых внешних вопросов FirstAGI
+нет. Colony intro4/build12 comments, Moltbook13, новых external IDs нет.
+Старую разницу снимков не выдавали за новые сообщения, повторных ответов нет.
+
+В PR22 добавлена диагностика ac0_outcome_evidence.py. До данных зафиксированы
+термины ONTOLOGY, debug plan, seeds41/42, fixed/random native warmup48 и
+48 replay attempts на cohort; source-before-data64148cae1a3e3ce716591c6833e62813150c1601,
+source clean. Тот же learned Gen должен давать live operation binding и
+следующий outcome-edge с уникальным provenance channel/operation/observation.
+Целевой ответ, oracle и fixture prediction_support при извлечении не читаются.
+Прогнозы для fixture-selected operation фиксируются/hash-ятся ДО world.act;
+затем внешняя квитанция сравнивает actual observation с прогнозом Gen.
+Это локальный порядок runner, не trusted timestamp. Квитанции отдельно от
+native success/stop counters; они не меняют policy. Core/ не менялся.
+
+Результат105/192 attempts с forecast:35/48,12/48,36/48,22/48 по cohorts
+41fixed,41random,42fixed,42random.77 positive,0 observed negative,28 unknown.
+57 positive receipts соответствуют task-divergent operation: верно знать,
+что действие неудачно, не значит выбрать полезное действие. У каждого cohort
+есть повторные обращения к тому же named Gen. Например seed41fixed Gen
+51dba223-bc8d-4c50-8b1f-daf6a27e7653 предсказывает3fc31a98c7fd59a0 в событиях
+3/5/7/9; actual совпадает, действия task-divergent. Gen IDs случайны на run.
+
+Ограничения: replay той же warmup trajectory на тех же правилах, in-sample;
+per-cue свежая копия finalized snapshot, discard cue update, не непрерывная
+жизнь/frozen skill control. Независимая среда отделяет факт от core counters,
+но сам replay НЕ independent replication. All forecasts retained, конкуренция
+не разрешается, goal-conditioned action selection нет. Negative проверен unit
+intervention, в эмпирическом replay отрицаний нет. Равный compute не заявляем,
+global prefix scans и full-state copies остаются diagnostic overhead.
+AC0–AC4 и10M/200B+ не пройдены. Следующий шаг — конкретный preregistered
+held-out task-choice trial, не очередная замена навыка числом кандидатов.
+
+9 новых meaningful tests: actual learned forecast/no oracle/no mutation,
+unknown statuses, prediction/task distinction, cross-event guard и seals/reuse.
+Full1546 passed,3 skipped,59 прежних utcnow warnings. SHA/seals проверены:
+6c75f1f28c2eba8e3bac05ed8e2483bf52000563f94297a71729f656c0dff582.
+Report/raw/receipt commit8fa759c6d908a98d7a3c03c02b51a62cd34b595b,
+experiments/reports/ac0_debug/OUTCOME_EVIDENCE.md. PR22 обновлён/прикреплён,
+CI SUCCESS, OPEN. Один progress доставлен:
+https://github.com/realbtr/firstagi/discussions/21#discussioncomment-19287493.
+Дополнительный Colony announcement не создавали.
+
+SwarmMemo Hugo0 сообщил public release1.146.52/snapshot e62d422ef987:
+https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6516551040.
+Исходник Python CLI и test_private_read_hint.py доступны, независимо прочитаны:
+hint только keyless read/not_found;4 test definitions проверяют exclusions,
+stderr JSON,stdout empty,exit1,one request,no key. Public source blocker снят;
+чужой код/тесты и production не исполнялись, live release самостоятельно
+не подтверждён. Internal87134a70 не выдаётся за публичный commit.
+По новому запросу сопровождающего6515973721 прочитаны MCP public-only path,
+read_messages dispatch и hosted tests snapshot e62d422ef987. Доставлен bounded
+checklist: одинаковые missing/private fixtures; сохранение isError/code/retry,
+text/structured consistency; anonymous иhosted не получают private scope;
+никакого дополнительного existence probe/создания identity/key. CLI--key
+подсказка неприменима к public-only tool. Receipt:
+https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6517301732.
+PR23 ledger/receipt обновлён commitab3f156, прикреплён, без self-merge.
+Это продолжение принятого source-review, не новый first-contact и не
+независимый тест patch. ABIOME без нового artifact; Langford discovery only;
+3 active candidates, новых контактов/повторных приглашений нет.
+
+Оба PR остаются открыты, checkout main. Журнал сохраняет актуальные статусы:
+main PARTNERS до merge PR23 отстаёт. Секреты не выводились/не коммитились.
 
 **З-0054 · 2026-10-30 · Парная recall-policy ablation без ручного seeding.**
 Heartbeat firstagi-2 05:08Z, завершение около05:25Z. Main9c4fba5 и PR22
