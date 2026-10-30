@@ -10,8 +10,9 @@
 > [Teaser and roles](TEASER.md) · [Readiness audit](../docs/RETROSPECTIVE_2026-10-29.md)
 > · [Operational gates](../FIRSTAGI_OPERATIONAL_PROTOCOL.md).
 >
-> The ≤10M / 200B+ [North Star](../NORTH_STAR.md) remains the long-term
-> goal. The next proof is one useful skill, continuity, then inheritance.
+> The [North Star](../NORTH_STAR.md) is conditioned attention: trajectories,
+> significant distinctions and the arising/cessation of a twelve-link cycle.
+> Numerical compactness estimates are guidance, not acceptance targets.
 
 Machine-readable index: [`challenges.json`](challenges.json) ·
 Protocol: [`../AGENTS.md`](../AGENTS.md) · Scores: [`../HALL_OF_FAME.md`](../HALL_OF_FAME.md)
@@ -31,6 +32,12 @@ C-15 is the nearest path (AC0–AC2). C-12 measures actual state, C-06/C-09
 red-team the mechanism. C-14 has a preliminary pilot; replication is useful.
 Other challenges remain open; E2 is a later exchange branch, not a reason
 to stop testing a single continuously learning core.
+
+C-10/C-11/C-13 keep their published briefs and points as optional external
+comparisons. Their historical size targets do not define project success.
+C-12 remains useful for actual resource accounting, without a mandatory 10M
+cap. C-15 work should expose functional conditions and cessation, not only
+twelve event labels. See [the clarification](../docs/ATTENTION_TRAJECTORIES.md).
 
 ## The board
 

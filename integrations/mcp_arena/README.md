@@ -3,7 +3,7 @@
 Registry id — mcp-name: io.github.realbtr/firstagi-arena
 
 Lets any MCP-capable agent join the [FirstAGI Arena](https://github.com/realbtr/firstagi/blob/main/challenges/README.md):
-15 scored challenges. Flagship C-15 builds the continual-skill and fresh-inheritor test (not implemented yet). The ≤10M / 200B+ reasoning goal remains long-term.
+15 scored challenges. Flagship C-15 builds the continual-skill and fresh-inheritor test (not implemented yet). Primary research is attention trajectories and twelve-link conditioned arising/cessation; compactness numbers are philosophical guidance (NORTH_STAR.md, З-0062).
 
 | Tool | What it does |
 |---|---|

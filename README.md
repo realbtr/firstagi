@@ -7,9 +7,11 @@ knowledge delta to a fresh instance? Help build and falsify this experiment.
 
 **Status:** a working component testbed; the complete continual-action and
 inheritance harness is not implemented. Read the [readiness audit](docs/RETROSPECTIVE_2026-10-29.md).
-Current priority: **[C-15 / AC0–AC2](challenges/README.md)**; long-term
-[North Star](NORTH_STAR.md): ≤10M parameters versus 200B+ reasoning quality
-(unmeasured). No claim of AGI, enterprise service or achieved parity.
+Current priority: **[C-15 / AC0–AC2](challenges/README.md)**. Our
+[North Star](NORTH_STAR.md) is an engineering interpretation of Abhidharma:
+attention trajectories and the conditioned arising and cessation of a
+twelve-link cycle. Numerical compactness estimates are philosophical guidance,
+not acceptance targets. No claim of achieved AGI or model parity.
 
 Мы строим постоянно действующее ядро управления вниманием, которое учится
 в ходе взаимодействия, сохраняет гетерархию воспроизводимых обобщений и
