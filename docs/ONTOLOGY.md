@@ -144,6 +144,16 @@ exact_learned_prefix — явно отмеченный эксперимента�
 Это in-sample механистическая проверка доступности знаний, не качество действий,
 не frozen-model skill control и не перенос между независимыми жизнями.
 
+### Named-Gen outcome evidence (PR22, З-0055)
+
+forecast — read-only чтение следующего outcome-edge того же живого Gen,
+который предложил operation-edge; происхождение включает channel/source/target.
+evidence — отдельная внешняя квитанция positive/negative/unknown по совпадению
+предсказанного и фактически наблюдённого outcome ID. Это не task success и
+не автоматическое изменение native Gen counters. Верное предсказание неудачи
+операции получает positive; ненаблюдённый исход — unknown. replay в этой
+диагностике повторяет training trajectory и не является independent replication.
+
 ## 5. Правила словаря
 
 1. Новый термин → сначала определение здесь (через запись З-NNNN), потом код.
