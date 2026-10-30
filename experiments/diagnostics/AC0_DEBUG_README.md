@@ -86,3 +86,5 @@ A [paired learned-prefix recall ablation](../reports/ac0_debug/RECALL_ABLATION.m
 now compares native/default recall, an explicit existing-chain prefix adapter
 and a minus-long-Gen control on copies of the same finalized warmup state.
 Candidate coverage is measured separately from action quality; no actions execute.
+
+Named-Gen outcome replay: [report](../reports/ac0_debug/OUTCOME_EVIDENCE.md), external receipts separate prediction agreement from task success; in-sample debug, no AC0 pass.
