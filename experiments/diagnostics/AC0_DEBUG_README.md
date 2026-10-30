@@ -81,3 +81,8 @@ The separate [coded observer/native proposal probe](../reports/ac0_debug/KERNEL_
 now feeds the codec to LearningSystem and revalidates actual live Gen/feature
 state. Its unseeded native-context runs yielded zero bound operation candidates;
 the original TextDriver diagnostic above remains unchanged.
+
+A [paired learned-prefix recall ablation](../reports/ac0_debug/RECALL_ABLATION.md)
+now compares native/default recall, an explicit existing-chain prefix adapter
+and a minus-long-Gen control on copies of the same finalized warmup state.
+Candidate coverage is measured separately from action quality; no actions execute.
