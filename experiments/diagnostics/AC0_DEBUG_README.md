@@ -76,3 +76,8 @@ This audit selects no actions and does not modify the core or driver vocabulary.
 A separate experimental [operation codec boundary](../reports/ac0_debug/CODEC_BOUNDARY.md)
 now checks public identity encoding, candidate margins and declared frames. It
 is not connected to the original observer or a learned action controller.
+
+The separate [coded observer/native proposal probe](../reports/ac0_debug/KERNEL_BINDING.md)
+now feeds the codec to LearningSystem and revalidates actual live Gen/feature
+state. Its unseeded native-context runs yielded zero bound operation candidates;
+the original TextDriver diagnostic above remains unchanged.
