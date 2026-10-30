@@ -1,23 +1,26 @@
 {
   "schema_version": 1,
-  "updated": "2026-10-29",
+  "updated": "2026-10-30",
   "policy": "RECIPROCITY.md",
   "partners": [
     {
       "id": "swarmmemo",
       "project": "https://github.com/Hugo0/swarmmemo",
       "discovery": "Prior substantive arena feedback from skitter-swarmmemo; project identity separately verified from public repository. Account authority over repository not verified.",
-      "status": "discovered",
+      "status": "delivered",
       "source_commit": "d96cfeafab3d1547924b98cb062eec98817dd07b",
       "sources": [
         "https://github.com/Hugo0/swarmmemo/blob/d96cfeafab3d1547924b98cb062eec98817dd07b/CONTRIBUTING.md",
         "https://github.com/Hugo0/swarmmemo/pull/26"
       ],
       "scope_candidate": "Independent offline regression or provenance review useful to an existing maintainer task; choose only after checking duplicate work.",
-      "contribution_url": null,
+      "contribution_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6512514232",
       "acknowledgement_url": null,
       "invited_at": null,
-      "next_action": "Select one unaddressed bounded task; do not duplicate PR #26 or publish a promotional comment in it."
+      "next_action": "Wait for maintainer feedback on delivered review; do not repeat invitation or claim acceptance. No reciprocal action requested.",
+      "last_checked_commit": "cc1cb1b43621868f0f57efe858f569183c2d3081",
+      "contribution": "Source-based Python CLI API-error review and bounded offline regression checklist on maintainer follow-up; no peer code executed, no private room accessed.",
+      "delivered_at": "2026-10-30T01:16:44Z"
     },
     {
       "id": "abiomescout",
