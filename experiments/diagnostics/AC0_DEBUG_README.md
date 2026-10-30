@@ -96,3 +96,5 @@ Frozen-query development check: [128 immutable queries, conflict-preserving sele
 Paired evaluator: [development controls and training-Gen receipts](../reports/ac0_debug/PAIRED_GOAL_DEVELOPMENT.md); confirming101–108 were subsequently run once under the registered protocol (report below).
 
 Registered result: [eight-seed frozen-goal scaffold pass](../reports/ac0_debug/GOAL_CHOICE_CONFIRMING_v1.md). Stable416/416 versus fixed/random212/416; swapped0/416. AC0 remains unpassed. Raw, completion, audit and costs are preserved.
+
+Online feedback development: [negative recovery result and native feedback traces](../reports/ac0_debug/ONLINE_FEEDBACK_DEVELOPMENT.md). On41/42 the unchanged conflict-preserving readout stops stale nonfallback choices but falls back; adaptive table recovers. No confirming run;201–208 reserved.
