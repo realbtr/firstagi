@@ -1,0 +1,170 @@
+{
+  "schema": "firstagi.confirming-goal-raw-audit/v1",
+  "status": "recorded_data_audit_pass",
+  "raw_sha256": "937ab033a63fc4de42001ce5370a804dadbe58c84e7fca7088f1629ed90d8568",
+  "source_commit": "c81166f11320628fb955d186f1d3c7597441661d",
+  "protocol_sha256": "2437f4fca7cfe683531b06175468573c482a2d2a88d7479fb57bbe5884370f3f",
+  "completion_seconds": 8.449834599974565,
+  "raw_bytes": 20647527,
+  "budget_counts": {
+    "train_actions": 768,
+    "train_core_tokens": 1920,
+    "evaluation_opportunities": 6144,
+    "evaluation_actions": 4096
+  },
+  "pre_outcome_seals_checked": 6144,
+  "forecasts_checked": 2048,
+  "native_creation_receipts_checked": 288,
+  "checks": {
+    "seed_count": true,
+    "stable_goal_success": true,
+    "stable_coverage": true,
+    "advantage_fixed_first": true,
+    "advantage_random_uniform": true,
+    "advantage_minus_long_gen_goal": true,
+    "advantage_empty_goal": true,
+    "observed_forecast_accuracy": true
+  },
+  "rule_change_check": true,
+  "bounded_scaffold_pass": true,
+  "AC0_gate_pass": false,
+  "per_seed": [
+    {
+      "seed": 101,
+      "goal_successes_out_of_52": {
+        "stable:frozen_prefix_goal": 52,
+        "stable:fixed_first": 29,
+        "stable:random_uniform": 25,
+        "stable:minus_long_gen_goal": 0,
+        "stable:empty_goal": 0,
+        "stable:oracle_upper_bound": 52,
+        "all_cue_answers_swapped:frozen_prefix_goal": 0,
+        "all_cue_answers_swapped:fixed_first": 23,
+        "all_cue_answers_swapped:random_uniform": 27,
+        "all_cue_answers_swapped:minus_long_gen_goal": 0,
+        "all_cue_answers_swapped:empty_goal": 0,
+        "all_cue_answers_swapped:oracle_upper_bound": 52
+      }
+    },
+    {
+      "seed": 102,
+      "goal_successes_out_of_52": {
+        "stable:frozen_prefix_goal": 52,
+        "stable:fixed_first": 27,
+        "stable:random_uniform": 23,
+        "stable:minus_long_gen_goal": 0,
+        "stable:empty_goal": 0,
+        "stable:oracle_upper_bound": 52,
+        "all_cue_answers_swapped:frozen_prefix_goal": 0,
+        "all_cue_answers_swapped:fixed_first": 25,
+        "all_cue_answers_swapped:random_uniform": 29,
+        "all_cue_answers_swapped:minus_long_gen_goal": 0,
+        "all_cue_answers_swapped:empty_goal": 0,
+        "all_cue_answers_swapped:oracle_upper_bound": 52
+      }
+    },
+    {
+      "seed": 103,
+      "goal_successes_out_of_52": {
+        "stable:frozen_prefix_goal": 52,
+        "stable:fixed_first": 26,
+        "stable:random_uniform": 31,
+        "stable:minus_long_gen_goal": 0,
+        "stable:empty_goal": 0,
+        "stable:oracle_upper_bound": 52,
+        "all_cue_answers_swapped:frozen_prefix_goal": 0,
+        "all_cue_answers_swapped:fixed_first": 26,
+        "all_cue_answers_swapped:random_uniform": 21,
+        "all_cue_answers_swapped:minus_long_gen_goal": 0,
+        "all_cue_answers_swapped:empty_goal": 0,
+        "all_cue_answers_swapped:oracle_upper_bound": 52
+      }
+    },
+    {
+      "seed": 104,
+      "goal_successes_out_of_52": {
+        "stable:frozen_prefix_goal": 52,
+        "stable:fixed_first": 27,
+        "stable:random_uniform": 25,
+        "stable:minus_long_gen_goal": 0,
+        "stable:empty_goal": 0,
+        "stable:oracle_upper_bound": 52,
+        "all_cue_answers_swapped:frozen_prefix_goal": 0,
+        "all_cue_answers_swapped:fixed_first": 25,
+        "all_cue_answers_swapped:random_uniform": 27,
+        "all_cue_answers_swapped:minus_long_gen_goal": 0,
+        "all_cue_answers_swapped:empty_goal": 0,
+        "all_cue_answers_swapped:oracle_upper_bound": 52
+      }
+    },
+    {
+      "seed": 105,
+      "goal_successes_out_of_52": {
+        "stable:frozen_prefix_goal": 52,
+        "stable:fixed_first": 25,
+        "stable:random_uniform": 21,
+        "stable:minus_long_gen_goal": 0,
+        "stable:empty_goal": 0,
+        "stable:oracle_upper_bound": 52,
+        "all_cue_answers_swapped:frozen_prefix_goal": 0,
+        "all_cue_answers_swapped:fixed_first": 27,
+        "all_cue_answers_swapped:random_uniform": 31,
+        "all_cue_answers_swapped:minus_long_gen_goal": 0,
+        "all_cue_answers_swapped:empty_goal": 0,
+        "all_cue_answers_swapped:oracle_upper_bound": 52
+      }
+    },
+    {
+      "seed": 106,
+      "goal_successes_out_of_52": {
+        "stable:frozen_prefix_goal": 52,
+        "stable:fixed_first": 26,
+        "stable:random_uniform": 28,
+        "stable:minus_long_gen_goal": 0,
+        "stable:empty_goal": 0,
+        "stable:oracle_upper_bound": 52,
+        "all_cue_answers_swapped:frozen_prefix_goal": 0,
+        "all_cue_answers_swapped:fixed_first": 26,
+        "all_cue_answers_swapped:random_uniform": 24,
+        "all_cue_answers_swapped:minus_long_gen_goal": 0,
+        "all_cue_answers_swapped:empty_goal": 0,
+        "all_cue_answers_swapped:oracle_upper_bound": 52
+      }
+    },
+    {
+      "seed": 107,
+      "goal_successes_out_of_52": {
+        "stable:frozen_prefix_goal": 52,
+        "stable:fixed_first": 23,
+        "stable:random_uniform": 31,
+        "stable:minus_long_gen_goal": 0,
+        "stable:empty_goal": 0,
+        "stable:oracle_upper_bound": 52,
+        "all_cue_answers_swapped:frozen_prefix_goal": 0,
+        "all_cue_answers_swapped:fixed_first": 29,
+        "all_cue_answers_swapped:random_uniform": 21,
+        "all_cue_answers_swapped:minus_long_gen_goal": 0,
+        "all_cue_answers_swapped:empty_goal": 0,
+        "all_cue_answers_swapped:oracle_upper_bound": 52
+      }
+    },
+    {
+      "seed": 108,
+      "goal_successes_out_of_52": {
+        "stable:frozen_prefix_goal": 52,
+        "stable:fixed_first": 29,
+        "stable:random_uniform": 28,
+        "stable:minus_long_gen_goal": 0,
+        "stable:empty_goal": 0,
+        "stable:oracle_upper_bound": 52,
+        "all_cue_answers_swapped:frozen_prefix_goal": 0,
+        "all_cue_answers_swapped:fixed_first": 23,
+        "all_cue_answers_swapped:random_uniform": 24,
+        "all_cue_answers_swapped:minus_long_gen_goal": 0,
+        "all_cue_answers_swapped:empty_goal": 0,
+        "all_cue_answers_swapped:oracle_upper_bound": 52
+      }
+    }
+  ],
+  "scope": "stdlib fixture reconstruction, hashes, arithmetic and recorded consistency; not independent replication or proof of frozen runtime state"
+}

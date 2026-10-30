@@ -89,8 +89,10 @@ Candidate coverage is measured separately from action quality; no actions execut
 
 Named-Gen outcome replay: [report](../reports/ac0_debug/OUTCOME_EVIDENCE.md), external receipts separate prediction agreement from task success; in-sample debug, no AC0 pass.
 
-Next goal-choice design: [registered protocol v1](../reports/ac0_debug/GOAL_CHOICE_PROTOCOL_v1.md). No confirming results or frozen runner yet; goal selection is an explicit scaffold, not an AC0 pass.
+Next goal-choice design: [registered protocol v1](../reports/ac0_debug/GOAL_CHOICE_PROTOCOL_v1.md). Registered v1 confirming result is now available below; goal selection remains an explicit scaffold, not an AC0 pass.
 
-Frozen-query development check: [128 immutable queries, conflict-preserving selector](../reports/ac0_debug/FROZEN_QUERY.md). Confirming evaluator still absent; no confirming seeds or task-quality score.
+Frozen-query development check: [128 immutable queries, conflict-preserving selector](../reports/ac0_debug/FROZEN_QUERY.md). This historical development probe had no task-quality score; the paired confirming report is linked below.
 
-Paired evaluator: [development controls and training-Gen receipts](../reports/ac0_debug/PAIRED_GOAL_DEVELOPMENT.md); confirming101–108 remain unused.
+Paired evaluator: [development controls and training-Gen receipts](../reports/ac0_debug/PAIRED_GOAL_DEVELOPMENT.md); confirming101–108 were subsequently run once under the registered protocol (report below).
+
+Registered result: [eight-seed frozen-goal scaffold pass](../reports/ac0_debug/GOAL_CHOICE_CONFIRMING_v1.md). Stable416/416 versus fixed/random212/416; swapped0/416. AC0 remains unpassed. Raw, completion, audit and costs are preserved.
