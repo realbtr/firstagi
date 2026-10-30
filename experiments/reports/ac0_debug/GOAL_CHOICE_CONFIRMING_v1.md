@@ -111,3 +111,33 @@ matched frozen control, with unknown protected from negative updates and a
 metric that requires reaching goals again rather than only abstaining. Native
 goal/action selection remains unresolved; AC1 continuous life, AC2 inheritance
 and≤10M versus200B+ reasoning remain unproven. Keep this v1 protocol/raw intact.
+
+## Retrospective qualification · 2026-10-30 · post hoc
+
+An important comparator was missing from the registered design: a plain table
+of observed transitions. A retrospective check builds `(channel,cue,operation)
+→ observed outcome sets` from training actual outcomes only, omitting unknowns.
+With the same explicit public-goal equality rule, eight table entries per task
+reproduce ALL1024 scaffold decisions across stable/swapped conditions. Because
+each action is identical to the recorded action, its factual outcome can be
+reused without counterfactual scoring: stable416/416, swapped0/416.
+
+This is an exploratory post-hoc comparator, not another preregistered run or
+an independent execution of the environment. It changes neither the v1 raw
+data nor its registered pass. It **does narrow the architectural inference**:
+this task does not establish a benefit of Gen/heterarchy over simple transition
+memory. Eight entries are not eight parameters; their IDs/keys/outcomes also
+consume storage. No cost or sample-efficiency advantage was measured here.
+
+Reproduce using the recorded data, without training or running policies:
+
+```powershell
+py experiments/reports/ac0_debug/confirming_goal/v1/posthoc_lookup_audit.py experiments/reports/ac0_debug/confirming_goal/v1/goal_choice_confirming_v1.json
+```
+
+The adjacent posthoc_lookup_audit.json/SHA retain all per-seed comparisons.
+Future online/recovery and compositional tests need a matched tabular baseline
+and, for multi-step tasks, a generic planner over learned transitions. Merely
+adapting or adding graph nodes would not establish the value of abstraction.
+Actual transfer/composition or measured memory/sample/cost advantage remains
+an open hypothesis. The scaffold is still a valid diagnostic lower rung.
