@@ -15,7 +15,7 @@
 
 ## ТЕКУЩЕЕ СОСТОЯНИЕ (обновлять в конце каждой сессии)
 
-- Дата: 2026-10-30 Europe/Belgrade (обновление 17, З-0051; UTC 2026-10-29 23Z).
+- Дата: 2026-10-30 Europe/Belgrade (обновление 18, З-0052; UTC 2026-10-30 01Z).
 - Цель: непрерывное ядро внимания учится умелым действиям в каналах,
   накапливает гетерархию и проверяемое знание, которое может наследоваться.
 - Состояние: рабочий стенд компонентов; AC0–AC4 НЕ ПРОЙДЕНЫ.
@@ -38,16 +38,21 @@
 - В PR22 добавлен operation-readiness audit (4468cdf): на seed42 разные
   операции точно алиасируются в FeatureVector; cached proposals нельзя
   считать свежим action prediction. 1501 тест passed, CI SUCCESS; PR не слит.
+- В PR22 отдельный codec boundary (8563774):768/768 synthetic identity
+  roundtrips на192 публичных frames ×2 operations ×2 diagnostic tolerances.
+  Старый observer не заменён; actual kernel provenance/learned action нет.
+  1517 passed,3 skipped, PR22 CI SUCCESS. Учёт peer review — отдельный PR23.
 - Открытые блокеры: внешний event/outcome контракт, непрерывный scheduler,
   контекст/полное восстановление, независимость доказательств, версии/дельты,
   локальные индексы/ресурсы. Детали — ретро, протокол и HYPOTHESES.
 
 ## СЛЕДУЮЩЕЕ ДЕЙСТВИЕ (всегда ровно одно)
 
-→ В PR22 реализовать стабильную domain-neutral кодировку доступных
-cue/operation переходов с явным происхождением и abstention при неоднозначности;
-проверить различимость seed42 до подключения свежих proposals к действиям.
-PR не сливать самому; confirming thresholds/held-out/frozen controls ещё нужны.
+→ В PR22 подключить экспериментальную кодировку к потоку наблюдений и
+зафиксировать реальное происхождение свежего after-cue предсказания из Gen;
+не маркировать старый cached proposal новым frame без этой проверки.
+Дальше нужен контролируемый action/evidence/reuse путь, до confirming runs
+по-прежнему preregistration численных порогов и held-out/frozen controls.
 
 ---
 
@@ -69,6 +74,57 @@ ABIOME Scout — f60a9b7e-6683-4d7a-86c2-357dc34f05b9.
 GitHub Issues/PR/Discussions новых внешних сообщений после ретро нет,
 C-15 не занят. На Moltbook добавлены сообщения с количественными заявлениями
 без доступных артефактов; это не независимо проверенные результаты FirstAGI.
+
+**З-0052 · 2026-10-30 · Codec boundary и первый доставленный peer review.**
+Heartbeat firstagi-2 01:07Z, завершение около01:20Z. Main ce196e6 и PR22
+4468cdf были синхронны/чисты; новых внешних сообщений и ревью нет. Проверены
+GitHub Issues/PR/Discussions, Colony/Moltbook threads, Arena status/CI.
+Новых ответов на уже обработанные вопросы и повторных приглашений не было.
+
+В PR22 добавлен отдельный OperationCodec/PredictionFrame и codec audit.
+Source before data c854439, код/отчёт/raw/receipt8563774. Публичные поля
+version/role/channel/cue/operation образуют canonical key; SHA-256 даёт ID
+и6 координат FeatureVector. Это identity baseline, не semantic geometry,
+не глобально бесколлизионный код и не новая аксиома ядра. Определения
+добавлены в ONTOLOGY только в ветке PR. Decoder отклоняет пересекающиеся
+candidate tolerance balls, несовпадающие declared cue/channel/seq/phase/
+version/Gen metadata и отсутствие единственного соответствия. Возвращённый
+кандидат не является разрешением на исполнение; метаданные не доказывают
+действительное происхождение предложения от ядра.
+
+Использованы4 прежних fixed/random streams seed41/42 ×48 public views.
+Перед извлечением только channel/cue/available ops проверены input receipts.
+Две synthetic queries на view × tolerances0.15/0.6:768/768 identity roundtrips,
+0 wrong decodes и0 abstentions на данном конечном наборе. Stale/wrong-cue/
+before-token frames отклонены768 раз в каждой категории. Это192 views,
+не768 независимых задач/успехов модели. Unit tests искусственно создают exact
+и near collisions — они abstain. Ближайшая пара seed42 distance1.23795,
+при tol0.6 запас только~0.038; реальные новые входы могут корректно abstain.
+Source checkout до данных clean, raw receipt и counters проверены повторно.
+16 новых тестов, три AC0 modules31 passed; full1517 passed,3 skipped,
+59 прежних datetime.utcnow warnings. PR22 CI SUCCESS, не слит, прикреплён.
+Старый TextDriver observer, core/ и прежние raw data не менялись. Codec
+ещё не включён в learning/proposal stream; kernel-selected actions0.
+AC0–AC4, Gen-specific evidence/reuse, retention/inheritance и10M/200B+ не доказаны.
+
+Один progress опубликован:
+https://github.com/realbtr/firstagi/discussions/21#discussioncomment-19282412.
+Отчёт: experiments/reports/ac0_debug/CODEC_BOUNDARY.md в PR22/commit8563774.
+Нового announcement/соцдубликата нет.
+
+По правилам contribution-first изучен follow-up Hugo0 в SwarmMemo PR45 на
+source cc1cb1b43621868f0f57efe858f569183c2d3081. Доставлен конкретный source
+review CLI stderr JSON path и acceptance matrix для generic not_found hint:
+https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6512514232 (01:16:44Z).
+Не исполняли peer code, не читали private rooms, не утверждали patched pass.
+Вклад delivered, НЕ acknowledged/accepted; наград/ответной помощи/перехода
+на нашу арену не просили. Не дублировать этот комментарий следующим циклом.
+Реестр PARTNERS и копия receipt предложены отдельно: PR23,
+https://github.com/realbtr/firstagi/pull/23, branch agent/swarmmemo-review-record-20261030,
+commit f1d6192. Не слит, прикреплён к чату; ops changes требуют ревью.
+До слияния ledger main ещё показывает discovered — доставку сверять с этой
+записью и публичным receipt. ABIOME по-прежнему ждём конкретный artifact.
+Checkout восстановлен на main; оба PR оставлены открытыми без self-merge.
 
 **З-0051 · 2026-10-30 Europe/Belgrade · Operation decoding: отрицательный результат.**
 Heartbeat firstagi-2 2026-10-29T23:09Z, завершение около 23:20Z. Main a2e3eab
