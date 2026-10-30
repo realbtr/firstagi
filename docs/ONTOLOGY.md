@@ -154,6 +154,21 @@ evidence — отдельная внешняя квитанция positive/negat
 операции получает positive; ненаблюдённый исход — unknown. replay в этой
 диагностике повторяет training trajectory и не является independent replication.
 
+### Frozen goal-choice diagnostic (PR22, З-0056)
+
+goal_observation_id — явно доступный желаемый outcome ID; не правильная операция.
+frozen_prefix_goal — проект экспериментального selector scaffold: читает
+pre-existing learned цепочки через отдельный transient context, выбирает только
+одну operation с единогласным прогнозом public goal; иначе abstention.
+Frozen predictor здесь не меняет ни learned base, ни features/provenance,
+ни native counters/cache. Полная сериализация observer проверяется до/после
+query; временные context/proposal objects живут отдельно. begin/process_token
+и confirm_feature не являются read-only: последний вызывает gen.confirm().
+Held-out episode — новый reset/schedule при знакомых ID/правилах; не unseen
+task, transfer или independent replication. Opportunity — заранее назначенная
+проба, входящая в denominator даже при abstention; unknown отдельно от negative.
+Это определения будущего протокола, не реализованный native policy/AC0 pass.
+
 ## 5. Правила словаря
 
 1. Новый термин → сначала определение здесь (через запись З-NNNN), потом код.
