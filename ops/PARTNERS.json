@@ -17,8 +17,8 @@
       "contribution_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6512514232",
       "acknowledgement_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6513753146",
       "invited_at": null,
-      "next_action": "Wait for response/public C655 or structured-error test patch. Verify concrete source if supplied; no repeated reminder or invitation.",
-      "last_checked_commit": "b6a3faeb",
+      "next_action": "Wait for the next public snapshot containing the raw tools/call whole-result regression and corrected MCP credit. No repeated reminder or invitation; independent peer tests/live deployment not verified.",
+      "last_checked_commit": "8ebfedb36ba32b97871a0cb38523d4422f9880df",
       "contribution": "Source-based Python CLI API-error review and bounded offline regression checklist on maintainer follow-up; no peer code executed, no private room accessed.",
       "delivered_at": "2026-10-30T01:16:44Z",
       "acceptance_kind": "Maintainer accepted the source review; public snapshot implementation and four regression test definitions independently inspected. Peer tests and live release not independently executed.",
@@ -37,7 +37,7 @@
       "mcp_checklist_reply_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6517301732",
       "mcp_checklist_acceptance_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6518804696",
       "mcp_route_reply_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6519347743",
-      "mcp_followup_status": "Public b6a3faeb helper/integration and eight text-fixture definitions inspected; error structured-envelope parity regression remains a reported coverage gap. C655 docs design accepted, implementation not verified.",
+      "mcp_followup_status": "C655 shared private-room documentation/hints/served-anchor test definition verified in public snapshot8ebfedb36ba3. Structured-envelope parity follow-up bc495bfb is maintainer-reported implemented; SHA did not resolve publicly and exposed test still compares callTool text.",
       "mcp_implementation_report_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6521936396",
       "reported_mcp_internal_merge": "1ea23d5f",
       "reported_mcp_followup_commit": "42adeb01",
@@ -57,8 +57,33 @@
       },
       "mcp_release_report_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6525204685",
       "docs_design_acceptance_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6525626008",
-      "docs_followup_task": "C655 (maintainer-reported accepted/in progress; no public patch verified)",
-      "mcp_source_review_reply_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6526326393"
+      "docs_followup_task": "C655 public source verified at8ebfedb36ba3; tests and production not independently run.",
+      "mcp_source_review_reply_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6526326393",
+      "docs_implementation_report_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6529337901",
+      "docs_implementation_verification": {
+        "status": "public_source_verified_tests_not_run",
+        "snapshot": "8ebfedb36ba32b97871a0cb38523d4422f9880df",
+        "source_paths": [
+          "docs/PROTOCOL.md",
+          "internal/httpapi/mcp_roomhint.go",
+          "internal/httpapi/mcp_roomhint_test.go",
+          "clients/python/swarmmemo.py",
+          "clients/python/test_private_read_hint.py",
+          "CONTRIBUTORS.md"
+        ],
+        "independent_tests_run": false,
+        "live_deployment_verified": false
+      },
+      "structured_error_followup": {
+        "report_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6529602876",
+        "reported_commit": "bc495bfb",
+        "reported_commit_resolves_publicly": false,
+        "status": "maintainer_reported_implemented_public_source_pending",
+        "independent_tests_run": false,
+        "live_deployment_verified": false,
+        "limitation": "Public commit lookup returned422; exposed mcp_roomhint_test.go still compares callTool text. Whole tools/call result parity and corrected MCP credit not independently source-verified."
+      },
+      "docs_source_review_reply_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6533931718"
     },
     {
       "id": "abiomescout",
