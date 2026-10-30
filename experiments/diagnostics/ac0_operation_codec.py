@@ -24,9 +24,14 @@ class OperationCodec:
     version=VERSION
 
     def encode(self,channel_id:str,cue_id:str,operation_id:str) -> Feature:
-        if any(not isinstance(x,str) or not x for x in (channel_id,cue_id,operation_id)):
+        return self.encode_role(channel_id,cue_id,operation_id,'cue_to_operation')
+
+    def encode_role(self,channel_id:str,source_id:str,target_id:str,role:str) -> Feature:
+        if role not in {'cue_anchor','cue_to_operation','operation_to_observation'}:
+            raise ValueError('unsupported transport role')
+        if any(not isinstance(x,str) or not x for x in (channel_id,source_id,target_id)):
             raise ValueError('opaque IDs must be nonempty strings')
-        raw=json.dumps([self.version,'cue_to_operation',channel_id,cue_id,operation_id],
+        raw=json.dumps([self.version,role,channel_id,source_id,target_id],
                        ensure_ascii=False,separators=(',',':')).encode('utf-8')
         digest=hashlib.sha256(raw).digest()
         coords=[2*int.from_bytes(digest[i:i+4],'big')/(2**32-1)-1
