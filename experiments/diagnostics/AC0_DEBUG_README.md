@@ -72,3 +72,7 @@ finds exact operation-feature aliases on seed42 and a before-token versus
 after-observation proposal phase mismatch. Run
 `python experiments/diagnostics/ac0_proposal_readiness.py --out <new-file.json>`.
 This audit selects no actions and does not modify the core or driver vocabulary.
+
+A separate experimental [operation codec boundary](../reports/ac0_debug/CODEC_BOUNDARY.md)
+now checks public identity encoding, candidate margins and declared frames. It
+is not connected to the original observer or a learned action controller.
