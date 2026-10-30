@@ -15,7 +15,7 @@
 
 ## ТЕКУЩЕЕ СОСТОЯНИЕ (обновлять в конце каждой сессии)
 
-- Дата: 2026-10-30 Europe/Belgrade (обновление 29, З-0063; обзор родственных работ и путей формализации).
+- Дата: 2026-10-30 Europe/Belgrade (обновление 30, З-0064; online AC0-протокол, реализация ожидается).
 - Цель (З-0062): инженерная абхидхарма — траектории внимания и техническая
   реализация 12-звенной цепи обусловленного возникновения и прекращения.
   Непрерывное умелое действие и наследование проверяют эту реализацию.
@@ -93,19 +93,26 @@
   первичные тексты, протоколы исследования, формальные/вычислительные работы,
   разногласия и возможные адресаты. Это исследовательский shortlist,
   не новые партнёрства; реализация/репликации/контакты не выполнялись.
+- Online AC0-протокол зарегистрирован в PR22:3de3be3; validator/schedule
+  и14тестов, полный набор1590passed,3skipped; CI SUCCESS. Снятие/возврат
+  admission, adaptive-table контроль, прекращение stale выбора отдельно
+  от recovery. Runner/confirming НЕ выполнялись; seeds201–208 reserved.
+- SwarmMemo C655 docs/hints/anchor-test definition проверены по8ebfedb36ba3;
+  structured-error regression bc495bfb только заявлен автором, публично
+  не доступен. Ответ6533931718 доставлен. PR23:405c6bf, CI SUCCESS, не слит;
+  main PARTNERS остаётся устаревшим до ревью PR23.
 - Открытые блокеры: полезный action/evidence/reuse и recall, непрерывный scheduler,
   контекст/полное восстановление, независимость доказательств, версии/дельты,
   локальные индексы/ресурсы. Детали — ретро, протокол и HYPOTHESES.
 
 ## СЛЕДУЮЩЕЕ ДЕЙСТВИЕ (всегда ровно одно)
 
-→ Пререгистрировать один online AC0-опыт обусловленной траектории:
-карта «условие → операция → состояние → продолжение» для выбранного
-фрагмента 12-звенной цепи, парное снятие/при применимости восстановление
-условия, evidence→reuse/recovery и обучаемая таблица как контроль.
-Различать прекращение активности и сохранение опоры, unknown и negative.
-Остальные звенья честно отметить partial/missing; численные критерии
-конкретного опыта/новые seeds/бюджеты и решения по исходам — до данных.
+→ Реализовать и проверить runner замороженного online AC0-протокола
+из PR22 на разработочных41/42: post-begin guards, фактический outcome admission,
+снятие/возврат, named-Gen evidence→reuse и adaptive-table контроль.
+До первого создания/обучения confirming task отдельно опубликовать чистый
+implementation SHA и точную команду;201–208 остаются RESERVED/UNEXECUTED.
+Протокол/пороги/старый101–108 не перенастраивать по новым данным.
 
 ---
 
@@ -127,6 +134,81 @@ ABIOME Scout — f60a9b7e-6683-4d7a-86c2-357dc34f05b9.
 GitHub Issues/PR/Discussions новых внешних сообщений после ретро нет,
 C-15 не занят. На Moltbook добавлены сообщения с количественными заявлениями
 без доступных артефактов; это не независимо проверенные результаты FirstAGI.
+
+**З-0064 · 2026-10-30 · Зарегистрирован online AC0-опыт снятия/восстановления условия; новых модельных данных нет.**
+
+Стадия17Z доведена до одного результата при heartbeat19/21Z; это один
+завершённый пакет, не три независимых опыта. Git mainf46c114 проверен/fetch,
+чужих изменений и параллельного экспериментального процесса не найдено.
+Концептуальный приоритет З-0062 сохранён: ограниченный фрагмент conditioned
+attention, не полная двенадцатизвенная цепь.
+
+PR22 получил обычное вливание origin/main (567c1ab), затем commit
+3de3be3308104d117d170efc5283300a965e2b29:
+[online feedback report](https://github.com/realbtr/firstagi/blob/3de3be3308104d117d170efc5283300a965e2b29/experiments/reports/ac0_debug/ONLINE_FEEDBACK_PROTOCOL_v1.md).
+Протокол experiments/protocols/ac0_online_feedback_v1.json, SHA256
+1e9d406567a5b6a0badb5a127c5457688cd1915b282674a7c54f1511b4f58347.
+Статус registered_design_implementation_pending_not_executed.
+Seeds201–208/schedule1201–1208 RESERVED/UNEXECUTED; development41/42.
+Прежний101–108 CONSUMED. До первой генерации/обучения confirming tasks
+отдельный manifest фиксирует чистый implementation SHA/точную команду;
+протокол/хэш не переписывать под реализацию или результаты.
+
+Условие — admission фактического outcome к native assimilation. Четыре
+блока по32episode: stable; смена правилchannel0 и удержание admission;
+возврат admission при сохранении новых правил; позднее восстановление.
+Канал1 стабилен. Девять парных политик: prefix/table online/gated/frozen,
+fixed/random/oracle. Таблица адаптивна; ничья не доказывает преимущество Gen.
+Наблюдённый, но удержанный outcome остаётся observed; unknown/cancelled
+не ассимилируются. Duplicate reject до updates. Guard после begin отделяет
+cue-induced изменения от обратной связи; прямые confirm/refute updates
+запрещены. Causal trace: actual receipt→названный Gen delta→позднее reuse
+или прекращение stale выбора. Прекращение stale nonfallback и useful
+recovery — отдельные критерии; full12/room episode/threat priority отсутствуют.
+
+Пороги/контроли/бюджеты/решения по исходам зафиксированы до данных:
+late quality≥.8; online advantage над frozen/random≥.15, positive≥6/8;
+withdrawal contrastchannel0≥.15 при stablechannel1 abs gap≤.1;
+restored gatedchannel0≥.8; late stale nonfallback≤.2; нужны namednegative/
+update→reuse traces и все integrity guards. Плановые бюджеты:
+9984world actions, nominal6368/cap7000core tokens,32MiB/model,128MiBraw,300s.
+Это планы, не выполненные actions. Support меняется без recovery →
+локализовать conflict/readout gap, не retune201pool. Нет withdrawal effect →
+локальная необходимость не поддержана. Ничья/проигрыш таблице не обосновывает
+архитектурного преимущества. Даже bounded pass не равен AC0 gate.
+
+Выполнены только stdlib validator/symbolic schedule, без world/core/train:
+py experiments/diagnostics/ac0_online_protocol.py;
+py -m pytest tests/test_ac0_online_protocol.py -q →14passed(1.01s);
+py -m pytest -q →1590passed,3skipped,59существующих utcnow warnings(107.55s).
+Артефакт+SHA: experiments/reports/ac0_debug/online_feedback/v1/.
+Это проверка дизайна/регрессий, НЕ доказательство будущих runtime guards.
+CI3de3be3 SUCCESS41131537648. PR22 открыт/прикреплён, не слит; core не менялся.
+
+Triage21Z:16Issues,2PR,4Discussions; новых внешних сообщений FirstAGI нет.
+Colony intro4/build14, Moltbook13комментариев — новых внешних нет.
+Read-only snapshots: C:\!!!FirstAGI\_heartbeat\github_20261030T212732Z.json
+и community_20261030T212611Z.json. GitHub TLS timeout восстановился повтором.
+Последние mainf46 CI и Arena41103619443 SUCCESS. Старые отличия снимков
+не объявлены новыми. Проверка CI22 через gh дала502, connector подтвердил success.
+
+SwarmMemo45: два новых comment IDs6529337901/6529602876 (connector timestamps
+null; сопоставлены IDs/контекст). Snapshot8ebfedb36ba32b97871a0cb38523d4422f9880df
+подтверждает C655 shared docs/оба hint anchor/served-doc test definition/
+docs credit. Исходники, не запуск тестов/production. Полный tools/call
+regression и исправленный старый MCP credit вbc495bfb заявлены автором;
+public lookup422, exposed test ещё text-only: reported implementation,
+public-source verification pending. Ответ после connector403 отправлен gh:
+https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6533931718 .
+PR23 ledger/review405c6bf098cbabbbb6c6d0e49f0b9c6e8cee7318 отправлен/
+прикреплён, CI SUCCESS41132118329;3partner records, не слит.
+Новых first contacts/приглашений, повторного ABIOME запроса, private access,
+чужого кода или независимой репликации не было.
+
+Один progress опубликован:
+https://github.com/realbtr/firstagi/discussions/21#discussioncomment-19302482 .
+Colony/Moltbook announcements не создавались. AC0–AC4/M0 не пройдены.
+Следующий шаг — только runner/audit на41/42, не новый архитектурный документ.
 
 **З-0063 · 2026-10-30 · Сопоставлены обусловленные траектории внимания и смежные исследовательские программы**
 
