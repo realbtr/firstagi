@@ -108,7 +108,7 @@
   1614passed,3skipped; CI PR22 SUCCESS.201–208 не выполнялись.
 - SwarmMemo whole-result MCP regression теперь source-verified вe83f5800c1eb;
   tests/production не запускались. Ответ6535772816, ledger PR23e828433,
-  CI при проверке in_progress; main PARTNERS устарел до ревью PR23.
+  CI SUCCESS41145418872; main PARTNERS устарел до ревью PR23.
 - Открытые блокеры: полезный action/evidence/reuse и recall, непрерывный scheduler,
   контекст/полное восстановление, независимость доказательств, версии/дельты,
   локальные индексы/ресурсы. Детали — ретро, протокол и HYPOTHESES.
