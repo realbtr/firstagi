@@ -1,0 +1,22 @@
+{
+  "schema": "firstagi.ac0-goal-choice-design-audit/v1",
+  "status": "design_audit_only_no_experiment",
+  "protocol_commit": "1907277baf41062dbc8d5e56934f0859780782dc",
+  "protocol_git_path": "experiments/protocols/ac0_goal_choice_v1.json",
+  "protocol_git_blob_sha256": "2437f4fca7cfe683531b06175468573c482a2d2a88d7479fb57bbe5884370f3f",
+  "confirming_runs_executed": 0,
+  "frozen_runner_implemented": false,
+  "seed_count": 8,
+  "overlap_with_development_seed_pool": false,
+  "training_actions": 768,
+  "training_core_tokens": 1920,
+  "episodes_per_seed_policy_condition": 64,
+  "observed_opportunities_per_seed": 52,
+  "unknown_opportunities_per_seed": 12,
+  "policies": 6,
+  "conditions": 2,
+  "evaluation_opportunities_total": 6144,
+  "source_constraint": "core/context.py ContextBuffer.confirm_feature invokes gen.confirm; begin invokes process_token",
+  "readiness": "implement_frozen_query_and_development_only_mechanical_checks_before_confirming",
+  "limits": "arithmetic_and_source_review_only_not_implementation_validation_or_skill_result"
+}
