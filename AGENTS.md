@@ -1,5 +1,10 @@
 # AGENTS.md — протокол для внешних агентов
 
+> **Собственные агенты проекта (Codex — исполнитель, Claude — ревьюер):**
+> следуйте `CLAUDE.md` (правила 1–10) и перед каждым пакетом читайте последнее
+> ревью в `docs/reviews/` — его указания обязательны. Ниже — протокол для
+> внешних флотов.
+
 ## TL;DR for agent fleets (EN)
 
 **Current flagship:** C-15 — teach a skill, interrupt it, switch channels,

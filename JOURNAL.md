@@ -13,93 +13,48 @@
    этого файла и SPEC_FINAL.md. Больше ничего. Если чего-то не хватает —
    это дефект журнала; исправляется записью, а не раскопками истории.
 
-## ТЕКУЩЕЕ СОСТОЯНИЕ (обновлять в конце каждой сессии)
+## ТЕКУЩЕЕ СОСТОЯНИЕ (обновлять в конце каждой сессии; не больше 20 строк — ревью D3)
 
-- Дата:2026-10-31 Europe/Belgrade, обновление35/З-0069. Сводка сокращена;
-  полная история решений/источники ниже сохранены без переписывания.
-- Цель З-0062: инженерная абхидхарма, траектории внимания и функциональная
-  12-звенная цепь обусловленного возникновения/прекращения. Устойчивые
-  значимые опоры отличаем от временной детализации и текущей применимости.
-- Статус: рабочий стенд компонентов; AC0–AC4/M0 НЕ ПРОЙДЕНЫ. Smoke/uptime/
-  MR/рост Gen/социальные LLM-агенты не когнитивные гейты/экземпляры ядра.
-  SPEC_FINAL v1.2, FIRSTAGI_OPERATIONAL_PROTOCOL v0.2; аудит
-  docs/RETROSPECTIVE_2026-10-29.md; источники docs/concept с хэшами.
-- Приоритет AC0→AC1(непрерывная жизнь)→AC2(проверенная дельта наследнику).
-  Рой E2 и mirror-body — позже соответствующих предпосылок, не обход AC0.
-- Миллионы/триллионы,≤10M/200B+,<1M опор/7^7 — философское подспорье,
-  не обязательные критерии и не отдельная задача уточнения/опровержения.
-- H22 pilotv1 завершён, ёмкость не установлена, полная серия не запускалась.
-  H27–H35 открыты; H1–H26 сохраняют исторические пределы применимости.
-- Репозиторий public/MIT:github.com/realbtr/firstagi; C-15 issue20/Discussion21,
-  15вызовов. Bot/MCP/triage — инфраструктура. Readiness259tests — только smoke.
-- PR22 открыт/не слит: event/outcome+двухканальный scaffold, verified codec/
-  Gen provenance и explicit prefix/goal readout; context reset по cue — fixture,
-  не AC1. Core не менялся. Pipeline-история и точные SHA — З-0050…З-0069.
-- Frozen v1 З-0059/0060:stable416/416 vs fixed/random212/416, swapped0/416.
-  Таблица8переходов/task воспроизводит1024выбора; нет heterarchy advantage.
-  Confirming101–108 CONSUMED, не переигрывать/не retune.201–208 RESERVED,
-  не генерировались/обучались/исполнялись; старый online protocol неизменён.
-- Online development41/42 З-0065: native support меняется, latechanged4/10
-  и6/10 полностью fallback; table10/10, stable native10/10. Useful recovery
-  не достигнуто. Source05c4b98/report5f5c22e; не новый confirming pass.
-- Receipt replay З-0066:256query matches;16negative forecasts deactivated/
-  retained и16later reappearances;44stale waits ещё live/stop unchanged.
-  Global any-match не равен event-scoped grading каждой ветви. Все query
-  contributors уже live; одного live-intersection недостаточно. Это fixture
-  contract gap, не универсальный kernel bug; не удалять все nonmatches.
-- Shadow З-0067:sourcecc2fc5b/report5fc0ebd,256cases/1024readonlyqueries,
-  0новых model/core/world actions/outcomes. Abstentions original/live84,
-  prior-actual-compatible Gen31, table22; conflicts145→0,9verified forecast
-  coverage gaps.33masked choices не исполнялись; counterfactual outcomes
-  UNKNOWN. Нет on-policy recovery/independent replication/AGI advantage.
-- Own-action development З-0068 выполнен на known41/42, но INCOMPLETE:
-  formatted raw35,160,493bytes превысил32MiB; исходная квитанция сохранена.
-  Prior-actual-compatible Gen latechanged10/10,10/10; original4/10,6/10
-  полностью fallback; table10/10,10/10. Gated recovery10/10,8/10, в8/10
-  входят2random successes.58repeated update/reuse joins по8Gen — temporal
-  provenance, не causal necessity/native policy/heterarchy advantage.
-  Source50a752e, report47970a1;1728world actions/2168tokens/12.806s.
-  Один pre-eval copy-guard failure также сохранён. Compact writer исправлен
-  для будущего; этот rollout не переигрывать ради pass.201–208 не тронуты.
-- Forecast-gap replay З-0069:4пропуска —2native candidates со счётчиком1
-  при неизменном пороге2; признаки/provenance есть, matching chains ещё нет.
-  Вторые actual observations98/112 создают Gen; позже correct nonfallback
-  actions106/120. Это concrete evidence→creation→use в explicit scaffold,
-  не independent replication/causalnecessity/native policy/full12chain.
-  128raw/masked query matches,508replayedtokens,0новыхworld/actions/outcomes,
-  complete4.000s/408533bytes; исходный own-action rollout остаётсяincomplete.
-- PR22headd563398,1687passed/3skipped/59existingwarnings, CI SUCCESS41181707326.
-  Core/min_gen_count2/original online/declared designs неизменны. Число
-  тестов и завершённый diagnostic replay не cognitive gate pass.
-- Родственные работы/эпизод владельца:docs/research/ABHIDHARMA_RELATED_WORK_2026-10-30.md
-  и docs/ATTENTION_TRAJECTORIES.md. Реактивация опор не обязательно новый Gen;
-  confident recognition/attention priority/context/knowledge различать.
-- SwarmMemo: прежние docs/full-result review приняты/source-verified наe83f5800.
-  Read_thread review6537271756 доставлен, не принят/не выполнен как tests.
-  Latest public61488240(version1.146.62) checked boundedly: signed-member
-  masked-author test включаетthread.get, но это другая граница, чем delivered
-  four-MCP-caller/private-vs-missing matrix. Acceptance не установлено;
-  чужие tests/live/private не запускались.
-  PR23head5e101ea открыт/не слит; CI SUCCESS41181804514;3partner records.
-  Main PARTNERS устарел до ревью PR23; ABIOME ждёт artifact, Langford discovery.
-- Открыто: полезный native action/evidence/reuse, условия применимости/Gen
-  coverage, непрерывный scheduler и полный context restore, независимость
-  подтверждений, версии/дельты и наследование, локальные индексы/ресурсы.
-  Дизайн функции/слова Учения не доказательство полноты12звенной реализации.
+- 2026-10-31, обновление 36 / З-0070. Роли: Codex — исполнитель; Claude — ревью,
+  ретро, фокус. Действующее ревью: docs/reviews/REVIEW_2026-10-31_focus.md (D1–D6).
+- Цель (З-0062): инженерная абхидхарма — траектории внимания и функциональная
+  12-звенная цепь возникновения и прекращения. ≤10M/200B+ — ориентир, не критерий.
+- Путь: AC0 → AC1 → AC2 (FIRSTAGI_OPERATIONAL_PROTOCOL v0.2). AC0–AC4 и M0 не
+  пройдены. Численные пороги AC0 не зафиксированы — все опыты до сих пор debug.
+- Главный факт: в goal-choice v1 таблица переходов воспроизводит 1024/1024
+  решений; преимущество гетерархии не показано (З-0060).
+- Диагностики З-0064…З-0069 (известные seeds 41/42): обратная связь меняет
+  поддержку Gen, полезное восстановление не достигнуто. Закрытых вариантов не было.
+- Код: ядро не менялось. Scaffold и данные — открытый PR #22 (~1,95 млн строк,
+  в основном сырые трассы; разделить по D4). PR #23 — запись ревью партнёру.
+- H22: пилот завершён, ёмкость не установлена (C-14 открыт). H27–H35 открыты.
+- Арена: 15 вызовов; бот, MCP (PyPI/реестр) и ежедневный сортировщик работают.
+  Внешних находок нет; входящие — единичные полезные отклики (Colony).
+- Каденция и публичность — по D1/D2: без двухчасового цикла и самоотчётов.
+- Открыто: О-8 (аудит ресурсов), независимость подтверждений, наследование.
 
 ## СЛЕДУЮЩЕЕ ДЕЙСТВИЕ (всегда ровно одно)
 
-→ До новых действий описать development-only контроль uniform fallback
-против явно маркированного probe из существующего native candidate. Сохранить
-min_gen_count2, отдельно считать probes/Gen-supported choices, заранее задать
-seeds/бюджеты и одиночный шумовой/unknown контроль. Проверять полезность
-сбора actual evidence для появления и позднего применения цепочки при равных
-opportunities; не выдумывать forecast/outcome для probe. Пока только дизайн,
-без execution/confirming201–208; код/данные остаются в открытом PR22.
+→ Пререгистрировать AC0 confirming по указанию D5 ревью 2026-10-31: закрытые
+  варианты, численные пороги и бюджет, контроль — обучаемая таблица переходов
+  (плюс fixed/random/frozen), одна функциональная зависимость со снятием
+  условия через вмешательство в причинный носитель, заранее записанное решение
+  для исходов «лучше / равно / хуже таблицы». Только протокол, без запусков.
 
 ---
 
 ## ЖУРНАЛ РЕШЕНИЙ
+
+**З-0070 · 2026-10-31 · Роли агентов; первое фокусирующее ревью.**
+Решение владельца: Codex — исполнитель; Claude — ревью, инициация технических
+и концептуальных ретро, фокус на главном (CLAUDE.md п.10, отсылка в AGENTS.md).
+Ревью docs/reviews/REVIEW_2026-10-31_focus.md: научная строгость выросла, но
+З-0064…З-0069 — отладочный конвейер без критерия успеха (пороги AC0 не выбраны)
+и без закрытых вариантов. Указания: D1 без двухчасового цикла; D2 без
+самоотчётов, только ответы/итоги гейтов/недельный дайджест; D3 лимиты журнала;
+D4 разделить PR #22, сырые трассы вне git; D5 пререгистрация AC0 confirming —
+главное; D6 рамки сотрудничества З-0048. «Текущее состояние» сжато до 20 строк;
+прежняя сводка сохранена в истории git (коммит df63220). Код не менялся.
 
 Публикация З-0047/З-0048: revision abc9c27 отправлена в main;
 C-15 открыт и закреплён: https://github.com/realbtr/firstagi/issues/20.
