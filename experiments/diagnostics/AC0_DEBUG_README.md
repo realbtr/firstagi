@@ -99,3 +99,4 @@ Registered result: [eight-seed frozen-goal scaffold pass](../reports/ac0_debug/G
 
 Online feedback development: [negative recovery result and native feedback traces](../reports/ac0_debug/ONLINE_FEEDBACK_DEVELOPMENT.md). On41/42 the unchanged conflict-preserving readout stops stale nonfallback choices but falls back; adaptive table recovers. No confirming run;201–208 reserved.
 Context applicability: [saved-receipt replay](../reports/ac0_debug/CONTEXT_APPLICABILITY_REPLAY.md) separates persistent Gen, live waiting branches and event-scoped forecast evidence. No new world actions; a separate shadow comparison is declared but unexecuted.
+Applicability shadows: [fixed-history result](../reports/ac0_debug/APPLICABILITY_SHADOW_RESULT.md). Prior-actual compatibility reduces abstention84-to31 versus table22; nine verified forecast-coverage gaps. No new actions or on-policy recovery; the next on-policy development comparison is declared separately.

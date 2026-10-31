@@ -11,3 +11,4 @@ experiments/reports/ac0_debug/** -text
 # Registered online AC0 design: hash pins exact bytes.
 experiments/protocols/ac0_online_feedback_v1.json -text
 experiments/protocols/ac0_applicability_shadow_v1.json -text
+experiments/protocols/ac0_applicability_on_policy_dev_v1.json -text

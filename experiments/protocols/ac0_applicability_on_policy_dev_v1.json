@@ -1,0 +1,149 @@
+{
+  "schema": "firstagi.ac0-applicability-on-policy-development/v1",
+  "status": "declared_before_on_policy_development_execution",
+  "scope": "explicit_Gen_readout_and_prior_actual_context_scaffold_not_native_policy_or_AC0_gate",
+  "prior_shadow_raw_sha256": "a255fa5c3373d0de12244267ed46fe4f7b25dbf0cb14ff45d41f5c4aca6e79bf",
+  "task_seeds": [
+    41,
+    42
+  ],
+  "exposure": "known_development_tasks_already_used_no_held_out_or_population_claim",
+  "source_implementation_commit": null,
+  "policies": [
+    "prefix_online",
+    "prefix_actual_context_online",
+    "prefix_actual_context_feedback_gate",
+    "table_online",
+    "table_feedback_gate",
+    "random_uniform"
+  ],
+  "training": {
+    "attempts_per_seed": 96,
+    "operation_rng_offset": 1000,
+    "unknown_modulo": 12,
+    "unknown_slots": {
+      "3": "interrupted",
+      "5": "unavailable",
+      "7": "cancelled"
+    },
+    "recall_policy": "native_atomic",
+    "finalize_once_before_cloning": true,
+    "shared_training_snapshot_and_actual_receipts": true,
+    "extend_for_coverage": false
+  },
+  "schedule": {
+    "source": "unchanged_ac0_online_protocol.schedule_layout",
+    "schedule_seeds": [
+      1041,
+      1042
+    ],
+    "blocks": 4,
+    "episodes_per_block": 32,
+    "actions_per_episode": 1,
+    "reset_world_phase_from_case": true,
+    "flip_channel_index": 0,
+    "flip_from_block": 1,
+    "withdraw_channel_index": 0,
+    "withdraw_blocks": [
+      1
+    ],
+    "gated_policies": [
+      "prefix_actual_context_feedback_gate",
+      "table_feedback_gate"
+    ],
+    "paired_fallback_offset": 30000,
+    "random_policy_offset": 20000
+  },
+  "controller_boundary": {
+    "public_view_fields": [
+      "channel_id",
+      "observation_id",
+      "available_operations",
+      "goal_observation_id"
+    ],
+    "only_own_past_executed_actual_receipts_after_action": true,
+    "no_hidden_phase_block_rule_or_oracle": true,
+    "per_policy_world_and_history_independent": true,
+    "no_evaluation_receipts_shared_across_policies": true
+  },
+  "native_readout": {
+    "base": "unchanged_FrozenGoalPredictor_all_contributors_unanimous_public_goal_rule",
+    "contextual_variant": "filter_existing_Gen_forecasts_by_last_prior_admitted_actual_for_channel_cue_operation_if_present",
+    "missing_history": "retain_original_forecasts",
+    "missing_Gen": "abstain_or_other_Gen_supported_choice_never_synthesize_from_table",
+    "trial_begin": "existing_exact_learned_prefix_begin",
+    "updates": "existing_process_token_actual_observed_admitted_only",
+    "direct_Gen_counter_or_chain_assignment": false,
+    "persistent_Gen_deletion": false
+  },
+  "actual_context": {
+    "initialization": "shared_observed_training_receipts",
+    "update": "only_own_current_executed_actual_observed_admitted_after_sealed_query",
+    "unknown_or_withheld": "no_replace_no_negative",
+    "key_fields": [
+      "channel_id",
+      "observation_id",
+      "operation_id"
+    ],
+    "no_TTL_or_evaluator_regime_label": true,
+    "status": "explicit_sidecar_proxy_not_native_context_or_sufficient_statistic_claim"
+  },
+  "fallback": {
+    "policy": "paired_uniform_public_operation_after_raw_abstention",
+    "counts_in_actual_task_quality": true,
+    "is_Gen_supported_action": false
+  },
+  "trace_and_integrity": [
+    "record_pre_action_raw_and_filtered_forecasts_history_digest_and_seal",
+    "actual_transition_event_and_operation_cost_for_each_action",
+    "grade_only_forecasts_of_same_executed_operation_unknown_separate",
+    "named_Gen_creation_or_support_update_then_later_correct_nonfallback_choice_on_own_history",
+    "post_begin_native_snapshot_before_after_feedback_for_unknown_withheld",
+    "duplicate_receipt_rejected_before_updates",
+    "history_unknown_withheld_and_channel_cue_operation_isolation",
+    "missing_Gen_coverage_and_context_eligibility_separate",
+    "all_model_and_sidecar_stores_accounted_including_receipt_id_bookkeeping"
+  ],
+  "development_checks": {
+    "late_observed_per_channel_seed": 10,
+    "masked_late_goal_rate_each_channel_each_seed_min": 0.8,
+    "restored_gated_late_changed_goal_rate_each_seed_min": 0.8,
+    "table_late_goal_rate_each_channel_each_seed_min": 0.8,
+    "require_at_least_one_changed_channel_named_Gen_update_then_correct_nonfallback_reuse": true,
+    "report_fallback_and_nonfallback_success_separately": true,
+    "withdrawal_contrast_descriptive_not_population_significance": true,
+    "all_integrity_guards_required": true,
+    "pass_is_only_development_candidate": true,
+    "AC0_or_full_twelve_link_gate_pass_allowed": false
+  },
+  "budgets": {
+    "max_train_actions": 192,
+    "max_train_core_tokens": 480,
+    "max_evaluation_actions": 1536,
+    "max_all_world_actions": 1728,
+    "nominal_all_core_tokens": 2168,
+    "max_all_core_tokens": 2300,
+    "max_gen_visits_per_query": 4096,
+    "max_feature_lookups_per_query": 12288,
+    "max_serialized_model_bytes_per_instance": 33554432,
+    "max_actual_context_keys": 8,
+    "max_raw_bytes": 33554432,
+    "max_wall_seconds_complete_run": 60,
+    "violation": "stop_save_partial_no_seed_drop_or_extension"
+  },
+  "preconditions": [
+    "implement_and_test_without_changing_this_design",
+    "clean_source_SHA_and_fresh_raw_SHA_completion_paths_before_execution",
+    "CLI_development41_42_only_no_confirming_mode",
+    "retain_all_runs_and_failures"
+  ],
+  "decisions": {
+    "integrity_failure": "incomplete_no_mechanism_claim",
+    "mask_does_not_recover_table_does": "localize_own_history_Gen_coverage_creation_or_readout_gap",
+    "masked_equals_table": "no_heterarchy_advantage_established",
+    "masked_recovers_with_trace": "one_explicit_sidecar_readout_development_fragment_not_native_core_competence",
+    "all_checks_pass": "consider_separate_preregistered_on_policy_confirming_design_only_after_review"
+  },
+  "original_online_protocol": "unchanged",
+  "reserved_confirming_pool_201_208": "untouched_no_execution_authorized_by_this_development_design"
+}
