@@ -194,3 +194,10 @@ Actual evidence/pending в двух core-файлах; 30 новых тесто�
 CI41235860201 SUCCESS. StepResult unit fixtures не живой стенд; policy/перенос не проверены.
 Следующий шаг — ревью A1; PR28 без отдельного разрешения не сливать, A2/A3 не начинать.
 Session pickle поддержан; отдельный legacy DB-экспорт ledger не сохраняет.
+
+Уточнение З-0084: H1 A1-ревью исправлен в PR28/dc9ae7, CI41244381976 SUCCESS.
+Origin у Gen ровно один; второй bind — ошибка, новые p/n только из frozen forecast.
+Полный1732passed/3skipped; shared fixture больше не даёт post-hoc допуска.
+PR28 не слит: подтверждение исправления и отдельное разрешение владельца ещё нужны.
+C1/C2 — A2 (contributors из live core; без скрытого full scan), C3 — до development
+(байты состояния≤16MiB и checkpoint, сохраняющий ledger). Новых опытов нет.
