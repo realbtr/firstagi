@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "source_commit": "d563398bf06fc274555cb6844a86e362081fa15f",
+  "source_pr": "https://github.com/realbtr/firstagi/pull/22",
+  "purpose": "Historical diagnostics only; not a new experiment, gate pass or repaired incomplete run",
+  "archive_url": "https://github.com/realbtr/firstagi/releases/download/ac0-debug-archive-20261031/ac0-debug-raw-d563398.tar.gz",
+  "archive_sha256": "a1e27c982cea03e96dbeddd88476485e97852cab6ba7ef3d4e8336ca1e0fca17",
+  "archive_bytes": 3026774,
+  "uncompressed_bytes": 85108775,
+  "git_raw_limit_bytes": 1000000,
+  "files": [
+    {
+      "path": "experiments/reports/ac0_debug/codec/v0_1/audit.json",
+      "bytes": 1110918,
+      "sha256": "1588d6ae1be167ba6ee84d4b2b1de3a75f9223780971536b12f688082186c32f",
+      "git_blob": "06035371f2ee2fce2e9da313a0cdaeba1aec3ea4"
+    },
+    {
+      "path": "experiments/reports/ac0_debug/confirming_goal/v1/goal_choice_confirming_v1.json",
+      "bytes": 20647527,
+      "sha256": "937ab033a63fc4de42001ce5370a804dadbe58c84e7fca7088f1629ed90d8568",
+      "git_blob": "db990bd1666a75ba06efb9fc7c6929c318cdbff0"
+    },
+    {
+      "path": "experiments/reports/ac0_debug/online_feedback/v1/applicability_shadow_20261031T0324.json",
+      "bytes": 1067695,
+      "sha256": "a255fa5c3373d0de12244267ed46fe4f7b25dbf0cb14ff45d41f5c4aca6e79bf",
+      "git_blob": "260eadaef5fe38b70fc5c7475a494e9642a96e59"
+    },
+    {
+      "path": "experiments/reports/ac0_debug/online_feedback/v1/context_replay_20261031T0135.json",
+      "bytes": 5158371,
+      "sha256": "35b1ca6656a6faaae3592eb8968d992dd5831c32c37f2f4032141713b49dd7fc",
+      "git_blob": "0969b53a3b4484ded2d73f27371f67d694570998"
+    },
+    {
+      "path": "experiments/reports/ac0_debug/online_feedback/v1/development_41_42_20261030T2334.json",
+      "bytes": 15191215,
+      "sha256": "04039391fb7a1bd46598e90b7665d11b529dcb9bce9217c080f088b81ebe4829",
+      "git_blob": "fd23aefdd72a9f31ef5fea53e9c66166052177cd"
+    },
+    {
+      "path": "experiments/reports/ac0_debug/online_feedback/v1/on_policy_dev_20261031T0540.json",
+      "bytes": 35160493,
+      "sha256": "b565e4d6df5f35e1da49ec145b11586054dcee28f408bcb6f7c23547fd771dee",
+      "git_blob": "4553748f7ae2ae6e66c4cd730ac5e7b4c46f865e"
+    },
+    {
+      "path": "experiments/reports/ac0_debug/paired_goal/v0_1/development.json",
+      "bytes": 5162532,
+      "sha256": "2c91aa58517716e603901ffe0565a3522ad99f57992d76bb55c3a401a389817b",
+      "git_blob": "fb1dc3fd85e832ecfacc28b8d3d3067a5c014cbe"
+    },
+    {
+      "path": "experiments/reports/ac0_debug/recall_ablation/v0_1/probe.json",
+      "bytes": 1610024,
+      "sha256": "180eb79b410cc6c2da6d81fbc0ab8a1d6b620b6b7865b50f76952579b04b5dd7",
+      "git_blob": "50c30ddaa0a703dde393150854f8e151e437bc8f"
+    }
+  ]
+}

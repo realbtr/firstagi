@@ -1,0 +1,162 @@
+{
+  "status": "post_hoc_descriptive_baseline_not_preregistered",
+  "source_raw_sha256": "937ab033a63fc4de42001ce5370a804dadbe58c84e7fca7088f1629ed90d8568",
+  "method": "training actual-outcome table(channel,cue,operation); same explicit public-goal equality selector; factual scores reused only after per-record action equality check",
+  "learner_or_world_executed": false,
+  "uses_Gen_heterarchy_vectors_native_scores": false,
+  "results": [
+    {
+      "seed": 101,
+      "table_entries": 8,
+      "nondeterministic_entries": 0,
+      "conditions": [
+        {
+          "condition": "stable",
+          "identical_choices": 64,
+          "goal_successes": 52,
+          "observed_opportunities": 52
+        },
+        {
+          "condition": "all_cue_answers_swapped",
+          "identical_choices": 64,
+          "goal_successes": 0,
+          "observed_opportunities": 52
+        }
+      ]
+    },
+    {
+      "seed": 102,
+      "table_entries": 8,
+      "nondeterministic_entries": 0,
+      "conditions": [
+        {
+          "condition": "stable",
+          "identical_choices": 64,
+          "goal_successes": 52,
+          "observed_opportunities": 52
+        },
+        {
+          "condition": "all_cue_answers_swapped",
+          "identical_choices": 64,
+          "goal_successes": 0,
+          "observed_opportunities": 52
+        }
+      ]
+    },
+    {
+      "seed": 103,
+      "table_entries": 8,
+      "nondeterministic_entries": 0,
+      "conditions": [
+        {
+          "condition": "stable",
+          "identical_choices": 64,
+          "goal_successes": 52,
+          "observed_opportunities": 52
+        },
+        {
+          "condition": "all_cue_answers_swapped",
+          "identical_choices": 64,
+          "goal_successes": 0,
+          "observed_opportunities": 52
+        }
+      ]
+    },
+    {
+      "seed": 104,
+      "table_entries": 8,
+      "nondeterministic_entries": 0,
+      "conditions": [
+        {
+          "condition": "stable",
+          "identical_choices": 64,
+          "goal_successes": 52,
+          "observed_opportunities": 52
+        },
+        {
+          "condition": "all_cue_answers_swapped",
+          "identical_choices": 64,
+          "goal_successes": 0,
+          "observed_opportunities": 52
+        }
+      ]
+    },
+    {
+      "seed": 105,
+      "table_entries": 8,
+      "nondeterministic_entries": 0,
+      "conditions": [
+        {
+          "condition": "stable",
+          "identical_choices": 64,
+          "goal_successes": 52,
+          "observed_opportunities": 52
+        },
+        {
+          "condition": "all_cue_answers_swapped",
+          "identical_choices": 64,
+          "goal_successes": 0,
+          "observed_opportunities": 52
+        }
+      ]
+    },
+    {
+      "seed": 106,
+      "table_entries": 8,
+      "nondeterministic_entries": 0,
+      "conditions": [
+        {
+          "condition": "stable",
+          "identical_choices": 64,
+          "goal_successes": 52,
+          "observed_opportunities": 52
+        },
+        {
+          "condition": "all_cue_answers_swapped",
+          "identical_choices": 64,
+          "goal_successes": 0,
+          "observed_opportunities": 52
+        }
+      ]
+    },
+    {
+      "seed": 107,
+      "table_entries": 8,
+      "nondeterministic_entries": 0,
+      "conditions": [
+        {
+          "condition": "stable",
+          "identical_choices": 64,
+          "goal_successes": 52,
+          "observed_opportunities": 52
+        },
+        {
+          "condition": "all_cue_answers_swapped",
+          "identical_choices": 64,
+          "goal_successes": 0,
+          "observed_opportunities": 52
+        }
+      ]
+    },
+    {
+      "seed": 108,
+      "table_entries": 8,
+      "nondeterministic_entries": 0,
+      "conditions": [
+        {
+          "condition": "stable",
+          "identical_choices": 64,
+          "goal_successes": 52,
+          "observed_opportunities": 52
+        },
+        {
+          "condition": "all_cue_answers_swapped",
+          "identical_choices": 64,
+          "goal_successes": 0,
+          "observed_opportunities": 52
+        }
+      ]
+    }
+  ],
+  "conclusion": "This task/result does not establish advantage over an eight-entry per-task transition table. This does not refute heterarchy outside this task."
+}

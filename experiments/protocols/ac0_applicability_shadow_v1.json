@@ -1,0 +1,65 @@
+{
+  "schema": "firstagi.ac0-applicability-shadow-design/v1",
+  "status": "declared_before_shadow_analysis_development_only",
+  "source_receipts_sha256": "04039391fb7a1bd46598e90b7665d11b529dcb9bce9217c080f088b81ebe4829",
+  "source_frontier_replay_sha256": "35b1ca6656a6faaae3592eb8968d992dd5831c32c37f2f4032141713b49dd7fc",
+  "task_seeds": [
+    41,
+    42
+  ],
+  "policies": [
+    "recorded_all_prefix",
+    "recorded_query_intersect_live_operation_frontier",
+    "last_admitted_actual_compatible_Gen_forecasts",
+    "adaptive_last_actual_table"
+  ],
+  "trajectory": "fixed_saved_prefix_online_actions_and_actual_receipts_not_counterfactual_policy_rollouts",
+  "history_boundary": "training_receipts_then_only_own_past_executed_actual_observed_admitted_receipts_before_current_query",
+  "context_key": [
+    "channel_id",
+    "observation_id",
+    "executed_operation"
+  ],
+  "eligibility": "retain_original_forecast_if_no_latest_actual_for_its_key_or_its_predicted_observation_equals_latest_actual",
+  "retention": "never_remove_or_modify_persistent_Gen_support_or_synthesize_a_forecast",
+  "update_order": "query_and_seal_all_shadow_outputs_before_consume_current_actual_receipt",
+  "unknown_or_withheld": "do_not_replace_latest_actual_and_do_not_label_negative",
+  "attempt_local_rule": "only_same_executed_operation_forecasts_compared_with_actual_outcome_on_observed_attempt_closure",
+  "cross_attempt_limit": "last_actual_is_declared_context_proxy_not_proven_sufficient_statistic_or_native_regime_inference",
+  "no_cue_block_or_oracle_leak": true,
+  "original_selector": "unchanged_unanimous_public_goal_rule",
+  "metrics": [
+    "raw_abstention",
+    "conflicting_forecast_operations",
+    "forecast_agreement_only_on_saved_executed_operation",
+    "agreement_with_saved_action",
+    "unexecuted_shadow_choice_outcome_unknown",
+    "Gen_coverage_of_table_eligible_keys"
+  ],
+  "prohibited_claims": [
+    "counterfactual_task_success",
+    "on_policy_recovery",
+    "independent_replication",
+    "heterarchy_advantage_from_table_tie",
+    "AC0_gate_pass",
+    "full_twelve_link_implementation"
+  ],
+  "budgets": {
+    "max_saved_cases": 256,
+    "max_shadow_queries": 1024,
+    "max_new_world_actions": 0,
+    "max_new_task_outcomes": 0,
+    "max_core_tokens": 0,
+    "max_wall_seconds": 30,
+    "max_raw_bytes": 2097152
+  },
+  "predeclared_decisions": {
+    "live_intersection_unchanged": "cannot_attribute_current_conflict_only_to_synthetic_readout_context",
+    "mask_resolves_conflict": "supports_role_of_explicit_applicability_context_on_recorded_history_only",
+    "mask_equals_table": "no_heterarchy_advantage_role_of_Gen_is_coverage_constraint",
+    "mask_cannot_emit_missing_chain": "report_Gen_coverage_gap_do_not_create_predictions_from_table",
+    "shadow_choice_differs_from_saved_action": "leave_counterfactual_outcome_unknown_require_later_separately_registered_on_policy_test"
+  },
+  "reserved_confirming_pool_201_208": "not_generated_trained_or_evaluated_no_entry_point_in_this_shadow_design",
+  "original_online_protocol": "unchanged"
+}

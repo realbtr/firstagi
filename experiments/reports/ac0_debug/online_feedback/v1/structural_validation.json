@@ -1,0 +1,18 @@
+{
+  "schema": "firstagi.ac0-online-feedback-structural-check/v1",
+  "status": "design_and_symbolic_arithmetic_only_not_task_experiment",
+  "protocol_sha256": "1e9d406567a5b6a0badb5a127c5457688cd1915b282674a7c54f1511b4f58347",
+  "counts_are_declared_or_derived_not_observed_training_or_task_outcomes": true,
+  "task_seeds": 8,
+  "policies": 9,
+  "episodes_per_policy_seed": 128,
+  "observed_per_policy_seed": 80,
+  "unknown_per_policy_seed": 48,
+  "observed_per_block_channel_seed": 10,
+  "train_actions_total": 768,
+  "train_core_tokens_total": 1920,
+  "evaluation_opportunities_total": 9216,
+  "all_world_actions_total": 9984,
+  "expected_core_tokens_total": 6368,
+  "validator_executes_task_or_model": false
+}

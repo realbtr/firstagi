@@ -1,0 +1,1870 @@
+{
+  "schema": "firstagi.ac0-debug/v0.1",
+  "status": "debug_scaffold_not_gate",
+  "seed": 41,
+  "controller": "oracle",
+  "scheduler": "fixed_alternating",
+  "attempt_budget": 48,
+  "operation_cost": 48,
+  "observed_outcomes": 36,
+  "unknown_outcomes": 12,
+  "task_successes": 36,
+  "events": [
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 1,
+      "event_id": "e0001",
+      "causal_parents": [],
+      "observation_id": "e57b47b993f3cfc7",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 2,
+      "event_id": "e0002",
+      "causal_parents": [],
+      "observation_id": "46db76078d954e50",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": "026355459390c87c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 3,
+      "event_id": "e0003",
+      "causal_parents": [
+        "e0001"
+      ],
+      "observation_id": "4890afe0b0ac88b8",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "62b8a158e9f0fcf8",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 4,
+      "event_id": "e0004",
+      "causal_parents": [
+        "e0002"
+      ],
+      "observation_id": "da1a4658622ff19b",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": null,
+      "completion": "interrupted",
+      "prediction_support": "unknown",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 5,
+      "event_id": "e0005",
+      "causal_parents": [
+        "e0003"
+      ],
+      "observation_id": "e57b47b993f3cfc7",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 6,
+      "event_id": "e0006",
+      "causal_parents": [
+        "e0004"
+      ],
+      "observation_id": "da1a4658622ff19b",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": null,
+      "completion": "unavailable",
+      "prediction_support": "unknown",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 7,
+      "event_id": "e0007",
+      "causal_parents": [
+        "e0005"
+      ],
+      "observation_id": "4890afe0b0ac88b8",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "62b8a158e9f0fcf8",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 8,
+      "event_id": "e0008",
+      "causal_parents": [
+        "e0006"
+      ],
+      "observation_id": "da1a4658622ff19b",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": null,
+      "completion": "cancelled",
+      "prediction_support": "unknown",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 9,
+      "event_id": "e0009",
+      "causal_parents": [
+        "e0007"
+      ],
+      "observation_id": "e57b47b993f3cfc7",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 10,
+      "event_id": "e0010",
+      "causal_parents": [
+        "e0008"
+      ],
+      "observation_id": "da1a4658622ff19b",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": "026355459390c87c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 11,
+      "event_id": "e0011",
+      "causal_parents": [
+        "e0009"
+      ],
+      "observation_id": "4890afe0b0ac88b8",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "62b8a158e9f0fcf8",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 12,
+      "event_id": "e0012",
+      "causal_parents": [
+        "e0010"
+      ],
+      "observation_id": "46db76078d954e50",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": "026355459390c87c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 13,
+      "event_id": "e0013",
+      "causal_parents": [
+        "e0011"
+      ],
+      "observation_id": "e57b47b993f3cfc7",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 14,
+      "event_id": "e0014",
+      "causal_parents": [
+        "e0012"
+      ],
+      "observation_id": "da1a4658622ff19b",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": "026355459390c87c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 15,
+      "event_id": "e0015",
+      "causal_parents": [
+        "e0013"
+      ],
+      "observation_id": "4890afe0b0ac88b8",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "62b8a158e9f0fcf8",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 16,
+      "event_id": "e0016",
+      "causal_parents": [
+        "e0014"
+      ],
+      "observation_id": "46db76078d954e50",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": null,
+      "completion": "interrupted",
+      "prediction_support": "unknown",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 17,
+      "event_id": "e0017",
+      "causal_parents": [
+        "e0015"
+      ],
+      "observation_id": "e57b47b993f3cfc7",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 18,
+      "event_id": "e0018",
+      "causal_parents": [
+        "e0016"
+      ],
+      "observation_id": "46db76078d954e50",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": null,
+      "completion": "unavailable",
+      "prediction_support": "unknown",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 19,
+      "event_id": "e0019",
+      "causal_parents": [
+        "e0017"
+      ],
+      "observation_id": "4890afe0b0ac88b8",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "62b8a158e9f0fcf8",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 20,
+      "event_id": "e0020",
+      "causal_parents": [
+        "e0018"
+      ],
+      "observation_id": "46db76078d954e50",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": null,
+      "completion": "cancelled",
+      "prediction_support": "unknown",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 21,
+      "event_id": "e0021",
+      "causal_parents": [
+        "e0019"
+      ],
+      "observation_id": "e57b47b993f3cfc7",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 22,
+      "event_id": "e0022",
+      "causal_parents": [
+        "e0020"
+      ],
+      "observation_id": "46db76078d954e50",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": "026355459390c87c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 23,
+      "event_id": "e0023",
+      "causal_parents": [
+        "e0021"
+      ],
+      "observation_id": "4890afe0b0ac88b8",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "62b8a158e9f0fcf8",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 24,
+      "event_id": "e0024",
+      "causal_parents": [
+        "e0022"
+      ],
+      "observation_id": "da1a4658622ff19b",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": "026355459390c87c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 25,
+      "event_id": "e0025",
+      "causal_parents": [
+        "e0023"
+      ],
+      "observation_id": "e57b47b993f3cfc7",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 26,
+      "event_id": "e0026",
+      "causal_parents": [
+        "e0024"
+      ],
+      "observation_id": "46db76078d954e50",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": "026355459390c87c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 27,
+      "event_id": "e0027",
+      "causal_parents": [
+        "e0025"
+      ],
+      "observation_id": "4890afe0b0ac88b8",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "62b8a158e9f0fcf8",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 28,
+      "event_id": "e0028",
+      "causal_parents": [
+        "e0026"
+      ],
+      "observation_id": "da1a4658622ff19b",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": null,
+      "completion": "interrupted",
+      "prediction_support": "unknown",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 29,
+      "event_id": "e0029",
+      "causal_parents": [
+        "e0027"
+      ],
+      "observation_id": "e57b47b993f3cfc7",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 30,
+      "event_id": "e0030",
+      "causal_parents": [
+        "e0028"
+      ],
+      "observation_id": "da1a4658622ff19b",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": null,
+      "completion": "unavailable",
+      "prediction_support": "unknown",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 31,
+      "event_id": "e0031",
+      "causal_parents": [
+        "e0029"
+      ],
+      "observation_id": "4890afe0b0ac88b8",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "62b8a158e9f0fcf8",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 32,
+      "event_id": "e0032",
+      "causal_parents": [
+        "e0030"
+      ],
+      "observation_id": "da1a4658622ff19b",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": null,
+      "completion": "cancelled",
+      "prediction_support": "unknown",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 33,
+      "event_id": "e0033",
+      "causal_parents": [
+        "e0031"
+      ],
+      "observation_id": "e57b47b993f3cfc7",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 34,
+      "event_id": "e0034",
+      "causal_parents": [
+        "e0032"
+      ],
+      "observation_id": "da1a4658622ff19b",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": "026355459390c87c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 35,
+      "event_id": "e0035",
+      "causal_parents": [
+        "e0033"
+      ],
+      "observation_id": "4890afe0b0ac88b8",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "62b8a158e9f0fcf8",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 36,
+      "event_id": "e0036",
+      "causal_parents": [
+        "e0034"
+      ],
+      "observation_id": "46db76078d954e50",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": "026355459390c87c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 37,
+      "event_id": "e0037",
+      "causal_parents": [
+        "e0035"
+      ],
+      "observation_id": "e57b47b993f3cfc7",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 38,
+      "event_id": "e0038",
+      "causal_parents": [
+        "e0036"
+      ],
+      "observation_id": "da1a4658622ff19b",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": "026355459390c87c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 39,
+      "event_id": "e0039",
+      "causal_parents": [
+        "e0037"
+      ],
+      "observation_id": "4890afe0b0ac88b8",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "62b8a158e9f0fcf8",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 40,
+      "event_id": "e0040",
+      "causal_parents": [
+        "e0038"
+      ],
+      "observation_id": "46db76078d954e50",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": null,
+      "completion": "interrupted",
+      "prediction_support": "unknown",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 41,
+      "event_id": "e0041",
+      "causal_parents": [
+        "e0039"
+      ],
+      "observation_id": "e57b47b993f3cfc7",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 42,
+      "event_id": "e0042",
+      "causal_parents": [
+        "e0040"
+      ],
+      "observation_id": "46db76078d954e50",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": null,
+      "completion": "unavailable",
+      "prediction_support": "unknown",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 43,
+      "event_id": "e0043",
+      "causal_parents": [
+        "e0041"
+      ],
+      "observation_id": "4890afe0b0ac88b8",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "62b8a158e9f0fcf8",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 44,
+      "event_id": "e0044",
+      "causal_parents": [
+        "e0042"
+      ],
+      "observation_id": "46db76078d954e50",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": null,
+      "completion": "cancelled",
+      "prediction_support": "unknown",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 45,
+      "event_id": "e0045",
+      "causal_parents": [
+        "e0043"
+      ],
+      "observation_id": "e57b47b993f3cfc7",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 46,
+      "event_id": "e0046",
+      "causal_parents": [
+        "e0044"
+      ],
+      "observation_id": "46db76078d954e50",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": "026355459390c87c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "550caef9618a9261",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 47,
+      "event_id": "e0047",
+      "causal_parents": [
+        "e0045"
+      ],
+      "observation_id": "4890afe0b0ac88b8",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "62b8a158e9f0fcf8",
+      "operation_cost": 1,
+      "expected_observation": "c36492adbb4bb95c",
+      "actual_observation": "c36492adbb4bb95c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    },
+    {
+      "run_id": "ac0-debug-41-oracle",
+      "instance_id": "observer-0",
+      "channel_id": "fe1b14343b106980",
+      "driver_version": "opaque-two-channel/0.1",
+      "base_revision": "unpublished-debug",
+      "seq": 48,
+      "event_id": "e0048",
+      "causal_parents": [
+        "e0046"
+      ],
+      "observation_id": "da1a4658622ff19b",
+      "observation_source": "sandbox-driver",
+      "available_operations": [
+        "e6e9d6a12a8161e5",
+        "62b8a158e9f0fcf8"
+      ],
+      "chosen_operation": "e6e9d6a12a8161e5",
+      "operation_cost": 1,
+      "expected_observation": "026355459390c87c",
+      "actual_observation": "026355459390c87c",
+      "completion": "success",
+      "prediction_support": "positive",
+      "prediction_source": "fixture_task_target_not_a_learned_Gen"
+    }
+  ],
+  "core_updates": [
+    {
+      "event_id": "e0001",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "COMPLETED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "05857a55-bfab-4006-a1d5-fb7f41c1a2d5",
+        "fd0bdc38-8cd8-4bc4-9cbf-bbc82720f498"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 2
+    },
+    {
+      "event_id": "e0002",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "1907b812-5bd2-4e70-9c00-669dedb6125e",
+        "322c6901-223c-4b64-9ae8-a0aa9e3edc5a"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 4
+    },
+    {
+      "event_id": "e0003",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "6008c32e-4adb-46ab-88f9-be119a13f58e",
+        "71f9c945-e3f8-438c-84bb-b7b8a3763b39"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 6
+    },
+    {
+      "event_id": "e0004",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [],
+      "referenced_gen_ids": [],
+      "gen_support_evaluated": false,
+      "processed_tokens": 0,
+      "node_count": 6
+    },
+    {
+      "event_id": "e0005",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "0f2f6201-67f4-4c89-98f7-0bf0a359d778",
+        "5c5d3a67-ef6a-42ee-adb9-209aeb802bb9"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 8
+    },
+    {
+      "event_id": "e0006",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [],
+      "referenced_gen_ids": [],
+      "gen_support_evaluated": false,
+      "processed_tokens": 0,
+      "node_count": 8
+    },
+    {
+      "event_id": "e0007",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "277e082c-c699-42ed-8053-9dbe9f80918f",
+        "8ee271f8-4c29-4a22-a706-8c60e1470685"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 10
+    },
+    {
+      "event_id": "e0008",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [],
+      "referenced_gen_ids": [],
+      "gen_support_evaluated": false,
+      "processed_tokens": 0,
+      "node_count": 10
+    },
+    {
+      "event_id": "e0009",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "e7a94b62-2b3b-423b-8f8f-00f5f5913469",
+        "e2371444-2324-4d28-bfe1-1c80222c94b5"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 12
+    },
+    {
+      "event_id": "e0010",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "ad32d90b-849e-4d11-b14a-669f8ee1b8a1",
+        "1c09cb8f-fb52-475d-b8fe-7a19495b3984"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 14
+    },
+    {
+      "event_id": "e0011",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "3b9533e1-d018-41ad-9d6e-6df366a3393d",
+        "082e0ac9-a9e2-4313-9af8-6f988263344d"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 16
+    },
+    {
+      "event_id": "e0012",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "ab5914d4-f6e5-4de3-a19e-353418cae5ee",
+        "911d18d5-9c4c-4d77-b08b-493107891af5"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 18
+    },
+    {
+      "event_id": "e0013",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "e74e635e-d79d-4093-a8ac-a7f6f229ea4c",
+        "6a025081-450b-4bd9-9a28-5a4fcfcc70d9"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 20
+    },
+    {
+      "event_id": "e0014",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "fffebe56-27d3-4d4d-8169-b87e3112e59c",
+        "42a87177-d674-41a6-9251-e5d173bb5bfe"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 22
+    },
+    {
+      "event_id": "e0015",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "f647b881-4e20-4581-ac31-56ad30237a8a",
+        "4de79590-9366-4f48-b5fc-c01b5a7bc0ce"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 24
+    },
+    {
+      "event_id": "e0016",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [],
+      "referenced_gen_ids": [],
+      "gen_support_evaluated": false,
+      "processed_tokens": 0,
+      "node_count": 24
+    },
+    {
+      "event_id": "e0017",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "52201ca1-236c-4347-83c2-604603f96241",
+        "69198eaf-0007-41f6-a4bc-dc450859f53e"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 26
+    },
+    {
+      "event_id": "e0018",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [],
+      "referenced_gen_ids": [],
+      "gen_support_evaluated": false,
+      "processed_tokens": 0,
+      "node_count": 26
+    },
+    {
+      "event_id": "e0019",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "6d56e69e-7739-4783-8f9f-775418f178dd",
+        "93451ed9-51df-4974-9289-3fce2851dd10"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 28
+    },
+    {
+      "event_id": "e0020",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [],
+      "referenced_gen_ids": [],
+      "gen_support_evaluated": false,
+      "processed_tokens": 0,
+      "node_count": 28
+    },
+    {
+      "event_id": "e0021",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "c70d76c8-757c-4066-82e0-197ffa31a725",
+        "8642b7df-fb0e-49e6-aa0a-4e04e484a939"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 30
+    },
+    {
+      "event_id": "e0022",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "311aa617-cd80-451d-9739-b71f4e025f1d",
+        "40a6327b-3ae6-42a1-8c59-a3c44f943465"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 32
+    },
+    {
+      "event_id": "e0023",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "a7409621-6a66-4f2e-bdb4-586de47412e4",
+        "c79fc3ef-882a-4a98-9471-094682e7a961"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 34
+    },
+    {
+      "event_id": "e0024",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "10375ffd-401d-4c5a-8fca-d26651ae8535",
+        "f6942870-44e6-4d20-aed8-4b72f61498b9"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 36
+    },
+    {
+      "event_id": "e0025",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "fe9bf607-9759-4491-b440-5d10d087077f",
+        "86a4d671-9a83-43e0-804a-325df757a5da"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 38
+    },
+    {
+      "event_id": "e0026",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "ee49db9f-28d4-4857-881e-baf65654efc6",
+        "4fd6b491-e179-4b53-942b-152fc32751ba"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 40
+    },
+    {
+      "event_id": "e0027",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "cf29bb8e-8818-407c-99fd-de0162dcd623",
+        "490f61ea-c809-4e9e-ad34-3e0f548798ff"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 42
+    },
+    {
+      "event_id": "e0028",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [],
+      "referenced_gen_ids": [],
+      "gen_support_evaluated": false,
+      "processed_tokens": 0,
+      "node_count": 42
+    },
+    {
+      "event_id": "e0029",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "1fda989d-7de2-4160-9e8c-27af86ce66d3",
+        "39fdfe3f-a117-4f04-86a1-eac82efc0ede"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 44
+    },
+    {
+      "event_id": "e0030",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [],
+      "referenced_gen_ids": [],
+      "gen_support_evaluated": false,
+      "processed_tokens": 0,
+      "node_count": 44
+    },
+    {
+      "event_id": "e0031",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "6a53f258-0dd3-4e7c-b0b5-829d917de99b",
+        "8087424e-dd56-42d8-b952-fbe241ef27c5"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 46
+    },
+    {
+      "event_id": "e0032",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [],
+      "referenced_gen_ids": [],
+      "gen_support_evaluated": false,
+      "processed_tokens": 0,
+      "node_count": 46
+    },
+    {
+      "event_id": "e0033",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "3511ca88-c9f2-4b52-9149-b765240198c9",
+        "daf17d3f-2418-4166-b562-38221febb3a3"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 48
+    },
+    {
+      "event_id": "e0034",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "438b984d-8d87-420d-8f56-c7fe2eeff217",
+        "7b56addb-34db-4c27-91f4-91ce28697c3d"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 50
+    },
+    {
+      "event_id": "e0035",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "b6b5379e-f0d2-4a4b-83ce-d635b6735cca",
+        "a087285d-625e-4878-a12f-c1ca5e3e21c8"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 52
+    },
+    {
+      "event_id": "e0036",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "5e86d80e-901c-44b8-b7de-872e511f454f",
+        "a937ca07-dd86-400b-bb89-055c5f24e317"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 54
+    },
+    {
+      "event_id": "e0037",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "9fb826a7-d612-4cc0-928f-08aad8de6e53",
+        "33eab7af-3988-4f2e-a817-533da041a269"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 56
+    },
+    {
+      "event_id": "e0038",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "455b45e5-173a-4c95-8ca6-f4f0abb832a5",
+        "4f56f794-713d-4d20-a806-afff38216019"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 58
+    },
+    {
+      "event_id": "e0039",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "731bd6a4-0a43-42cf-8986-6aa0bde5dcf8",
+        "74d75754-7aa5-433a-875a-755faa4e8a66"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 60
+    },
+    {
+      "event_id": "e0040",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [],
+      "referenced_gen_ids": [],
+      "gen_support_evaluated": false,
+      "processed_tokens": 0,
+      "node_count": 60
+    },
+    {
+      "event_id": "e0041",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "f35b7db0-863f-4150-8bd5-538b8adba232",
+        "d8548b12-2a3b-4d91-9862-e81d7cb24ee4"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 62
+    },
+    {
+      "event_id": "e0042",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [],
+      "referenced_gen_ids": [],
+      "gen_support_evaluated": false,
+      "processed_tokens": 0,
+      "node_count": 62
+    },
+    {
+      "event_id": "e0043",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "978c5257-105f-4460-a031-a2ace8f8d0bf",
+        "8a1f98eb-9b86-4257-a324-0648fc68b63f"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 64
+    },
+    {
+      "event_id": "e0044",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [],
+      "referenced_gen_ids": [],
+      "gen_support_evaluated": false,
+      "processed_tokens": 0,
+      "node_count": 64
+    },
+    {
+      "event_id": "e0045",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "cc2ff015-a30a-4302-861a-06991b37e8c1",
+        "da7b28e4-a638-446a-92e9-2aaabe0a17f1"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 66
+    },
+    {
+      "event_id": "e0046",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "d8a4c162-97cd-4a61-835d-e279c7f1a508",
+        "a6fb14a6-913d-4dc4-9e45-380dadadb55c"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 68
+    },
+    {
+      "event_id": "e0047",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "f0af3ce9-b3f9-4ecd-9043-42f2b1100742",
+        "c4337a68-e503-43a7-b8b0-4b3b40a19b1d"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 70
+    },
+    {
+      "event_id": "e0048",
+      "kernel_role": "observer_only",
+      "core_step_outcomes": [
+        "REFUTED",
+        "REFUTED"
+      ],
+      "referenced_gen_ids": [
+        "f12c847d-c2c0-430d-a8ed-d171d1db1717",
+        "ab97dfdd-6be7-4eed-aef6-8c0a0ae93785"
+      ],
+      "gen_support_evaluated": false,
+      "processed_tokens": 2,
+      "node_count": 72
+    }
+  ],
+  "gate_passed": false,
+  "limitations": [
+    "no learned action/channel selection",
+    "no Gen-specific support updates",
+    "no held-out competence or preregistered thresholds",
+    "no full runtime persistence or inheritance",
+    "no local-frontier work counters; kernel may scan globally"
+  ],
+  "source_commit": "462f6b3430ad45d5dbe41ac10cbeb29e9166968f",
+  "source_dirty": false
+}
