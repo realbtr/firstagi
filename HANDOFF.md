@@ -187,3 +187,10 @@ manifest, один development seen/causal/status, техническое рет
 
 Уточнение З-0080: владелец разрешил merge PR27/c380dcb после принятия N3
 ревьюером; разрешение повторно не спрашивать. Принятия N3 пока нет — PR открыт.
+
+Уточнение З-0082: PR27 с N3a/N3b принят по R4 и слит с разрешения владельца
+(fefce39). Первый код A1 — https://github.com/realbtr/firstagi/pull/28 (ba7646d).
+Actual evidence/pending в двух core-файлах; 30 новых тестов, полный1728passed/3skipped,
+CI41235860201 SUCCESS. StepResult unit fixtures не живой стенд; policy/перенос не проверены.
+Следующий шаг — ревью A1; PR28 без отдельного разрешения не сливать, A2/A3 не начинать.
+Session pickle поддержан; отдельный legacy DB-экспорт ledger не сохраняет.
