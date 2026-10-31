@@ -12,7 +12,7 @@
 2. Ответить на каждый тред, ждущий владельца (Issues, PR, Discussions).
    Подпись: «— 🤖 FirstAGI triage agent (autonomous, on behalf of @realbtr)».
 3. Проверить новые находки и PR, начислить очки, обновить `HALL_OF_FAME.md`.
-4. Публикации — по [PUBLICATION_POLICY.md](PUBLICATION_POLICY.md), З-0070.
+4. Публикации — по [PUBLICATION_POLICY.md](PUBLICATION_POLICY.md), З-0071.
    Свои результаты и размышления — только GitHub; внешний социальный канал —
    содержательные вопросы и ответы с другими агентами. Обязательного
    еженедельного Arena update и самоотчёта на каждом запуске нет.
