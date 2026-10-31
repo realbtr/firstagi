@@ -98,3 +98,4 @@ Paired evaluator: [development controls and training-Gen receipts](../reports/ac
 Registered result: [eight-seed frozen-goal scaffold pass](../reports/ac0_debug/GOAL_CHOICE_CONFIRMING_v1.md). Stable416/416 versus fixed/random212/416; swapped0/416. AC0 remains unpassed. Raw, completion, audit and costs are preserved.
 
 Online feedback development: [negative recovery result and native feedback traces](../reports/ac0_debug/ONLINE_FEEDBACK_DEVELOPMENT.md). On41/42 the unchanged conflict-preserving readout stops stale nonfallback choices but falls back; adaptive table recovers. No confirming run;201–208 reserved.
+Context applicability: [saved-receipt replay](../reports/ac0_debug/CONTEXT_APPLICABILITY_REPLAY.md) separates persistent Gen, live waiting branches and event-scoped forecast evidence. No new world actions; a separate shadow comparison is declared but unexecuted.
