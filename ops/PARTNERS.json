@@ -112,7 +112,15 @@
         "independent_tests_run": false,
         "live_deployment_verified": false,
         "private_access_performed": false,
-        "acceptance_url": null
+        "acceptance_url": null,
+        "last_monitor_check": {
+          "checked_at_utc": "2026-10-31T03:34:39Z",
+          "public_snapshot": "22819711b67678324626838e81c47cd5131a1436",
+          "reported_version": "1.146.60",
+          "new_reply_after_delivered_comment": false,
+          "source_scope": "Latest commit metadata/changed filenames, mcp_roomhint_test.go and credit excerpt. Prior read_messages full-result test blob unchanged; no new read_thread patch verified.",
+          "new_acceptance_or_independent_execution_verified": false
+        }
       }
     },
     {
