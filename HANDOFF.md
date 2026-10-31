@@ -208,3 +208,10 @@ C1/C2 — A2 (contributors из live core; без скрытого full scan), C
 PR28 слит по разрешению владельца→bbda4a1. Дополнительного разрешения на28 не нужно.
 Следующий пакет — A2 с C1/C2/N4; C3 до development. A2/A3 не реализованы,
 confirming закрыт до ретро «Перенос». Слияния следующих core PR требуют правил владельца.
+
+Уточнение З-0087: A2 — https://github.com/realbtr/firstagi/pull/29 (dc0e473),
+CI41253730280 SUCCESS;1751passed/3skipped в изолированной копии. Свежий cue → live recall
+→ полная competition; C1 сбор в core, C2 evidence counter и metered GenBase reads.
+Прежний A1 begin с ручными IDs — private primitive для unit fixtures; live public API их не принимает.
+Следующий шаг — ревью A2; PR29 без отдельного разрешения не сливать. Затем A3,
+C3/manifest/development по очереди. Полного environment learning и переноса пока не проверяли.
