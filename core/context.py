@@ -66,10 +66,14 @@ class ContextBuffer:
     # ------------------------------------------------------------------
     # Управление активными обобщениями
 
-    def add_active(self, gen_id: str) -> None:
+    def add_active(self, gen_id: str, current_feature_index=None) -> None:
         """Добавить обобщение как активную опору."""
+        if current_feature_index is not None and (type(current_feature_index) is not int or current_feature_index < 0):
+            raise ValueError("Invalid continuation position")
         if gen_id not in self._active:
             self._active[gen_id] = ActiveGen(gen_id=gen_id)
+        if current_feature_index is not None:
+            self._active[gen_id].current_feature_index = current_feature_index
 
     def add_competing(self, gen_id: str) -> None:
         """Добавить обобщение как конкурирующее (для различения)."""
@@ -83,6 +87,9 @@ class ContextBuffer:
 
     def active_gen_ids(self) -> List[str]:
         return list(self._active.keys())
+
+    def active_positions(self):
+        return tuple(sorted((gid, active.current_feature_index) for gid, active in self._active.items()))
 
     def competing_gen_ids(self) -> List[str]:
         return list(self._competing.keys())

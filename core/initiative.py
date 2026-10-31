@@ -46,6 +46,21 @@ class Proposal:
 # Двигатель инициативы
 # ══════════════════════════════════════════════════════════════════════
 
+@dataclass(frozen=True)
+class OperationProposal:
+    instance_id: str
+    channel_id: str
+    seq: int
+    cue_gen_id: str
+    goal_gen_id: str
+    command_address: str
+    operation_gen_id: str
+    confidence: float
+    contributor_gen_ids: tuple
+    context_positions: tuple
+    tick: int
+
+
 class InitiativeEngine:
     """
     Двигатель инициативы.
@@ -68,6 +83,27 @@ class InitiativeEngine:
 
     # ------------------------------------------------------------------
 
+    def choose_operation(self, groups, goal_matches, hedonic):
+        """All linked contributors before ranking; no top-3 or ID tie-break."""
+        import math
+        scores = {}
+        for operation_id, contributors in groups.items():
+            eligible = [g for g in contributors if g.oper_id == operation_id and g.operation_admitted]
+            if not eligible or any(not goal_matches(g.goal_id) for g in eligible):
+                continue
+            weights = []
+            for gen in eligible:
+                novelty = hedonic.novelty_score(gen.gen_id)
+                if not math.isfinite(novelty) or not 0 <= novelty <= 1:
+                    raise ValueError("Invalid novelty in command competition")
+                weights.append(gen.actual_support * (0.5 + 0.5 * novelty))
+            scores[operation_id] = max(weights)
+        if not scores:
+            return None
+        maximum = max(scores.values())
+        winners = [op for op, score in scores.items() if maximum - score <= 1e-12]
+        return (winners[0], maximum) if len(winners) == 1 else None
+
     def propose(
         self,
         context: "ContextBuffer",
@@ -80,7 +116,7 @@ class InitiativeEngine:
         Алгоритм:
           1. Получить ожидаемые признаки из контекста (gen_id → feature_id).
           2. Взвесить каждый: weight = significance * (0.5 + 0.5*novelty_score).
-          3. Сгруппировать по feature_id (суммируем веса).
+          3. Сгруппировать по feature_id (сохраняем максимальный вес).
           4. Для каждой группы выбрать gen_id с максимальным весом.
           5. Отсортировать по убыванию confidence.
 

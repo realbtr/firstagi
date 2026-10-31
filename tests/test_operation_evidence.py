@@ -18,7 +18,7 @@ def setup_system():
 
 
 def begin(system, atoms, seq, contributors=(), **kwargs):
-    return system.begin_operation(instance_id="life", channel_id="channel", seq=seq,
+    return system._begin_operation(instance_id="life", channel_id="channel", seq=seq,
                                   command_address="opaque", cue_gen_id=atoms["cue"],
                                   operation_gen_id=atoms["op"],
                                   contributor_gen_ids=contributors, **kwargs)
@@ -201,7 +201,7 @@ def test_second_pending_and_other_channel_are_separate():
     begin(system, atoms, 0)
     with pytest.raises(ValueError):
         begin(system, atoms, 1)
-    system.begin_operation(instance_id="life", channel_id="other", seq=0,
+    system._begin_operation(instance_id="life", channel_id="other", seq=0,
                            command_address="opaque", cue_gen_id=atoms["cue"],
                            operation_gen_id=atoms["op"])
     system.accept_operation_outcome(receipt(atoms, 0))
@@ -216,6 +216,7 @@ def test_legacy_pickle_does_not_convert_old_token_counts_into_actual():
     for name in list(vars(system)):
         if name.startswith("_operation_"):
             delattr(system, name)
+    del system.base._actual_evidence_entries  # This field did not exist in legacy checkpoints.
     restored = pickle.loads(pickle.dumps(system))
     gen = restored.base.get(gen.gen_id)
     assert gen.actual_positive_count == 0 and not gen.operation_admitted
