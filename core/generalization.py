@@ -14,6 +14,15 @@ import uuid
 import time
 
 
+@dataclass(frozen=True)
+class ActualEvidence:
+    """One observed execution; origin is an observation, not a prior forecast."""
+    receipt_id: str
+    positive: bool
+    origin: bool
+    outcome_gen_id: str
+
+
 @dataclass
 class Generalization:
     """
@@ -45,6 +54,37 @@ class Generalization:
     child_ids: List[str] = field(default_factory=list)
     created_at: float = field(default_factory=time.time)
     label: Optional[str] = None
+
+    # Actual operation evidence is separate from legacy token confirmations.
+    actual_evidence: Dict[tuple, "ActualEvidence"] = field(default_factory=dict)
+    actual_link: Optional[tuple] = None
+    actual_chain: Optional[tuple] = None
+
+    def __setstate__(self, state):
+        self.__dict__.update(state)
+        self.__dict__.setdefault("actual_evidence", {})
+        self.__dict__.setdefault("actual_link", None)
+        self.__dict__.setdefault("actual_chain", None)
+
+    @property
+    def actual_positive_count(self) -> int:
+        return sum(e.positive for e in getattr(self, "actual_evidence", {}).values())
+
+    @property
+    def actual_negative_count(self) -> int:
+        return sum(not e.positive for e in getattr(self, "actual_evidence", {}).values())
+
+    @property
+    def actual_support(self) -> float:
+        p, n = self.actual_positive_count, self.actual_negative_count
+        return p / (p + n) if p + n else 0.0
+
+    @property
+    def operation_admitted(self) -> bool:
+        link = getattr(self, "actual_link", None)
+        return (link is not None and link[2:] == (self.key_id, self.oper_id, self.goal_id)
+                and getattr(self, "actual_chain", None) == tuple(self.feature_chain)
+                and self.actual_positive_count >= 2 and self.actual_support > 0.5)
 
     @property
     def significance(self) -> float:

@@ -670,6 +670,53 @@ class HierarchicalConsolidator:
 # 5. Интегрированная система обучения
 # ══════════════════════════════════════════════════════════════════════
 
+@dataclass(frozen=True)
+class OperationReceipt:
+    """Transport fact about one executed command, with no desired-goal label."""
+    receipt_id: str
+    instance_id: str
+    channel_id: str
+    seq: int
+    command_address: str
+    source_id: str
+    status: str = "observed"
+    outcome_gen_id: Optional[str] = None
+
+    def __post_init__(self):
+        if any(not isinstance(v, str) or not v for v in (
+            self.receipt_id, self.instance_id, self.channel_id,
+            self.command_address, self.source_id,
+        )):
+            raise ValueError("Receipt identifiers and source must be nonempty strings")
+        if type(self.seq) is not int or self.seq < 0:
+            raise ValueError("Operation seq must be a nonnegative integer")
+        if self.status not in ("observed", "unknown", "unavailable"):
+            raise ValueError("Invalid actual status")
+        if (self.status == "observed") != (
+            isinstance(self.outcome_gen_id, str) and bool(self.outcome_gen_id)
+        ) or (self.status != "observed" and self.outcome_gen_id is not None):
+            raise ValueError("Only observed receipts carry an outcome")
+
+
+@dataclass(frozen=True)
+class PendingOperation:
+    instance_id: str
+    channel_id: str
+    seq: int
+    command_address: str
+    cue_gen_id: str
+    operation_gen_id: str
+    prefix: tuple
+    forecasts: tuple
+
+
+@dataclass(frozen=True)
+class OperationRecord:
+    pending: PendingOperation
+    status: str
+    receipt: Optional[OperationReceipt] = None
+
+
 class LearningSystem:
     """
     Полная система: AttractorEngine + GreedyGeneralizer +
@@ -688,6 +735,7 @@ class LearningSystem:
         query_log=None,         # Optional[ContextQueryLog] — лог удивлений для SleepDriver
         provisional_base=None,  # Optional[ProvisionalBase]
         attention_tracer=None,     # Optional[AttentionTracer] — трасса C.12 (И1-Т4)
+        operation_record_limit: int = 4096,
     ) -> None:
         from .generalization import GeneralizationBase
         from .algorithm import AttractorEngine
@@ -720,6 +768,222 @@ class LearningSystem:
         self.initiative = InitiativeEngine(self.resource)
         self.vitality = VitalityEngine()
         self.restorer = WakeUpRestorer()
+        if type(operation_record_limit) is not int or operation_record_limit < 1:
+            raise ValueError("operation_record_limit must be a positive integer")
+        self._operation_state()
+        self._operation_record_limit = operation_record_limit
+
+    def _operation_state(self):
+        # Old native session pickles have no actual ledger: migrate empty,
+        # never manufacture receipts from success_count/stop_count.
+        if not hasattr(self, "_operation_pending"):
+            self._operation_pending = {}
+            self._operation_records = {}
+            self._operation_deliveries = {}
+            self._operation_sources = {}
+            self._operation_paused = set()
+            self._operation_record_limit = 4096
+
+    def operation_state_usage(self) -> Dict[str, int]:
+        """Count retained ledger entries; this is not byte/RSS accounting."""
+        self._operation_state()
+        return {
+            "pending": len(self._operation_pending),
+            "terminal": len(self._operation_records),
+            "deliveries": len(self._operation_deliveries),
+            "sources": len(self._operation_sources),
+            "paused": len(self._operation_paused),
+            "forecast_links": sum(len(p.forecasts) for p in self._operation_pending.values())
+                + sum(len(r.pending.forecasts) for r in self._operation_records.values()),
+            "evidence": sum(len(getattr(g, "actual_evidence", {})) for g in self.base.all()),
+        }
+
+    def _operation_capacity(self, additional: int):
+        if sum(self.operation_state_usage().values()) + additional > self._operation_record_limit:
+            raise OverflowError("Operation evidence budget exhausted; stop INCOMPLETE")
+
+    def _operation_atom(self, gen_id):
+        gen = self.base.get(gen_id)
+        if gen is None or len(gen.feature_chain) != 1:
+            raise ValueError("Operation role must refer to an existing atomic Gen")
+        return gen.feature_chain[0]
+
+    def begin_operation(
+        self, *, instance_id: str, channel_id: str, seq: int,
+        command_address: str, cue_gen_id: str, operation_gen_id: str,
+        contributor_gen_ids=(),
+    ) -> PendingOperation:
+        """Record an execution, not a selector. A2 must supply its full core contributors.
+
+        Empty contributors are allowed for explicitly forced curriculum actions;
+        this API makes no claim that the operation was chosen by native competition.
+        """
+        self._operation_state()
+        if any(not isinstance(v, str) or not v for v in (
+            instance_id, channel_id, command_address,
+        )) or type(seq) is not int or seq < 0:
+            raise ValueError("Invalid operation identity")
+        scope, key = (instance_id, channel_id), (instance_id, channel_id, seq)
+        if scope in self._operation_paused or scope in self._operation_pending:
+            raise ValueError("Channel is interrupted or has a pending operation")
+        if key in self._operation_records:
+            raise ValueError("Operation seq cannot be reused")
+        prefix = (self._operation_atom(cue_gen_id), self._operation_atom(operation_gen_id))
+        forecasts = []
+        for gid in dict.fromkeys(contributor_gen_ids):
+            gen = self.base.get(gid)
+            if (gen is None or gen.key_id != cue_gen_id or gen.oper_id != operation_gen_id
+                    or not gen.goal_id or getattr(gen, "actual_link", None) != (
+                        instance_id, channel_id, cue_gen_id, operation_gen_id, gen.goal_id)):
+                raise ValueError("Contributor is not linked to this cue, command and scope")
+            self._operation_atom(gen.goal_id)
+            forecasts.append((gid, gen.goal_id, self._operation_atom(gen.goal_id),
+                              tuple(gen.feature_chain)))
+        self._operation_capacity(1 + len(forecasts))
+        pending = PendingOperation(instance_id, channel_id, seq, command_address,
+                                   cue_gen_id, operation_gen_id, prefix, tuple(forecasts))
+        self._operation_pending[scope] = pending
+        return pending
+
+    def set_operation_channel_interrupted(self, instance_id, channel_id, interrupted=True):
+        self._operation_state()
+        if any(not isinstance(v, str) or not v for v in (instance_id, channel_id)):
+            raise ValueError("Channel identity is required")
+        scope = (instance_id, channel_id)
+        if interrupted and scope not in self._operation_paused:
+            self._operation_capacity(1)
+            self._operation_paused.add(scope)
+        elif not interrupted:
+            self._operation_paused.discard(scope)
+
+    def cancel_operation(self, instance_id, channel_id) -> bool:
+        """Explicit cancel/reset/close; no timeout and no negative evidence."""
+        self._operation_state()
+        scope = (instance_id, channel_id)
+        pending = self._operation_pending.get(scope)
+        if pending is None:
+            return False
+        self._operation_records[(*scope, pending.seq)] = OperationRecord(pending, "cancelled")
+        del self._operation_pending[scope]
+        return True
+
+    def _actual_evidence_update(self, gen, pending, receipt, *, origin=False):
+        from .generalization import ActualEvidence
+        key = (pending.instance_id, pending.channel_id, pending.seq)
+        evidence = getattr(gen, "actual_evidence", {})
+        if key in evidence:
+            return False
+        link = (pending.instance_id, pending.channel_id, pending.cue_gen_id,
+                pending.operation_gen_id, gen.goal_id)
+        if getattr(gen, "actual_link", None) not in (None, link):
+            raise ValueError("Gen evidence belongs to a different command or scope")
+        if not hasattr(gen, "actual_evidence"):
+            gen.actual_evidence = {}
+        gen.actual_link = link
+        gen.actual_chain = tuple(gen.feature_chain)
+        gen.actual_evidence[key] = ActualEvidence(
+            receipt.receipt_id, receipt.outcome_gen_id == gen.goal_id, origin,
+            receipt.outcome_gen_id,
+        )
+        return True
+
+    def accept_operation_outcome(self, receipt: OperationReceipt) -> str:
+        """Validate first, then atomically account each observed execution once."""
+        if not isinstance(receipt, OperationReceipt):
+            raise TypeError("Expected an OperationReceipt")
+        self._operation_state()
+        previous = self._operation_deliveries.get(receipt.receipt_id)
+        if previous is not None:
+            if previous != receipt:
+                raise ValueError("Receipt ID reused with different content")
+            return "duplicate"
+        scope = (receipt.instance_id, receipt.channel_id)
+        key = (*scope, receipt.seq)
+        terminal = self._operation_records.get(key)
+        pending = terminal.pending if terminal else self._operation_pending.get(scope)
+        if pending is None or (pending.seq, pending.command_address) != (
+            receipt.seq, receipt.command_address,
+        ):
+            raise ValueError("Actual does not match its pending operation")
+        source_key = (*scope, receipt.source_id)
+        source_seq = self._operation_sources.get(source_key)
+        if receipt.status == "observed" and source_seq is not None and source_seq != receipt.seq:
+            raise ValueError("Observed source event replayed under a different operation seq")
+        if terminal:
+            if terminal.status == "observed" and receipt.status == "observed" and (
+                terminal.receipt.outcome_gen_id != receipt.outcome_gen_id
+            ):
+                raise ValueError("Conflicting actual for an already observed execution")
+            add_source = terminal.status == "observed" and receipt.status == "observed" and source_seq is None
+            self._operation_capacity(1 + int(add_source))
+            self._operation_deliveries[receipt.receipt_id] = receipt
+            if add_source:
+                self._operation_sources[source_key] = receipt.seq
+            return "late_cancelled" if terminal.status == "cancelled" else "duplicate"
+        if receipt.status != "observed":
+            self._operation_capacity(1)
+            self._operation_deliveries[receipt.receipt_id] = receipt
+            return "unknown"
+        self._operation_atom(receipt.outcome_gen_id)
+        if scope in self._operation_paused:
+            raise ValueError("Resume the interrupted channel before admitting actual")
+        if (self._operation_atom(pending.cue_gen_id),
+            self._operation_atom(pending.operation_gen_id)) != pending.prefix:
+            raise ValueError("Pending cue/operation encoding changed")
+        updates = []
+        for gid, forecast, expected_feature, chain in pending.forecasts:
+            gen = self.base.get(gid)
+            if (gen is None or (gen.key_id, gen.oper_id, gen.goal_id) != (
+                pending.cue_gen_id, pending.operation_gen_id, forecast,
+            ) or tuple(gen.feature_chain) != chain
+                or self._operation_atom(forecast) != expected_feature
+                or getattr(gen, "actual_link", None) != (*scope, pending.cue_gen_id,
+                                                      pending.operation_gen_id, forecast)):
+                raise ValueError("Frozen forecast changed or disappeared before actual")
+            updates.append(gen)
+        self._operation_capacity(2 + len(updates))
+        for gen in updates:
+            self._actual_evidence_update(gen, pending, receipt)
+        self._operation_deliveries[receipt.receipt_id] = receipt
+        self._operation_sources[source_key] = receipt.seq
+        self._operation_records[key] = OperationRecord(pending, "observed", receipt)
+        del self._operation_pending[scope]
+        return "observed"
+
+    def bind_operation_evidence(self, gen_id: str, receipt_id: str) -> bool:
+        """Bind a native learned chain to observed roles, including its origin.
+
+        This never creates a Gen or uses task success. It validates that the
+        existing native learner created exactly cue→operation→actual chain.
+        A2 still must wire this to its live recall/competition path.
+        """
+        self._operation_state()
+        receipt = self._operation_deliveries.get(receipt_id)
+        if receipt is None or receipt.status != "observed":
+            raise ValueError("Binding requires an observed receipt")
+        key = (receipt.instance_id, receipt.channel_id, receipt.seq)
+        record = self._operation_records.get(key)
+        if record is None or record.status != "observed":
+            raise ValueError("Cancelled/unknown executions cannot originate a link")
+        receipt = record.receipt  # Canonical delivery, even when an alias was supplied.
+        pending = record.pending
+        gen = self.base.get(gen_id)
+        actual_feature = self._operation_atom(receipt.outcome_gen_id)
+        if (gen is None or gen_id not in self.generalizer._created_ids
+                or tuple(gen.feature_chain) != (*pending.prefix, actual_feature)):
+            raise ValueError("Link must originate from the matching native learned chain")
+        roles = (pending.cue_gen_id, pending.operation_gen_id, receipt.outcome_gen_id)
+        old_roles = (gen.key_id, gen.oper_id, gen.goal_id)
+        link = (pending.instance_id, pending.channel_id, *roles)
+        if (old_roles not in ((None, None, None), roles)
+                or getattr(gen, "actual_link", None) not in (None, link)):
+            raise ValueError("Cannot rebind an existing link or channel evidence")
+        if key in getattr(gen, "actual_evidence", {}):
+            return False
+        self._operation_capacity(1)
+        gen.key_id, gen.oper_id, gen.goal_id = roles
+        return self._actual_evidence_update(gen, pending, receipt,
+                                            origin=gen_id not in {f[0] for f in pending.forecasts})
 
     def process_token(self, token) -> StepResult:
         """
