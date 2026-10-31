@@ -24,4 +24,10 @@ jobs:
           cache: pip
           cache-dependency-path: requirements-ci.txt
       - run: pip install -r requirements-ci.txt
+      - name: Restore pinned historical AC0 test artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download ac0-debug-archive-20261031 --repo realbtr/firstagi --pattern ac0-debug-raw-d563398.tar.gz --dir "$RUNNER_TEMP/ac0-raw"
+          python experiments/diagnostics/ac0_restore_artifacts.py --archive "$RUNNER_TEMP/ac0-raw/ac0-debug-raw-d563398.tar.gz"
       - run: python -m pytest -q

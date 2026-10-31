@@ -1,0 +1,17 @@
+{
+  "raw_sha256": "b565e4d6df5f35e1da49ec145b11586054dcee28f408bcb6f7c23547fd771dee",
+  "status": "recorded_data_consistent",
+  "counts": {
+    "records": 1536,
+    "unknown_withheld_native_guards": 308,
+    "changed_channel_causal_links": 58,
+    "causal_links": 334
+  },
+  "new_world_actions": 0,
+  "independent_execution": false,
+  "AC0_gate_pass": false,
+  "original_completion_status": "incomplete",
+  "complete_budget_pass": false,
+  "development_candidate_pass": false,
+  "scope": "diagnostic_consistency_not_upgrade_of_incomplete_execution"
+}

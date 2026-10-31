@@ -1,0 +1,614 @@
+{
+  "status": "recorded_data_consistency_audit_pass_not_independent_execution",
+  "counts": {
+    "evaluation_records": 2304,
+    "observed": 1440,
+    "unknown": 864,
+    "native_no_ingest_guard_records": 468,
+    "update_then_correct_reuse": 184,
+    "negative_forecast_receipts": 180,
+    "named_negative_native_stop_delta": 32,
+    "changed_channel_update_then_correct_reuse": 0
+  },
+  "named_negative_delta_witnesses": [
+    {
+      "seed": 41,
+      "policy": "prefix_online",
+      "episode_index": 32,
+      "channel_index": 0,
+      "event_id": "e0001",
+      "gen_id": "a5bafe3f-e269-4854-8adc-e3d208a9e95c",
+      "predicted": "c36492adbb4bb95c",
+      "actual": "3fc31a98c7fd59a0",
+      "before": {
+        "feature_chain": [
+          "op:db1a40d6ee76af5b1f7769b56f9e948548d7ae8066c64e31921722bc437a451b",
+          "op:48ea2574ba59d85d15e227e2e04b462aee31abe24322588e59475de5ce035c36",
+          "op:314654f2c646abd2073218c2c77402e34125d26175142fcf9620b2928df5f5cb"
+        ],
+        "success_count": 51,
+        "stop_count": 0,
+        "variation_count": 0
+      },
+      "after": {
+        "feature_chain": [
+          "op:db1a40d6ee76af5b1f7769b56f9e948548d7ae8066c64e31921722bc437a451b",
+          "op:48ea2574ba59d85d15e227e2e04b462aee31abe24322588e59475de5ce035c36",
+          "op:314654f2c646abd2073218c2c77402e34125d26175142fcf9620b2928df5f5cb"
+        ],
+        "success_count": 52,
+        "stop_count": 1,
+        "variation_count": 0
+      },
+      "token_steps": [
+        314,
+        315
+      ]
+    },
+    {
+      "seed": 41,
+      "policy": "prefix_online",
+      "episode_index": 33,
+      "channel_index": 0,
+      "event_id": "e0001",
+      "gen_id": "823ed882-0961-42e5-b53e-96bb76712758",
+      "predicted": "c36492adbb4bb95c",
+      "actual": "3fc31a98c7fd59a0",
+      "before": {
+        "feature_chain": [
+          "op:49f8df1dfb48e9fe85334b242b3dcae1e3ade38c4979a75dc731709edd3dbdde",
+          "op:5ccdf1e00e17c1db77552406446bc88475c06104b0fc746c0b39a9385e8c7de7",
+          "op:171286b5dd97d4dc2c05dc621c8d1a47347be53d812fbb174c071a5f8d2f3170"
+        ],
+        "success_count": 51,
+        "stop_count": 0,
+        "variation_count": 0
+      },
+      "after": {
+        "feature_chain": [
+          "op:49f8df1dfb48e9fe85334b242b3dcae1e3ade38c4979a75dc731709edd3dbdde",
+          "op:5ccdf1e00e17c1db77552406446bc88475c06104b0fc746c0b39a9385e8c7de7",
+          "op:171286b5dd97d4dc2c05dc621c8d1a47347be53d812fbb174c071a5f8d2f3170"
+        ],
+        "success_count": 52,
+        "stop_count": 1,
+        "variation_count": 0
+      },
+      "token_steps": [
+        317,
+        318
+      ]
+    }
+  ],
+  "conflict_witnesses": [
+    {
+      "seed": 41,
+      "policy": "prefix_online",
+      "episode_index": 96,
+      "conflicting_outcomes": {
+        "e6e9d6a12a8161e5": [
+          "3fc31a98c7fd59a0",
+          "c36492adbb4bb95c"
+        ],
+        "62b8a158e9f0fcf8": [
+          "3fc31a98c7fd59a0",
+          "c36492adbb4bb95c"
+        ]
+      },
+      "raw_choice": null,
+      "fallback": true
+    },
+    {
+      "seed": 41,
+      "policy": "prefix_online",
+      "episode_index": 97,
+      "conflicting_outcomes": {
+        "62b8a158e9f0fcf8": [
+          "3fc31a98c7fd59a0",
+          "c36492adbb4bb95c"
+        ],
+        "e6e9d6a12a8161e5": [
+          "3fc31a98c7fd59a0",
+          "c36492adbb4bb95c"
+        ]
+      },
+      "raw_choice": null,
+      "fallback": true
+    }
+  ],
+  "windows": [
+    {
+      "seed": 41,
+      "policy": "prefix_online",
+      "late_changed_conflict_queries": 10,
+      "late_changed": {
+        "observed": 10,
+        "goal_successes": 4,
+        "goal_rate": 0.4,
+        "fallback_actions": 10,
+        "nonfallback_successes": 0,
+        "fallback_successes": 4,
+        "raw_abstentions": 10,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      },
+      "late_stable": {
+        "observed": 10,
+        "goal_successes": 10,
+        "goal_rate": 1.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 10,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      }
+    },
+    {
+      "seed": 41,
+      "policy": "prefix_feedback_gate",
+      "late_changed_conflict_queries": 10,
+      "late_changed": {
+        "observed": 10,
+        "goal_successes": 4,
+        "goal_rate": 0.4,
+        "fallback_actions": 10,
+        "nonfallback_successes": 0,
+        "fallback_successes": 4,
+        "raw_abstentions": 10,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      },
+      "late_stable": {
+        "observed": 10,
+        "goal_successes": 10,
+        "goal_rate": 1.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 10,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      }
+    },
+    {
+      "seed": 41,
+      "policy": "prefix_frozen",
+      "late_changed_conflict_queries": 0,
+      "late_changed": {
+        "observed": 10,
+        "goal_successes": 0,
+        "goal_rate": 0.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 0,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 10,
+        "stale_nonfallback_fraction": 1.0
+      },
+      "late_stable": {
+        "observed": 10,
+        "goal_successes": 10,
+        "goal_rate": 1.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 10,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      }
+    },
+    {
+      "seed": 41,
+      "policy": "table_online",
+      "late_changed_conflict_queries": 0,
+      "late_changed": {
+        "observed": 10,
+        "goal_successes": 10,
+        "goal_rate": 1.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 10,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      },
+      "late_stable": {
+        "observed": 10,
+        "goal_successes": 10,
+        "goal_rate": 1.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 10,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      }
+    },
+    {
+      "seed": 41,
+      "policy": "table_feedback_gate",
+      "late_changed_conflict_queries": 0,
+      "late_changed": {
+        "observed": 10,
+        "goal_successes": 10,
+        "goal_rate": 1.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 10,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      },
+      "late_stable": {
+        "observed": 10,
+        "goal_successes": 10,
+        "goal_rate": 1.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 10,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      }
+    },
+    {
+      "seed": 41,
+      "policy": "table_frozen",
+      "late_changed_conflict_queries": 0,
+      "late_changed": {
+        "observed": 10,
+        "goal_successes": 0,
+        "goal_rate": 0.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 0,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 10,
+        "stale_nonfallback_fraction": 1.0
+      },
+      "late_stable": {
+        "observed": 10,
+        "goal_successes": 10,
+        "goal_rate": 1.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 10,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      }
+    },
+    {
+      "seed": 41,
+      "policy": "fixed_first",
+      "late_changed_conflict_queries": 0,
+      "late_changed": {
+        "observed": 10,
+        "goal_successes": 2,
+        "goal_rate": 0.2,
+        "fallback_actions": 0,
+        "nonfallback_successes": 2,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 8,
+        "stale_nonfallback_fraction": 0.8
+      },
+      "late_stable": {
+        "observed": 10,
+        "goal_successes": 6,
+        "goal_rate": 0.6,
+        "fallback_actions": 0,
+        "nonfallback_successes": 6,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      }
+    },
+    {
+      "seed": 41,
+      "policy": "random_uniform",
+      "late_changed_conflict_queries": 0,
+      "late_changed": {
+        "observed": 10,
+        "goal_successes": 5,
+        "goal_rate": 0.5,
+        "fallback_actions": 0,
+        "nonfallback_successes": 5,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 5,
+        "stale_nonfallback_fraction": 0.5
+      },
+      "late_stable": {
+        "observed": 10,
+        "goal_successes": 5,
+        "goal_rate": 0.5,
+        "fallback_actions": 0,
+        "nonfallback_successes": 5,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      }
+    },
+    {
+      "seed": 41,
+      "policy": "oracle_upper_bound",
+      "late_changed_conflict_queries": 0,
+      "late_changed": {
+        "observed": 10,
+        "goal_successes": 10,
+        "goal_rate": 1.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 10,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      },
+      "late_stable": {
+        "observed": 10,
+        "goal_successes": 10,
+        "goal_rate": 1.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 10,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      }
+    },
+    {
+      "seed": 42,
+      "policy": "prefix_online",
+      "late_changed_conflict_queries": 10,
+      "late_changed": {
+        "observed": 10,
+        "goal_successes": 6,
+        "goal_rate": 0.6,
+        "fallback_actions": 10,
+        "nonfallback_successes": 0,
+        "fallback_successes": 6,
+        "raw_abstentions": 10,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      },
+      "late_stable": {
+        "observed": 10,
+        "goal_successes": 10,
+        "goal_rate": 1.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 10,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      }
+    },
+    {
+      "seed": 42,
+      "policy": "prefix_feedback_gate",
+      "late_changed_conflict_queries": 10,
+      "late_changed": {
+        "observed": 10,
+        "goal_successes": 6,
+        "goal_rate": 0.6,
+        "fallback_actions": 10,
+        "nonfallback_successes": 0,
+        "fallback_successes": 6,
+        "raw_abstentions": 10,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      },
+      "late_stable": {
+        "observed": 10,
+        "goal_successes": 10,
+        "goal_rate": 1.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 10,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      }
+    },
+    {
+      "seed": 42,
+      "policy": "prefix_frozen",
+      "late_changed_conflict_queries": 0,
+      "late_changed": {
+        "observed": 10,
+        "goal_successes": 0,
+        "goal_rate": 0.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 0,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 10,
+        "stale_nonfallback_fraction": 1.0
+      },
+      "late_stable": {
+        "observed": 10,
+        "goal_successes": 10,
+        "goal_rate": 1.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 10,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      }
+    },
+    {
+      "seed": 42,
+      "policy": "table_online",
+      "late_changed_conflict_queries": 0,
+      "late_changed": {
+        "observed": 10,
+        "goal_successes": 10,
+        "goal_rate": 1.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 10,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      },
+      "late_stable": {
+        "observed": 10,
+        "goal_successes": 10,
+        "goal_rate": 1.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 10,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      }
+    },
+    {
+      "seed": 42,
+      "policy": "table_feedback_gate",
+      "late_changed_conflict_queries": 0,
+      "late_changed": {
+        "observed": 10,
+        "goal_successes": 10,
+        "goal_rate": 1.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 10,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      },
+      "late_stable": {
+        "observed": 10,
+        "goal_successes": 10,
+        "goal_rate": 1.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 10,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      }
+    },
+    {
+      "seed": 42,
+      "policy": "table_frozen",
+      "late_changed_conflict_queries": 0,
+      "late_changed": {
+        "observed": 10,
+        "goal_successes": 0,
+        "goal_rate": 0.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 0,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 10,
+        "stale_nonfallback_fraction": 1.0
+      },
+      "late_stable": {
+        "observed": 10,
+        "goal_successes": 10,
+        "goal_rate": 1.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 10,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      }
+    },
+    {
+      "seed": 42,
+      "policy": "fixed_first",
+      "late_changed_conflict_queries": 0,
+      "late_changed": {
+        "observed": 10,
+        "goal_successes": 2,
+        "goal_rate": 0.2,
+        "fallback_actions": 0,
+        "nonfallback_successes": 2,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 8,
+        "stale_nonfallback_fraction": 0.8
+      },
+      "late_stable": {
+        "observed": 10,
+        "goal_successes": 3,
+        "goal_rate": 0.3,
+        "fallback_actions": 0,
+        "nonfallback_successes": 3,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      }
+    },
+    {
+      "seed": 42,
+      "policy": "random_uniform",
+      "late_changed_conflict_queries": 0,
+      "late_changed": {
+        "observed": 10,
+        "goal_successes": 5,
+        "goal_rate": 0.5,
+        "fallback_actions": 0,
+        "nonfallback_successes": 5,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 5,
+        "stale_nonfallback_fraction": 0.5
+      },
+      "late_stable": {
+        "observed": 10,
+        "goal_successes": 4,
+        "goal_rate": 0.4,
+        "fallback_actions": 0,
+        "nonfallback_successes": 4,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      }
+    },
+    {
+      "seed": 42,
+      "policy": "oracle_upper_bound",
+      "late_changed_conflict_queries": 0,
+      "late_changed": {
+        "observed": 10,
+        "goal_successes": 10,
+        "goal_rate": 1.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 10,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      },
+      "late_stable": {
+        "observed": 10,
+        "goal_successes": 10,
+        "goal_rate": 1.0,
+        "fallback_actions": 0,
+        "nonfallback_successes": 10,
+        "fallback_successes": 0,
+        "raw_abstentions": 0,
+        "stale_nonfallback_choices": 0,
+        "stale_nonfallback_fraction": 0.0
+      }
+    }
+  ],
+  "limitations": [
+    "native hashes not reconstructed from full snapshots",
+    "same author audit, no independent task rerun",
+    "development41/42 only; no confirming criteria or gate verdict"
+  ],
+  "raw_sha256": "04039391fb7a1bd46598e90b7665d11b529dcb9bce9217c080f088b81ebe4829",
+  "raw_name": "development_41_42_20261030T2334.json"
+}

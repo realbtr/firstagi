@@ -116,6 +116,96 @@
 Названия событий из конституции — целевой словарь; старые enum кода этим
 документом не переименованы. Отсутствие пробы — UNKNOWN, а не negative.
 
+## Экспериментальная кодировка операций AC0 (PR22, З-0052)
+
+OperationCodec — stateless кодировка публичного перехода cue→operation:
+версия, роль, channel ID, cue ID и operation ID образуют канонический ключ;
+SHA-256 даёт ID и шесть числовых координат FeatureVector. Это код различимой
+идентичности для debug, не семантическая близость и не новая аксиома ядра.
+PredictionFrame — заявленные cue/channel/decision seq/phase/Gen/version
+предсказания; проверка совпадения метаданных не доказывает их происхождение.
+Abstention — возврат без операции при несовпадающем frame, отсутствии
+единственного соответствия или пересечении допусков кандидатов. Decoder
+не исполняет операцию и не выдаёт разрешение на неё. Классы находятся только
+в experiments/diagnostics/ac0_operation_codec.py, baseline ещё на ревью;
+код ядра, реальное обучение и подтверждающие критерии этим не меняются.
+
+### Живая привязка предсказания (PR22, З-0053)
+
+CodedKernelObserver — экспериментальный adapter, подающий реальные cue,
+операции и наблюдённые исходы в LearningSystem как Feature/PeripheralToken.
+Роли cue_anchor/cue_to_operation/operation_to_observation входят в ключ;
+неизвестный исход не порождает поддельный operation/outcome токен.
+KernelBinding — локальный снимок свежего after-cue proposal с реальными
+Gen/feature ссылками, ролью/источником признака, шагом и fingerprint контекста.
+Перед декодированием сверяется живое состояние, а не только заявленные поля.
+Это не аутентификация недоверенного кода и не подтверждение полезного навыка.
+Диагностический поток reset-ит контекст перед cue: это scaffold, не AC1.
+
+### Recall-policy ablation (PR22, З-0054)
+
+native_atomic — штатная загрузка контекста без дополнительного recall.
+exact_learned_prefix — явно отмеченный экспериментальный adapter: активирует
+только уже выученные chain>1 Gen с точным префиксом текущего cue-anchor,
+без создания новых Gen или доступа к правильной операции. minus_long_gen —
+контроль: такие цепочки удалены до той же prefix-recall пробы. Warmup-chain
+сначала завершается через reset_context для общей базы, затем делаются парные
+копии; иначе reset может восстановить только что удалённый Gen в контроле.
+Это in-sample механистическая проверка доступности знаний, не качество действий,
+не frozen-model skill control и не перенос между независимыми жизнями.
+
+### Named-Gen outcome evidence (PR22, З-0055)
+
+forecast — read-only чтение следующего outcome-edge того же живого Gen,
+который предложил operation-edge; происхождение включает channel/source/target.
+evidence — отдельная внешняя квитанция positive/negative/unknown по совпадению
+предсказанного и фактически наблюдённого outcome ID. Это не task success и
+не автоматическое изменение native Gen counters. Верное предсказание неудачи
+операции получает positive; ненаблюдённый исход — unknown. replay в этой
+диагностике повторяет training trajectory и не является independent replication.
+
+### Frozen goal-choice diagnostic (PR22, З-0056)
+
+goal_observation_id — явно доступный желаемый outcome ID; не правильная операция.
+frozen_prefix_goal — проект экспериментального selector scaffold: читает
+pre-existing learned цепочки через отдельный transient context, выбирает только
+одну operation с единогласным прогнозом public goal; иначе abstention.
+Frozen predictor здесь не меняет ни learned base, ни features/provenance,
+ни native counters/cache. Полная сериализация observer проверяется до/после
+query; временные context/proposal objects живут отдельно. begin/process_token
+и confirm_feature не являются read-only: последний вызывает gen.confirm().
+Held-out episode — новый reset/schedule при знакомых ID/правилах; не unseen
+task, transfer или independent replication. Opportunity — заранее назначенная
+проба, входящая в denominator даже при abstention; unknown отдельно от negative.
+Это определения будущего протокола, не реализованный native policy/AC0 pass.
+
+### Frozen query implementation (PR22, З-0057)
+
+FrozenGoalPredictor — read-only adapter зарегистрированного goal-selector
+scaffold; query принимает только четыре public fields, не world/teacher.
+CountedBase — временный proxy чтений: учитывает весь scan и каждый get,
+включая повторные обращения native initiative/context. BoundaryError —
+прекращение run при мутации frozen state/превышении бюджета, не abstention.
+episode_schedule — заранее построенные парные one-action opportunities;
+opportunity_metrics сохраняет observed denominator при abstention.
+Native propose группирует по feature иоставляет best Gen: predictor обязан
+проверить ВСЕ active Gen contributors для proposed feature, чтобы ranking
+не скрыл противоречащие outcome forecasts. Confidence не разрешает конфликт.
+
+### Paired goal evaluator (PR22, З-0058)
+
+RunBudget — счётчики train actions/core tokens, evaluation opportunities/actions
+иwall-clock; превышение останавливаетrun сpartial data, не заменой seeds.
+ReceiptObserver/CreationReceipts — tracing adapter стандартного warmup:
+регистрирует фактические токены ипервое появление Gen после token/context reset,
+связывая feature chain сранее наблюдёнными token steps. Это не независимое
+свидетельство качества Gen. Tracing sink удаляется изobserver доfreeze.
+aggregate — calculator заранее заданных paired thresholds, не AGI-gate.
+Completion receipt — отдельный итог после raw write, чтобы execution complete
+не означал прохождение wall budget при сохранении. Raw pending-write status
+пригоден дляclaims только вместе сcomplete receipt ивалидными hashes.
+Неисполненный forecast имеет unknown/not_executed, анеobservednegative.
+
 ## 5. Правила словаря
 
 1. Новый термин → сначала определение здесь (через запись З-NNNN), потом код.

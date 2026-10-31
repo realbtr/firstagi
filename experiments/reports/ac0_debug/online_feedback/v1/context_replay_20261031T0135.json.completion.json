@@ -1,0 +1,6 @@
+{
+  "status": "receipt_replay_complete",
+  "raw_sha256": "35b1ca6656a6faaae3592eb8968d992dd5831c32c37f2f4032141713b49dd7fc",
+  "raw_bytes": 5158371,
+  "elapsed_including_raw_write": 4.1191823000553995
+}

@@ -1,0 +1,61 @@
+{
+  "python": "3.12.2 (tags/v3.12.2:6abddd9, Feb  6 2024, 21:26:36) [MSC v.1937 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "test_result": "1496 passed, 3 skipped, 59 existing datetime.utcnow warnings",
+  "results": [
+    {
+      "seed": 41,
+      "controller": "fixed",
+      "source_commit": "462f6b3430ad45d5dbe41ac10cbeb29e9166968f",
+      "source_dirty": false,
+      "task_successes": 13,
+      "observed_outcomes": 36,
+      "unknown_outcomes": 12
+    },
+    {
+      "seed": 41,
+      "controller": "random",
+      "source_commit": "462f6b3430ad45d5dbe41ac10cbeb29e9166968f",
+      "source_dirty": false,
+      "task_successes": 16,
+      "observed_outcomes": 36,
+      "unknown_outcomes": 12
+    },
+    {
+      "seed": 41,
+      "controller": "oracle",
+      "source_commit": "462f6b3430ad45d5dbe41ac10cbeb29e9166968f",
+      "source_dirty": false,
+      "task_successes": 36,
+      "observed_outcomes": 36,
+      "unknown_outcomes": 12
+    },
+    {
+      "seed": 42,
+      "controller": "fixed",
+      "source_commit": "462f6b3430ad45d5dbe41ac10cbeb29e9166968f",
+      "source_dirty": true,
+      "task_successes": 24,
+      "observed_outcomes": 36,
+      "unknown_outcomes": 12
+    },
+    {
+      "seed": 42,
+      "controller": "random",
+      "source_commit": "462f6b3430ad45d5dbe41ac10cbeb29e9166968f",
+      "source_dirty": true,
+      "task_successes": 17,
+      "observed_outcomes": 36,
+      "unknown_outcomes": 12
+    },
+    {
+      "seed": 42,
+      "controller": "oracle",
+      "source_commit": "462f6b3430ad45d5dbe41ac10cbeb29e9166968f",
+      "source_dirty": true,
+      "task_successes": 36,
+      "observed_outcomes": 36,
+      "unknown_outcomes": 12
+    }
+  ]
+}
