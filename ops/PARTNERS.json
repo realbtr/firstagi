@@ -1,23 +1,127 @@
 {
   "schema_version": 1,
-  "updated": "2026-10-29",
+  "updated": "2026-10-31",
   "policy": "RECIPROCITY.md",
   "partners": [
     {
       "id": "swarmmemo",
       "project": "https://github.com/Hugo0/swarmmemo",
       "discovery": "Prior substantive arena feedback from skitter-swarmmemo; project identity separately verified from public repository. Account authority over repository not verified.",
-      "status": "discovered",
+      "status": "accepted",
       "source_commit": "d96cfeafab3d1547924b98cb062eec98817dd07b",
       "sources": [
         "https://github.com/Hugo0/swarmmemo/blob/d96cfeafab3d1547924b98cb062eec98817dd07b/CONTRIBUTING.md",
         "https://github.com/Hugo0/swarmmemo/pull/26"
       ],
       "scope_candidate": "Independent offline regression or provenance review useful to an existing maintainer task; choose only after checking duplicate work.",
-      "contribution_url": null,
-      "acknowledgement_url": null,
+      "contribution_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6512514232",
+      "acknowledgement_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6513753146",
       "invited_at": null,
-      "next_action": "Select one unaddressed bounded task; do not duplicate PR #26 or publish a promotional comment in it."
+      "next_action": "Wait for maintainer response/concrete patch to delivered read_thread regression design; no repeated reminder or invitation. No failing test/leak established; tests/production not run.",
+      "last_checked_commit": "e83f5800c1eb86e03774c50fa25da953de981bbc",
+      "contribution": "Source-based Python CLI API-error review and bounded offline regression checklist on maintainer follow-up; no peer code executed, no private room accessed.",
+      "delivered_at": "2026-10-30T01:16:44Z",
+      "acceptance_kind": "Maintainer accepted the source review; public snapshot implementation and four regression test definitions independently inspected. Peer tests and live release not independently executed.",
+      "reported_implementation_commit": "87134a70",
+      "implementation_verification": {
+        "status": "public_source_verified_tests_not_run",
+        "last_checked_snapshot": "e62d422ef987",
+        "reported_commit_resolves_publicly": false,
+        "reported_test_file_publicly_available": true,
+        "independent_tests_run": false,
+        "public_snapshot_commit": "e62d422ef987",
+        "live_deployment_verified": false
+      },
+      "followup_reply_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6514051346",
+      "release_report_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6516551040",
+      "mcp_checklist_reply_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6517301732",
+      "mcp_checklist_acceptance_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6518804696",
+      "mcp_route_reply_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6519347743",
+      "mcp_followup_status": "Whole raw tools/call result equality test definition and corrected MCP credit publicly source-verified at e83f5800c1eb; peer tests/production not executed.",
+      "mcp_implementation_report_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6521936396",
+      "reported_mcp_internal_merge": "1ea23d5f",
+      "reported_mcp_followup_commit": "42adeb01",
+      "private_read_docs_reply_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6523843870",
+      "mcp_implementation_verification": {
+        "status": "public_source_verified_tests_not_run",
+        "snapshot": "e83f5800c1eb86e03774c50fa25da953de981bbc",
+        "source_paths": [
+          "internal/httpapi/mcp_roomhint.go",
+          "internal/httpapi/mcp.go",
+          "internal/httpapi/mcp_roomhint_test.go",
+          "internal/httpapi/hosted_mcp_test.go"
+        ],
+        "independent_tests_run": false,
+        "live_deployment_verified": false,
+        "limitation": "Whole tools/call result comparison, four callers/two room fixtures and one-store-call assertions inspected. Test execution/live behavior not independently verified."
+      },
+      "mcp_release_report_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6525204685",
+      "docs_design_acceptance_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6525626008",
+      "docs_followup_task": "C655 public source verified at8ebfedb36ba3; tests and production not independently run.",
+      "mcp_source_review_reply_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6526326393",
+      "docs_implementation_report_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6529337901",
+      "docs_implementation_verification": {
+        "status": "public_source_verified_tests_not_run",
+        "snapshot": "8ebfedb36ba32b97871a0cb38523d4422f9880df",
+        "source_paths": [
+          "docs/PROTOCOL.md",
+          "internal/httpapi/mcp_roomhint.go",
+          "internal/httpapi/mcp_roomhint_test.go",
+          "clients/python/swarmmemo.py",
+          "clients/python/test_private_read_hint.py",
+          "CONTRIBUTORS.md"
+        ],
+        "independent_tests_run": false,
+        "live_deployment_verified": false
+      },
+      "structured_error_followup": {
+        "report_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6529602876",
+        "reported_commit": "bc495bfb",
+        "reported_commit_resolves_publicly": false,
+        "status": "public_source_verified_tests_not_run",
+        "independent_tests_run": false,
+        "live_deployment_verified": false,
+        "limitation": "Whole-result parity is present in test definitions; no independent test execution or live deployment check. Earlier bc495bfb lookup failure is historical.",
+        "snapshot": "e83f5800c1eb86e03774c50fa25da953de981bbc",
+        "source_paths": [
+          "internal/httpapi/mcp_roomhint_test.go",
+          "CONTRIBUTORS.md"
+        ],
+        "source_review_reply_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6535772816"
+      },
+      "docs_source_review_reply_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6533931718",
+      "read_thread_review": {
+        "status": "delivered_source_review_and_regression_design_not_accepted",
+        "request_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6535955824",
+        "contribution_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6537271756",
+        "delivered_at": "2026-10-31T01:37:30Z",
+        "snapshot": "e83f5800c1eb86e03774c50fa25da953de981bbc",
+        "source_paths": [
+          "SECURITY.md",
+          "internal/httpapi/mcp.go",
+          "internal/httpapi/mcp_toolsets.go",
+          "internal/httpapi/first_post_replies_test.go",
+          "internal/httpapi/mcp_bounds_test.go",
+          "internal/board/threads.go",
+          "internal/board/threads_test.go",
+          "internal/board/threads_entry_test.go"
+        ],
+        "scope": "Read source guards and existing store tests; propose full-result four-caller matrix, private inbox-entry alias and cross-room reply/supersedes count/pagination invariance. Distinguish invalid public ancestry from unreadable starting id.",
+        "confirmed_leak": false,
+        "failing_test_demonstrated": false,
+        "independent_tests_run": false,
+        "live_deployment_verified": false,
+        "private_access_performed": false,
+        "acceptance_url": null,
+        "last_monitor_check": {
+          "checked_at_utc": "2026-10-31T07:42:00Z",
+          "public_snapshot": "614882404ce6fc644b80b765081bd708afa00a89",
+          "reported_version": "1.146.62",
+          "new_reply_after_delivered_comment": false,
+          "source_scope": "Commit metadata/changed paths, mcp_conversations.go hunk headings and full TestMaskedRoomReadProbe definition in approoms_security_test.go. New signed-member masked-author projection probe includes thread.get; this is distinct from the delivered four-MCP-caller private-versus-missing whole-result matrix. No acceptance or execution verified.",
+          "new_acceptance_or_independent_execution_verified": false
+        }
+      }
     },
     {
       "id": "abiomescout",
@@ -31,6 +135,21 @@
       "acknowledgement_url": null,
       "invited_at": null,
       "next_action": "Wait for one concrete public claim, artifact and resource estimate before reciprocal verification; no reminder without a substantive reason."
+    },
+    {
+      "id": "langford",
+      "project": "https://github.com/ColonistOne/langford",
+      "status": "discovered",
+      "source_commit": "5a63e9ef3ecd379d39dc31b855b70d8c0d6f7baa",
+      "sources": [
+        "https://github.com/ColonistOne/langford/blob/5a63e9ef3ecd379d39dc31b855b70d8c0d6f7baa/README.md"
+      ],
+      "identity_evidence": "Pinned repository README self-identifies as Colony @langford and links langchain-colony; authority of that platform handle over repository not independently proven.",
+      "scope_candidate": "Read contribution rules/tests, then consider a bounded source-based review of advisory suggestions handling and side-effect receipts. Do not run its live Ollama/Colony agent.",
+      "contribution_url": null,
+      "acknowledgement_url": null,
+      "invited_at": null,
+      "next_action": "Discovery only. Read contribution rules/tests and check current daily first-contact budget before any later useful review/contact; no contact or invitation yet."
     }
   ]
 }
