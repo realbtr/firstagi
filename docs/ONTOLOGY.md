@@ -206,7 +206,7 @@ Completion receipt — отдельный итог после raw write, что�
 пригоден дляclaims только вместе сcomplete receipt ивалидными hashes.
 Неисполненный forecast имеет unknown/not_executed, анеobservednegative.
 
-## Локальный путь операции (проект v0.1, З-0078 / поправки N3)
+## Локальный путь операции (проект v0.1, З-0078 / принятые N3a/N3b)
 
 Это определения для ещё не реализованной части A; они не объявляют перенос
 или прохождение AC0. Контракт и численные правила: [дизайн](design/NATIVE_OPERATION_CHOICE_v0_1.md).
@@ -215,10 +215,10 @@ Completion receipt — отдельный итог после raw write, что�
 |---|---|---|
 | Адрес команды (command address) | Непрозрачный идентификатор исполнимой операции в данном channel/interface; сам не кодирует правильность выбора | Поле текущего public menu/Proposal; драйвер исполняет выбор ядра |
 | Actual receipt | Квитанция конкретного исполнения с instance/channel/operation seq/address, уникальным ID, происхождением и observed либо unknown исходом | Приём через LearningSystem.accept_operation_outcome; повтор доставки не новый опыт |
-| Actual evidence у Gen | Ссылки на разные наблюдённые исполнения и positive/negative относительно заранее зафиксированного прогноза этого Gen; unknown не обновляет их | Предлагаемые provenance/counters Generalization, отдельно от legacy token counters; не task success |
+| Actual evidence у Gen | Ссылки на разные наблюдённые исполнения и positive/negative относительно обученной связи этого Gen, включая порождающий receipt с отметкой origin (не прогноз); unknown не обновляет их | Предлагаемые provenance/counters Generalization, отдельно от legacy token counters; не task success |
 | Pending operation | Исполненная команда с замороженным составом прогнозов, ожидающая наблюдения либо явной отмены; interruption не опровержение | Состояние LearningSystem: не более одной на instance/channel; явная отмена без evidence, без TTL |
 | Applicability guard | Общий предикат допуска конкретного Gen до влияния на конкуренцию, включая загрузку, раскрытие, чтение ожиданий и dispatch | Предлагаемые проверки core Context/Attractor/Initiative; временный causal block не стирает знание |
-| Ambiguous command | Команда с несовместимыми допустимыми прогнозами полного состава contributors; высокий confidence не скрывает конфликт | Недопуск к goal-compatible competition до top3; отличается от численной ничьей |
+| Ambiguous command | Команда с несовместимыми допустимыми прогнозами всех Gen со связью именно с этой командой; token Gen без oper_id не входит; высокий confidence не скрывает конфликт | Недопуск к goal-compatible competition до top3; отличается от численной ничьей |
 
 ## 5. Правила словаря
 
