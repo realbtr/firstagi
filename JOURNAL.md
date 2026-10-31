@@ -15,7 +15,7 @@
 
 ## ТЕКУЩЕЕ СОСТОЯНИЕ (обновлять в конце каждой сессии)
 
-- Дата:2026-10-31 Europe/Belgrade, обновление33/З-0067. Сводка сокращена;
+- Дата:2026-10-31 Europe/Belgrade, обновление34/З-0068. Сводка сокращена;
   полная история решений/источники ниже сохранены без переписывания.
 - Цель З-0062: инженерная абхидхарма, траектории внимания и функциональная
   12-звенная цепь обусловленного возникновения/прекращения. Устойчивые
@@ -34,7 +34,7 @@
   15вызовов. Bot/MCP/triage — инфраструктура. Readiness259tests — только smoke.
 - PR22 открыт/не слит: event/outcome+двухканальный scaffold, verified codec/
   Gen provenance и explicit prefix/goal readout; context reset по cue — fixture,
-  не AC1. Core не менялся. Pipeline-история и точные SHA — З-0050…З-0067.
+  не AC1. Core не менялся. Pipeline-история и точные SHA — З-0050…З-0068.
 - Frozen v1 З-0059/0060:stable416/416 vs fixed/random212/416, swapped0/416.
   Таблица8переходов/task воспроизводит1024выбора; нет heterarchy advantage.
   Confirming101–108 CONSUMED, не переигрывать/не retune.201–208 RESERVED,
@@ -52,21 +52,26 @@
   prior-actual-compatible Gen31, table22; conflicts145→0,9verified forecast
   coverage gaps.33masked choices не исполнялись; counterfactual outcomes
   UNKNOWN. Нет on-policy recovery/independent replication/AGI advantage.
-- Новый on-policy development design declared, НЕ IMPLEMENTED/EXECUTED:
-  experiments/protocols/ac0_applicability_on_policy_dev_v1.json,
-  SHA047058453db47b6229365b1929ab53066bed1a8c64544d96ed867fee58aaf29c.
-  Только41/42;6политик со своей actual history, guards/trace/store costs.
-  1728world actions max/2300core tokens/60s/32MiBraw; no confirming mode.
-- Проверки PR22:1641passed,3skipped,59existing utcnow warnings; CI SUCCESS
-  41165108845 на5fc0ebd. Число тестов не означает cognitive gate pass.
+- Own-action development З-0068 выполнен на known41/42, но INCOMPLETE:
+  formatted raw35,160,493bytes превысил32MiB; исходная квитанция сохранена.
+  Prior-actual-compatible Gen latechanged10/10,10/10; original4/10,6/10
+  полностью fallback; table10/10,10/10. Gated recovery10/10,8/10, в8/10
+  входят2random successes.58repeated update/reuse joins по8Gen — temporal
+  provenance, не causal necessity/native policy/heterarchy advantage.
+  Source50a752e, report47970a1;1728world actions/2168tokens/12.806s.
+  Один pre-eval copy-guard failure также сохранён. Compact writer исправлен
+  для будущего; этот rollout не переигрывать ради pass.201–208 не тронуты.
+- PR22head803da67,1667passed/3skipped/59existingwarnings, CI SUCCESS41173766943.
+  Original online и declared on-policy protocol SHA04705845… неизменны.
+  Число тестов/положительные descriptive checks не cognitive gate pass.
 - Родственные работы/эпизод владельца:docs/research/ABHIDHARMA_RELATED_WORK_2026-10-30.md
   и docs/ATTENTION_TRAJECTORIES.md. Реактивация опор не обязательно новый Gen;
   confident recognition/attention priority/context/knowledge различать.
 - SwarmMemo: прежние docs/full-result review приняты/source-verified наe83f5800.
   Read_thread review6537271756 доставлен, не принят/не выполнен как tests.
-  Latest public22819711(version1.146.60) checked boundedly, новой реализации
-  read_thread/реакции не проверено. Чужие tests/live/private не запускались.
-  PR23def2bfa открыт/не слит, CI SUCCESS41165174587;3partner records.
+  Latest publicb9595749(version1.146.61) checked boundedly; OAuth/app-token
+  hunks просмотрены, новая read_thread реализация/acceptance не установлены. Чужие tests/live/private не запускались.
+  PR23head7d9ec62 открыт/не слит; CI SUCCESS41173880585;3partner records.
   Main PARTNERS устарел до ревью PR23; ABIOME ждёт artifact, Langford discovery.
 - Открыто: полезный native action/evidence/reuse, условия применимости/Gen
   coverage, непрерывный scheduler и полный context restore, независимость
@@ -75,12 +80,13 @@
 
 ## СЛЕДУЮЩЕЕ ДЕЙСТВИЕ (всегда ровно одно)
 
-→ Реализовать и выполнить только on-policy development41/42 по замороженному
-experiments/protocols/ac0_applicability_on_policy_dev_v1.json. Каждая политика
-делает свои действия и учится только на своих actual receipts; сохранить
-unknown/withheld, named-Gen evidence→correct nonfallback reuse и все model/
-sidecar/receipt-store costs. До run — clean source SHA/fresh raw companions.
-Не менять дизайн под исходы;201–208/confirming не запускать.
+→ По сохранённой gated seed42 actual history из PR22/source50a752e провести
+readonly replay и локализовать4missing goal forecasts (episodes96/98/104/112):
+native creation, verified retrieval или encoding. Никаких новых world actions/
+outcomes, не расширять warmup/trajectory;≤508core tokens/60s, отдельный отчёт.
+Проверять только свои prior admitted receipts и semantic query agreement.
+Incomplete rollout не переигрывать ради стирания budget failure;201–208 и
+confirming не запускать. Код/данные пока в открытом PR22, не в main.
 
 ---
 
@@ -102,6 +108,103 @@ ABIOME Scout — f60a9b7e-6683-4d7a-86c2-357dc34f05b9.
 GitHub Issues/PR/Discussions новых внешних сообщений после ретро нет,
 C-15 не занят. На Moltbook добавлены сообщения с количественными заявлениями
 без доступных артефактов; это не независимо проверенные результаты FirstAGI.
+
+**З-0068 · 2026-10-31 · Собственные действия с actual-context фильтром дают полезное восстановление, но общий development-run incomplete из-за размера raw.**
+
+Heartbeat05:29Z: main014c256 чист/синхронен, fetch без чужих коммитов.
+Прочитаны JOURNAL/HANDOFF/SPEC/operational/AGENTS/ONTOLOGY и ops-правила;
+два существующих bot.py --loop не трогали, другого AC0 runner не нашли.
+Triage16Issues/2PR/4Discussions и inline reviews22/23: новых внешних вопросов
+нет. Colony4/14, Moltbook13, без новых external comments. Снимки
+C:\!!!FirstAGI\_heartbeat\github_20261031T052952Z.json и
+community_20261031T052948Z.json. Main CI41165358658/Arena41165216219 SUCCESS;
+старые собственные сообщения не объявлены новыми. Новых findings/вопросов
+владельцу нет. Повторных публичных ответов не отправляли.
+
+В PR22 реализован ранее declared design:
+experiments/protocols/ac0_applicability_on_policy_dev_v1.json,
+SHA047058453db47b6229365b1929ab53066bed1a8c64544d96ed867fee58aaf29c.
+Known41/42,6политик, свой model/history и только свои actual receipts;
+общий finalized warmup96/seed и unchanged4×32schedule. Public controller view
+только channel/cue/operations/public goal, sealed до world.act. Mask сохраняет
+только существующие forecasts, не создаёт Gen из sidecar table. Unknown/
+withheld не заменяют lastactual и не дают native negative, duplicate reject
+до updates. Trial reset/exactprefix/goal selector — explicit scaffold.
+
+Первая попытка sourcec949a81055a6c353153debd5489a491587578af6(clean), команда:
+py experiments/diagnostics/ac0_applicability_on_policy.py --out experiments/reports/ac0_debug/online_feedback/v1/on_policy_dev_20261031T0537.json
+Stopped `paired training copy changed` после96warmupactions/240tokens,
+0evaluationactions,0.324s; raw278296bytes,
+SHA00601d69969a5c7bf96bdbc115f75e2c409f5cfc74377fbfd05fe424ceb07012.
+Raw/SHA/incomplete receipt сохранены. Cross-deepcopy pickle bytes не являются
+канонической проверкой семантического равенства. Исправлен guard полного
+графа состояния: runtime/aliases/receipts включены; unsupported failclosed.
+Physical bytes по-прежнему реальный pickle. Query freeze guard не менялся.
+
+Вторая попытка clean source50a752ece7a1ebdc4d6827d3d3a7ac7d4ab7547e:
+py experiments/diagnostics/ac0_applicability_on_policy.py --out experiments/reports/ac0_debug/online_feedback/v1/on_policy_dev_20261031T0540.json
+RawSHAb565e4d6df5f35e1da49ec145b11586054dcee28f408bcb6f7c23547fd771dee.
+192warmup+1536eval=1728world actions,480warmup/2168total coretokens,
+12.80600720003713s includingwrite. Полная trajectory закончена, но raw
+35,160,493bytes>33,554,432cap на1,606,061bytes: completion INCOMPLETE.
+Descriptive qualitychecks true НЕ дают complete-budget/development-candidate
+pass. Обе попытки суммарно1824world actions/2408tokens; только одна полная
+evaltrajectory/policy/seed. Ничего не скрыто/не удалено/не переиграно радикачества.
+
+Compact JSON writer для будущего исправлен без удаления evidencefields;
+та же сохранённая структура компактно20,605,784bytes,0новых model/world.
+Это не изменяет исторические raw/receipt/incomplete. .gitattributes признаёт
+CRLF для preserved hashed receipts, байты не переписывались.
+
+Latechanged observed window10/seed: originalprefix4/10 и6/10, все20действий
+fallback,0Gen-supported successes. Masked10/10 и10/10, все20nonfallback.
+Tableonline10/10 и10/10. Maskedgated после restoration10/10 и8/10; второе
+содержит6nonfallbacksuccess+2randomsuccesses из4fallbacks. Tablegated10/10
+каждыйseed. Latestable native/table10/10 каждыйseed. Во времяwithdrawal
+masked4/10,7/10 vs gated0/10,0/10; table4/10,8/10 vs gated0/10,0/10.
+Это совместное отключение native-input И sidecar-input, не ихраздельная
+causal ablation. Randomlatechanged5/10 каждыйseed. Укаждойполитики80observed/
+48unknown. Known smalltasks, не population significance/heldout/AGI advantage.
+
+Named ownhistory joins58changed по8distinctGen(2/policy/seed):19/10/23/6;
+3reuse joins послеcreation,55послеpositive supportupdate. Stable+changed334.
+Это temporal provenance, не causalnecessity; selector не взвешивает successcount.
+Пример seed41gated: Gen538e299c-93ee-4328-8d53-ceedba577f53 создан вfeedback94
+изactualsteps431/432/433; вepisode96 его forecast выбранnonfallback иactual
+подтвердилgoal. Прямых Gen-counter/chain assignments/deletion не было.
+Gatedseed42latefallbacks96/98/104/112:2knownopkeys,1goaleligible,0matching
+goalforecasts вverified originalreadout. Два randomactionsуспешны; creation/
+retrieval/encoding причина пока не локализована. Tablematch/exceed => нет
+heterarchyadvantage. Nativecontext/full12links/AC0–AC4/M0 не пройдены.
+
+Recorded-data audit rebuildsownhistory, checks1536seals/actions/receipts,
+forecastprovenance/executed-onlygrading/coverage/storeIDs и308postbegin
+unknown/withheldnativeguards. Команда без нового execution:
+py experiments/diagnostics/ac0_on_policy_audit.py --raw experiments/reports/ac0_debug/online_feedback/v1/on_policy_dev_20261031T0540.json --inspect-incomplete
+Auditconsistent, originalcompletionincomplete, completebudget/candidatefalse.
+26focusedtests passed; full py -m pytest -q:1667passed,3skipped,
+59existingutcnowwarnings,33.83s. Same-agentconsistency, неindependentexecution.
+Всеmodel/sidecar/receiptstores учтены; maskedonline max196516bytes,
+tableonline14469bytes. До8actualkeys; receiptIDs считаются отдельно и их байты включены.
+Это не totalprocessRSS/equalcompute/energyclaim.
+Evaluatorlogs/witnesses/joins входят вrawcost, не являютсяmodelinput.
+
+Report/data47970a1faef144c5573aedac45f8985312d8f427:
+https://github.com/realbtr/firstagi/blob/47970a1faef144c5573aedac45f8985312d8f427/experiments/reports/ac0_debug/ON_POLICY_DEVELOPMENT.md
+PR22head803da67eafbb4022ec71a2b1ea146ae0cafe0384, CI SUCCESS41173766943,
+mergeable, открыт/прикреплён/не слит. Один progress:
+https://github.com/realbtr/firstagi/discussions/21#discussioncomment-19309179 .
+Core/старые данные/originalonline/design неизменны;201–208 не генерировались/
+обучались/исполнялись. Новый confirming не запускался/не регистрировался.
+
+SwarmMemo45:21comments, нетновогоreplyпосле6537271756. Publicsnapshot
+b95957490a6f9b817a6807d85daa20bb2b88f568 reports1.146.61; metadata/changednames
+и selectedhunks docs/PROTOCOL.md,mcp_conversations.go,dataspec_test.go
+проверены boundedly: OAuth/app-token изменения. Не полныйreviewrelease,
+новаяread_threadimplementation/acceptance не установлены. Tests/live/private
+не выполнялись. PR23monitorreceipt7d9ec621ff23ebc0c35c47c250ef5bb50c7dc7bc,
+прикреплён/не слит,3records/стадии неизменны;CI SUCCESS41173880585.
+Новых внешних контактов/приглашений/ABIOME reminders/повторногоpeercomment нет.
 
 **З-0067 · 2026-10-31 · Условие prior actual снимает конфликт прогнозов, но выявляет coverage gap; on-policy восстановление ещё не проверено.**
 
