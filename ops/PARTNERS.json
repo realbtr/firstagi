@@ -114,11 +114,11 @@
         "private_access_performed": false,
         "acceptance_url": null,
         "last_monitor_check": {
-          "checked_at_utc": "2026-10-31T05:46:00Z",
-          "public_snapshot": "b95957490a6f9b817a6807d85daa20bb2b88f568",
-          "reported_version": "1.146.61",
+          "checked_at_utc": "2026-10-31T07:42:00Z",
+          "public_snapshot": "614882404ce6fc644b80b765081bd708afa00a89",
+          "reported_version": "1.146.62",
           "new_reply_after_delivered_comment": false,
-          "source_scope": "Public commit metadata/changed filenames and selected patch hunks in docs/PROTOCOL.md, internal/httpapi/mcp_conversations.go and internal/board/dataspec_test.go. OAuth/app-token changes observed; this bounded inspection does not verify a new read_thread regression patch. No peer tests or live/private access.",
+          "source_scope": "Commit metadata/changed paths, mcp_conversations.go hunk headings and full TestMaskedRoomReadProbe definition in approoms_security_test.go. New signed-member masked-author projection probe includes thread.get; this is distinct from the delivered four-MCP-caller private-versus-missing whole-result matrix. No acceptance or execution verified.",
           "new_acceptance_or_independent_execution_verified": false
         }
       }
