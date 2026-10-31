@@ -84,6 +84,7 @@ class Generalization:
         link = getattr(self, "actual_link", None)
         return (link is not None and link[2:] == (self.key_id, self.oper_id, self.goal_id)
                 and getattr(self, "actual_chain", None) == tuple(self.feature_chain)
+                and sum(e.origin for e in getattr(self, "actual_evidence", {}).values()) == 1
                 and self.actual_positive_count >= 2 and self.actual_support > 0.5)
 
     @property

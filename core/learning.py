@@ -953,6 +953,8 @@ class LearningSystem:
     def bind_operation_evidence(self, gen_id: str, receipt_id: str) -> bool:
         """Bind a native learned chain to observed roles, including its origin.
 
+        Exactly one originating observation is allowed. Later evidence must
+        come through a forecast frozen by begin_operation, including mismatch.
         This never creates a Gen or uses task success. It validates that the
         existing native learner created exactly cue→operation→actual chain.
         A2 still must wire this to its live recall/competition path.
@@ -968,6 +970,8 @@ class LearningSystem:
         receipt = record.receipt  # Canonical delivery, even when an alias was supplied.
         pending = record.pending
         gen = self.base.get(gen_id)
+        if gen is not None and getattr(gen, "actual_evidence", {}):
+            raise ValueError("Gen already has actual evidence; later receipts require a frozen forecast")
         actual_feature = self._operation_atom(receipt.outcome_gen_id)
         if (gen is None or gen_id not in self.generalizer._created_ids
                 or tuple(gen.feature_chain) != (*pending.prefix, actual_feature)):
@@ -978,12 +982,9 @@ class LearningSystem:
         if (old_roles not in ((None, None, None), roles)
                 or getattr(gen, "actual_link", None) not in (None, link)):
             raise ValueError("Cannot rebind an existing link or channel evidence")
-        if key in getattr(gen, "actual_evidence", {}):
-            return False
         self._operation_capacity(1)
         gen.key_id, gen.oper_id, gen.goal_id = roles
-        return self._actual_evidence_update(gen, pending, receipt,
-                                            origin=gen_id not in {f[0] for f in pending.forecasts})
+        return self._actual_evidence_update(gen, pending, receipt, origin=True)
 
     def process_token(self, token) -> StepResult:
         """

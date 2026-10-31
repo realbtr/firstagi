@@ -45,10 +45,12 @@ def linked_system():
     system, atoms = setup_system()
     gen = None
     for seq in (0, 1):
-        begin(system, atoms, seq)
+        begin(system, atoms, seq, (gen.gen_id,) if gen else ())
         system.accept_operation_outcome(receipt(atoms, seq))
         gen = learn_native_chain(system)
-        system.bind_operation_evidence(gen.gen_id, f"r{seq}")
+        if seq == 0:
+            system.bind_operation_evidence(gen.gen_id, f"r{seq}")
+    assert sum(e.origin for e in gen.actual_evidence.values()) == 1
     return system, atoms, gen
 
 
@@ -61,7 +63,8 @@ def test_origin_and_exactly_two_observations_admit_without_forged_forecast():
     system.bind_operation_evidence(gen.gen_id, "r0")
     assert gen.actual_positive_count == 1 and not gen.operation_admitted
     assert next(iter(gen.actual_evidence.values())).origin
-    assert not system.bind_operation_evidence(gen.gen_id, "r0")
+    with pytest.raises(ValueError, match="already has actual evidence"):
+        system.bind_operation_evidence(gen.gen_id, "r0")
     begin(system, atoms, 1, (gen.gen_id,))
     token_counts = (gen.success_count, gen.stop_count)
     system.accept_operation_outcome(receipt(atoms, 1))
@@ -77,7 +80,8 @@ def test_repeated_delivery_and_alias_for_same_execution_are_not_new_evidence():
     assert system.accept_operation_outcome(original) == "duplicate"
     alias = replace(original, receipt_id="alias", source_id="redelivery")
     assert system.accept_operation_outcome(alias) == "duplicate"
-    assert not system.bind_operation_evidence(gen.gen_id, "alias")
+    with pytest.raises(ValueError, match="already has actual evidence"):
+        system.bind_operation_evidence(gen.gen_id, "alias")
     assert gen.actual_positive_count == 2
 
 
@@ -133,9 +137,10 @@ def test_negative_means_prediction_mismatch_and_updates_all_frozen_contributors(
     # with both predictions to test A1 accounting, not A2's ambiguity selector.
     other = learn_native_chain(system, "other-actual")
     for seq in (2, 3):
-        begin(system, atoms, seq)
+        begin(system, atoms, seq, (other.gen_id,) if seq == 3 else ())
         system.accept_operation_outcome(receipt(atoms, seq, outcome_gen_id=atoms["other-actual"]))
-        system.bind_operation_evidence(other.gen_id, f"r{seq}")
+        if seq == 2:
+            system.bind_operation_evidence(other.gen_id, f"r{seq}")
     begin(system, atoms, 4, (gen.gen_id, other.gen_id))
     system.accept_operation_outcome(receipt(atoms, 4))
     assert (gen.actual_positive_count, gen.actual_negative_count) == (3, 0)
@@ -269,3 +274,46 @@ def test_frozen_structural_change_is_rejected_before_actual_update(change):
 def test_invalid_operation_budget_rejected(limit):
     with pytest.raises(ValueError):
         LearningSystem(operation_record_limit=limit)
+
+
+@pytest.mark.parametrize("later_forecast", [False, True])
+def test_second_origin_binding_is_rejected_without_partial_mutation(later_forecast):
+    system, atoms = setup_system()
+    begin(system, atoms, 0)
+    system.accept_operation_outcome(receipt(atoms, 0))
+    gen = learn_native_chain(system)
+    system.bind_operation_evidence(gen.gen_id, "r0")
+    begin(system, atoms, 1, (gen.gen_id,) if later_forecast else ())
+    system.accept_operation_outcome(receipt(atoms, 1))
+    before = pickle.dumps(system)
+    with pytest.raises(ValueError, match="already has actual evidence"):
+        system.bind_operation_evidence(gen.gen_id, "r1")
+    assert pickle.dumps(system) == before
+    assert sum(e.origin for e in gen.actual_evidence.values()) == 1
+    assert gen.actual_positive_count == (2 if later_forecast else 1)
+    assert gen.operation_admitted == later_forecast
+
+
+def test_second_execution_can_refute_before_admission_without_second_origin():
+    system, atoms = setup_system()
+    begin(system, atoms, 0)
+    system.accept_operation_outcome(receipt(atoms, 0))
+    gen = learn_native_chain(system)
+    system.bind_operation_evidence(gen.gen_id, "r0")
+    begin(system, atoms, 1, (gen.gen_id,))
+    system.accept_operation_outcome(receipt(atoms, 1, outcome_gen_id=atoms["other-actual"]))
+    assert (gen.actual_positive_count, gen.actual_negative_count) == (1, 1)
+    assert gen.actual_support == 0.5 and not gen.operation_admitted
+    evidence = gen.actual_evidence[("life", "channel", 1)]
+    assert not evidence.origin and not evidence.positive
+
+
+
+def test_pre_h1_checkpoint_with_multiple_origins_is_not_admitted():
+    system, atoms, gen = linked_system()
+    key = ("life", "channel", 1)
+    gen.actual_evidence[key] = replace(gen.actual_evidence[key], origin=True)
+    system = pickle.loads(pickle.dumps(system))
+    gen = system.base.get(gen.gen_id)
+    assert gen.actual_positive_count == 2  # Preserve historical data, do not relabel it.
+    assert not gen.operation_admitted
