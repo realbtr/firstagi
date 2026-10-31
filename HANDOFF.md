@@ -17,13 +17,16 @@ SPEC_FINAL.md теперь различает целевой контракт и
 следующий шаг и статус реализованного стенда брать из JOURNAL, а не
 восстанавливать по историческому описанию baseline в этом файле.
 
-Уточнение З-0068: в PR22 есть own-action scaffold с actual-token свидетелями
-создания/обновления Gen и позднего полезного выбора. Его rollout INCOMPLETE:
-raw превысил32MiB, исходная квитанция сохранена. Таблица восстанавливается
-не хуже. Compact writer для будущего не делает старую квитанцию успешной;
-не повторять эту траекторию ради pass. Следующий шаг в JOURNAL — readonly
-локализация четырёх missing forecasts gated seed42, без новых world actions.
-Это ещё не native policy, непрерывная жизнь или полный 12-звенный цикл.
+Уточнение З-0069: в PR22 есть explicit own-action scaffold и source-matched
+replay:4missing forecasts —2native candidates с count1 при пороге2. Вторые
+actual observations98/112 создают Gen; позже полезные Gen choices106/120.
+Признаки корректны; это admission/evidence latency в данных случаях.
+Оригинальный own-action rollout остаётся INCOMPLETE из-за32MiBraw cap;
+завершённый diagnostic replay не меняет его квитанцию. Таблица работает
+с одним receipt; преимущество гетерархии не установлено. Следующее в JOURNAL —
+development-дизайн candidate probe versus uniform fallback сnoise/unknown,
+без execution/confirming201–208 и без измененияmin_gen_count2. Это ещё не
+native policy, непрерывная жизнь или полный12-звенный цикл.
 
 Текущая цель (З-0062): инженерная интерпретация абхидхармы, траектории
 внимания и 12-звенная обусловленная цепь возникновения и прекращения.
