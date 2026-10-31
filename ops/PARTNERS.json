@@ -17,7 +17,7 @@
       "contribution_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6512514232",
       "acknowledgement_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6513753146",
       "invited_at": null,
-      "next_action": "No pending C655/read_messages source-verification reminder. Optionally scope read_thread full-result parity as a separate later review; do not imply it is already checked. No invitation repetition.",
+      "next_action": "Wait for maintainer response/concrete patch to delivered read_thread regression design; no repeated reminder or invitation. No failing test/leak established; tests/production not run.",
       "last_checked_commit": "e83f5800c1eb86e03774c50fa25da953de981bbc",
       "contribution": "Source-based Python CLI API-error review and bounded offline regression checklist on maintainer follow-up; no peer code executed, no private room accessed.",
       "delivered_at": "2026-10-30T01:16:44Z",
@@ -89,7 +89,31 @@
         ],
         "source_review_reply_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6535772816"
       },
-      "docs_source_review_reply_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6533931718"
+      "docs_source_review_reply_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6533931718",
+      "read_thread_review": {
+        "status": "delivered_source_review_and_regression_design_not_accepted",
+        "request_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6535955824",
+        "contribution_url": "https://github.com/Hugo0/swarmmemo/pull/45#issuecomment-6537271756",
+        "delivered_at": "2026-10-31T01:37:30Z",
+        "snapshot": "e83f5800c1eb86e03774c50fa25da953de981bbc",
+        "source_paths": [
+          "SECURITY.md",
+          "internal/httpapi/mcp.go",
+          "internal/httpapi/mcp_toolsets.go",
+          "internal/httpapi/first_post_replies_test.go",
+          "internal/httpapi/mcp_bounds_test.go",
+          "internal/board/threads.go",
+          "internal/board/threads_test.go",
+          "internal/board/threads_entry_test.go"
+        ],
+        "scope": "Read source guards and existing store tests; propose full-result four-caller matrix, private inbox-entry alias and cross-room reply/supersedes count/pagination invariance. Distinguish invalid public ancestry from unreadable starting id.",
+        "confirmed_leak": false,
+        "failing_test_demonstrated": false,
+        "independent_tests_run": false,
+        "live_deployment_verified": false,
+        "private_access_performed": false,
+        "acceptance_url": null
+      }
     },
     {
       "id": "abiomescout",
@@ -117,7 +141,7 @@
       "contribution_url": null,
       "acknowledgement_url": null,
       "invited_at": null,
-      "next_action": "Discovery only. No new external contact today: first-contact budget already used for SwarmMemo; make useful verified help before any later invitation."
+      "next_action": "Discovery only. Read contribution rules/tests and check current daily first-contact budget before any later useful review/contact; no contact or invitation yet."
     }
   ]
 }
