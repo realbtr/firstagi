@@ -15,121 +15,72 @@
 
 ## ТЕКУЩЕЕ СОСТОЯНИЕ (обновлять в конце каждой сессии)
 
-- Дата: 2026-10-31 Europe/Belgrade (обновление 32, З-0066; локализованы реактивация и event-scoped applicability gap).
-- Цель (З-0062): инженерная абхидхарма — траектории внимания и техническая
-  реализация 12-звенной цепи обусловленного возникновения и прекращения.
-  Непрерывное умелое действие и наследование проверяют эту реализацию.
-  Устойчивые значимые опоры отличаем от временной детализации периферии.
-- Состояние: рабочий стенд компонентов; AC0–AC4 НЕ ПРОЙДЕНЫ.
-  Матрица: docs/RETROSPECTIVE_2026-10-29.md; исполнимый readiness smoke есть.
-- Контракт: SPEC_FINAL v1.2 + FIRSTAGI_OPERATIONAL_PROTOCOL v0.2;
-  сентябрьские источники импортированы в docs/concept с хэшами.
-- Приоритет: AC0, затем AC1 (одна непрерывная жизнь), AC2 (одна дельта
-  наследнику); рой E2 — последующая отдельная ветка, а не стоп всей программы.
-- Числа компактности (≤10M/200B+, условные миллионы/триллионы, <1M опор,
-  7^7) — философское подспорье; не гейты и не задача уточнения/опровержения.
-  M0 не выполнен; прежние сравнения сохранены как необязательная линия.
-- H22: пилот v1 закончен; lexical branching чувствителен к настройкам,
-  memory capacity не установлена; основная серия не запущена (З-0046).
-- Открыты H27–H35; исторические H1–H26 сохранены с областью применимости.
-- GitHub: github.com/realbtr/firstagi (public, MIT); арена C-15 флагман,
-  всего 15 вызовов. Бот/LLM-triage — инфраструктура, не доказательство ядра.
-- CI: 1400+ тестов; точный результат по коммиту. Отдельная readiness выборка:
-  259 passed. Нидана-трасса проверяет стадии, не весь будущий causal path.
-- Первый AC0 event debug scaffold предложен в PR #22 (dfef2cf), CI зелёный,
-  не слит: два канала, внешний action/outcome, observer existing core,
-  10 новых тестов, шесть raw debug traces. Это НЕ gate pass и НЕ learned policy.
-- В PR22 добавлен operation-readiness audit (4468cdf): на seed42 разные
-  операции точно алиасируются в FeatureVector; cached proposals нельзя
-  считать свежим action prediction. 1501 тест passed, CI SUCCESS; PR не слит.
-- В PR22 отдельный codec boundary (8563774):768/768 synthetic identity
-  roundtrips на192 публичных frames ×2 operations ×2 diagnostic tolerances.
-  Старый observer не заменён; actual kernel provenance/learned action нет.
-  1517 passed,3 skipped, PR22 CI SUCCESS. Учёт peer review — отдельный PR23.
-- В PR22 coded kernel observer/native probe (58efa83): реальные Feature-токены
-  и свежий after-cue вызов initiative; live context/Gen/feature guards.11 fresh
-  proposals,0 eligible operations в4 unseeded streams; long-prefix Gen есть
-  в143/192 views. Полный набор1531 passed,3 skipped, CI зелёный; не gate pass.
-- SwarmMemo принял review; public snapshot e62d422ef987 теперь проверен по
-  исходнику и четырём test definitions. Чужие тесты/production не запускались.
-  Запрошенный MCP-checklist доставлен; PR23 ab3f156 обновлён, не слит.
-- Парная recall ablation в PR22 (956eb89): eligible candidate coverage
-  native0/192, explicit learned-prefix191/192, minus-long-Gen0/192.119 views
-  с одной distinct operation,72 с конкурирующими; это in-sample доступность,
-  не качество действий.1537 passed,3 skipped, CI зелёный; AC0 не пройден.
-- Named-Gen outcome replay PR22 (8fa759c):105/192 attempts с прогнозом,
-  77 positive,28 unknown,0 observed negative;57 positive предсказывают
-  task-divergent operation. Это in-sample dynamics recall, не task skill;
-  external receipts не обновляют native support.1546 passed,3 skipped, CI SUCCESS.
-- Goal-choice protocol v1 в PR22:1907277, design audit1a244da.8 новых task
-  seeds, numeric thresholds/budgets, frozen predictor/ablations, stable/swapped
-  rules. Confirming v1 завершён (З-0059); paired evaluator реализован. Goal selector —
-  explicit scaffold, не native policy.1546 passed,3 skipped, PR22 CI SUCCESS.
-- SwarmMemo принял MCP-checklist как C642; route-вопрос отвечен с источниками.
-  Это принятое проектирование, не проверенный MCP patch; PR23 теперь047fe74.
-- FrozenGoalPredictor в PR22 реализован:source1795d14, report/rawb6b11b9.
-  128/128 development queries41/42 сохраняют полный observer hash;0 query
-  tokens/actions/task scores. Conflict-preserving selector/paired schedules/
-  denominator tests есть.1564 passed,3 skipped; confirming101–108 не запускали.
-- Full paired development evaluator вPR22:a6ecf72/report99fbb64,
-  финальный preflightguardc81166f.41/42stable goal104/104, fixed54/104,
-  random57/104, minus/empty0/104; swapped goal0/104 и104observednegatives.
-  Это known-task scaffold sanity check, неconfirming/gate.1576passed,3skipped.
-  Exact confirming command/SHA опубликованы ДОrun; v1pool теперь CONSUMED.
-- Registered confirming v1 (PR22report64ab9d7) прошёл bounded scaffold
-  criteria:8seeds101–108,stable416/416, fixed/random212/416, minus/empty0/416;
-  swapped0/416 и416observednegative. Все6144records провереныstdlibaudit,
-  complete8.45s. Этоexplicitgoal-selectorстенд; AC0–AC4 не пройдены.
-  Dataset/seeds v1 CONSUMED; безповторныхconfirming/retuningнаэтомпуле.
-- Ретро З-0060: post-hoc таблица из8 переходов на task воспроизводит все
-  1024 выбора scaffold (stable416/416, swapped0/416) без Gen/гетерархии.
-  v1 pass сохранён; архитектурное преимущество этим опытом НЕ установлено.
-  Следующий протокол обязан включить обучаемый табличный контроль.
-- Метаретро З-0061: дисциплина измерения улучшилась; путь от AC0–AC2 к
-  преимуществу обобщения и далее к North Star ещё не доказан. Каждый пакет
-  заранее связывает исходы опыта с решением о механизме; положительный
-  scaffold результат сам по себе не обосновывает расширение архитектуры.
-- Обзор З-0063: docs/research/ABHIDHARMA_RELATED_WORK_2026-10-30.md —
-  первичные тексты, протоколы исследования, формальные/вычислительные работы,
-  разногласия и возможные адресаты. Это исследовательский shortlist,
-  не новые партнёрства; реализация/репликации/контакты не выполнялись.
-- Online AC0-протокол зарегистрирован в PR22:3de3be3; validator/schedule
-  и14тестов, полный набор1590passed,3skipped; CI SUCCESS. Снятие/возврат
-  admission, adaptive-table контроль, прекращение stale выбора отдельно
-  от recovery. Runner/confirming НЕ выполнялись; seeds201–208 reserved.
-- SwarmMemo C655 docs/hints/anchor-test definition проверены по8ebfedb36ba3;
-  structured-error regression bc495bfb только заявлен автором, публично
-  не доступен. Ответ6533931718 доставлен. PR23:405c6bf, CI SUCCESS, не слит;
-  main PARTNERS остаётся устаревшим до ревью PR23.
-- Online development41/42 выполнен один раз: source05c4b98, audit/dataf5caba4,
-  report5f5c22e в PR22. После смены правил late4/10 и6/10, всё fallback;
-  adaptive table10/10 на обоих seeds, stable native10/10. Поддержка Gen
-  меняется, stale nonfallback прекращается, useful recovery отсутствует.
-  1614passed,3skipped; CI PR22 SUCCESS.201–208 не выполнялись.
-- SwarmMemo whole-result MCP regression теперь source-verified вe83f5800c1eb;
-  tests/production не запускались. Ответ6535772816, ledger PR23e828433,
-  CI SUCCESS41145418872; main PARTNERS устарел до ревью PR23.
-- Receipt replay PR22:sourceeccd930/report0469dd5:256/256 query semantics
-  совпали,0новых world actions/outcomes.60negative forecasts:16deactivated/
-  retained,16later reappearances;44still-live old-outcome waits без stop↑.
-  Все query contributors уже live; один live-intersection конфликт не снимет.
-  1619passed,3skipped; CI SUCCESS. Отдельный shadow-design declared/unexecuted.
-- SwarmMemo подтвердил прежнее закрытие и запросил read_thread review.
-  Source-review/test matrix доставлены6537271756; новых failing tests/leaks
-  не установлено, чужие tests/live не запускались. PR23:5f5f33a, CI SUCCESS,
-  новый scope delivered/not accepted;3records. Main PARTNERS ещё до ревью PR23.
-- Открытые блокеры: полезный action/evidence/reuse и recall, непрерывный scheduler,
-  контекст/полное восстановление, независимость доказательств, версии/дельты,
-  локальные индексы/ресурсы. Детали — ретро, протокол и HYPOTHESES.
+- Дата:2026-10-31 Europe/Belgrade, обновление33/З-0067. Сводка сокращена;
+  полная история решений/источники ниже сохранены без переписывания.
+- Цель З-0062: инженерная абхидхарма, траектории внимания и функциональная
+  12-звенная цепь обусловленного возникновения/прекращения. Устойчивые
+  значимые опоры отличаем от временной детализации и текущей применимости.
+- Статус: рабочий стенд компонентов; AC0–AC4/M0 НЕ ПРОЙДЕНЫ. Smoke/uptime/
+  MR/рост Gen/социальные LLM-агенты не когнитивные гейты/экземпляры ядра.
+  SPEC_FINAL v1.2, FIRSTAGI_OPERATIONAL_PROTOCOL v0.2; аудит
+  docs/RETROSPECTIVE_2026-10-29.md; источники docs/concept с хэшами.
+- Приоритет AC0→AC1(непрерывная жизнь)→AC2(проверенная дельта наследнику).
+  Рой E2 и mirror-body — позже соответствующих предпосылок, не обход AC0.
+- Миллионы/триллионы,≤10M/200B+,<1M опор/7^7 — философское подспорье,
+  не обязательные критерии и не отдельная задача уточнения/опровержения.
+- H22 pilotv1 завершён, ёмкость не установлена, полная серия не запускалась.
+  H27–H35 открыты; H1–H26 сохраняют исторические пределы применимости.
+- Репозиторий public/MIT:github.com/realbtr/firstagi; C-15 issue20/Discussion21,
+  15вызовов. Bot/MCP/triage — инфраструктура. Readiness259tests — только smoke.
+- PR22 открыт/не слит: event/outcome+двухканальный scaffold, verified codec/
+  Gen provenance и explicit prefix/goal readout; context reset по cue — fixture,
+  не AC1. Core не менялся. Pipeline-история и точные SHA — З-0050…З-0067.
+- Frozen v1 З-0059/0060:stable416/416 vs fixed/random212/416, swapped0/416.
+  Таблица8переходов/task воспроизводит1024выбора; нет heterarchy advantage.
+  Confirming101–108 CONSUMED, не переигрывать/не retune.201–208 RESERVED,
+  не генерировались/обучались/исполнялись; старый online protocol неизменён.
+- Online development41/42 З-0065: native support меняется, latechanged4/10
+  и6/10 полностью fallback; table10/10, stable native10/10. Useful recovery
+  не достигнуто. Source05c4b98/report5f5c22e; не новый confirming pass.
+- Receipt replay З-0066:256query matches;16negative forecasts deactivated/
+  retained и16later reappearances;44stale waits ещё live/stop unchanged.
+  Global any-match не равен event-scoped grading каждой ветви. Все query
+  contributors уже live; одного live-intersection недостаточно. Это fixture
+  contract gap, не универсальный kernel bug; не удалять все nonmatches.
+- Shadow З-0067:sourcecc2fc5b/report5fc0ebd,256cases/1024readonlyqueries,
+  0новых model/core/world actions/outcomes. Abstentions original/live84,
+  prior-actual-compatible Gen31, table22; conflicts145→0,9verified forecast
+  coverage gaps.33masked choices не исполнялись; counterfactual outcomes
+  UNKNOWN. Нет on-policy recovery/independent replication/AGI advantage.
+- Новый on-policy development design declared, НЕ IMPLEMENTED/EXECUTED:
+  experiments/protocols/ac0_applicability_on_policy_dev_v1.json,
+  SHA047058453db47b6229365b1929ab53066bed1a8c64544d96ed867fee58aaf29c.
+  Только41/42;6политик со своей actual history, guards/trace/store costs.
+  1728world actions max/2300core tokens/60s/32MiBraw; no confirming mode.
+- Проверки PR22:1641passed,3skipped,59existing utcnow warnings; CI SUCCESS
+  41165108845 на5fc0ebd. Число тестов не означает cognitive gate pass.
+- Родственные работы/эпизод владельца:docs/research/ABHIDHARMA_RELATED_WORK_2026-10-30.md
+  и docs/ATTENTION_TRAJECTORIES.md. Реактивация опор не обязательно новый Gen;
+  confident recognition/attention priority/context/knowledge различать.
+- SwarmMemo: прежние docs/full-result review приняты/source-verified наe83f5800.
+  Read_thread review6537271756 доставлен, не принят/не выполнен как tests.
+  Latest public22819711(version1.146.60) checked boundedly, новой реализации
+  read_thread/реакции не проверено. Чужие tests/live/private не запускались.
+  PR23def2bfa открыт/не слит, CI SUCCESS41165174587;3partner records.
+  Main PARTNERS устарел до ревью PR23; ABIOME ждёт artifact, Langford discovery.
+- Открыто: полезный native action/evidence/reuse, условия применимости/Gen
+  coverage, непрерывный scheduler и полный context restore, независимость
+  подтверждений, версии/дельты и наследование, локальные индексы/ресурсы.
+  Дизайн функции/слова Учения не доказательство полноты12звенной реализации.
 
 ## СЛЕДУЮЩЕЕ ДЕЙСТВИЕ (всегда ровно одно)
 
-→ Реализовать readonly shadow comparison сохранённой41/42траектории по
-experiments/protocols/ac0_applicability_shadow_v1.json: original/live-filter/
-prior-admitted-actual-compatible Gen forecasts/adaptive table. Выходы sealed
-до current receipt; проверять только реально исполненную операцию, outcome
-неисполненного shadow выбора остаётся unknown.0world actions/outcomes/core
-tokens;30s/2MiB. Не объявлять on-policy recovery;201–208 не запускать.
+→ Реализовать и выполнить только on-policy development41/42 по замороженному
+experiments/protocols/ac0_applicability_on_policy_dev_v1.json. Каждая политика
+делает свои действия и учится только на своих actual receipts; сохранить
+unknown/withheld, named-Gen evidence→correct nonfallback reuse и все model/
+sidecar/receipt-store costs. До run — clean source SHA/fresh raw companions.
+Не менять дизайн под исходы;201–208/confirming не запускать.
 
 ---
 
@@ -151,6 +102,87 @@ ABIOME Scout — f60a9b7e-6683-4d7a-86c2-357dc34f05b9.
 GitHub Issues/PR/Discussions новых внешних сообщений после ретро нет,
 C-15 не занят. На Moltbook добавлены сообщения с количественными заявлениями
 без доступных артефактов; это не независимо проверенные результаты FirstAGI.
+
+**З-0067 · 2026-10-31 · Условие prior actual снимает конфликт прогнозов, но выявляет coverage gap; on-policy восстановление ещё не проверено.**
+
+Heartbeat03:24Z: main21895df чист/синхронен, fetch без чужих коммитов.
+Прочитаны журнал/контракты/правила. Существующих bot.py --loop не трогали,
+другой AC0 runner не найден. Triage16Issues/2PR/4Discussions+inline review
+comments: новых внешних FirstAGI сообщений нет; Colony4/14, Moltbook13,
+без новых внешних. Старые собственные комментарии не объявлены новыми.
+Снимки C:\!!!FirstAGI\_heartbeat\github_20261031T032455Z.json и
+community_20261031T032451Z.json. Main CI41156484967/последние Arena SUCCESS.
+JSON findings/новых вопросов владельцу нет.
+
+Реализован объявленный ранее shadow-design SHA738b96c253066651c026028d15eb030ed4faf7b542db11c20adc22c300a8c925,
+без его изменения. Stdlib-only sourcecc2fc5bf500e97bf779c158ebec9f1559bac8953,
+clean при старте. Сохранённая prefix_online история41/42: original readout,
+intersection live cursor1, prior admitted actual-compatible original Gen
+forecasts, adaptive last-actual table. Все4outputs sealed до текущего receipt.
+Нельзя создать прогноз из таблицы при missing Gen; unknown/withheld не
+перезаписывают контекст, duplicate reject до update, ключ channel/cue/op.
+
+Единственная команда анализа:
+py experiments/diagnostics/ac0_applicability_shadow.py --out experiments/reports/ac0_debug/online_feedback/v1/applicability_shadow_20261031T0324.json
+InputSHA04039391fb7a1bd46598e90b7665d11b529dcb9bce9217c080f088b81ebe4829,
+frontierReplaySHA35b1ca6656a6faaae3592eb8968d992dd5831c32c37f2f4032141713b49dd7fc.
+OutputSHAa255fa5c3373d0de12244267ed46fe4f7b25dbf0cb14ff45d41f5c4aca6e79bf.
+256saved cases/1024queries,1067695bytes,complete0.5135899001033977s.
+0новых models/core tokens/world actions/outcomes. Raw/SHA/completion сохранены.
+
+Итог:original/live rawabstention84/256, masked31/256, table22/256.
+Operation-query conflicts145→0. Original/live queries identical256/256;
+mask/table247/256. Все9расхождений(6seed41/3seed42):mask abstain при
+table choice;9недостающих verified forecasts, не другая chosen operation.
+Coverage495/512known op-key opportunities,225/234goal-eligible opportunities
+(повторные запросы, не512разных meanings). Это coverage проверенного readout,
+не доказательство отсутствия цепи во всей базе; retrieval/creation/encoding
+ещё не локализованы. Gen не удалялся/не дописывался.
+
+33masked и37table shadow choices не исполнялись в исходной истории,
+их counterfactual outcome UNKNOWN. Нельзя присвоить task success по будущим/
+oracle исходам. На actually executed forecasts original144positive/60negative,
+mask144/8, table152/8; denominators меняются при фильтрации, не matched task
+accuracy/causal skill improvement.0conflicts от single-valued lastactual
+ожидаемо; не самостоятельная reasoning/heterarchy способность.
+
+Recorded-data auditor rebuilds prior actual state и проверяет1024seals/
+provenance/eligibility/selector/executed-only grading.22focused tests passed
+(0.42s), включая future-history/fabricated counterfactual/Gen/admission/
+policy omission/metric/summary tampering. Полный py -m pytest -q:
+1641passed,3skipped,59existing utcnow warnings(33.16s). Same-agent consistency
+audit не independent execution. Core/старые данные/online protocol неизменны.
+
+Отдельный следующий on-policy development design зафиксирован ПОСЛЕ
+известных shadow results, ДО новых rollout, не реализован/не исполнен:
+experiments/protocols/ac0_applicability_on_policy_dev_v1.json,
+SHA047058453db47b6229365b1929ab53066bed1a8c64544d96ed867fee58aaf29c.
+Known41/42,6controls:prefix original/masked/masked-feedback-gate,
+table online/gated,random. Каждая политика делает свои действия и получает
+только собственные actual receipts, общий finalized warmup/schedule.
+Цели development latequality≥.8 каждогоchannel/seed, restored gated≥.8,
+named changed-channel Gen update→correct nonfallback reuse, integrity.
+Table tie не structural advantage; pass — лишь development candidate.
+Бюджет192training+1536eval=1728world actions;nominal2168/cap2300core tokens,
+60s/32MiBraw,≤8context keys плюс честный учёт всехreceipt/model stores.
+Арифметика/JSON проверены.201–208 не генерировались/обучались/исполнялись,
+confirming entry point не предусмотрен; старый online protocol не изменялся.
+
+Report/data/design5fc0ebd36c88204c00f433ad6519026a2eb00a41:
+https://github.com/realbtr/firstagi/blob/5fc0ebd36c88204c00f433ad6519026a2eb00a41/experiments/reports/ac0_debug/APPLICABILITY_SHADOW_RESULT.md
+PR22 открыт/прикреплён, CI SUCCESS41165108845, не слит.
+Один progress:
+https://github.com/realbtr/firstagi/discussions/21#discussioncomment-19307875 .
+AC0–AC4/M0/full12chain/continuous life/inheritance не пройдены.
+
+SwarmMemo45:после6537271756 новых replies нет. Latest public source22819711b67678324626838e81c47cd5131a1436/version1.146.60 проверен boundedly:
+metadata/changed filenames, mcp_roomhint_test.go и credit excerpt; прежний
+read_messages test blob4107727 неизменён. Новая read_thread реализация/
+acceptance не подтверждена, tests/live/private не выполнялись. Не отправляли
+повторный checklist/приглашение/ABIOME reminder. В PR23 обновлена только
+monitor receipt:headdef2bfa68fef297fd421d0247d2307a26dca99c9, CI SUCCESS41165174587,
+3records, delivered stage неизменён, PR прикреплён/не слит. Новых firstcontacts
+нет. Current-state сводка сокращена, все прежние З-записи сохранены.
 
 **З-0066 · 2026-10-31 · Сохранённая опора, активное ожидание и закрытие конкретной попытки требуют разных условий.**
 
