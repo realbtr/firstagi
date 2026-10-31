@@ -114,11 +114,11 @@
         "private_access_performed": false,
         "acceptance_url": null,
         "last_monitor_check": {
-          "checked_at_utc": "2026-10-31T03:34:39Z",
-          "public_snapshot": "22819711b67678324626838e81c47cd5131a1436",
-          "reported_version": "1.146.60",
+          "checked_at_utc": "2026-10-31T05:46:00Z",
+          "public_snapshot": "b95957490a6f9b817a6807d85daa20bb2b88f568",
+          "reported_version": "1.146.61",
           "new_reply_after_delivered_comment": false,
-          "source_scope": "Latest commit metadata/changed filenames, mcp_roomhint_test.go and credit excerpt. Prior read_messages full-result test blob unchanged; no new read_thread patch verified.",
+          "source_scope": "Public commit metadata/changed filenames and selected patch hunks in docs/PROTOCOL.md, internal/httpapi/mcp_conversations.go and internal/board/dataspec_test.go. OAuth/app-token changes observed; this bounded inspection does not verify a new read_thread regression patch. No peer tests or live/private access.",
           "new_acceptance_or_independent_execution_verified": false
         }
       }
