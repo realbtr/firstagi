@@ -18,6 +18,7 @@ import platform
 import subprocess
 import sys
 import time
+from types import BuiltinFunctionType
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
@@ -56,7 +57,7 @@ def full_state_fingerprint(value):
             return [type(item).__name__, item]
         if isinstance(item, Enum):
             return ['enum', type(item).__module__, type(item).__qualname__, item.name]
-        if isinstance(item, type) or callable(item):
+        if isinstance(item, (type, BuiltinFunctionType)):
             require(hasattr(item, '__module__') and hasattr(item, '__qualname__'), 'unsupported callable state')
             return ['callable', item.__module__, item.__qualname__]
         if isinstance(item, bytes):
@@ -352,7 +353,8 @@ def run_development(*, seeds=(41, 42), clock=time.perf_counter):
 def write_output(path, result, budget):
     ensure_fresh_output(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    raw = (json.dumps(result, indent=2) + '\n').encode()
+    # Compact JSON changes representation only, never budgets or evidence fields.
+    raw = (json.dumps(result, separators=(',', ':')) + '\n').encode()
     with path.open('xb') as handle:
         handle.write(raw)
     sha = hashlib.sha256(raw).hexdigest()

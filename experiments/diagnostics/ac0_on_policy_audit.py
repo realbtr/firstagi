@@ -189,14 +189,22 @@ def audit(result):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--raw', type=Path, required=True)
+    parser.add_argument('--inspect-incomplete', action='store_true',
+                        help='inspect completed rollout with raw-size-only failure; never upgrade its status')
     args = parser.parse_args()
     raw = args.raw.read_bytes()
     sha = hashlib.sha256(raw).hexdigest()
     receipt = json.loads(args.raw.with_suffix(args.raw.suffix + '.completion.json').read_text())
-    require(receipt['status'] == 'development_complete' and receipt['raw_sha256'] == sha and
-            receipt['raw_bytes'] == len(raw) <= 33554432 and receipt['elapsed_including_write'] <= 60, 'completion receipt')
+    require(receipt['raw_sha256'] == sha and receipt['raw_bytes'] == len(raw) and
+            receipt['elapsed_including_write'] <= 60, 'completion integrity/wall receipt')
+    budget_ok = receipt['status'] == 'development_complete' and len(raw) <= 33554432
+    if not budget_ok:
+        require(args.inspect_incomplete and receipt['status'] == 'incomplete' and
+                receipt.get('error') == 'raw bytes budget exceeded', 'incomplete receipt; explicit diagnostic inspection required')
     result = audit(json.loads(raw))
-    print(json.dumps({'raw_sha256': sha, **result}, indent=2))
+    print(json.dumps({'raw_sha256': sha, **result, 'original_completion_status': receipt['status'],
+                      'complete_budget_pass': budget_ok, 'development_candidate_pass': False,
+                      'scope': 'diagnostic_consistency_not_upgrade_of_incomplete_execution' if not budget_ok else 'recorded_data_audit'}, indent=2))
 
 
 if __name__ == '__main__':
