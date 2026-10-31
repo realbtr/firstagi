@@ -8,6 +8,8 @@ import argparse
 from collections import Counter
 from copy import deepcopy
 from dataclasses import asdict
+from collections import defaultdict, deque
+from enum import Enum
 import hashlib
 import json
 from pathlib import Path
@@ -31,6 +33,51 @@ PROTOCOL_SHA = '047058453db47b6229365b1929ab53066bed1a8c64544d96ed867fee58aaf29c
 POLICIES = ('prefix_online', 'prefix_actual_context_online',
             'prefix_actual_context_feedback_gate', 'table_online',
             'table_feedback_gate', 'random_uniform')
+
+
+def full_state_fingerprint(value):
+    """Canonical complete object graph, including mutable aliases and runtime state.
+
+    Pickle byte equality is not semantic equality across deepcopy: set iteration
+    and memo encoding can change. Pickle remains the physical byte-cost metric.
+    Unsupported runtime objects fail closed rather than being silently omitted.
+    """
+    memo = {}
+
+    def order_key(item):
+        if item is None or isinstance(item, (str, int, float, bool)):
+            return repr((type(item).__name__, item))
+        if isinstance(item, tuple):
+            return repr(tuple(order_key(x) for x in item))
+        raise TypeError('unsupported unordered key: ' + type(item).__name__)
+
+    def encode(item):
+        if item is None or isinstance(item, (str, int, float, bool)) and not isinstance(item, Enum):
+            return [type(item).__name__, item]
+        if isinstance(item, Enum):
+            return ['enum', type(item).__module__, type(item).__qualname__, item.name]
+        if isinstance(item, type) or callable(item):
+            require(hasattr(item, '__module__') and hasattr(item, '__qualname__'), 'unsupported callable state')
+            return ['callable', item.__module__, item.__qualname__]
+        if isinstance(item, bytes):
+            return ['bytes', item.hex()]
+        identity = id(item)
+        if identity in memo:
+            return ['reference', memo[identity]]
+        memo[identity] = len(memo)
+        header = [type(item).__module__, type(item).__qualname__, memo[identity]]
+        if isinstance(item, dict):
+            payload = [[encode(k), encode(item[k])] for k in sorted(item, key=order_key)]
+            return header + [encode(item.default_factory) if isinstance(item, defaultdict) else None, payload]
+        if isinstance(item, (set, frozenset)):
+            return header + [[encode(x) for x in sorted(item, key=order_key)]]
+        if isinstance(item, (list, tuple, deque)):
+            return header + [item.maxlen if isinstance(item, deque) else None, [encode(x) for x in item]]
+        if hasattr(item, '__dict__'):
+            return header + [encode(vars(item))]
+        raise TypeError('unsupported runtime state: ' + type(item).__name__)
+
+    return digest(encode(value))
 
 
 def protocol():
@@ -187,15 +234,19 @@ def run_seed(seed, result, budget, config):
     training = {'seed': seed, 'events': [], 'tokens': [], 'gen_creation': {}}
     result['training'].append(training)
     trained = traced_training(seed, training, budget)
-    initial = hashlib.sha256(pickle.dumps(trained, protocol=5)).hexdigest()
-    run = {'seed': seed, 'paired_initial_native_digest': initial, 'policies': []}
+    initial = full_state_fingerprint(trained)
+    run = {'seed': seed, 'paired_initial_native_state_digest': initial,
+           'pairing_guard': 'canonical_complete_graph_with_runtime_and_aliases_not_cross_copy_pickle_bytes',
+           'policies': []}
     result['runs'].append(run)
     for name in POLICIES:
         controller = Controller(name, trained, training, budget)
         row = {'policy': name, 'records': [], 'updates': [], 'initial_storage': controller.storage()}
         run['policies'].append(row)
         if controller.native:
-            require(controller.native.initial_full_digest == initial, 'paired training copy changed')
+            row['initial_native_state_digest'] = full_state_fingerprint(controller.native.observer)
+            row['initial_native_pickle_digest'] = controller.native.initial_full_digest
+            require(row['initial_native_state_digest'] == initial, 'paired complete training state changed')
         witnesses = {t['canonical_feature_id']: {**t, 'episode_index': -1} for t in training['tokens']}
         for case in schedule_layout(seed + 1000):
             budget.check()

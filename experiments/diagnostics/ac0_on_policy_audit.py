@@ -38,6 +38,8 @@ def audit(result):
         for policy in run['policies']:
             name, records = policy['policy'], policy['records']
             native = name.startswith('prefix_')
+            if native:
+                require(policy['initial_native_state_digest'] == run['paired_initial_native_state_digest'], 'paired complete state')
             history = {(e['channel_id'], e['observation_id'], e['chosen_operation']): e['actual_observation']
                        for e in training['events'] if e['completion'] not in UNKNOWN}
             if name == 'random_uniform':

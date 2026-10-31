@@ -5,7 +5,7 @@ from dataclasses import asdict, replace
 import pytest
 
 from experiments.diagnostics.ac0_applicability_on_policy import (
-    Budget, Controller, causal_links, protocol, register_changes, run_development, write_output,
+    Budget, Controller, causal_links, full_state_fingerprint, protocol, register_changes, run_development, write_output,
 )
 from experiments.diagnostics.ac0_applicability_shadow import ActualHistory, shadow_queries
 from experiments.diagnostics.ac0_event_baseline import TwoChannelWorld
@@ -149,3 +149,18 @@ def test_causal_link_requires_prior_own_correct_nonfallback_and_changed_actual_w
     assert causal_links(records, [{**update, 'episode_index': 1}]) == []
     assert causal_links([records[0], {**row, 'fallback': True}], [update]) == []
     assert not causal_links(records, [{**update, 'feature_witnesses': [{**witness, 'episode_index': -1}]}])[0]['changed_channel_actual_witness']
+
+
+def test_complete_graph_guard_ignores_unordered_insertion_but_detects_runtime_and_aliases():
+    a = CodedKernelObserver()
+    a.seen = {('run', str(i)) for i in range(96)}
+    b = deepcopy(a)
+    b.seen = set(reversed(list(a.seen)))
+    assert full_state_fingerprint(a) == full_state_fingerprint(b)
+    b.system.engine._step_count += 1
+    assert full_state_fingerprint(a) != full_state_fingerprint(b)
+    shared = []
+    assert full_state_fingerprint([shared, shared]) != full_state_fingerprint([[], []])
+    assert full_state_fingerprint({'b': {1, 2}, 'a': 3}) == full_state_fingerprint({'a': 3, 'b': {2, 1}})
+    with pytest.raises(TypeError, match='unsupported'):
+        full_state_fingerprint(object())
