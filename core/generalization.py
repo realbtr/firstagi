@@ -186,6 +186,7 @@ class GeneralizationBase:
         evict_callback: Optional[Callable[["GeneralizationBase"], int]] = None,
     ) -> None:
         self._gens: Dict[str, Generalization] = {}
+        self._actual_evidence_entries = 0
         # Статистика переходов: transition_stats[from_id][to_id] = count
         self._transition_stats: Dict[str, Dict[str, int]] = {}
         # Опциональный колбэк вытеснения — вызывается после каждого add().
@@ -197,6 +198,10 @@ class GeneralizationBase:
 
     def add(self, gen: Generalization) -> Generalization:
         """Добавить обобщение в базу. Если задан evict_callback — вызывает его после вставки."""
+        total = self.actual_evidence_entries
+        self._charge_reads(1)
+        old = self._gens.get(gen.gen_id)
+        self._actual_evidence_entries = total - len(getattr(old, "actual_evidence", {})) + len(getattr(gen, "actual_evidence", {}))
         self._gens[gen.gen_id] = gen
         if self._evict_callback is not None:
             self._evict_callback(self)
@@ -212,17 +217,20 @@ class GeneralizationBase:
 
         Возвращает True если Gen был найден и удалён.
         """
+        total = self.actual_evidence_entries
+        self._charge_reads(1)
         gen = self._gens.pop(gen_id, None)
         if gen is None:
             return False
+        self._actual_evidence_entries = total - len(getattr(gen, "actual_evidence", {}))
         # Убрать ссылки у родителей
         for pid in gen.parent_ids:
-            parent = self._gens.get(pid)
+            parent = self.get(pid)
             if parent and gen_id in parent.child_ids:
                 parent.child_ids.remove(gen_id)
         # Убрать ссылки у детей
         for cid in gen.child_ids:
-            child = self._gens.get(cid)
+            child = self.get(cid)
             if child and gen_id in child.parent_ids:
                 child.parent_ids.remove(gen_id)
         # Очистить статистику переходов
@@ -233,10 +241,12 @@ class GeneralizationBase:
 
     def get(self, gen_id: str) -> Optional[Generalization]:
         """Получить обобщение по ID."""
+        self._charge_reads(1)
         return self._gens.get(gen_id)
 
     def all(self) -> List[Generalization]:
         """Все обобщения."""
+        self._charge_reads(len(self._gens))
         return list(self._gens.values())
 
     def size(self) -> int:
@@ -250,7 +260,7 @@ class GeneralizationBase:
         Ранжировать обобщения по значимости (частоте подтверждений).
         Это и есть «опыт» системы.
         """
-        gens = [g for g in self._gens.values() if g.significance >= min_significance]
+        gens = [g for g in self.iter_operation_records() if g.significance >= min_significance]
         return sorted(gens, key=lambda g: g.significance, reverse=True)
 
     def search_by_chain(self, feature_chain: List[str]) -> List[Generalization]:
@@ -259,7 +269,7 @@ class GeneralizationBase:
         (Для нечёткого поиска нужен отдельный метод с толерантностью.)
         """
         result = []
-        for gen in self._gens.values():
+        for gen in self.iter_operation_records():
             if gen.feature_chain == feature_chain:
                 result.append(gen)
         return sorted(result, key=lambda g: g.significance, reverse=True)
@@ -268,7 +278,7 @@ class GeneralizationBase:
         """Найти обобщения, цепочка которых начинается с данного префикса."""
         result = []
         n = len(prefix)
-        for gen in self._gens.values():
+        for gen in self.iter_operation_records():
             if gen.feature_chain[:n] == prefix:
                 result.append(gen)
         return sorted(result, key=lambda g: g.significance, reverse=True)
@@ -279,7 +289,7 @@ class GeneralizationBase:
         При пустом/полном контексте внимание переключается именно на них.
         """
         result = [
-            g for g in self._gens.values()
+            g for g in self.iter_operation_records()
             if 0 < g.generalization_level <= max_chain_length
         ]
         return sorted(result, key=lambda g: g.significance, reverse=True)
@@ -310,13 +320,47 @@ class GeneralizationBase:
 
     def link(self, parent_id: str, child_id: str) -> None:
         """Установить связь родитель → потомок в гетерархии."""
-        parent = self._gens.get(parent_id)
-        child = self._gens.get(child_id)
+        parent = self.get(parent_id)
+        child = self.get(child_id)
         if parent and child:
             if child_id not in parent.child_ids:
                 parent.child_ids.append(child_id)
             if parent_id not in child.parent_ids:
                 child.parent_ids.append(parent_id)
+
+    def _charge_reads(self, count):
+        # Opt-in operation-call accounting; legacy frozen observers remain read-only.
+        if not getattr(self, "_operation_meter", False):
+            return
+        if self._operation_reads + count > self._operation_read_limit:
+            raise OverflowError("Operation GenBase read budget exhausted; stop INCOMPLETE")
+        self._operation_reads += count
+        self._operation_read_total = getattr(self, "_operation_read_total", 0) + count
+
+    def start_operation_reads(self, limit):
+        if type(limit) is not int or limit < 1 or getattr(self, "_operation_meter", False):
+            raise ValueError("Invalid or nested operation read budget")
+        self._operation_reads = 0
+        self._operation_read_limit = limit
+        self._operation_meter = True
+
+    def finish_operation_reads(self):
+        self._operation_meter = False
+        return self._operation_reads
+
+    def iter_operation_records(self):
+        for gen in self._gens.values():
+            self._charge_reads(1)  # Includes every miss, before payload access.
+            yield gen
+
+    @property
+    def actual_evidence_entries(self):
+        if not hasattr(self, "_actual_evidence_entries"):
+            # One counted migration of old session state, never per-capacity scan.
+            self._charge_reads(len(self._gens))
+            self._actual_evidence_entries = sum(
+                len(getattr(g, "actual_evidence", {})) for g in self._gens.values())
+        return self._actual_evidence_entries
 
     def __repr__(self) -> str:
         return f"GeneralizationBase(size={self.size()})"
