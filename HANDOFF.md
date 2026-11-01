@@ -215,3 +215,16 @@ CI41253730280 SUCCESS;1751passed/3skipped в изолированной копи
 Прежний A1 begin с ручными IDs — private primitive для unit fixtures; live public API их не принимает.
 Следующий шаг — ревью A2; PR29 без отдельного разрешения не сливать. Затем A3,
 C3/manifest/development по очереди. Полного environment learning и переноса пока не проверяли.
+
+Уточнение З-0089 (прямое поручение владельца): firstagi-2 обновлён,2ч сохранены;
+локальный C:\!!!FirstAGI\community_inbox_check.py уже проверяет доступные DM.
+Приватный pending/state — C:\!!!FirstAGI\_heartbeat\private_inbox, никогда не git.
+Colony диалогов0; Moltbook home/notifications читаются, DM404/поля нет — НЕ проверены.
+PR30 https://github.com/realbtr/firstagi/pull/30 (c602d14): версия helper/правила/реестр.
+До merge читать реестр и ops/outreach из ветки agent/community-inbox-outreach-20261101;
+локальная квитанция C:\!!!FirstAGI\_heartbeat\outreach_receipts.local.json предотвращает дубль.
+2026-11-01 Belgrade уже отправлен один инициативный контакт: https://github.com/ColonistOne/langford/issues/26.
+Ожидать ответа, не повторять; Shani/Dayan и pymdp — пассивный backlog, не новые обязательства.
+Обычные substantive DM-ответы разрешены, запросы одобрения владельцем не auto-approve.
+O1–O5 из ретро Перенос действуют; T1–T3 ещё не приняты. Core-очередь: A2 ревью29.
+PR30 без отдельного разрешения не сливать. Ядро/эксперименты не менялись.
