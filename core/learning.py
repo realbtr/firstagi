@@ -809,6 +809,9 @@ class LearningSystem:
             "forecast_links": sum(len(p.forecasts) for p in self._operation_pending.values())
                 + sum(len(r.pending.forecasts) for r in self._operation_records.values()),
             "evidence": self.base.actual_evidence_entries,
+            "guard_blocks": len(getattr(self.base, "_applicability_blocks", ())),
+            "guard_scopes": len(getattr(self.base, "_applicability_revisions", {})),
+            "guard_audit": len(getattr(self.base, "_applicability_audit", None) or ()),
         }
 
     def _operation_capacity(self, additional: int):
@@ -844,6 +847,8 @@ class LearningSystem:
         prefix = (self._operation_atom(cue_gen_id), self._operation_atom(operation_gen_id))
         forecasts = []
         for gid in dict.fromkeys(contributor_gen_ids):
+            if not self.base.is_applicable(gid, scope, stage="dispatch"):
+                raise ValueError("Contributor is not applicable to this execution")
             gen = self.base.get(gid)
             if (gen is None or gen.key_id != cue_gen_id or gen.oper_id != operation_gen_id
                     or not gen.goal_id or getattr(gen, "actual_link", None) != (
@@ -1001,47 +1006,62 @@ class LearningSystem:
         gen.key_id, gen.oper_id, gen.goal_id = roles
         return self._actual_evidence_update(gen, pending, receipt, origin=True)
 
+    def set_operation_applicability(self, gen_id, *, instance_id, channel_id, available):
+        if (any(not isinstance(v, str) or not v for v in (gen_id, instance_id, channel_id))
+                or type(available) is not bool):
+            raise ValueError("Invalid applicability condition")
+        scope, key = (instance_id, channel_id), (instance_id, channel_id, gen_id)
+        blocked = key in getattr(self.base, "_applicability_blocks", ())
+        if blocked == available:
+            extra = int(scope not in getattr(self.base, "_applicability_revisions", {}))
+            self._operation_capacity(extra + (1 if not available else -1))
+        return self.base.set_applicability(gen_id, instance_id=instance_id, channel_id=channel_id,
+                                           available=available, limit=self._operation_record_limit)
+
     def _operation_groups(self, view):
-        menu = dict(view.menu)
-        groups = {op: [] for op in menu.values()}
-        expected = self.engine.context.get_expected_features(self.base)
-        positions = dict(self.engine.context.active_positions())
-        for gid, feature in expected.items():
-            gen = self.base.get(gid)
-            if (gen is None or gen.oper_id not in groups or positions.get(gid) != 1
-                    or getattr(gen, "actual_link", None) != (
-                        view.instance_id, view.channel_id, view.cue_gen_id, gen.oper_id, gen.goal_id)
-                    or getattr(gen, "actual_chain", None) != tuple(gen.feature_chain)
-                    or not getattr(gen, "actual_evidence", {})
-                    or sum(e.origin for e in gen.actual_evidence.values()) != 1):
-                continue
-            if (self._operation_atom(gen.oper_id) != feature
-                    or gen.feature_chain != [self._operation_atom(view.cue_gen_id),
-                                             feature, self._operation_atom(gen.goal_id)]):
-                raise ValueError("Native operation link disagrees with its chain")
-            groups[gen.oper_id].append(gen)
-        return groups
+        with self.base.applicability_view(view.instance_id, view.channel_id):
+            menu = dict(view.menu)
+            groups = {op: [] for op in menu.values()}
+            expected = self.engine.context.get_expected_features(self.base)
+            positions = dict(self.engine.context.active_positions())
+            for gid, feature in expected.items():
+                gen = self.base.get(gid)
+                if (gen is None or gen.oper_id not in groups or positions.get(gid) != 1
+                        or getattr(gen, "actual_link", None) != (
+                            view.instance_id, view.channel_id, view.cue_gen_id, gen.oper_id, gen.goal_id)
+                        or getattr(gen, "actual_chain", None) != tuple(gen.feature_chain)
+                        or not getattr(gen, "actual_evidence", {})
+                        or sum(e.origin for e in gen.actual_evidence.values()) != 1):
+                    continue
+                if (self._operation_atom(gen.oper_id) != feature
+                        or gen.feature_chain != [self._operation_atom(view.cue_gen_id),
+                                                 feature, self._operation_atom(gen.goal_id)]):
+                    raise ValueError("Native operation link disagrees with its chain")
+                groups[gen.oper_id].append(gen)
+            return groups
 
     def _choose_current_operation(self, view):
-        from .initiative import OperationProposal
-        groups = self._operation_groups(view)
-        goal = self.engine.get_feature(self._operation_atom(view.goal_gen_id))
-        if goal is None:
-            raise ValueError("Desired distinction has no registered encoding")
-        def matches(outcome_id):
-            outcome = self.engine.get_feature(self._operation_atom(outcome_id))
-            if outcome is None:
-                raise ValueError("Predicted distinction has no registered encoding")
-            return outcome.matches(goal, self.engine.feature_tolerance)
-        choice = self.initiative.choose_operation(groups, matches, self.hedonic)
-        if choice is None:
-            return None
-        operation_id, score = choice
-        address = next(address for address, op in view.menu if op == operation_id)
-        return OperationProposal(view.instance_id, view.channel_id, view.seq,
-                                 view.cue_gen_id, view.goal_gen_id, address, operation_id,
-                                 score, tuple(g.gen_id for g in groups[operation_id]),
-                                 self.engine.context.active_positions(), self.engine.step_count)
+        with self.base.applicability_view(view.instance_id, view.channel_id):
+            from .initiative import OperationProposal
+            groups = self._operation_groups(view)
+            goal = self.engine.get_feature(self._operation_atom(view.goal_gen_id))
+            if goal is None:
+                raise ValueError("Desired distinction has no registered encoding")
+            def matches(outcome_id):
+                outcome = self.engine.get_feature(self._operation_atom(outcome_id))
+                if outcome is None:
+                    raise ValueError("Predicted distinction has no registered encoding")
+                return outcome.matches(goal, self.engine.feature_tolerance)
+            choice = self.initiative.choose_operation(groups, matches, self.hedonic)
+            if choice is None:
+                return None
+            operation_id, score = choice
+            address = next(address for address, op in view.menu if op == operation_id)
+            return OperationProposal(view.instance_id, view.channel_id, view.seq,
+                                     view.cue_gen_id, view.goal_gen_id, address, operation_id,
+                                     score, tuple(g.gen_id for g in groups[operation_id]),
+                                     self.engine.context.active_positions(), self.engine.step_count,
+                                     self.base.applicability_revision(view.instance_id, view.channel_id))
 
     def propose_operations(self, public_view: OperationView):
         """Ingest the cue, recall live links and select inside the native core."""
@@ -1068,22 +1088,25 @@ class LearningSystem:
             raise ValueError("Channel has pending or interrupted work")
         self.base.start_operation_reads(view.read_limit)
         try:
-            cue_feature = self.engine.get_feature(self._operation_atom(view.cue_gen_id))
-            if cue_feature is None or not cue_feature.matches(view.cue.data, self.engine.feature_tolerance):
-                raise ValueError("Public cue does not match its native role")
-            self._operation_atom(view.goal_gen_id)
-            for _, op in view.menu:
-                self._operation_atom(op)
-            result = self.process_token(view.cue)
-            if result.outcome == StepOutcome.CYCLE_AVOIDED:
-                raise ValueError("Operation view reused an already consumed cue token")
-            if self.engine.find_matching_feature(view.cue.data) != cue_feature.feature_id:
-                raise ValueError("Cue encoding resolved to a different native distinction")
-            self.engine.recall_operation_context(view.cue_gen_id, view.instance_id, view.channel_id)
-            proposal = self._choose_current_operation(view)
-            self._last_operation_view = view
-            self._last_operation_proposal = proposal
-            return proposal
+            with self.base.applicability_view(view.instance_id, view.channel_id):
+                cue_feature = self.engine.get_feature(self._operation_atom(view.cue_gen_id))
+                if cue_feature is None or not cue_feature.matches(view.cue.data, self.engine.feature_tolerance):
+                    raise ValueError("Public cue does not match its native role")
+                self._operation_atom(view.goal_gen_id)
+                for _, op in view.menu:
+                    self._operation_atom(op)
+                self.engine.context._base = self.base  # Migrate old session contexts lazily.
+                self.engine.context.prune_inapplicable(self.base)
+                result = self.process_token(view.cue)
+                if result.outcome == StepOutcome.CYCLE_AVOIDED:
+                    raise ValueError("Operation view reused an already consumed cue token")
+                if self.engine.find_matching_feature(view.cue.data) != cue_feature.feature_id:
+                    raise ValueError("Cue encoding resolved to a different native distinction")
+                self.engine.recall_operation_context(view.cue_gen_id, view.instance_id, view.channel_id)
+                proposal = self._choose_current_operation(view)
+                self._last_operation_view = view
+                self._last_operation_proposal = proposal
+                return proposal
         finally:
             self._last_operation_read_work = self.base.finish_operation_reads()
 
@@ -1097,11 +1120,12 @@ class LearningSystem:
     def _begin_current_operation(self, view, address):
         self.base.start_operation_reads(view.read_limit)
         try:
-            op = dict(view.menu)[address]
-            contributors = tuple(g.gen_id for g in self._operation_groups(view)[op])
-            return self._begin_operation(instance_id=view.instance_id, channel_id=view.channel_id,
-                                         seq=view.seq, command_address=address, cue_gen_id=view.cue_gen_id,
-                                         operation_gen_id=op, contributor_gen_ids=contributors)
+            with self.base.applicability_view(view.instance_id, view.channel_id):
+                op = dict(view.menu)[address]
+                contributors = tuple(g.gen_id for g in self._operation_groups(view)[op])
+                return self._begin_operation(instance_id=view.instance_id, channel_id=view.channel_id,
+                                             seq=view.seq, command_address=address, cue_gen_id=view.cue_gen_id,
+                                             operation_gen_id=op, contributor_gen_ids=contributors)
         finally:
             self._last_operation_read_work = self.base.finish_operation_reads()
             self._last_operation_proposal = None
@@ -1115,9 +1139,10 @@ class LearningSystem:
             raise ValueError("Stale operation proposal")
         self.base.start_operation_reads(view.read_limit)
         try:
-            current = self._choose_current_operation(view)
-            if current != proposal:
-                raise ValueError("Operation competition changed since proposal")
+            with self.base.applicability_view(view.instance_id, view.channel_id):
+                current = self._choose_current_operation(view)
+                if current != proposal:
+                    raise ValueError("Operation competition changed since proposal")
         finally:
             self._last_operation_read_work = self.base.finish_operation_reads()
         return self._begin_current_operation(view, proposal.command_address)
