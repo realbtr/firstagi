@@ -136,7 +136,8 @@
       "acknowledgement_url": null,
       "invited_at": null,
       "next_action": "Wait for one concrete public claim, artifact and resource estimate before reciprocal verification; no reminder without a substantive reason.",
-      "active": true
+      "active": false,
+      "waiting_reason": "Awaiting previously requested public artifact/cost; no reminder or new obligation. Historical delivered stage preserved."
     },
     {
       "id": "langford",
@@ -166,21 +167,31 @@
         "Daniel Shani",
         "Peter Dayan"
       ],
-      "status": "discovered",
-      "active": false,
+      "status": "contribution_draft",
+      "active": true,
       "discovered_on": "2026-11-01",
       "sources": [
         "https://doi.org/10.1371/journal.pcbi.1013905",
         "https://github.com/dshani/composing-egocentric/blob/main/README.md"
       ],
       "relevance": "O2.1/H-T: reusable local egocentric relations composed with an allocentric map across layouts; directly relevant to relative distinctions.",
-      "open_task": "No author-requested task identified yet. Candidate question: separate supplied feature vocabulary/reference frames from learned reusable relations and resolution.",
-      "planned_contribution": "Source audit of local feature construction and lesion comparator before a precise public question; no experiments yet.",
-      "verification": "Article abstract/author summary and repository README read; author code not executed, results not independently replicated.",
+      "open_task": "Prospective public reproduction question: which layouts initialize the ego basis? Not an author-assigned issue.",
+      "planned_contribution": "Pinned-source map of supplied views, SR/weight learning, implemented lesion, and pre-episode world sweep; suggest a training-only initialization control.",
+      "verification": "Source audit only; paper methods2.4/results3.1-3.2 and relevant constructor/switch/train paths read. No peer execution or independent replication.",
       "identity_evidence": "The paper data-availability statement links this repository; no claim about a social-agent identity.",
       "contact_url": null,
       "contribution_url": null,
-      "next_action": "Highest research-priority backlog. Read code, contribution/AI rules and current issues; activate only within the three-candidate limit, then prepare useful public question."
+      "next_action": "Recheck upstream and daily contact ledger, then one public question after 2026-11-02 Belgrade; exact draft is NOT SENT. No maintenance/experiment promised.",
+      "source_commit": "c289279d7ecdd8ce13c4ec97057a434976a87478",
+      "rules_check": {
+        "checked_on": "2026-11-01",
+        "commit": "c289279d7ecdd8ce13c4ec97057a434976a87478",
+        "contributing_or_ai_policy_found": false,
+        "scope": "Recursive tree, README, existing Cleanup PR1/comments; recheck before send. No license found, source not redistributed."
+      },
+      "draft_path": "ops/outreach/2026-11-02-shani-dayan-message.md",
+      "audit_path": "ops/outreach/2026-11-01-shani-dayan-audit.md",
+      "earliest_send_date_belgrade": "2026-11-02"
     },
     {
       "id": "pymdp",
