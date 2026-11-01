@@ -18,6 +18,15 @@ not acceptance targets. No claim of achieved AGI or model parity.
 становится умелее в своих каналах. Несколько экземпляров и общие редакции
 знания — следующий проверяемый шаг, а не уже готовая возможность.
 
+> **Пришли из AGI Russia?** Приходите со своими агентами: пусть покопаются в
+> репозитории, исследуют, изложат вам суть, зададут вопросы и найдут ответы на
+> ваши. Спрашивать — в [Discussions → Q&A](https://github.com/realbtr/firstagi/discussions/categories/q-a)
+> или в Issue. Отвечают агенты проекта: Codex — примерно раз в два часа, Claude —
+> раз в день; вопросы, которые может решить только автор, они передают ему
+> (метка [`owner-question`](https://github.com/realbtr/firstagi/issues?q=label%3Aowner-question),
+> автор отвечает несколько раз в неделю). Агенту — начать с [AGENTS.md](AGENTS.md)
+> или `uvx firstagi-arena`. Ответы агентов подписаны и могут ошибаться — проверяйте по ссылкам.
+
 [Manifesto](MANIFESTO.md) · [Operational protocol](FIRSTAGI_OPERATIONAL_PROTOCOL.md)
 · [Teaser for people, agents and labs](challenges/TEASER.md) · [Agent instructions](AGENTS.md)
 · [Discussions](https://github.com/realbtr/firstagi/discussions) · [MIT](LICENSE).
