@@ -69,7 +69,7 @@ class AttractorEngine:
         provisional: Optional[ProvisionalBase] = None,
     ) -> None:
         self.base = base
-        self.context = ContextBuffer()
+        self.context = ContextBuffer(base)
         self._features: dict[str, Feature] = {}          # все известные признаки
         self.feature_tolerance = feature_tolerance        # порог совпадения признаков
         self.min_context_gens = min_context_gens
@@ -319,27 +319,30 @@ class AttractorEngine:
         """Restore learned command continuations in the live context after cue intake.
 
         This remains a metered full scan, not a claimed local index. Scope and
-        role checks precede context admission; A3 adds the shared causal guard.
+        role checks and the shared guard precede context admission.
         """
-        cue = self.base.get(cue_gen_id)
-        if cue is None or len(cue.feature_chain) != 1:
-            raise ValueError("Cue must refer to a native atomic Gen")
-        restored = []
-        for gen in self.base.iter_operation_records():
-            link = getattr(gen, "actual_link", None)
-            if (link == (instance_id, channel_id, cue_gen_id, gen.oper_id, gen.goal_id)
-                    and gen.oper_id and gen.goal_id and len(gen.feature_chain) == 3
-                    and gen.feature_chain[0] == cue.feature_chain[0]
-                    and getattr(gen, "actual_chain", None) == tuple(gen.feature_chain)
-                    and getattr(gen, "actual_evidence", {})
-                    and sum(e.origin for e in gen.actual_evidence.values()) == 1):
-                restored.append(gen.gen_id)
-        for gid in getattr(self, "_operation_context_ids", ()):
-            self.context.remove_active(gid)
-        for gid in restored:
-            self.context.add_active(gid, current_feature_index=1)
-        self._operation_context_ids = tuple(restored)
-        return tuple(restored)
+        with self.base.applicability_view(instance_id, channel_id):
+            self.context._base = self.base
+            self.context.prune_inapplicable(self.base)
+            cue = self.base.get(cue_gen_id)
+            if cue is None or len(cue.feature_chain) != 1:
+                raise ValueError("Cue must refer to a native atomic Gen")
+            restored = []
+            for gen in self.base.iter_operation_records():
+                link = getattr(gen, "actual_link", None)
+                if (link == (instance_id, channel_id, cue_gen_id, gen.oper_id, gen.goal_id)
+                        and gen.oper_id and gen.goal_id and len(gen.feature_chain) == 3
+                        and gen.feature_chain[0] == cue.feature_chain[0]
+                        and getattr(gen, "actual_chain", None) == tuple(gen.feature_chain)
+                        and getattr(gen, "actual_evidence", {})
+                        and sum(e.origin for e in gen.actual_evidence.values()) == 1):
+                    restored.append(gen.gen_id)
+            for gid in getattr(self, "_operation_context_ids", ()):
+                self.context.remove_active(gid)
+            for gid in restored:
+                self.context.add_active(gid, current_feature_index=1)
+            self._operation_context_ids = tuple(restored)
+            return tuple(restored)
 
     def _load_context_for_feature(
         self,

@@ -12,6 +12,7 @@ from dataclasses import dataclass, field
 from typing import Callable, Dict, List, Optional, Any
 import uuid
 import time
+from contextlib import contextmanager
 
 
 @dataclass(frozen=True)
@@ -242,12 +243,12 @@ class GeneralizationBase:
     def get(self, gen_id: str) -> Optional[Generalization]:
         """Получить обобщение по ID."""
         self._charge_reads(1)
-        return self._gens.get(gen_id)
+        return self._gens.get(gen_id) if self.is_applicable(gen_id) else None
 
     def all(self) -> List[Generalization]:
         """Все обобщения."""
         self._charge_reads(len(self._gens))
-        return list(self._gens.values())
+        return [g for g in self._gens.values() if self.is_applicable(g.gen_id, stage="scan")]
 
     def size(self) -> int:
         return len(self._gens)
@@ -306,7 +307,14 @@ class GeneralizationBase:
 
     def get_transitions(self, from_id: str) -> Dict[str, int]:
         """Статистика переходов из данного обобщения."""
-        return self._transition_stats.get(from_id, {})
+        transitions = self._transition_stats.get(from_id, {})
+        if getattr(self, "_applicability_scope", None) is None:
+            return transitions
+        if not self.is_applicable(from_id, stage="transition"):
+            return {}
+        self._charge_reads(len(transitions))
+        return {gid: count for gid, count in transitions.items()
+                if self.is_applicable(gid, stage="transition")}
 
     def most_likely_next(self, from_id: str) -> Optional[str]:
         """Наиболее вероятное следующее обобщение после from_id."""
@@ -351,7 +359,8 @@ class GeneralizationBase:
     def iter_operation_records(self):
         for gen in self._gens.values():
             self._charge_reads(1)  # Includes every miss, before payload access.
-            yield gen
+            if self.is_applicable(gen.gen_id, stage="expand"):
+                yield gen
 
     @property
     def actual_evidence_entries(self):
@@ -361,6 +370,72 @@ class GeneralizationBase:
             self._actual_evidence_entries = sum(
                 len(getattr(g, "actual_evidence", {})) for g in self._gens.values())
         return self._actual_evidence_entries
+
+    @contextmanager
+    def applicability_view(self, instance_id, channel_id):
+        """Scoped read visibility; storage and already frozen receipts stay intact."""
+        previous = getattr(self, "_applicability_scope", None)
+        self._applicability_scope = (instance_id, channel_id)
+        try:
+            yield
+        finally:
+            self._applicability_scope = previous
+
+    def applicability_revision(self, instance_id, channel_id):
+        return getattr(self, "_applicability_revisions", {}).get((instance_id, channel_id), 0)
+
+    def _audit_applicability(self, scope, gen_id, stage, allowed):
+        audit = getattr(self, "_applicability_audit", None)
+        if audit is not None and scope is not None:
+            if len(audit) >= self._applicability_audit_limit:
+                raise OverflowError("Applicability audit budget exhausted; stop INCOMPLETE")
+            audit.append((scope, gen_id, stage, allowed))
+
+    def is_applicable(self, gen_id, scope=None, stage="read"):
+        scope = scope if scope is not None else getattr(self, "_applicability_scope", None)
+        if scope is None:
+            return True
+        self._charge_reads(1)  # Scoped guard-index lookup is work too.
+        allowed = (*scope, gen_id) not in getattr(self, "_applicability_blocks", set())
+        self._audit_applicability(scope, gen_id, stage, allowed)
+        return allowed
+
+    def set_applicability(self, gen_id, *, instance_id, channel_id, available, limit=4096):
+        """Register a bounded causal condition, without changing Gen/evidence."""
+        if (any(not isinstance(v, str) or not v for v in (gen_id, instance_id, channel_id))
+                or type(available) is not bool or type(limit) is not int or limit < 1):
+            raise ValueError("Invalid applicability condition")
+        self._charge_reads(1)
+        if gen_id not in self._gens:
+            raise ValueError("Applicability target must exist")
+        blocks = getattr(self, "_applicability_blocks", set())
+        revisions = getattr(self, "_applicability_revisions", {})
+        scope, key = (instance_id, channel_id), (instance_id, channel_id, gen_id)
+        changed = (key in blocks) == available
+        extra = (int(scope not in revisions) + (1 if not available else -1)) if changed else 0
+        if len(blocks) + len(revisions) + extra > limit:
+            raise OverflowError("Applicability state budget exhausted; stop INCOMPLETE")
+        self._audit_applicability(scope, gen_id, "condition", available)
+        if changed:
+            if available:
+                blocks.remove(key)
+            else:
+                blocks.add(key)
+            revisions[scope] = revisions.get(scope, 0) + 1
+            self._applicability_blocks, self._applicability_revisions = blocks, revisions
+        return changed
+
+    def start_applicability_audit(self, limit=4096):
+        if type(limit) is not int or limit < 1 or getattr(self, "_applicability_audit", None) is not None:
+            raise ValueError("Invalid or nested applicability audit")
+        self._applicability_audit_limit = limit
+        self._applicability_audit = []
+
+    def finish_applicability_audit(self):
+        result = tuple(getattr(self, "_applicability_audit", None) or ())
+        self._applicability_audit = None
+        return result
+
 
     def __repr__(self) -> str:
         return f"GeneralizationBase(size={self.size()})"

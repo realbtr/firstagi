@@ -59,6 +59,7 @@ class OperationProposal:
     contributor_gen_ids: tuple
     context_positions: tuple
     tick: int
+    applicability_revision: int = 0
 
 
 class InitiativeEngine:

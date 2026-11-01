@@ -54,7 +54,8 @@ class ContextBuffer:
         5. is_complete()            → все Gen завершены → успешное распознавание
     """
 
-    def __init__(self) -> None:
+    def __init__(self, base=None) -> None:
+        self._base = base
         # Активные обобщения (опоры): gen_id → ActiveGen
         self._active: Dict[str, ActiveGen] = {}
         # Конкурирующие обобщения (для различения)
@@ -66,10 +67,21 @@ class ContextBuffer:
     # ------------------------------------------------------------------
     # Управление активными обобщениями
 
+    def _applicable(self, gen_id):
+        base = getattr(self, "_base", None)
+        return base is None or base.is_applicable(gen_id, stage="load")
+
+    def prune_inapplicable(self, base):
+        for gid in set(self._active) | set(self._competing):
+            if not base.is_applicable(gid, stage="context"):
+                self.remove_active(gid)
+
     def add_active(self, gen_id: str, current_feature_index=None) -> None:
         """Добавить обобщение как активную опору."""
         if current_feature_index is not None and (type(current_feature_index) is not int or current_feature_index < 0):
             raise ValueError("Invalid continuation position")
+        if not self._applicable(gen_id):
+            return
         if gen_id not in self._active:
             self._active[gen_id] = ActiveGen(gen_id=gen_id)
         if current_feature_index is not None:
@@ -77,6 +89,8 @@ class ContextBuffer:
 
     def add_competing(self, gen_id: str) -> None:
         """Добавить обобщение как конкурирующее (для различения)."""
+        if not self._applicable(gen_id):
+            return
         if gen_id not in self._competing:
             self._competing[gen_id] = ActiveGen(gen_id=gen_id)
 
