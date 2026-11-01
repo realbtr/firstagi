@@ -237,3 +237,13 @@ https://github.com/realbtr/firstagi/pull/31, пока НЕ отправлен, e
 Сегодня Langford#26 уже отправлен; повторного инициативного контакта нет.
 Следующая исследовательская задача A3, затем C4/C5/C3. PR31 A3 не блокирует.
 Разрешение29/30 не разрешает сливать новые PR. T1–T3 не приняты, confirming закрыт.
+
+Уточнение З-0092: A3 в https://github.com/realbtr/firstagi/pull/32 (ac7d94f), не слит.
+Общий GenBase.is_applicable в scoped view фильтрует load/read/search/recall/dispatch;
+LearningSystem.set_operation_applicability(..., instance_id, channel_id, available) — causal hook.
+Ревизия условия инвалидирует старые команды; уже исполненный pending и его evidence сохраняются.
+Проверены альтернативы/родитель, запрет recall, scope, checkpoint, бюджеты и четыре paired arms.
+13 новых cases,133 targeted;1764passed/3skipped/59warnings43.28с в изолированном клоне без ключей.
+R1/команды/ограничения в PR32, CI41313414467 первоначально pending. Разрешения на merge32 нет.
+Следующий шаг ревью32, затем C4/C5/C3; T1–T3 не приняты, confirming/новые seeds не открывать.
+Существенных входящих нет, сегодняшний контакт Langford не повторялся; draft Shani остаётся PR31.
