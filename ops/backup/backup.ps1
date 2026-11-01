@@ -25,6 +25,10 @@ git clone --mirror --quiet "https://github.com/$Repo.git" $mirror
 if ($LASTEXITCODE) { throw "git clone --mirror failed" }
 git -C $mirror bundle create (Join-Path $work "firstagi.bundle") --all 2>$null
 if ($LASTEXITCODE) { throw "git bundle failed" }
+$wiki = Join-Path $work "wiki.git"
+git clone --mirror --quiet "https://github.com/$Repo.wiki.git" $wiki
+if ($LASTEXITCODE) { Note "!!! wiki clone failed" }
+else { git -C $wiki bundle create (Join-Path $work "firstagi-wiki.bundle") --all 2>$null; Remove-Item -Recurse -Force $wiki }
 $head = (git -C $mirror rev-parse refs/heads/main).Trim()
 Note "main $head"
 
