@@ -1,5 +1,7 @@
 # FirstAGI — a continuously learning attention kernel
 
+[Wiki: исходный замысел и обсуждение](https://github.com/realbtr/firstagi/wiki) · [Действующая спецификация](SPEC_FINAL.md) · [Текущее состояние](JOURNAL.md)
+
 **Teach a skill. Interrupt it. Let a fresh mind inherit it.**
 Can one shared attention algorithm become more competent in its channels,
 retain that competence through interruption/restart, and transfer a checked
