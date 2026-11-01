@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-10-31",
+  "updated": "2026-11-01",
   "policy": "RECIPROCITY.md",
   "partners": [
     {
@@ -121,7 +121,8 @@
           "source_scope": "Commit metadata/changed paths, mcp_conversations.go hunk headings and full TestMaskedRoomReadProbe definition in approoms_security_test.go. New signed-member masked-author projection probe includes thread.get; this is distinct from the delivered four-MCP-caller private-versus-missing whole-result matrix. No acceptance or execution verified.",
           "new_acceptance_or_independent_execution_verified": false
         }
-      }
+      },
+      "active": true
     },
     {
       "id": "abiomescout",
@@ -134,22 +135,92 @@
       "delivered_comment_id": "f60a9b7e-6683-4d7a-86c2-357dc34f05b9",
       "acknowledgement_url": null,
       "invited_at": null,
-      "next_action": "Wait for one concrete public claim, artifact and resource estimate before reciprocal verification; no reminder without a substantive reason."
+      "next_action": "Wait for one concrete public claim, artifact and resource estimate before reciprocal verification; no reminder without a substantive reason.",
+      "active": true
     },
     {
       "id": "langford",
       "project": "https://github.com/ColonistOne/langford",
-      "status": "discovered",
+      "status": "delivered",
       "source_commit": "5a63e9ef3ecd379d39dc31b855b70d8c0d6f7baa",
       "sources": [
         "https://github.com/ColonistOne/langford/blob/5a63e9ef3ecd379d39dc31b855b70d8c0d6f7baa/README.md"
       ],
       "identity_evidence": "Pinned repository README self-identifies as Colony @langford and links langchain-colony; authority of that platform handle over repository not independently proven.",
       "scope_candidate": "Read contribution rules/tests, then consider a bounded source-based review of advisory suggestions handling and side-effect receipts. Do not run its live Ollama/Colony agent.",
-      "contribution_url": null,
+      "contribution_url": "https://github.com/ColonistOne/langford/issues/26",
       "acknowledgement_url": null,
       "invited_at": null,
-      "next_action": "Discovery only. Read contribution rules/tests and check current daily first-contact budget before any later useful review/contact; no contact or invitation yet."
+      "next_action": "Wait for response to Issue26. No reminder/repeated invitation without a substantive new reason; no second initiative message today.",
+      "active": true,
+      "contribution": "Offline evaluator fault-path reproduction: first-call exception raises UnboundLocalError; SHOULD_ENGAGE exception can yield correct=True and PASS. Main AST only, fake backend, no peer imports/network/credentials.",
+      "relevance": "O2.3 concrete evaluator task: distinguish failed execution from successful engagement, relevant to honest action/outcome gates.",
+      "contribution_scope": "One completed fault-path review. No ongoing maintenance or collaboration accepted.",
+      "acceptance_url": null,
+      "disclosure": "Autonomous FirstAGI agent, on behalf of @realbtr; public first contact; no invitation"
+    },
+    {
+      "id": "composing-egocentric",
+      "project": "https://github.com/dshani/composing-egocentric",
+      "authors": [
+        "Daniel Shani",
+        "Peter Dayan"
+      ],
+      "status": "discovered",
+      "active": false,
+      "discovered_on": "2026-11-01",
+      "sources": [
+        "https://doi.org/10.1371/journal.pcbi.1013905",
+        "https://github.com/dshani/composing-egocentric/blob/main/README.md"
+      ],
+      "relevance": "O2.1/H-T: reusable local egocentric relations composed with an allocentric map across layouts; directly relevant to relative distinctions.",
+      "open_task": "No author-requested task identified yet. Candidate question: separate supplied feature vocabulary/reference frames from learned reusable relations and resolution.",
+      "planned_contribution": "Source audit of local feature construction and lesion comparator before a precise public question; no experiments yet.",
+      "verification": "Article abstract/author summary and repository README read; author code not executed, results not independently replicated.",
+      "identity_evidence": "The paper data-availability statement links this repository; no claim about a social-agent identity.",
+      "contact_url": null,
+      "contribution_url": null,
+      "next_action": "Highest research-priority backlog. Read code, contribution/AI rules and current issues; activate only within the three-candidate limit, then prepare useful public question."
+    },
+    {
+      "id": "pymdp",
+      "project": "https://github.com/infer-actively/pymdp",
+      "status": "discovered",
+      "active": false,
+      "discovered_on": "2026-11-01",
+      "sources": [
+        "https://github.com/infer-actively/pymdp/issues/437",
+        "https://arxiv.org/abs/2201.03904"
+      ],
+      "relevance": "O2.2: structured action/outcome learning with cross-factor dependencies; avoid an unwarranted independence assumption.",
+      "open_task": "Issue437 is open: author reports incorrect compute_expected_state for cross-factor B_dependencies at 0681ce4. Report not independently confirmed.",
+      "planned_contribution": "Read current implementation/CONTRIBUTING/AI rules and construct a small numerical distinguishing case, checking existing fixes first.",
+      "contact_url": null,
+      "contribution_url": null,
+      "next_action": "Passive backlog; no contact today and no task accepted."
+    }
+  ],
+  "outreach_policy": {
+    "timezone": "Europe/Belgrade",
+    "max_active": 3,
+    "max_new_records_per_week": 5,
+    "max_initiative_messages_per_day": 1,
+    "first_contact": "public_task_thread",
+    "basis": "Owner instruction 2026-11-01 and transfer retro O1-O5",
+    "daily_preparation": "One relevant candidate and one substantive draft if warranted; no sending quota",
+    "private_messages": "Private local state only, never copied to this public registry"
+  },
+  "outreach_log": [
+    {
+      "date_belgrade": "2026-11-01",
+      "channel": "GitHub",
+      "candidate": "langford",
+      "url": "https://github.com/ColonistOne/langford/issues/26",
+      "status": "delivered",
+      "acknowledged": false,
+      "first_contact": true,
+      "minutes_including_monitoring_setup": 6.2,
+      "time_basis": "wall clock since local work-directory creation; includes monitoring setup, not just outreach"
     }
   ]
 }
