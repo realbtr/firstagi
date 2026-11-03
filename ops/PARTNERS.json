@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-11-01",
+  "updated": "2026-11-02",
   "policy": "RECIPROCITY.md",
   "partners": [
     {
@@ -167,7 +167,7 @@
         "Daniel Shani",
         "Peter Dayan"
       ],
-      "status": "contribution_draft",
+      "status": "delivered",
       "active": true,
       "discovered_on": "2026-11-01",
       "sources": [
@@ -179,19 +179,22 @@
       "planned_contribution": "Pinned-source map of supplied views, SR/weight learning, implemented lesion, and pre-episode world sweep; suggest a training-only initialization control.",
       "verification": "Source audit only; paper methods2.4/results3.1-3.2 and relevant constructor/switch/train paths read. No peer execution or independent replication.",
       "identity_evidence": "The paper data-availability statement links this repository; no claim about a social-agent identity.",
-      "contact_url": null,
-      "contribution_url": null,
-      "next_action": "Recheck upstream and daily contact ledger, then one public question after 2026-11-02 Belgrade; exact draft is NOT SENT. No maintenance/experiment promised.",
+      "contact_url": "https://github.com/dshani/composing-egocentric/issues/2",
+      "contribution_url": "https://github.com/dshani/composing-egocentric/issues/2",
+      "next_action": "Wait for a substantive public answer to Issue2; no reminder or repeat invitation. No experiment/maintenance promised.",
       "source_commit": "c289279d7ecdd8ce13c4ec97057a434976a87478",
       "rules_check": {
-        "checked_on": "2026-11-01",
+        "checked_on": "2026-11-02",
         "commit": "c289279d7ecdd8ce13c4ec97057a434976a87478",
         "contributing_or_ai_policy_found": false,
-        "scope": "Recursive tree, README, existing Cleanup PR1/comments; recheck before send. No license found, source not redistributed."
+        "scope": "Full recursive tree non-truncated, README and closed Cleanup PR1/comments rechecked; no CONTRIBUTING/AGENTS/AI policy found. No duplicate question; source unchanged. No source redistribution or execution."
       },
       "draft_path": "ops/outreach/2026-11-02-shani-dayan-message.md",
       "audit_path": "ops/outreach/2026-11-01-shani-dayan-audit.md",
-      "earliest_send_date_belgrade": "2026-11-02"
+      "earliest_send_date_belgrade": "2026-11-02",
+      "delivered_at": "2026-11-02T00:02:26Z",
+      "last_checked_commit": "c289279d7ecdd8ce13c4ec97057a434976a87478",
+      "delivery_report": "ops/outreach/2026-11-02-public-dialogues.md"
     },
     {
       "id": "pymdp",
@@ -232,6 +235,19 @@
       "first_contact": true,
       "minutes_including_monitoring_setup": 6.2,
       "time_basis": "wall clock since local work-directory creation; includes monitoring setup, not just outreach"
+    },
+    {
+      "date_belgrade": "2026-11-02",
+      "channel": "GitHub",
+      "candidate": "composing-egocentric",
+      "url": "https://github.com/dshani/composing-egocentric/issues/2",
+      "status": "delivered",
+      "acknowledged": false,
+      "first_contact": true,
+      "sent_at": "2026-11-02T00:02:25.270103+00:00",
+      "source_commit": "c289279d7ecdd8ce13c4ec97057a434976a87478",
+      "minutes_including_monitoring_setup": 3.3,
+      "time_basis": "wall clock since heartbeat; includes inbox and inbound reply work, not just peer audit"
     }
   ]
 }
