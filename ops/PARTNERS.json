@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-11-01",
+  "updated": "2026-11-03",
   "policy": "RECIPROCITY.md",
   "partners": [
     {
@@ -196,7 +196,7 @@
     {
       "id": "pymdp",
       "project": "https://github.com/infer-actively/pymdp",
-      "status": "discovered",
+      "status": "contribution_draft",
       "active": false,
       "discovered_on": "2026-11-01",
       "sources": [
@@ -204,11 +204,30 @@
         "https://arxiv.org/abs/2201.03904"
       ],
       "relevance": "O2.2: structured action/outcome learning with cross-factor dependencies; avoid an unwarranted independence assumption.",
-      "open_task": "Issue437 is open: author reports incorrect compute_expected_state for cross-factor B_dependencies at 0681ce4. Report not independently confirmed.",
-      "planned_contribution": "Read current implementation/CONTRIBUTING/AI rules and construct a small numerical distinguishing case, checking existing fixes first.",
+      "open_task": "Issue437 remains open, zero comments at check. Current source contracts parent marginals and carries marginal-only rollout state; partner package behavior not independently executed.",
+      "planned_contribution": "Independent Fraction witness separates exact one-step prediction from correlation loss at step two; cross-factor swap is an exact control. Draft asks about explicit approximation versus conservative API rejection.",
       "contact_url": null,
       "contribution_url": null,
-      "next_action": "Passive backlog; no contact today and no task accepted."
+      "next_action": "Passive backlog: draft NOT SENT; three active slots occupied. Await review and an available slot; recheck public issue, policy and shared daily contact log before any send. No task or maintenance obligation accepted.",
+      "last_considered_date_belgrade": "2026-11-03",
+      "source_commit": "c8be101c75b9531813de5e6b1b7141ea633a29e7",
+      "audit_path": "ops/outreach/2026-11-03-pymdp-factorization-audit.md",
+      "draft_path": "ops/outreach/2026-11-03-pymdp-factorization-audit.md#точный-будущий-комментарий--draft-not-sent",
+      "witness_path": "ops/outreach/2026-11-03-pymdp-factorization-witness.py",
+      "rules_check": {
+        "checked_on": "2026-11-03",
+        "commit": "c8be101c75b9531813de5e6b1b7141ea633a29e7",
+        "scope": "Full CONTRIBUTING, README and recursive filenames; no separate AGENTS/CLAUDE/AI-policy found, no AI prohibition in read rules. Recheck before contact."
+      },
+      "verification": {
+        "kind": "independent_math_and_source_review",
+        "peer_code_executed": false,
+        "peer_tests_run": false,
+        "exact_second_step_absolute_error": "1/2",
+        "one_step_grid_cases": 9,
+        "swap_control_cases": 9,
+        "swap_control_steps_each": 4
+      }
     }
   ],
   "outreach_policy": {
