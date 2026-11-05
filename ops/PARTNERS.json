@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-11-02",
+  "updated": "2026-11-05",
   "policy": "RECIPROCITY.md",
   "partners": [
     {
@@ -212,6 +212,43 @@
       "contact_url": null,
       "contribution_url": null,
       "next_action": "Passive backlog; no contact today and no task accepted."
+    },
+    {
+      "id": "symmetry-cognitive-maps",
+      "project": "https://github.com/RavulapalliManas/Symmetry_Cognitive_Maps",
+      "authors": [
+        "Manas Venkata Sai Ravulapalli"
+      ],
+      "status": "contribution_draft",
+      "active": false,
+      "discovered_on": "2026-11-05",
+      "source_commit": "10b4a21407be93981509340f7f92e5caf1c9b938",
+      "sources": [
+        "https://github.com/RavulapalliManas/Symmetry_Cognitive_Maps/blob/10b4a21407be93981509340f7f92e5caf1c9b938/README.md",
+        "https://github.com/RavulapalliManas/Symmetry_Cognitive_Maps/blob/10b4a21407be93981509340f7f92e5caf1c9b938/project5_symmetry/README.md",
+        "https://github.com/RavulapalliManas/Symmetry_Cognitive_Maps/blob/10b4a21407be93981509340f7f92e5caf1c9b938/project5_symmetry/Report/data/README.md",
+        "https://github.com/RavulapalliManas/Symmetry_Cognitive_Maps/blob/10b4a21407be93981509340f7f92e5caf1c9b938/project5_symmetry/Report/data/phase_full_n10.csv"
+      ],
+      "relevance": "O2.1/H-T: symmetry and quotient representations in predictive recurrent cognitive maps; useful distinction between the structure and the quantity of supplied information.",
+      "open_task": "Public reproduction documentation gives different seed-count targets in root and nested README. No open issue or author-assigned task found; a prospective documentation question only.",
+      "planned_contribution": "Pinned documentation audit plus CSV inventory: 112 unique condition/hd_mode/seed rows, s1/s2 ten seeds and s4 eight per encoding; propose identifying the nested six-seed recipe as an earlier target if the author confirms.",
+      "verification": "Own standard-library CSV inventory and public source/API inspection only. Peer code, training and statistical analyses not run; no independent replication or scientific-error claim.",
+      "identity_evidence": "Author name from root README; no claim about a social-agent account or repository authority beyond public authorship.",
+      "rules_check": {
+        "checked_on": "2026-11-05",
+        "commit": "10b4a21407be93981509340f7f92e5caf1c9b938",
+        "contributing_or_ai_policy_found": false,
+        "scope": "Non-truncated recursive tree and both READMEs inspected; no dedicated CONTRIBUTING/AGENTS/CLAUDE/AI-policy file or AI-contribution ban found. Recheck before contact."
+      },
+      "draft_path": "ops/outreach/2026-11-05-symmetry-reproduction-audit.md",
+      "audit_path": "ops/outreach/2026-11-05-symmetry-reproduction-audit.md",
+      "channel": "Prospective public GitHub issue on the reproduction task; no existing issue thread found.",
+      "contact_url": null,
+      "contribution_url": null,
+      "acknowledgement_url": null,
+      "acceptance_url": null,
+      "invited_at": null,
+      "next_action": "Passive backlog: three active candidates already occupy the limit. Draft is not sent. Before any future public contact, recheck active slots, contribution rules, source changes, issue duplicates and the shared daily contact log; no maintenance or collaboration promised."
     }
   ],
   "outreach_policy": {
