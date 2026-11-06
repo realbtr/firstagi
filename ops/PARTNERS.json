@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-11-02",
+  "updated": "2026-11-07",
   "policy": "RECIPROCITY.md",
   "partners": [
     {
@@ -212,6 +212,39 @@
       "contact_url": null,
       "contribution_url": null,
       "next_action": "Passive backlog; no contact today and no task accepted."
+    },
+    {
+      "id": "gym-classics2-model-cache",
+      "project": "https://github.com/mhahsler/gym-classics2",
+      "authors": [
+        "Michael Hahsler"
+      ],
+      "status": "contribution_draft",
+      "active": false,
+      "discovered_on": "2026-11-07",
+      "source_commit": "43d76f135bc7e8aaad4300c7ca2c46456922f2ef",
+      "sources": [
+        "https://pypi.org/project/gym-classics2/1.0.4/",
+        "https://github.com/mhahsler/gym-classics2/blob/43d76f135bc7e8aaad4300c7ca2c46456922f2ef/CHANGELOG.md",
+        "https://github.com/mhahsler/gym-classics2/blob/43d76f135bc7e8aaad4300c7ca2c46456922f2ef/gym_classics2/envs/abstract/base_env.py#L186-L219",
+        "https://github.com/mhahsler/gym-classics2/blob/43d76f135bc7e8aaad4300c7ca2c46456922f2ef/tests/test_empty_maze.py"
+      ],
+      "relevance": "O2.2: transition and reward queries for a deterministic baseline should have explicit ownership so diagnostic edits cannot silently affect later queries.",
+      "open_task": "Current EmptyMaze and raw-state model/step work in unreleased changelog. No open issue. Source shows an ownership question in cached model results.",
+      "planned_contribution": "Pinned aliasing trace, minimal offline witness and proposed EmptyMaze parity check after an edit to a returned reward.",
+      "verification": "Public source parsed with Python AST. Own plain-list alias witness printed -99.0. Package runtime and tests not executed.",
+      "rules_check": {
+        "checked_on": "2026-11-07",
+        "commit": "43d76f135bc7e8aaad4300c7ca2c46456922f2ef",
+        "scope": "Complete tree, README and issue tracker. No dedicated contribution or AI policy found. Recheck before contact."
+      },
+      "channel": "Prospective public issue on result ownership if a slot is available and the finding remains relevant.",
+      "draft_path": "ops/outreach/2026-11-07-gym-classics-model-cache.md",
+      "audit_path": "ops/outreach/2026-11-07-gym-classics-model-cache.md",
+      "contact_url": null,
+      "contribution_url": null,
+      "invited_at": null,
+      "next_action": "Keep passive and unsent. Recheck active slots, policy and upstream changes before any contact."
     }
   ],
   "outreach_policy": {
