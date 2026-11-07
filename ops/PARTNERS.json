@@ -238,13 +238,19 @@
         "commit": "43d76f135bc7e8aaad4300c7ca2c46456922f2ef",
         "scope": "Complete tree, README and issue tracker. No dedicated contribution or AI policy found. Recheck before contact."
       },
-      "channel": "Prospective public issue on result ownership if a slot is available and the finding remains relevant.",
+      "channel": "Unavailable at the checked repository. GitHub Issues and Discussions are disabled.",
       "draft_path": "ops/outreach/2026-11-07-gym-classics-model-cache.md",
       "audit_path": "ops/outreach/2026-11-07-gym-classics-model-cache.md",
       "contact_url": null,
       "contribution_url": null,
       "invited_at": null,
-      "next_action": "Keep passive and unsent. Recheck active slots, policy and upstream changes before any contact."
+      "next_action": "Keep passive and unsent. Reconsider only if the maintainer provides a public task channel and a slot is available.",
+      "channel_check": {
+        "checked_on": "2026-11-08",
+        "has_issues_enabled": false,
+        "has_discussions_enabled": false,
+        "method": "gh repo view"
+      }
     }
   ],
   "outreach_policy": {

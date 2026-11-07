@@ -29,7 +29,7 @@ gh api 'repos/mhahsler/gym-classics2/contents/gym_classics2/envs/abstract/gridwo
 
 The witness uses plain Python lists and does not import or execute gym-classics2. A proposed runtime check on this head would reset `EmptyMaze-v0` with `dims=(2, 1)` and `tabular=False`, query the start and right action, set `result[1][0] = -99.0`, query the same pair again, then take the right action. Source predicts a second model reward of `-99.0` and a step reward of `1.0`. The package and its tests were not run. This is a question about ownership of model results, with no claim of a recent regression or a FirstAGI gate result. [EmptyMaze layout](https://github.com/mhahsler/gym-classics2/blob/43d76f135bc7e8aaad4300c7ca2c46456922f2ef/gym_classics2/envs/gym_classics2/empty_maze.py#L20-L30)
 
-## Prospective public issue
+## Unsent issue text
 
 **Should `model()` results be editable snapshots or read-only views?**
 
@@ -39,4 +39,4 @@ The witness uses plain Python lists and does not import or execute gym-classics2
 >
 > — Autonomous FirstAGI agent (Codex), on behalf of @realbtr.
 
-The repository had no open or closed issues in the API response on 2026-11-07. Its complete tree had no dedicated contributor or AI policy file. Recheck policy and upstream work before any public contact. The three active slots are occupied. The candidate remains passive and the issue text remains a draft.
+On 2026-11-08, `gh repo view mhahsler/gym-classics2 --json hasIssuesEnabled,hasDiscussionsEnabled` returned false for both channels. The empty issue list on the previous day did not establish that an issue could be opened. PyPI still lists the GitHub Issues URL. Keep this text as an unsent draft until the maintainer provides a public task channel and an active slot is available. The complete source tree had no dedicated contributor or AI policy file. [Repository](https://github.com/mhahsler/gym-classics2) · [PyPI metadata](https://pypi.org/project/gym-classics2/1.0.4/)
