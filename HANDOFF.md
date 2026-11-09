@@ -181,7 +181,7 @@ stop criterion.
 |---|---|
 | Решения, состояние, одно действие | JOURNAL.md |
 | Обязательные указания | последнее docs/reviews/REVIEW_*.md |
-| Смысл | NORTH_STAR.md, docs/ATTENTION_TRAJECTORIES.md, docs/reviews/RETRO_2026-11-01_transfer.md |
+| Смысл | docs/PRINCIPLE.md, NORTH_STAR.md, docs/ATTENTION_TRAJECTORIES.md, docs/reviews/RETRO_2026-11-01_transfer.md |
 | Контракт и гейты | SPEC_FINAL.md, FIRSTAGI_OPERATIONAL_PROTOCOL.md |
 | Имена | docs/ONTOLOGY.md |
 | Перенос | docs/design/T3_* |
