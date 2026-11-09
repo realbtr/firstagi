@@ -13,6 +13,15 @@
       "file": "FIRSTAGI_CONSTITUTION_v0.4_compact.md",
       "sha256": "7f952d08e50bfc93edc0e5047b64e2dc16b8fbc2e4879a386226e9ed0411913a",
       "role": "unchanged conceptual source; implementation and active revisions are specified elsewhere"
+    },
+    {
+      "original_name": "https://habr.com/ru/companies/sensecognition/articles/209472/",
+      "file": "HABR_2014_ATTENTION_MOVEMENT.md",
+      "sha256": "0a54c792725f9d799219e2efd521ed478f7ba01410f5547fe43c84b3967c8e96",
+      "sha256_note": "computed over the LF-normalised Markdown file, not over the Habr page",
+      "imported": "2026-11-10",
+      "decision": "З-0119",
+      "role": "2014 article by the owner with the owner's own comments verbatim, converted from HTML to Markdown; other participants' comments are not reproduced"
     }
   ]
 }
