@@ -12,6 +12,12 @@ and cessation of a twelve-link cycle. Continuous skill and checked inheritance
 are behavioral tests of this implementation. Parameter reduction is not an
 absolute objective or a prerequisite for valuable results.
 
+**Принцип, из которого это следует** (подтверждён владельцем 2026-11-10,
+З-0122): [двенадцать положений о движении внимания](docs/PRINCIPLE.md) —
+переход «команда, ключ, цель», замыкание циклов, разрешение периферии,
+интерес к непредсказуемой бифуркации, брокер внимания, язык как внешнее
+обозначение. Это концепция; реализация и гейты остаются открыты.
+
 ## Статус численных ориентиров
 
 Прежнее «≤10M против 200B+», условные миллионы против триллионов, менее
