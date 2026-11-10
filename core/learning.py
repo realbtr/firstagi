@@ -126,7 +126,31 @@ class GreedyGeneralizer:
         # EXPLORING: не сбрасываем, не пробуем создать
         return None
 
-    def _try_create(self) -> Optional[Generalization]:
+    def observe_for_debug_chain(self, result: StepResult) -> None:
+        """Learn successive exact distinctions using the existing chain state."""
+        if result.outcome == StepOutcome.CYCLE_AVOIDED:
+            return
+        feature_id = result.observed_feature_id or result.matched_feature_id
+        if feature_id is None:
+            self._current_chain.clear()
+            return
+
+        # A repeated distinction closes the earlier path. Keep its remaining
+        # suffix so every observed rotation can qualify by the same rule.
+        if feature_id in self._current_chain:
+            repeat = self._current_chain.index(feature_id)
+            self._current_chain = self._current_chain[repeat + 1:]
+        self._current_chain.append(feature_id)
+        self._current_chain = self._current_chain[-self.max_chain:]
+        for length in range(2, len(self._current_chain) + 1):
+            chain = self._current_chain[-length:]
+            if length > 2 and not self.base.search_by_chain(chain[:-1]):
+                continue
+            self._try_create(chain, reinforce_existing=False)
+
+    def _try_create(
+        self, chain: Optional[List[str]] = None, *, reinforce_existing: bool = True
+    ) -> Optional[Generalization]:
         """
         Попытаться создать новое обобщение из накопленной цепочки.
         Создаём только если:
@@ -135,7 +159,8 @@ class GreedyGeneralizer:
           3. Такого Gen ещё нет в базе
         Цепочки любой длины записываются в candidates (для статистики).
         """
-        chain = list(self._current_chain)
+        if chain is None:
+            chain = list(self._current_chain)
         if not chain:
             return None
 
@@ -153,7 +178,8 @@ class GreedyGeneralizer:
         # Проверить — возможно, уже существует
         existing = self.base.search_by_chain(chain)
         if existing:
-            existing[0].success_count += 1
+            if reinforce_existing:
+                existing[0].success_count += 1
             return None
 
         # Создать новый Gen
@@ -1236,7 +1262,10 @@ class LearningSystem:
             )
 
         # 3. Жадное обобщение
-        self.generalizer.on_step_result(result)
+        if getattr(self.engine, "debug_chain_recall", False):
+            self.generalizer.observe_for_debug_chain(result)
+        else:
+            self.generalizer.on_step_result(result)
 
         # 4. Запись траектории
         active = self.engine.context.active_gen_ids()
