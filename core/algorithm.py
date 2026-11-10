@@ -47,6 +47,7 @@ class StepResult:
     completed_gen_ids: List[str] = field(default_factory=list)
     removed_gen_ids: List[str] = field(default_factory=list)
     message: str = ""
+    observed_feature_id: Optional[str] = None
 
 
 class AttractorEngine:
@@ -282,6 +283,19 @@ class AttractorEngine:
             removed = self.context.refute_feature(feat_id, self.base)
             removed_ids.extend(removed)
 
+        if incoming_feature is not None and getattr(self, "debug_chain_recall", False):
+            feature_id = self._ensure_feature_registered(incoming_feature)
+            candidate = self._debug_chain_candidate(feature_id)
+            if candidate is not None:
+                # The current token is the cue. The following token can
+                # confirm only the expectation installed after this cue.
+                position = 1 if len(candidate.feature_chain) > 1 else 0
+                self.context.add_active(candidate.gen_id, current_feature_index=position)
+                return StepResult(
+                    outcome=StepOutcome.REFUTED, token=token,
+                    removed_gen_ids=removed_ids, observed_feature_id=feature_id,
+                )
+
         # Создать новое обобщение для нового признака
         new_gen: Optional[Generalization] = None
         if incoming_feature is not None:
@@ -301,6 +315,10 @@ class AttractorEngine:
             token=token,
             new_gen_id=new_gen.gen_id if new_gen else None,
             removed_gen_ids=removed_ids,
+            observed_feature_id=(
+                new_gen.feature_chain[0]
+                if new_gen and getattr(self, "debug_chain_recall", False) else None
+            ),
             message=(
                 f"Признак опровергнут. Удалено Gen: {removed_ids}. "
                 f"Создано: {new_gen.gen_id[:8] if new_gen else '—'}…"
@@ -344,6 +362,13 @@ class AttractorEngine:
             self._operation_context_ids = tuple(restored)
             return tuple(restored)
 
+    def _debug_chain_candidate(self, feature_id: str) -> Optional[Generalization]:
+        candidates = (
+            gen for gen in self.base.search_by_prefix([feature_id])
+            if gen.oper_id is None and getattr(gen, "actual_link", None) is None
+        )
+        return max(candidates, key=lambda gen: len(gen.feature_chain), default=None)
+
     def _load_context_for_feature(
         self,
         incoming_feature: Optional[Feature],
@@ -369,6 +394,11 @@ class AttractorEngine:
         if incoming_feature is not None:
             existing_feat_id = self.find_matching_feature(incoming_feature)
             if existing_feat_id:
+                if getattr(self, "debug_chain_recall", False):
+                    candidate = self._debug_chain_candidate(existing_feat_id)
+                    if candidate is not None:
+                        self.context.add_active(candidate.gen_id)
+                        return 1
                 candidates = self.base.search_by_prefix([existing_feat_id])
                 for gen in candidates:
                     if len(gen.feature_chain) == 1:
