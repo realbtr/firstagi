@@ -60,6 +60,8 @@ class AttractorEngine:
         - Реестром Feature   (все известные признаки)
     """
 
+    debug_repeat_recognition = False
+
     def __init__(
         self,
         base: GeneralizationBase,
@@ -158,8 +160,19 @@ class AttractorEngine:
         # в пределах tolerance. Это предотвращает засорение _features дублями
         # (каждый вызов learn() порождал новый UUID для той же траектории).
         incoming_feature = self._token_to_feature(token)
-        if incoming_feature and self.find_matching_feature(incoming_feature) is None:
+        canonical_id = self.find_matching_feature(incoming_feature) if incoming_feature else None
+        if incoming_feature and canonical_id is None:
             self.register_feature(incoming_feature)
+            canonical_id = incoming_feature.feature_id
+
+        repeat_pair = None
+        if self.debug_repeat_recognition:
+            exact_id = (
+                canonical_id if canonical_id is not None and
+                self._features[canonical_id].vector.distance_to(incoming_feature.vector) == 0
+                else None
+            )
+            repeat_pair = self._observe_repeat_pair(token, exact_id)
 
         # Очистить завершённые Gen перед следующим шагом.
         # Удаляем проактивно (а не только когда ВСЕ завершены),
@@ -169,7 +182,9 @@ class AttractorEngine:
 
         # Если контекст пуст — загрузить кандидатов для текущего признака
         if self.context.is_empty():
-            loaded = self._load_context_for_feature(incoming_feature, token_label=token.label)
+            loaded = (
+                repeat_pair is not None and self._activate_repeat_pair(repeat_pair[::-1])
+            ) or self._load_context_for_feature(incoming_feature, token_label=token.label)
             if loaded == 0:
                 # База пуста или нет совпадений → чистое исследование
                 return StepResult(
@@ -226,7 +241,7 @@ class AttractorEngine:
             )
         else:
             # ОПРОВЕРГНУТ
-            return self._handle_refuted(token, expected, incoming_feature)
+            return self._handle_refuted(token, expected, incoming_feature, repeat_pair=repeat_pair)
 
     # ------------------------------------------------------------------
     # Вспомогательные методы
@@ -270,6 +285,8 @@ class AttractorEngine:
         token: PeripheralToken,
         expected: dict[str, str],
         incoming_feature: Optional[Feature],
+        *,
+        repeat_pair: Optional[Tuple[str, str]] = None,
     ) -> StepResult:
         """
         Признак опровергнут.
@@ -281,6 +298,16 @@ class AttractorEngine:
         for gen_id, feat_id in list(expected.items()):
             removed = self.context.refute_feature(feat_id, self.base)
             removed_ids.extend(removed)
+
+        if repeat_pair is not None and self._activate_repeat_pair(repeat_pair, create=True):
+            # ABAB suggests the next AB. The observed B refuted the previous
+            # context and does not count toward the newly activated pair.
+            return StepResult(
+                outcome=StepOutcome.REFUTED,
+                token=token,
+                removed_gen_ids=removed_ids,
+                message="Debug: recurrent pair activated for the next observation.",
+            )
 
         # Создать новое обобщение для нового признака
         new_gen: Optional[Generalization] = None
@@ -306,6 +333,41 @@ class AttractorEngine:
                 f"Создано: {new_gen.gen_id[:8] if new_gen else '—'}…"
             ),
         )
+
+    def _observe_repeat_pair(
+        self, token: PeripheralToken, feature_id: Optional[str],
+    ) -> Optional[Tuple[str, str]]:
+        """Recognize ABAB in contiguous, exact token observations from one driver."""
+        if feature_id is None or getattr(self.base, "_applicability_scope", None) is not None:
+            self._debug_recent = ()
+            return None
+        recent = getattr(self, "_debug_recent", ())
+        if recent and (
+            recent[-1][0] != token.driver_id
+            or recent[-1][1] != self._step_count - 1
+            or not all(self.context.seen(item[2]) for item in recent)
+        ):
+            recent = ()
+        self._debug_recent = (*recent[-2:], (token.driver_id, self._step_count, token.token_id, feature_id))
+        if len(recent) == 3:
+            first, second, third = (item[3] for item in recent)
+            if first == third and second == feature_id and first != second:
+                return first, second
+        return None
+
+    def _activate_repeat_pair(self, pair: Tuple[str, str], *, create: bool = False) -> bool:
+        for gen in self.base.search_by_chain(list(pair)):
+            if gen.oper_id is None and gen.actual_link is None:
+                self.context.add_active(gen.gen_id)
+                return True
+        if not create:
+            return False
+        gen = Generalization.new(feature_chain=list(pair))
+        self.base.add(gen)
+        self.context.add_active(gen.gen_id)
+        if self._provisional is not None:
+            self._provisional.track(gen.gen_id)
+        return True
 
     def _ensure_feature_registered(self, feature: Feature) -> str:
         """Найти или зарегистрировать признак, вернуть его ID."""
