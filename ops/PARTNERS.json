@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-11-02",
+  "updated": "2026-11-06",
   "policy": "RECIPROCITY.md",
   "partners": [
     {
@@ -212,6 +212,38 @@
       "contact_url": null,
       "contribution_url": null,
       "next_action": "Passive backlog; no contact today and no task accepted."
+    },
+    {
+      "id": "minigrid-view-units",
+      "project": "https://github.com/Farama-Foundation/Minigrid",
+      "status": "contribution_draft",
+      "active": false,
+      "discovered_on": "2026-11-06",
+      "source_commit": "71ec8f174b981fdf3025179f022563ddf0064117",
+      "reviewed_pr_head": "853c12f88f64a1d01a7feac1cddd0d0a465806f5",
+      "sources": [
+        "https://pypi.org/project/minigrid/3.2.0/",
+        "https://github.com/Farama-Foundation/Minigrid/issues/468",
+        "https://github.com/Farama-Foundation/Minigrid/issues/419",
+        "https://github.com/Farama-Foundation/Minigrid/pull/421",
+        "https://github.com/vishwassathish/Minigrid/blob/853c12f88f64a1d01a7feac1cddd0d0a465806f5/minigrid/wrappers.py#L364-L395"
+      ],
+      "relevance": "O2.2: a controlled symbolic/RGB observation contract must preserve the intended field of view across encodings.",
+      "open_task": "PR421 addresses the view-size/RGB composition in #419 and part of #468. Its inferred cell count also accepts pixel widths as input.",
+      "planned_contribution": "Static size-argument trace for nested RGB wrappers. Ask whether the supported input must be symbolic and how to enforce the cell/pixel boundary.",
+      "verification": "Pinned Python AST and arithmetic only. Main and PR421 heads read. No peer code executed or runtime reproduction claimed.",
+      "rules_check": {
+        "checked_on": "2026-11-06",
+        "commit": "71ec8f174b981fdf3025179f022563ddf0064117",
+        "scope": "Complete MiniGrid tree, PR template, and Farama project standards. No dedicated repo AI policy found. Recheck before contact."
+      },
+      "channel": "Public GitHub PR421 comment if a slot is available and the finding remains relevant.",
+      "draft_path": "ops/outreach/2026-11-06-minigrid-view-units-audit.md",
+      "audit_path": "ops/outreach/2026-11-06-minigrid-view-units-audit.md",
+      "contact_url": null,
+      "contribution_url": null,
+      "invited_at": null,
+      "next_action": "Keep passive and unsent while three active slots are occupied. Recheck policy, PR head and thread before any contact."
     }
   ],
   "outreach_policy": {
