@@ -69,3 +69,42 @@ def test_view_is_a_pure_read():
     before = pickle.dumps(system, protocol=5)
     assert process_views(system) == process_views(system)
     assert pickle.dumps(system, protocol=5) == before
+
+
+def scope(atoms, operation="op"):
+    return dict(instance_id="life", channel_id="channel",
+                cue_gen_id=atoms["cue"], operation_gen_id=atoms[operation])
+
+
+def test_bid_is_due_only_after_outcomes_diverged():
+    from core.dependent_process import resolution_due
+    system, atoms = setup_system()
+    known = {}
+    assert not resolution_due(system, **scope(atoms))
+    execute(system, atoms, 0, "actual", known)
+    execute(system, atoms, 1, "actual", known)
+    assert not resolution_due(system, **scope(atoms))
+    execute(system, atoms, 2, "other-actual", known)
+    assert resolution_due(system, **scope(atoms))
+    assert not resolution_due(system, **scope(atoms, "other-op"))
+
+
+def test_refused_request_is_an_attempt_without_evidence():
+    from core.learning import OperationReceipt
+    system, atoms = setup_system()
+    known = {}
+    for seq, outcome in enumerate(["actual", "other-actual"]):
+        execute(system, atoms, seq, outcome, known)
+    evidence = system.base.actual_evidence_entries
+    for seq, refused in ((2, True), (3, False)):  # refused by the driver, then no slot
+        system._begin_operation(command_address="opaque", seq=seq, **scope(atoms, "other-op"))
+        if refused:
+            assert system.accept_operation_outcome(OperationReceipt(
+                f"r{seq}", "life", "channel", seq, "opaque", f"refused{seq}",
+                status="unavailable")) == "unknown"
+        system.cancel_operation("life", "channel")
+    views = {v.operation_gen_id: v for v in process_views(system, atoms["other-op"])}
+    move = views[atoms["op"]]
+    assert (move.resolution_attempts, move.resolution_refused) == (1, 1)
+    assert views[atoms["other-op"]].resolution_attempts == 0
+    assert system.base.actual_evidence_entries == evidence
