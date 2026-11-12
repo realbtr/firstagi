@@ -26,7 +26,8 @@ class ProcessView:
     hidden_executions: int             # observed executions before detection
     failed_forecasts_at_detection: int
     failed_admitted_at_detection: int  # of those, from Gens admitted at that time
-    resolution_attempts: int           # P1-a has no resolution rule: always 0
+    resolution_attempts: int = 0       # executed + refused resolution requests at this cue
+    resolution_refused: int = 0
 
     @property
     def is_bifurcation(self) -> bool:
@@ -47,15 +48,33 @@ def _admitted_before(gen, scope, seq) -> bool:
             and positive / len(entries) > 0.5)
 
 
-def process_views(system) -> Tuple[ProcessView, ...]:
-    """One view per point that has at least one observed or cancelled operation."""
+def process_views(system, resolution_operation_gen_id: Optional[str] = None
+                  ) -> Tuple[ProcessView, ...]:
+    """One view per point that has at least one observed or cancelled operation.
+
+    If the protocol's resolution request is named, its attempts from the same
+    cue are counted for every other point of that cue: executed requests and
+    requests the driver refused. A request that found no slot is not an attempt.
+    """
     system._operation_state()
+    refused_keys = {(r.instance_id, r.channel_id, r.seq)
+                    for r in system._operation_deliveries.values()
+                    if r.status == "unavailable"}
     points = {}
     for (instance_id, channel_id, seq), record in sorted(
             system._operation_records.items(), key=lambda item: item[0][2]):
         pending = record.pending
         key = (instance_id, channel_id, pending.cue_gen_id, pending.operation_gen_id)
         points.setdefault(key, []).append((seq, record))
+
+    attempts = {}
+    if resolution_operation_gen_id is not None:
+        for (instance_id, channel_id, cue, operation), rows in points.items():
+            if operation != resolution_operation_gen_id:
+                continue
+            refused = sum((instance_id, channel_id, seq) in refused_keys for seq, _ in rows)
+            executed = sum(r.status == "observed" for _, r in rows)
+            attempts[(instance_id, channel_id, cue)] = (executed + refused, refused)
 
     views = []
     for (instance_id, channel_id, cue, operation), rows in points.items():
@@ -82,6 +101,27 @@ def process_views(system) -> Tuple[ProcessView, ...]:
                                if detected is not None else len(observed)),
             failed_forecasts_at_detection=failed or 0,
             failed_admitted_at_detection=failed_admitted or 0,
-            resolution_attempts=0,
+            resolution_attempts=(0 if operation == resolution_operation_gen_id
+                                 else attempts.get((instance_id, channel_id, cue), (0, 0))[0]),
+            resolution_refused=(0 if operation == resolution_operation_gen_id
+                                else attempts.get((instance_id, channel_id, cue), (0, 0))[1]),
         ))
     return tuple(views)
+
+
+def resolution_due(system, *, instance_id: str, channel_id: str, cue_gen_id: str,
+                   operation_gen_id: str) -> bool:
+    """P1-b bid rule: request a nested region when the command is about to run
+    from a bifurcation point.
+
+    The condition is the point itself (different observed outcomes), not the
+    ambiguous-command predicate: with balanced branches only one of the two
+    Gens stays admitted, so no admitted forecasts conflict. Terminations
+    (resolved, suppressed) belong to P1-c; here a point never stops being due.
+    The scan is over the whole ledger: a metered full read, not a local index.
+    """
+    for view in process_views(system):
+        if (view.instance_id, view.channel_id, view.cue_gen_id, view.operation_gen_id) == (
+                instance_id, channel_id, cue_gen_id, operation_gen_id):
+            return view.is_bifurcation
+    return False
